@@ -17,15 +17,14 @@
     SAVED_FORMS: "cb_savedForms",
   };
 
-  // Preseeded Corporate Accounts
+  // Directory of corporate team members for dashboard display
   const DEFAULT_USERS = [
     {
       id: "usr_admin_01",
       username: "victoria.alexander",
       firstName: "Victoria",
       lastName: "Alexander",
-      email: "admin@corporatebusiness.com",
-      password: "Password@2026",
+      email: "v.alexander@thestackly.com",
       role: "Admin",
       title: "Managing General Partner & CEO",
       phone: "+1 (555) 234-5678",
@@ -38,8 +37,7 @@
       username: "marcus.sterling",
       firstName: "Marcus",
       lastName: "Sterling",
-      email: "manager@corporatebusiness.com",
-      password: "Password@2026",
+      email: "m.sterling@thestackly.com",
       role: "Manager",
       title: "Director of Capital Allocations",
       phone: "+1 (555) 345-6789",
@@ -52,8 +50,7 @@
       username: "elena.rostova",
       firstName: "Elena",
       lastName: "Rostova",
-      email: "employee@corporatebusiness.com",
-      password: "Password@2026",
+      email: "e.rostova@thestackly.com",
       role: "Employee",
       title: "Senior M&A Strategy Associate",
       phone: "+1 (555) 456-7890",
@@ -67,7 +64,6 @@
       firstName: "David",
       lastName: "Chen",
       email: "client@vanguardholding.com",
-      password: "Password@2026",
       role: "Customer",
       title: "Chief Operating Officer, Vanguard Group",
       phone: "+1 (555) 567-8901",
@@ -81,7 +77,6 @@
       firstName: "Sarah",
       lastName: "Jenkins",
       email: "vendor@apexadvisory.com",
-      password: "Password@2026",
       role: "Vendor",
       title: "Managing Partner, Apex Legal & Audit",
       phone: "+1 (555) 678-9012",
@@ -140,9 +135,8 @@
   function getUsers() {
     initStorage();
     try {
-      return (
-        JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || DEFAULT_USERS
-      );
+      const stored = localStorage.getItem(STORAGE_KEYS.USERS);
+      return stored ? JSON.parse(stored) : DEFAULT_USERS;
     } catch (e) {
       return DEFAULT_USERS;
     }
@@ -197,55 +191,52 @@
     window.location.href = "sign-in.html";
   }
 
+  /**
+   * Seamless login:
+   * Accepts any valid email address (such as @gmail.com) and any password.
+   * Does NOT save IDs or passwords to localStorage for login purpose.
+   * Only sets the active runtime session context for the dashboard.
+   */
   function authenticate(email, password, role) {
-    if (!email || !password) {
+    if (!email || !email.trim()) {
       return {
         success: false,
-        message: "Please enter both your email address and password.",
+        message: "Please enter your email address.",
       };
     }
-    const user = findUserByEmail(email);
-    if (user) {
-      if (user.password && user.password !== password) {
-        return {
-          success: false,
-          message: "Incorrect password. Please verify your credentials.",
-        };
-      }
-      if (role && user.role !== role) {
-        user.role = role;
-      }
-      user.lastLogin = new Date().toISOString();
-      setCurrentUser(user);
-      return { success: true, user: user };
+    if (!password) {
+      return {
+        success: false,
+        message: "Please enter your password.",
+      };
     }
 
-    // No predefined credentials required: auto-create workspace session on login
-    const parts = email.split("@")[0].split(".");
-    const firstName = parts[0]
-      ? parts[0].charAt(0).toUpperCase() + parts[0].slice(1)
+    const cleanEmail = email.trim();
+    const prefix = cleanEmail.split("@")[0] || "Executive";
+    const nameParts = prefix.replace(/[._-]+/g, " ").split(" ");
+    const firstName = nameParts[0]
+      ? nameParts[0].charAt(0).toUpperCase() +
+        nameParts[0].slice(1).toLowerCase()
       : "Executive";
-    const lastName = parts[1]
-      ? parts[1].charAt(0).toUpperCase() + parts[1].slice(1)
+    const lastName = nameParts[1]
+      ? nameParts[1].charAt(0).toUpperCase() +
+        nameParts[1].slice(1).toLowerCase()
       : "Member";
     const selectedRole = role || "Manager";
 
-    const newUser = {
-      id: "usr_" + Date.now(),
-      username: email.split("@")[0],
+    // Active session object - NO passwords or credential hashes stored
+    const activeSession = {
+      email: cleanEmail,
       firstName: firstName,
       lastName: lastName,
-      email: email.trim(),
-      password: password,
+      displayName: `${firstName} ${lastName}`.trim(),
       role: selectedRole,
       title: `${selectedRole} - Strategic Advisory`,
-      createdAt: new Date().toISOString(),
-      lastLogin: new Date().toISOString(),
+      loginTime: new Date().toISOString(),
     };
 
-    saveUser(newUser);
-    setCurrentUser(newUser);
-    return { success: true, user: newUser };
+    setCurrentUser(activeSession);
+    return { success: true, user: activeSession };
   }
 
   function register(formData) {
@@ -268,7 +259,6 @@
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
-      password: formData.password,
       role: formData.role || "Customer",
       phone: formData.phone || "",
       country: formData.country || "United States",

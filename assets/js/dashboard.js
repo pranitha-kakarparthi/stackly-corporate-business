@@ -644,7 +644,7 @@
     });
   }
 
-  // 9. Desktop Sidebar Collapse Toggle
+  // 9. Desktop Sidebar Collapse Toggle & Menu Highlight
   function initSidebarCollapse() {
     const collapseBtns = document.querySelectorAll(".sidebar-collapse-btn");
     const wrapper = document.querySelector(".dashboard-wrapper");
@@ -652,8 +652,45 @@
 
     collapseBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
-        wrapper.classList.toggle("sidebar-collapsed");
+        const isCollapsed = wrapper.classList.toggle("sidebar-collapsed");
+        const label = btn.querySelector(".collapse-label");
+        if (label) {
+          label.textContent = isCollapsed ? "Expand Menu" : "Collapse Menu";
+        }
+        btn.setAttribute("aria-expanded", !isCollapsed);
       });
+    });
+
+    // Handle access and highlighting when menu bar is in collapsed mode
+    const navItems = document.querySelectorAll(".dash-nav-item");
+    navItems.forEach((item) => {
+      // Prevent drag
+      item.addEventListener("dragstart", (e) => e.preventDefault());
+
+      const link = item.querySelector("a");
+      if (link) {
+        link.addEventListener("dragstart", (e) => e.preventDefault());
+
+        link.addEventListener("click", () => {
+          if (wrapper.classList.contains("sidebar-collapsed")) {
+            navItems.forEach((i) => i.classList.remove("highlighted"));
+            item.classList.add("highlighted");
+            setTimeout(() => {
+              item.classList.remove("highlighted");
+            }, 2200);
+          }
+        });
+
+        link.addEventListener("focus", () => {
+          if (wrapper.classList.contains("sidebar-collapsed")) {
+            item.classList.add("highlighted");
+          }
+        });
+
+        link.addEventListener("blur", () => {
+          item.classList.remove("highlighted");
+        });
+      }
     });
   }
 

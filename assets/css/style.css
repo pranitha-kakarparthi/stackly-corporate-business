@@ -1333,6 +1333,221 @@ body.nav-open .mobile-nav-overlay {
 }
 
 /* =========================================================
+   PILLARS & STEWARDSHIP CHARTER (ABOUT US)
+   ========================================================= */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .pillars-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pillar-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+.pillar-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(158, 133, 104, 0.45);
+  box-shadow: var(--shadow-lg);
+}
+
+.pillar-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-md);
+  background: rgba(158, 133, 104, 0.12);
+  color: var(--color-accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.pillar-card:hover .pillar-icon {
+  background: var(--color-accent-gold);
+  color: #ffffff;
+}
+.pillar-icon svg {
+  width: 24px;
+  height: 24px;
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.pillar-card h3 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--color-primary-900);
+  margin-bottom: 10px;
+}
+
+.pillar-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.pillar-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-accent-gold-dark);
+  background: rgba(158, 133, 104, 0.1);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  border: 1px solid rgba(158, 133, 104, 0.2);
+}
+
+/* =========================================================
+   GLOBAL LEADERSHIP & ADVISORY COUNCIL GRIDS
+   ========================================================= */
+.leadership-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+@media (min-width: 768px) {
+  .leadership-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .leadership-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.leadership-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 34px 28px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+.leadership-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(158, 133, 104, 0.45);
+  box-shadow: var(--shadow-lg);
+}
+
+.leadership-role {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-accent-gold);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.leadership-card h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary-900);
+  margin-bottom: 12px;
+}
+
+.leadership-bio {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.leadership-credentials {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-primary-800);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.team-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 640px) {
+  .team-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .team-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.milestones-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .milestones-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.milestone-box-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+.milestone-box-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(158, 133, 104, 0.45);
+  box-shadow: var(--shadow-lg);
+}
+
+.milestone-year-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  align-self: flex-start;
+}
+
+/* =========================================================
    CTA SECTION
    ========================================================= */
 .cta-section {

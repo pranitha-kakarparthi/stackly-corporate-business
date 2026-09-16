@@ -34,20 +34,6 @@
               style="height: 36px; max-width: 160px; object-fit: contain"
             />
           </a>
-          <button
-            class="sidebar-collapse-btn"
-            title="Collapse / Expand Sidebar"
-            aria-label="Toggle Sidebar width"
-          >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-              />
-            </svg>
-          </button>
         </div>
 
         <div class="dash-role-badge-box">
@@ -58,8 +44,8 @@
 
         <ul class="dash-nav-menu">
           <li class="dash-nav-heading">Core Modules</li>
-          <li class="dash-nav-item active">
-            <a href="dashboard.html">
+          <li class="dash-nav-item active" data-tooltip="Overview">
+            <a href="dashboard.html" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -70,9 +56,13 @@
               </svg>
               <span>Overview</span>
             </a>
+            <div class="menu-popover-tag" role="tooltip">
+              <span class="tag-status-badge">Active View</span>
+              <span class="tag-title-text">Overview</span>
+            </div>
           </li>
-          <li class="dash-nav-item">
-            <a href="404.html">
+          <li class="dash-nav-item" data-tooltip="Transactions & Deals">
+            <a href="404.html" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -83,9 +73,30 @@
               </svg>
               <span>Transactions & Deals</span>
             </a>
+            <div class="menu-popover-tag" role="tooltip">
+              <span class="tag-status-badge">Mandates</span>
+              <span class="tag-title-text">Transactions & Deals</span>
+            </div>
           </li>
-          <li class="dash-nav-item">
-            <a href="404.html">
+          <li class="dash-nav-item" data-tooltip="Capital Allocation">
+            <a href="404.html" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Capital Allocation</span>
+            </a>
+            <div class="menu-popover-tag" role="tooltip">
+              <span class="tag-status-badge">Treasury</span>
+              <span class="tag-title-text">Capital Allocation</span>
+            </div>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Deliverables Vault">
+            <a href="404.html" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -96,9 +107,30 @@
               </svg>
               <span>Deliverables Vault</span>
             </a>
+            <div class="menu-popover-tag" role="tooltip">
+              <span class="tag-status-badge">Vault</span>
+              <span class="tag-title-text">Deliverables Vault</span>
+            </div>
           </li>
-          <li class="dash-nav-item">
-            <a href="404.html">
+          <li class="dash-nav-item" data-tooltip="Financial Analytics">
+            <a href="404.html" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+              <span>Financial Analytics</span>
+            </a>
+            <div class="menu-popover-tag" role="tooltip">
+              <span class="tag-status-badge">Metrics</span>
+              <span class="tag-title-text">Financial Analytics</span>
+            </div>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Governance & Audit">
+            <a href="404.html" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -109,8 +141,32 @@
               </svg>
               <span>Governance & Audit</span>
             </a>
+            <div class="menu-popover-tag" role="tooltip">
+              <span class="tag-status-badge">Audit</span>
+              <span class="tag-title-text">Governance & Audit</span>
+            </div>
           </li>
         </ul>
+
+        <!-- COLLAPSE OPTION AT LEFT BOTTOM CORNER -->
+        <div class="dash-sidebar-bottom">
+          <button
+            class="sidebar-collapse-btn"
+            id="sidebar-collapse-trigger"
+            title="Collapse / Expand Sidebar"
+            aria-label="Toggle Desktop Sidebar"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+              />
+            </svg>
+            <span class="collapse-label">Collapse Menu</span>
+          </button>
+        </div>
       </aside>
 
       <!-- MAIN DASHBOARD CONTENT -->
@@ -134,20 +190,6 @@
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-            <button
-              class="sidebar-collapse-btn"
-              title="Collapse / Expand Sidebar"
-              aria-label="Toggle Desktop Sidebar"
-            >
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h7"
                 />
               </svg>
             </button>
@@ -226,7 +268,394 @@
             </section>
           </div>
 
-          <!-- SECTION 4: DATA TABLE SECTION -->
+          <!-- SECTION 4: SECTOR PORTFOLIO ALLOCATION & PERFORMANCE BENCHMARK (CHARTS & GRAPHS) -->
+          <div class="chart-grid-2col">
+            <!-- Sub-section: Sector Capital Allocation Donut Chart -->
+            <section class="dash-panel" aria-label="Sector Capital Allocation">
+              <div class="dash-panel-header">
+                <h3>Sector Portfolio Capital Allocation ($4.80B Total)</h3>
+                <span
+                  class="user-greeting-pill"
+                  style="
+                    background: rgba(158, 133, 104, 0.12);
+                    color: var(--color-accent-gold-dark);
+                    border-color: rgba(158, 133, 104, 0.3);
+                  "
+                >
+                  <span>AUM Q3 Active</span>
+                </span>
+              </div>
+              <div class="sector-chart-body">
+                <div class="donut-svg-wrap">
+                  <svg viewBox="0 0 160 160" width="100%" height="100%">
+                    <!-- Donut Segments (Circumference ~ 376.99) -->
+                    <circle
+                      cx="80"
+                      cy="80"
+                      r="60"
+                      fill="transparent"
+                      stroke="#f1f3f5"
+                      stroke-width="24"
+                    />
+                    <!-- Enterprise Tech 38.5% (145.1) -->
+                    <circle
+                      cx="80"
+                      cy="80"
+                      r="60"
+                      fill="transparent"
+                      stroke="#9E8568"
+                      stroke-width="24"
+                      stroke-dasharray="145.1 231.9"
+                      stroke-dashoffset="0"
+                    />
+                    <!-- Energy Transition 25.0% (94.25) -->
+                    <circle
+                      cx="80"
+                      cy="80"
+                      r="60"
+                      fill="transparent"
+                      stroke="#10B981"
+                      stroke-width="24"
+                      stroke-dasharray="94.25 282.74"
+                      stroke-dashoffset="-145.1"
+                    />
+                    <!-- Healthcare & Bio-Assets 19.8% (74.6) -->
+                    <circle
+                      cx="80"
+                      cy="80"
+                      r="60"
+                      fill="transparent"
+                      stroke="#3B82F6"
+                      stroke-width="24"
+                      stroke-dasharray="74.6 302.4"
+                      stroke-dashoffset="-239.35"
+                    />
+                    <!-- Cross-Border Logistics 16.7% (63.0) -->
+                    <circle
+                      cx="80"
+                      cy="80"
+                      r="60"
+                      fill="transparent"
+                      stroke="#F59E0B"
+                      stroke-width="24"
+                      stroke-dasharray="63.0 314.0"
+                      stroke-dashoffset="-313.95"
+                    />
+                    <!-- Donut Center Label -->
+                    <text
+                      x="80"
+                      y="74"
+                      text-anchor="middle"
+                      font-size="18"
+                      font-weight="800"
+                      fill="#0F172A"
+                    >
+                      $4.8B
+                    </text>
+                    <text
+                      x="80"
+                      y="92"
+                      text-anchor="middle"
+                      font-size="9"
+                      font-weight="700"
+                      fill="#64748B"
+                      letter-spacing="0.5"
+                    >
+                      DEPLOYED
+                    </text>
+                  </svg>
+                </div>
+                <div class="donut-legend-wrap">
+                  <div class="legend-metric-item">
+                    <div class="legend-metric-left">
+                      <span
+                        class="legend-color-dot"
+                        style="background: #9e8568"
+                      ></span>
+                      <span class="legend-title">Enterprise Tech & Cloud</span>
+                    </div>
+                    <div class="legend-metric-right">
+                      <span class="legend-val">$1.85B</span>
+                      <span class="legend-pct">(38.5%)</span>
+                    </div>
+                  </div>
+                  <div class="legend-metric-item">
+                    <div class="legend-metric-left">
+                      <span
+                        class="legend-color-dot"
+                        style="background: #10b981"
+                      ></span>
+                      <span class="legend-title"
+                        >Energy Transition & Infra</span
+                      >
+                    </div>
+                    <div class="legend-metric-right">
+                      <span class="legend-val">$1.20B</span>
+                      <span class="legend-pct">(25.0%)</span>
+                    </div>
+                  </div>
+                  <div class="legend-metric-item">
+                    <div class="legend-metric-left">
+                      <span
+                        class="legend-color-dot"
+                        style="background: #3b82f6"
+                      ></span>
+                      <span class="legend-title">Healthcare & Bio-Assets</span>
+                    </div>
+                    <div class="legend-metric-right">
+                      <span class="legend-val">$950M</span>
+                      <span class="legend-pct">(19.8%)</span>
+                    </div>
+                  </div>
+                  <div class="legend-metric-item">
+                    <div class="legend-metric-left">
+                      <span
+                        class="legend-color-dot"
+                        style="background: #f59e0b"
+                      ></span>
+                      <span class="legend-title">Cross-Border Logistics</span>
+                    </div>
+                    <div class="legend-metric-right">
+                      <span class="legend-val">$800M</span>
+                      <span class="legend-pct">(16.7%)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Sub-section: Quarterly Net IRR Performance Benchmarking -->
+            <section
+              class="dash-panel"
+              aria-label="Quarterly Benchmark Comparison"
+            >
+              <div class="dash-panel-header">
+                <h3>Quarterly Net IRR Performance Benchmarking</h3>
+                <div
+                  style="
+                    display: flex;
+                    gap: 12px;
+                    font-size: 0.78rem;
+                    font-weight: 700;
+                  "
+                >
+                  <span
+                    style="
+                      display: inline-flex;
+                      align-items: center;
+                      gap: 5px;
+                      color: #9e8568;
+                    "
+                  >
+                    <span
+                      style="
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 2px;
+                        background: #9e8568;
+                      "
+                    ></span>
+                    Stackly Portfolio
+                  </span>
+                  <span
+                    style="
+                      display: inline-flex;
+                      align-items: center;
+                      gap: 5px;
+                      color: #94a3b8;
+                    "
+                  >
+                    <span
+                      style="
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 2px;
+                        background: #94a3b8;
+                      "
+                    ></span>
+                    Cambridge PE Index
+                  </span>
+                </div>
+              </div>
+              <div class="benchmark-chart-body">
+                <div class="bar-group-row">
+                  <div class="bar-label-row">
+                    <span>Q3 2025 (Current Period)</span>
+                    <span
+                      >Stackly: 24.8% &bull; Index: 14.2% (+10.6% Alpha)</span
+                    >
+                  </div>
+                  <div class="bar-track-wrapper">
+                    <div class="bar-track">
+                      <div class="bar-fill-stackly" style="width: 82.6%"></div>
+                    </div>
+                    <div class="bar-track">
+                      <div class="bar-fill-index" style="width: 47.3%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bar-group-row">
+                  <div class="bar-label-row">
+                    <span>Q2 2025</span>
+                    <span
+                      >Stackly: 22.4% &bull; Index: 13.8% (+8.6% Alpha)</span
+                    >
+                  </div>
+                  <div class="bar-track-wrapper">
+                    <div class="bar-track">
+                      <div class="bar-fill-stackly" style="width: 74.6%"></div>
+                    </div>
+                    <div class="bar-track">
+                      <div class="bar-fill-index" style="width: 46%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bar-group-row">
+                  <div class="bar-label-row">
+                    <span>Q1 2025</span>
+                    <span
+                      >Stackly: 26.1% &bull; Index: 15.1% (+11.0% Alpha)</span
+                    >
+                  </div>
+                  <div class="bar-track-wrapper">
+                    <div class="bar-track">
+                      <div class="bar-fill-stackly" style="width: 87%"></div>
+                    </div>
+                    <div class="bar-track">
+                      <div class="bar-fill-index" style="width: 50.3%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bar-group-row">
+                  <div class="bar-label-row">
+                    <span>Q4 2024</span>
+                    <span
+                      >Stackly: 21.0% &bull; Index: 12.9% (+8.1% Alpha)</span
+                    >
+                  </div>
+                  <div class="bar-track-wrapper">
+                    <div class="bar-track">
+                      <div class="bar-fill-stackly" style="width: 70%"></div>
+                    </div>
+                    <div class="bar-track">
+                      <div class="bar-fill-index" style="width: 43%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- SECTION 5: EXECUTIVE MANDATE MILESTONE TRACKER & CAPITAL DRAWDOWN SCHEDULE -->
+          <section
+            class="dash-panel"
+            aria-label="Milestones and Drawdowns"
+            style="margin-bottom: 28px"
+          >
+            <div class="dash-panel-header">
+              <h3>Active Deal Pipeline & Capital Drawdown Schedule</h3>
+              <a href="404.html" class="btn btn-subtle btn-sm">Audit Dossier</a>
+            </div>
+            <div class="milestones-grid">
+              <div class="milestone-card">
+                <div class="milestone-card-top">
+                  <div>
+                    <div class="milestone-card-title">
+                      Project Titan Cross-Border Carveout
+                    </div>
+                    <div class="milestone-entity">
+                      Target: Nordic Industrial Robotics Group
+                    </div>
+                  </div>
+                  <span
+                    class="milestone-stage-badge"
+                    style="background: rgba(16, 185, 129, 0.12); color: #059669"
+                    >Closing Ready</span
+                  >
+                </div>
+                <div class="milestone-progress-box">
+                  <div class="progress-header">
+                    <span>Regulatory & Anti-Trust Sign-off</span>
+                    <span>92%</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 92%"></div>
+                  </div>
+                </div>
+                <div class="milestone-meta-row">
+                  <span>Drawdown: $420M</span>
+                  <span>Lead: V. Alexander (Senior Partner)</span>
+                </div>
+              </div>
+
+              <div class="milestone-card">
+                <div class="milestone-card-top">
+                  <div>
+                    <div class="milestone-card-title">
+                      Helios Energy Asset Recapitalization
+                    </div>
+                    <div class="milestone-entity">
+                      Sponsor: Brookfield Mediterranean Fund
+                    </div>
+                  </div>
+                  <span
+                    class="milestone-stage-badge"
+                    style="background: rgba(59, 130, 246, 0.12); color: #2563eb"
+                    >Due Diligence</span
+                  >
+                </div>
+                <div class="milestone-progress-box">
+                  <div class="progress-header">
+                    <span>Tax Structure & Mezzanine Syndication</span>
+                    <span>68%</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 68%"></div>
+                  </div>
+                </div>
+                <div class="milestone-meta-row">
+                  <span>Drawdown: $280M</span>
+                  <span>Lead: M. Sterling (Partner)</span>
+                </div>
+              </div>
+
+              <div class="milestone-card">
+                <div class="milestone-card-top">
+                  <div>
+                    <div class="milestone-card-title">
+                      Vanguard Logistics APAC Expansion
+                    </div>
+                    <div class="milestone-entity">
+                      Client: Singapore Sovereign Co-Investment
+                    </div>
+                  </div>
+                  <span
+                    class="milestone-stage-badge"
+                    style="background: rgba(245, 158, 11, 0.12); color: #d97706"
+                    >Mandate Structuring</span
+                  >
+                </div>
+                <div class="milestone-progress-box">
+                  <div class="progress-header">
+                    <span>Synergy Modeling & Term Sheet Delivery</span>
+                    <span>45%</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 45%"></div>
+                  </div>
+                </div>
+                <div class="milestone-meta-row">
+                  <span>Drawdown: $150M</span>
+                  <span>Lead: E. Rostova (Associate)</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 6: DATA TABLE SECTION -->
           <section
             class="dash-panel"
             aria-label="Mandates and User Directory"

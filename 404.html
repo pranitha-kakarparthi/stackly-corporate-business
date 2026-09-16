@@ -65,47 +65,12 @@
     <main id="main-content" class="error-page-wrapper">
       <div class="error-card" data-aos="zoom-in">
         <div class="error-code">404</div>
-        <h1>Mandate Resource Not Located</h1>
+        <h1>Page Not Found</h1>
         <p>
-          The institutional dossier, legal clause, or portal route you requested
-          is unavailable or has been archived under new regulatory protocols.
+          The destination you followed is not available yet. Return to Stackly
+          and keep exploring.
         </p>
-
-        <!-- Search Box with functional redirection (no alerts) -->
-        <form
-          class="error-search-box"
-          onsubmit="
-            event.preventDefault();
-            window.location.href = 'index.html';
-          "
-        >
-          <input
-            type="text"
-            class="error-search-input"
-            placeholder="Search advisory services, sectors, leadership..."
-            aria-label="Search site"
-          />
-          <button type="submit" class="btn btn-primary btn-sm">Search</button>
-        </form>
-
         <!-- Quick Navigation Links -->
-        <div class="error-quick-links">
-          <a href="index.html" class="error-quick-link">Home Overview</a>
-          <a href="about.html" class="error-quick-link">Leadership Team</a>
-          <a href="services.html" class="error-quick-link"
-            >M&A & Capital Services</a
-          >
-          <a href="pricing.html" class="error-quick-link"
-            >Engagement Retainers</a
-          >
-          <a href="contact.html" class="error-quick-link"
-            >Corporate Headquarters</a
-          >
-          <a href="dashboard.html" class="error-quick-link"
-            >Executive Dashboard</a
-          >
-        </div>
-
         <div
           style="
             display: flex;
@@ -129,14 +94,11 @@
                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
               />
             </svg>
-            <span>Return to Headquarters</span>
+            <span>Home</span>
           </a>
           <button onclick="history.back()" class="btn btn-secondary btn-lg">
             <span>Go Back</span>
           </button>
-          <a href="contact.html" class="btn btn-secondary-light btn-lg"
-            >Contact Support</a
-          >
         </div>
       </div>
     </main>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" width="240" height="50" fill="none">
+  <!-- Private Equity Luxury Gold Gradient Definition -->
+  <defs>
+    <linearGradient id="corpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C5A880" />
+      <stop offset="50%" stop-color="#DFCAAB" />
+      <stop offset="100%" stop-color="#B89052" />
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0E0D" />
+      <stop offset="100%" stop-color="#18201D" />
+    </linearGradient>
+  </defs>
+
+  <!-- Crest Icon -->
+  <g transform="translate(6, 6)">
+    <!-- Outer Shield / Hexagonal Emblem -->
+    <rect x="0" y="0" width="38" height="38" rx="10" fill="url(#shieldGrad)" stroke="url(#corpGrad)" stroke-width="2"/>
+    <!-- Dynamic Growth Pillars -->
+    <rect x="8" y="18" width="4" height="12" rx="2" fill="#FFFFFF" opacity="0.6"/>
+    <rect x="15" y="13" width="4" height="17" rx="2" fill="#FFFFFF" opacity="0.85"/>
+    <rect x="22" y="8" width="4" height="22" rx="2" fill="url(#corpGrad)"/>
+    <!-- Ascending Apex Arrow -->
+    <path d="M28 8L20 8M28 8L28 16M28 8L15 21" stroke="#DFCAAB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Brand Typography -->
+  <g transform="translate(54, 16)">
+    <text x="0" y="14" font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="800" letter-spacing="1.5" fill="#FFFFFF">
+      CORPORATE<tspan fill="#C5A880">.</tspan>
+    </text>
+    <text x="0" y="27" font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8.5" font-weight="600" letter-spacing="3" fill="#A4ABA6">
+      CAPITAL & ADVISORY
+    </text>
+  </g>
+</svg>

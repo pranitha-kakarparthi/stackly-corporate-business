@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found | Stackly</title>
+    <meta
+      name="description"
+      content="The requested institutional page or resource could not be found. Navigate back to Stackly headquarters."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to error content</a>
+
+    <!-- STICKY NAVBAR -->
+    <header class="site-header" role="banner">
+      <div class="container nav-container">
+        <a href="index.html" class="brand-logo" aria-label="Stackly Home">
+          <img
+            src="assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            style="height: 38px; max-width: 170px; object-fit: contain"
+          />
+        </a>
+
+        <nav
+          class="desktop-nav"
+          role="navigation"
+          aria-label="Primary Navigation"
+        >
+          <ul class="nav-links">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="services.html" class="nav-link">Advisory Services</a>
+            </li>
+            <li class="nav-item">
+              <a href="pricing.html" class="nav-link">Engagement Models</a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">Contact</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="sign-in.html" class="btn btn-secondary btn-sm">Sign In</a>
+          <a href="sign-up.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="error-page-wrapper">
+      <div class="error-card" data-aos="zoom-in">
+        <div class="error-code">404</div>
+        <h1>Mandate Resource Not Located</h1>
+        <p>
+          The institutional dossier, legal clause, or portal route you requested
+          is unavailable or has been archived under new regulatory protocols.
+        </p>
+
+        <!-- Search Box with functional redirection (no alerts) -->
+        <form
+          class="error-search-box"
+          onsubmit="
+            event.preventDefault();
+            window.location.href = 'index.html';
+          "
+        >
+          <input
+            type="text"
+            class="error-search-input"
+            placeholder="Search advisory services, sectors, leadership..."
+            aria-label="Search site"
+          />
+          <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        </form>
+
+        <!-- Quick Navigation Links -->
+        <div class="error-quick-links">
+          <a href="index.html" class="error-quick-link">Home Overview</a>
+          <a href="about.html" class="error-quick-link">Leadership Team</a>
+          <a href="services.html" class="error-quick-link"
+            >M&A & Capital Services</a
+          >
+          <a href="pricing.html" class="error-quick-link"
+            >Engagement Retainers</a
+          >
+          <a href="contact.html" class="error-quick-link"
+            >Corporate Headquarters</a
+          >
+          <a href="dashboard.html" class="error-quick-link"
+            >Executive Dashboard</a
+          >
+        </div>
+
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+          "
+        >
+          <a href="index.html" class="btn btn-primary btn-lg">
+            <svg
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              width="18"
+              height="18"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+            <span>Return to Headquarters</span>
+          </a>
+          <button onclick="history.back()" class="btn btn-secondary btn-lg">
+            <span>Go Back</span>
+          </button>
+          <a href="contact.html" class="btn btn-secondary-light btn-lg"
+            >Contact Support</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="container">
+        <div class="footer-bottom">
+          <div>&copy; 2026 Stackly Inc. All rights reserved.</div>
+          <div class="footer-legal-links">
+            <a href="404.html">Terms of Use</a>
+            <a href="404.html">Privacy Policy</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

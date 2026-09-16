@@ -198,27 +198,54 @@
   }
 
   function authenticate(email, password, role) {
+    if (!email || !password) {
+      return {
+        success: false,
+        message: "Please enter both your email address and password.",
+      };
+    }
     const user = findUserByEmail(email);
-    if (!user) {
-      return {
-        success: false,
-        message: "Account not found with this corporate email address.",
-      };
+    if (user) {
+      if (user.password && user.password !== password) {
+        return {
+          success: false,
+          message: "Incorrect password. Please verify your credentials.",
+        };
+      }
+      if (role && user.role !== role) {
+        user.role = role;
+      }
+      user.lastLogin = new Date().toISOString();
+      setCurrentUser(user);
+      return { success: true, user: user };
     }
-    if (user.password !== password) {
-      return {
-        success: false,
-        message:
-          "Invalid password. Please check your credentials and try again.",
-      };
-    }
-    // Update role if selected explicitly
-    if (role && user.role !== role) {
-      user.role = role;
-    }
-    user.lastLogin = new Date().toISOString();
-    setCurrentUser(user);
-    return { success: true, user: user };
+
+    // No predefined credentials required: auto-create workspace session on login
+    const parts = email.split("@")[0].split(".");
+    const firstName = parts[0]
+      ? parts[0].charAt(0).toUpperCase() + parts[0].slice(1)
+      : "Executive";
+    const lastName = parts[1]
+      ? parts[1].charAt(0).toUpperCase() + parts[1].slice(1)
+      : "Member";
+    const selectedRole = role || "Manager";
+
+    const newUser = {
+      id: "usr_" + Date.now(),
+      username: email.split("@")[0],
+      firstName: firstName,
+      lastName: lastName,
+      email: email.trim(),
+      password: password,
+      role: selectedRole,
+      title: `${selectedRole} - Strategic Advisory`,
+      createdAt: new Date().toISOString(),
+      lastLogin: new Date().toISOString(),
+    };
+
+    saveUser(newUser);
+    setCurrentUser(newUser);
+    return { success: true, user: newUser };
   }
 
   function register(formData) {

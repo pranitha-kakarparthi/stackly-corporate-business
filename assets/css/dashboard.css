@@ -4,7 +4,7 @@
    ========================================================= */
 
 .dashboard-body {
-  background-color: #f4f1ea;
+  background-color: var(--bg-body);
   min-height: 100vh;
   display: flex;
   overflow-x: hidden;

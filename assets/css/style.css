@@ -6,68 +6,77 @@
    ========================================================= */
 
 :root {
-  /* Brand Color Palette - Private Equity & Capital Advisory */
-  --color-primary-900: #0b0e0d; /* Deepest Executive Obsidian */
-  --color-primary-800: #121816; /* Midnight Forest Slate */
-  --color-primary-700: #1a2220; /* Deep Pine Charcoal */
-  --color-primary-600: #2c3833; /* Muted Olive Slate */
+  /* Brand Color Palette - Classic & Subtle Executive Advisory */
+  --color-primary-900: #0f172a; /* Classic Executive Midnight Slate */
+  --color-primary-800: #1e293b; /* Dignified Charcoal Slate */
+  --color-primary-700: #334155; /* Muted Executive Slate */
+  --color-primary-600: #475569; /* Understated Steel Slate */
 
-  /* Signature Accents */
-  --color-accent-gold: #c5a880; /* Signature Warm Champagne Gold */
-  --color-accent-gold-light: #dfcaab; /* Luminous Champagne */
-  --color-accent-gold-dark: #a88656; /* Burnished Bronze Gold */
-  --color-accent-blue: #a88656; /* Mapped to Burnished Gold for consistency */
-  --color-accent-cyan: #dfcaab; /* Mapped to Champagne for highlights */
-  --color-accent-emerald: #1b4332; /* Deep British Racing Pine */
-  --color-accent-sage: #2d6a4f; /* Capital Growth Sage */
+  /* Signature Classic & Subtle Accents */
+  --color-accent-gold: #9e8568; /* Subtle Antique Cashmere Bronze */
+  --color-accent-gold-light: #c2ad94; /* Subtle Warm Champagne Oyster */
+  --color-accent-gold-dark: #7d674d; /* Deep Classic Bronze */
+  --color-accent-blue: #3b597c; /* Classic Heritage Slate Blue */
+  --color-accent-cyan: #7c98b3; /* Subtle Muted Mist Blue */
+  --color-accent-emerald: #234338; /* Subtle Heritage Deep Forest */
+  --color-accent-sage: #3d5a4f; /* Subtle Muted Sage */
+
+  /* Aliases for inline styles and components */
+  --color-gold: var(--color-accent-gold);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-border: var(--border-subtle);
+  --color-text-primary: var(--text-main);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
 
   /* Surfaces & Backgrounds */
-  --bg-body: #f9f8f5; /* Warm Architectural Alabaster / Linen */
-  --bg-surface: #ffffff; /* Pristine Card Surface */
+  --bg-body: #f8f9fa; /* Classic Architectural Alabaster */
+  --bg-surface: #ffffff; /* Crisp Card Surface */
   --bg-surface-elevated: #ffffff;
-  --bg-dark: #0b0e0d;
-  --bg-dark-surface: #121816;
-  --bg-dark-card: #18201d;
+  --bg-secondary: #f1f3f5; /* Soft Classic Neutral */
+  --bg-dark: #0f172a;
+  --bg-dark-surface: #1e293b;
+  --bg-dark-card: #243047;
 
   /* Text Colors */
-  --text-main: #141716; /* Deep warm ebony */
-  --text-secondary: #47504c; /* Warm architectural graphite */
-  --text-muted: #737d78; /* Muted stone */
-  --text-light: #f9f8f5;
+  --text-main: #0f172a; /* Sharp Classic Charcoal */
+  --text-secondary: #475569; /* Classic Executive Slate */
+  --text-muted: #64748b; /* Muted Neutral Grey */
+  --text-light: #f8f9fa;
   --text-white: #ffffff;
 
   /* Borders & Dividers */
-  --border-subtle: #e6e2d8; /* Warm stone border */
-  --border-medium: #d5cfc2;
-  --border-dark: #242e2a;
+  --border-subtle: #e2e8f0; /* Subtle Clean Hairline */
+  --border-medium: #cbd5e1;
+  --border-dark: rgba(255, 255, 255, 0.1);
 
   /* Gradients */
   --gradient-brand: linear-gradient(
     135deg,
-    #c5a880 0%,
-    #dfcaab 50%,
-    #b89052 100%
-  ); /* Warm Champagne Gold */
-  --gradient-gold: linear-gradient(135deg, #c5a880 0%, #a88656 100%);
-  --gradient-dark: linear-gradient(180deg, #0b0e0d 0%, #121816 100%);
-  --gradient-emerald: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+    #9e8568 0%,
+    #ba9f7f 50%,
+    #8c7355 100%
+  ); /* Subtle Cashmere Bronze */
+  --gradient-gold: linear-gradient(135deg, #9e8568 0%, #7d674d 100%);
+  --gradient-dark: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  --gradient-emerald: linear-gradient(135deg, #3d5a4f 0%, #234338 100%);
   --gradient-hero-overlay: linear-gradient(
     135deg,
-    rgba(11, 14, 13, 0.95) 0%,
-    rgba(18, 24, 22, 0.9) 100%
+    rgba(15, 23, 42, 0.94) 0%,
+    rgba(30, 41, 59, 0.9) 100%
   );
   --gradient-glass: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.85) 0%,
-    rgba(255, 255, 255, 0.5) 100%
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.6) 100%
   );
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(18, 24, 22, 0.05);
-  --shadow-md: 0 4px 14px rgba(18, 24, 22, 0.07);
-  --shadow-lg: 0 10px 30px rgba(18, 24, 22, 0.09);
-  --shadow-xl: 0 20px 45px rgba(18, 24, 22, 0.12);
-  --shadow-glow: 0 0 25px rgba(197, 168, 128, 0.28);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-xl: 0 20px 45px rgba(15, 23, 42, 0.1);
+  --shadow-glow: 0 0 20px rgba(158, 133, 104, 0.18);
 
   /* Typography Hierarchy */
   --font-family:

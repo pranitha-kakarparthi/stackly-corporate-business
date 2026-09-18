@@ -131,26 +131,56 @@
     }
   }
 
-  // 4. Mobile Navigation Drawer & Background Scroll Lock
+  // 4. Mobile Navigation Drawer & Dedicated Close Control
   function initMobileMenu() {
     const hamburger = document.querySelector(".hamburger-btn");
     const overlay = document.querySelector(".mobile-nav-overlay");
     if (!hamburger || !overlay) return;
 
+    function openMenu() {
+      document.body.classList.add("nav-open");
+      document.documentElement.classList.add("nav-open");
+      hamburger.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      document.body.classList.remove("nav-open");
+      document.documentElement.classList.remove("nav-open");
+      hamburger.setAttribute("aria-expanded", "false");
+    }
+
     function toggleMenu() {
-      const isOpen = document.body.classList.toggle("nav-open");
-      hamburger.setAttribute("aria-expanded", isOpen);
+      if (document.body.classList.contains("nav-open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     }
 
     hamburger.addEventListener("click", toggleMenu);
 
-    // Close mobile menu on overlay link click
+    // Dedicated Close Button inside overlay
+    const closeBtn = overlay.querySelector(".mobile-nav-close");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeMenu();
+      });
+    }
+
+    // Close on any link click
     const mobileLinks = overlay.querySelectorAll("a");
     mobileLinks.forEach((link) => {
       link.addEventListener("click", () => {
-        document.body.classList.remove("nav-open");
-        hamburger.setAttribute("aria-expanded", "false");
+        closeMenu();
       });
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && document.body.classList.contains("nav-open")) {
+        closeMenu();
+      }
     });
   }
 
@@ -208,6 +238,90 @@
     });
   }
 
+  // 7. Interactive Mandate Scope Calculator (Engagement Models Page)
+  function initScopeCalculator() {
+    const scalePills = document.querySelectorAll(
+      "#calc-scale-pills .calc-pill-btn"
+    );
+    const pacePills = document.querySelectorAll(
+      "#calc-pace-pills .calc-pill-btn"
+    );
+    const mandatePills = document.querySelectorAll(
+      "#calc-mandate-pills .calc-pill-btn"
+    );
+
+    if (!scalePills.length) return;
+
+    let currentScale = "small";
+    let currentPace = "standard";
+    let currentMandate = "ma";
+
+    function setupPillGroup(group, onSelect) {
+      group.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          group.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          onSelect(
+            btn.getAttribute("data-scale") ||
+              btn.getAttribute("data-pace") ||
+              btn.getAttribute("data-mandate")
+          );
+          calculateScope();
+        });
+      });
+    }
+
+    setupPillGroup(scalePills, (val) => {
+      currentScale = val;
+    });
+    setupPillGroup(pacePills, (val) => {
+      currentPace = val;
+    });
+    setupPillGroup(mandatePills, (val) => {
+      currentMandate = val;
+    });
+
+    function calculateScope() {
+      const tierEl = document.getElementById("calc-tier-result");
+      const descEl = document.getElementById("calc-tier-desc");
+      const squadEl = document.getElementById("calc-squad-result");
+      const partnerEl = document.getElementById("calc-partner-result");
+      const feeEl = document.getElementById("calc-fee-result");
+
+      if (!tierEl) return;
+
+      if (
+        currentMandate === "turnaround" ||
+        currentPace === "urgent" ||
+        currentScale === "mega"
+      ) {
+        tierEl.textContent = "Enterprise Turnaround Mandate";
+        descEl.textContent =
+          "Emergency operational restructuring, 13-week daily liquidity committee, and interim CRO on-site presence.";
+        squadEl.textContent = "6 Specialists (incl. Interim CRO)";
+        partnerEl.textContent = "Full-Time Dedicated";
+        feeEl.innerHTML =
+          '$65,000 <span style="font-size: 0.82rem; font-weight: 500; color: #94a3b8;">/ mo</span>';
+      } else if (currentScale === "small" && currentPace === "standard") {
+        tierEl.textContent = "Boardroom Strategic Retainer";
+        descEl.textContent =
+          "Quarterly board strategy briefings, ongoing governance counsel, and continuous competitor intelligence.";
+        squadEl.textContent = "2 Advisory Partners";
+        partnerEl.textContent = "15 Hours / Month";
+        feeEl.innerHTML =
+          '$15,000 <span style="font-size: 0.82rem; font-weight: 500; color: #94a3b8;">/ mo</span>';
+      } else {
+        tierEl.textContent = "Transaction Lead Mandate";
+        descEl.textContent =
+          "Dedicated deal execution pod with comprehensive valuation dossiers, cryptographic VDR, and regulatory antitrust clearance.";
+        squadEl.textContent = "4 Dedicated Specialists";
+        partnerEl.textContent = "40 Hours / Month";
+        feeEl.innerHTML =
+          '$35,000 <span style="font-size: 0.82rem; font-weight: 500; color: #94a3b8;">/ mo</span>';
+      }
+    }
+  }
+
   // DOM Content Loaded Initializer
   document.addEventListener("DOMContentLoaded", () => {
     initLoader();
@@ -216,6 +330,7 @@
     initMobileMenu();
     initAOS();
     initFAQ();
+    initScopeCalculator();
   });
 
   // Re-run greetings periodically (e.g. every minute)

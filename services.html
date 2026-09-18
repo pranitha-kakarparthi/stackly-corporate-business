@@ -32,6 +32,8 @@
           src="assets/images/logoStackly.webp"
           alt="Stackly Logo"
           class="loader-logo"
+          width="170"
+          height="38"
           style="height: 38px; max-width: 170px; object-fit: contain"
         />
         <div class="loader-spinner" aria-hidden="true"></div>
@@ -46,6 +48,8 @@
           <img
             src="assets/images/logoStackly.webp"
             alt="Stackly Logo"
+            width="170"
+            height="38"
             style="height: 38px; max-width: 170px; object-fit: contain"
           />
         </a>
@@ -79,18 +83,59 @@
                   />
                 </svg>
               </a>
-              <ul class="dropdown-menu">
+              <!-- Multi-level Dropdown -->
+              <ul class="dropdown-menu" aria-label="Advisory Services submenu">
                 <li class="dropdown-item">
-                  <a href="404.html"><span>Mergers & Acquisitions</span></a>
+                  <a href="#mna">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                      />
+                    </svg>
+                    <span>Mergers & Acquisitions</span>
+                  </a>
                 </li>
                 <li class="dropdown-item">
-                  <a href="404.html"><span>Strategic Capital Advisory</span></a>
+                  <a href="#capital">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>Strategic Capital Advisory</span>
+                  </a>
                 </li>
                 <li class="dropdown-item">
-                  <a href="404.html"><span>Turnaround & Optimization</span></a>
+                  <a href="#restructuring">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                      />
+                    </svg>
+                    <span>Turnaround & Optimization</span>
+                  </a>
                 </li>
                 <li class="dropdown-item">
-                  <a href="404.html"><span>ESG & Corporate Governance</span></a>
+                  <a href="#governance">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                      />
+                    </svg>
+                    <span>ESG & Corporate Governance</span>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -122,6 +167,27 @@
 
     <!-- Mobile Overlay -->
     <div class="mobile-nav-overlay" role="dialog" aria-modal="true">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="brand-logo" aria-label="Stackly Home">
+          <img
+            src="assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            width="150"
+            height="34"
+            style="height: 34px; max-width: 150px; object-fit: contain"
+          />
+        </a>
+        <button class="mobile-nav-close" aria-label="Close navigation menu">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
       <ul class="mobile-nav-links">
         <li><a href="index.html" class="mobile-nav-link">Home</a></li>
         <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
@@ -149,7 +215,7 @@
     <main id="main-content">
       <!-- PAGE HERO -->
       <section class="page-hero" aria-label="Services Page Hero">
-        <div class="container" data-aos="fade-down">
+        <div class="container">
           <ul class="breadcrumb">
             <li><a href="index.html">Home</a></li>
             <li>/</li>
@@ -248,6 +314,29 @@
             </div>
             <div data-aos="fade-left" data-aos-delay="150">
               <div
+                style="
+                  margin-bottom: 18px;
+                  border-radius: var(--radius-lg);
+                  overflow: hidden;
+                  border: 1px solid var(--border-subtle);
+                  box-shadow: var(--shadow-md);
+                "
+              >
+                <img
+                  src="assets/images/corporate-meeting.webp"
+                  alt="Executive M&A Consultation"
+                  width="540"
+                  height="260"
+                  style="
+                    width: 100%;
+                    height: 230px;
+                    object-fit: cover;
+                    display: block;
+                  "
+                  loading="lazy"
+                />
+              </div>
+              <div
                 class="hero-visual-card"
                 style="background: var(--color-primary-900)"
               >
@@ -262,7 +351,7 @@
                   <span class="stat-label">Average Synergy Capture</span>
                   <div
                     class="stat-value"
-                    style="font-size: 1.8rem; color: #10b981"
+                    style="font-size: 1.8rem; color: var(--color-accent-green)"
                   >
                     118% of Target
                   </div>
@@ -344,6 +433,29 @@
             </div>
             <div data-aos="fade-left" data-aos-delay="150" style="order: 1">
               <div
+                style="
+                  margin-bottom: 18px;
+                  border-radius: var(--radius-lg);
+                  overflow: hidden;
+                  border: 1px solid var(--border-subtle);
+                  box-shadow: var(--shadow-md);
+                "
+              >
+                <img
+                  src="assets/images/about-boardroom.webp"
+                  alt="Corporate Capital Restructuring Boardroom"
+                  width="540"
+                  height="260"
+                  style="
+                    width: 100%;
+                    height: 230px;
+                    object-fit: cover;
+                    display: block;
+                  "
+                  loading="lazy"
+                />
+              </div>
+              <div
                 class="hero-visual-card"
                 style="background: var(--color-primary-800)"
               >
@@ -352,7 +464,12 @@
                 </h3>
                 <div class="hero-stat-box">
                   <span class="stat-label">WACC Reduction Achieved</span>
-                  <div class="stat-value" style="color: #10b981">-185 bps</div>
+                  <div
+                    class="stat-value"
+                    style="color: var(--color-accent-green)"
+                  >
+                    -185 bps
+                  </div>
                 </div>
                 <div class="hero-stat-box">
                   <span class="stat-label">Refinanced Facility Volume</span>
@@ -508,6 +625,29 @@
             </div>
             <div data-aos="fade-left" data-aos-delay="150" style="order: 1">
               <div
+                style="
+                  margin-bottom: 18px;
+                  border-radius: var(--radius-lg);
+                  overflow: hidden;
+                  border: 1px solid var(--border-subtle);
+                  box-shadow: var(--shadow-md);
+                "
+              >
+                <img
+                  src="assets/images/auth-trust.webp"
+                  alt="Enterprise Governance and Fiduciary Assurance"
+                  width="540"
+                  height="260"
+                  style="
+                    width: 100%;
+                    height: 230px;
+                    object-fit: cover;
+                    display: block;
+                  "
+                  loading="lazy"
+                />
+              </div>
+              <div
                 class="hero-visual-card"
                 style="background: var(--color-primary-800)"
               >
@@ -516,7 +656,10 @@
                 </h3>
                 <div class="hero-stat-box">
                   <span class="stat-label">Compliance Certifications</span>
-                  <div class="stat-value" style="color: #10b981">
+                  <div
+                    class="stat-value"
+                    style="color: var(--color-accent-green)"
+                  >
                     100% Audit Readiness
                   </div>
                 </div>
@@ -591,10 +734,10 @@
               briefings.
             </p>
             <div class="cta-buttons">
-              <a href="contact.html" class="btn btn-primary btn-lg"
+              <a href="404.html" class="btn btn-primary btn-lg"
                 >Schedule Confidential Briefing</a
               >
-              <a href="pricing.html" class="btn btn-secondary btn-lg"
+              <a href="404.html" class="btn btn-secondary btn-lg"
                 >View Engagement Models</a
               >
             </div>
@@ -612,6 +755,8 @@
               ><img
                 src="assets/images/logoStackly.webp"
                 alt="Stackly Logo"
+                width="170"
+                height="38"
                 style="height: 38px; max-width: 170px; object-fit: contain"
             /></a>
             <p>
@@ -711,7 +856,7 @@
             <ul>
               <li><a href="index.html">Home Overview</a></li>
               <li><a href="about.html">Executive Heritage</a></li>
-              <li><a href="404.html">Advisory Services</a></li>
+              <li><a href="services.html">Advisory Services</a></li>
               <li><a href="pricing.html">Engagement Models</a></li>
               <li><a href="contact.html">Global Headquarters</a></li>
             </ul>

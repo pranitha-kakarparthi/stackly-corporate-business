@@ -32,6 +32,8 @@
           src="assets/images/logoStackly.webp"
           alt="Stackly Logo"
           class="loader-logo"
+          width="170"
+          height="38"
           style="height: 38px; max-width: 170px; object-fit: contain"
         />
         <div class="loader-spinner" aria-hidden="true"></div>
@@ -46,6 +48,8 @@
           <img
             src="assets/images/logoStackly.webp"
             alt="Stackly Logo"
+            width="170"
+            height="38"
             style="height: 38px; max-width: 170px; object-fit: contain"
           />
         </a>
@@ -124,6 +128,27 @@
 
     <!-- Mobile Overlay -->
     <div class="mobile-nav-overlay" role="dialog" aria-modal="true">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="brand-logo" aria-label="Stackly Home">
+          <img
+            src="assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            width="150"
+            height="34"
+            style="height: 34px; max-width: 150px; object-fit: contain"
+          />
+        </a>
+        <button class="mobile-nav-close" aria-label="Close navigation menu">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
       <ul class="mobile-nav-links">
         <li><a href="index.html" class="mobile-nav-link">Home</a></li>
         <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
@@ -151,7 +176,7 @@
     <main id="main-content">
       <!-- PAGE HERO -->
       <section class="page-hero" aria-label="Pricing Hero">
-        <div class="container" data-aos="fade-down">
+        <div class="container">
           <ul class="breadcrumb">
             <li><a href="index.html">Home</a></li>
             <li>/</li>
@@ -162,8 +187,37 @@
           </h1>
           <p style="color: #cbd5e1; max-width: 760px; font-size: 1.15rem">
             Predictable, milestone-driven fee structures engineered to align
-            incentives with verifiable balance sheet outcomes.
+            incentives with verifiable balance sheet outcomes and sovereign
+            confidentiality.
           </p>
+
+          <!-- HERO METRICS RIBBON -->
+          <div class="pricing-hero-ribbon">
+            <div class="pricing-ribbon-item">
+              <span class="pricing-ribbon-num">$14.2B+</span>
+              <span class="pricing-ribbon-label"
+                >Transaction Capital Advised</span
+              >
+            </div>
+            <div class="pricing-ribbon-item">
+              <span class="pricing-ribbon-num">100%</span>
+              <span class="pricing-ribbon-label"
+                >Fee Transparency & Milestone Gating</span
+              >
+            </div>
+            <div class="pricing-ribbon-item">
+              <span class="pricing-ribbon-num">48h</span>
+              <span class="pricing-ribbon-label"
+                >Emergency CRO Deployment Window</span
+              >
+            </div>
+            <div class="pricing-ribbon-item">
+              <span class="pricing-ribbon-num">Zero</span>
+              <span class="pricing-ribbon-label"
+                >Hidden Surcharges or Markups</span
+              >
+            </div>
+          </div>
         </div>
       </section>
 
@@ -236,7 +290,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -254,7 +308,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -272,7 +326,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -290,7 +344,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -346,7 +400,7 @@
                   align-self: flex-start;
                   margin-bottom: 16px;
                   background: rgba(197, 168, 128, 0.18);
-                  color: #b89052;
+                  color: var(--color-accent-gold-dark);
                 "
                 >Transaction Mandate</span
               >
@@ -392,7 +446,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -410,7 +464,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -428,7 +482,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -446,7 +500,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -464,7 +518,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -535,7 +589,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -553,7 +607,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -571,7 +625,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -589,7 +643,7 @@
                     stroke="currentColor"
                     width="18"
                     height="18"
-                    color="#10B981"
+                    color="var(--color-accent-green)"
                   >
                     <path
                       stroke-linecap="round"
@@ -637,6 +691,32 @@
               A four-phase transaction roadmap ensuring regulatory clearance,
               financial rigor, and transparent board milestones.
             </p>
+          </div>
+
+          <div
+            style="
+              margin-bottom: 36px;
+              border-radius: var(--radius-lg);
+              overflow: hidden;
+              border: 1px solid var(--border-subtle);
+              box-shadow: var(--shadow-md);
+              max-height: 280px;
+            "
+            data-aos="fade-up"
+          >
+            <img
+              src="assets/images/corporate-meeting.webp"
+              alt="Institutional Transaction Roadmap and Onboarding"
+              width="1200"
+              height="350"
+              style="
+                width: 100%;
+                height: 260px;
+                object-fit: cover;
+                display: block;
+              "
+              loading="lazy"
+            />
           </div>
 
           <div class="grid grid-4" data-aos="fade-up" data-aos-delay="100">
@@ -930,6 +1010,271 @@
         </div>
       </section>
 
+      <!-- SECTION 4B: INTERACTIVE SCOPE & RETAINER CALCULATOR -->
+      <section
+        class="section"
+        style="
+          background: var(--bg-surface);
+          border-top: 1px solid var(--border-subtle);
+        "
+        aria-label="Interactive Retainer Scope Calculator"
+      >
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-tag">Engagement Estimator</span>
+            <h2 class="section-title">
+              Institutional Mandate Scope Calculator
+            </h2>
+            <p class="section-subtitle">
+              Model your prospective mandate parameters to determine advisory
+              team composition, milestone structure, and estimated deployment
+              speed.
+            </p>
+          </div>
+
+          <div class="calc-card" data-aos="fade-up">
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 36px;
+                align-items: center;
+              "
+            >
+              <div>
+                <label
+                  style="
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                    color: var(--color-primary-900);
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    display: block;
+                    margin-bottom: 10px;
+                  "
+                >
+                  1. Transaction / Enterprise Scale
+                </label>
+                <div class="calc-pills-row" id="calc-scale-pills">
+                  <button
+                    type="button"
+                    class="calc-pill-btn active"
+                    data-scale="small"
+                  >
+                    $25M – $50M
+                  </button>
+                  <button type="button" class="calc-pill-btn" data-scale="mid">
+                    $50M – $200M
+                  </button>
+                  <button
+                    type="button"
+                    class="calc-pill-btn"
+                    data-scale="large"
+                  >
+                    $200M – $500M
+                  </button>
+                  <button type="button" class="calc-pill-btn" data-scale="mega">
+                    $500M+
+                  </button>
+                </div>
+
+                <label
+                  style="
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                    color: var(--color-primary-900);
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    display: block;
+                    margin-bottom: 10px;
+                  "
+                >
+                  2. Advisory Execution Velocity
+                </label>
+                <div class="calc-pills-row" id="calc-pace-pills">
+                  <button
+                    type="button"
+                    class="calc-pill-btn active"
+                    data-pace="standard"
+                  >
+                    Standard (90 Days)
+                  </button>
+                  <button
+                    type="button"
+                    class="calc-pill-btn"
+                    data-pace="accelerated"
+                  >
+                    Accelerated (45 Days)
+                  </button>
+                  <button
+                    type="button"
+                    class="calc-pill-btn"
+                    data-pace="urgent"
+                  >
+                    Critical Turnaround (30 Days)
+                  </button>
+                </div>
+
+                <label
+                  style="
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                    color: var(--color-primary-900);
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    display: block;
+                    margin-bottom: 10px;
+                  "
+                >
+                  3. Primary Advisory Mandate
+                </label>
+                <div class="calc-pills-row" id="calc-mandate-pills">
+                  <button
+                    type="button"
+                    class="calc-pill-btn active"
+                    data-mandate="ma"
+                  >
+                    M&A / Buy-Side
+                  </button>
+                  <button
+                    type="button"
+                    class="calc-pill-btn"
+                    data-mandate="carveout"
+                  >
+                    Corporate Carve-Out
+                  </button>
+                  <button
+                    type="button"
+                    class="calc-pill-btn"
+                    data-mandate="turnaround"
+                  >
+                    Liquidity Restructuring
+                  </button>
+                </div>
+              </div>
+
+              <div class="calc-summary-panel">
+                <span
+                  class="section-tag"
+                  style="
+                    background: rgba(197, 168, 128, 0.2);
+                    color: var(--color-accent-gold-light);
+                    margin-bottom: 14px;
+                    display: inline-block;
+                  "
+                  >Recommended Architecture</span
+                >
+                <h3
+                  id="calc-tier-result"
+                  style="font-size: 1.5rem; color: #ffffff; margin-bottom: 8px"
+                >
+                  Transaction Lead Mandate
+                </h3>
+                <p
+                  id="calc-tier-desc"
+                  style="
+                    font-size: 0.88rem;
+                    color: #cbd5e1;
+                    margin-bottom: 24px;
+                    line-height: 1.5;
+                  "
+                >
+                  Dedicated deal execution pod with comprehensive valuation
+                  dossiers, cryptographic VDR, and regulatory antitrust
+                  clearance.
+                </p>
+
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 16px;
+                    margin-bottom: 24px;
+                    padding: 18px 0;
+                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                  "
+                >
+                  <div>
+                    <span
+                      style="
+                        font-size: 0.74rem;
+                        color: var(--color-accent-gold-light);
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        display: block;
+                        margin-bottom: 2px;
+                      "
+                      >Squad Allocation</span
+                    >
+                    <strong
+                      id="calc-squad-result"
+                      style="font-size: 1.1rem; color: #ffffff"
+                      >4 Dedicated Specialists</strong
+                    >
+                  </div>
+                  <div>
+                    <span
+                      style="
+                        font-size: 0.74rem;
+                        color: var(--color-accent-gold-light);
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        display: block;
+                        margin-bottom: 2px;
+                      "
+                      >Partner Allocation</span
+                    >
+                    <strong
+                      id="calc-partner-result"
+                      style="font-size: 1.1rem; color: #ffffff"
+                      >40 Hours / Month</strong
+                    >
+                  </div>
+                </div>
+
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 24px;
+                  "
+                >
+                  <span style="font-size: 0.88rem; color: #cbd5e1"
+                    >Base Retainer Guidance:</span
+                  >
+                  <span
+                    id="calc-fee-result"
+                    style="
+                      font-size: 1.5rem;
+                      font-weight: 800;
+                      color: var(--color-accent-gold-light);
+                    "
+                    >$35,000
+                    <span
+                      style="
+                        font-size: 0.82rem;
+                        font-weight: 500;
+                        color: #94a3b8;
+                      "
+                      >/ mo</span
+                    ></span
+                  >
+                </div>
+
+                <a
+                  href="404.html"
+                  class="btn btn-primary"
+                  style="width: 100%; text-align: center"
+                  >Request Formatted Scope Dossier</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- SECTION 5: DELIVERABLES & GOVERNANCE SLA MATRIX -->
       <section
         class="section"
@@ -960,118 +1305,570 @@
             </p>
           </div>
 
-          <div
-            style="
-              overflow-x: auto;
-              background: #ffffff;
-              border-radius: var(--radius-md);
-              border: 1px solid var(--border-subtle);
-              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            "
-            data-aos="fade-up"
-          >
-            <table class="custom-table" style="width: 100%; min-width: 650px">
+          <div class="custom-table-container" data-aos="fade-up">
+            <table class="custom-table" style="min-width: 720px">
               <thead>
                 <tr>
-                  <th style="width: 40%">Core Deliverables & SLA Guarantees</th>
-                  <th style="width: 20%; text-align: center">
-                    Strategic Retainer
+                  <th class="col-feature">
+                    Core Deliverables & SLA Guarantees
                   </th>
-                  <th style="width: 20%; text-align: center">
+                  <th class="col-tier">Boardroom Counsel</th>
+                  <th class="col-tier featured">
+                    <span
+                      style="
+                        font-size: 0.68rem;
+                        display: block;
+                        color: var(--color-accent-gold);
+                        letter-spacing: 1px;
+                        margin-bottom: 2px;
+                      "
+                      >RECOMMENDED</span
+                    >
                     Transaction Lead
                   </th>
-                  <th style="width: 20%; text-align: center">
-                    Enterprise Turnaround
-                  </th>
+                  <th class="col-tier">Enterprise Turnaround</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>
-                    <strong>Managing Partner Dedicated Allocation</strong>
-                  </td>
-                  <td style="text-align: center">15 Hours / Mo</td>
-                  <td style="text-align: center">40 Hours / Mo</td>
-                  <td style="text-align: center">
-                    Full-Time Dedicated (Interim CRO)
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Zero-Knowledge Cryptographic Deal Room</strong>
-                  </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; Standard SOC2
-                  </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; Multi-Party Vault
-                  </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; Air-Gapped High Security
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong
-                      >Cross-Border Antitrust & Regulatory Clearances</strong
+                  <td class="cell-feature">
+                    Managing Partner Dedicated Allocation
+                    <span class="feature-desc"
+                      >Active monthly commitment dedicated exclusively to your
+                      boardroom.</span
                     >
                   </td>
-                  <td style="text-align: center; color: var(--text-muted)">
-                    &mdash;
+                  <td class="cell-val">
+                    <span class="sla-gold-pill">15 Hours / Mo</span>
                   </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; CFIUS & EU Filing
-                  </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; Multi-Jurisdiction Urgent
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong
-                      >Fairness Opinions & Board Solvency Affidavits</strong
+                  <td class="cell-val featured">
+                    <span class="sla-gold-pill" style="font-weight: 800"
+                      >40 Hours / Mo</span
                     >
                   </td>
-                  <td style="text-align: center; color: var(--text-muted)">
-                    &mdash;
-                  </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; 2 Opinions Included
-                  </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; Continuous Audit Sign-off
+                  <td class="cell-val">
+                    <span class="sla-gold-pill">Full-Time (Interim CRO)</span>
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    <strong>Post-Merger Synergy Execution Team (PMI)</strong>
+                  <td class="cell-feature">
+                    Zero-Knowledge Cryptographic Deal Room
+                    <span class="feature-desc"
+                      >SOC-2 Type II end-to-end encrypted virtual data room with
+                      audit logging.</span
+                    >
                   </td>
-                  <td style="text-align: center; color: var(--text-muted)">
-                    &mdash;
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Standard SOC2
+                    </span>
                   </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; 100-Day Playbook
+                  <td class="cell-val featured">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Multi-Party Vault
+                    </span>
                   </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; Dedicated On-Site Squad
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Air-Gapped Sovereign
+                    </span>
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    <strong>13-Week Cash Flow & Liquidity Optimization</strong>
+                  <td class="cell-feature">
+                    Cross-Border Antitrust & Regulatory Clearances
+                    <span class="feature-desc"
+                      >CFIUS, EU merger control, and jurisdictional sovereign
+                      wealth notifications.</span
+                    >
                   </td>
-                  <td style="text-align: center; color: var(--text-muted)">
-                    &mdash;
+                  <td class="cell-val">
+                    <span class="sla-dash">&mdash;</span>
                   </td>
-                  <td style="text-align: center; color: var(--text-muted)">
-                    &mdash;
+                  <td class="cell-val featured">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      CFIUS & EU Filing
+                    </span>
                   </td>
-                  <td style="text-align: center; color: #10b981">
-                    &#10003; Daily Monitoring Committee
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Multi-Jurisdiction Urgent
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-feature">
+                    Fairness Opinions & Board Solvency Affidavits
+                    <span class="feature-desc"
+                      >Independent valuation affidavits for fiduciary committee
+                      sign-offs.</span
+                    >
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-dash">&mdash;</span>
+                  </td>
+                  <td class="cell-val featured">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      2 Opinions Included
+                    </span>
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Continuous Audit Sign-off
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-feature">
+                    Post-Merger Synergy Execution Team (PMI)
+                    <span class="feature-desc"
+                      >Tactical playbook and milestone integration committee
+                      tracking.</span
+                    >
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-dash">&mdash;</span>
+                  </td>
+                  <td class="cell-val featured">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      100-Day Playbook
+                    </span>
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Dedicated On-Site Squad
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-feature">
+                    13-Week Cash Flow & Liquidity Optimization
+                    <span class="feature-desc"
+                      >Daily treasury monitoring, debt covenant compliance, and
+                      working capital buffers.</span
+                    >
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-dash">&mdash;</span>
+                  </td>
+                  <td class="cell-val featured">
+                    <span class="sla-dash">&mdash;</span>
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Daily Monitoring Committee
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-feature">
+                    Sovereign Data Residency & Jurisdictional Routing
+                    <span class="feature-desc"
+                      >Automated data sovereignty routing complying with GDPR,
+                      Swiss FADP, and US cloud rules.</span
+                    >
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Standard Routing
+                    </span>
+                  </td>
+                  <td class="cell-val featured">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Dual Jurisdiction
+                    </span>
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Dedicated Air-Gapped Node
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-feature">
+                    Milestone-Gated Fiduciary Escrow Security
+                    <span class="feature-desc"
+                      >Deposits held in Tier-1 segregated custodial accounts
+                      released only upon audit sign-off.</span
+                    >
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Standard Escrow
+                    </span>
+                  </td>
+                  <td class="cell-val featured">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Multi-Sig Custodial
+                    </span>
+                  </td>
+                  <td class="cell-val">
+                    <span class="sla-check-pill">
+                      <svg
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Dedicated Fiduciary Escrow
+                    </span>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5B: ESCROW & RISK MITIGATION CHARTER -->
+      <section
+        class="section"
+        style="background: #ffffff; border-top: 1px solid var(--border-subtle)"
+        aria-label="Escrow and Risk Mitigation"
+      >
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-tag">Institutional Security</span>
+            <h2 class="section-title">Client Escrow & Fiduciary Safeguards</h2>
+            <p class="section-subtitle">
+              How Stackly safeguards client retainers, confidentiality, and
+              transaction intelligence with zero institutional exposure.
+            </p>
+          </div>
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 24px;
+            "
+            data-aos="fade-up"
+          >
+            <div class="service-card" style="padding: 32px 28px">
+              <div
+                style="
+                  width: 48px;
+                  height: 48px;
+                  border-radius: var(--radius-md);
+                  background: rgba(35, 67, 56, 0.12);
+                  color: var(--color-accent-green);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin-bottom: 18px;
+                "
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  width="24"
+                  height="24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <h3
+                style="
+                  font-size: 1.2rem;
+                  margin-bottom: 10px;
+                  color: var(--color-primary-900);
+                "
+              >
+                Segregated Custodial Escrow
+              </h3>
+              <p
+                style="
+                  font-size: 0.88rem;
+                  color: var(--text-body);
+                  line-height: 1.6;
+                "
+              >
+                Client retainers and milestone disbursements are held
+                exclusively in segregated, third-party FDIC/FINMA-insured
+                institutional accounts at Tier-1 depository banks until verified
+                deliverables are executed.
+              </p>
+            </div>
+
+            <div class="service-card" style="padding: 32px 28px">
+              <div
+                style="
+                  width: 48px;
+                  height: 48px;
+                  border-radius: var(--radius-md);
+                  background: rgba(158, 133, 104, 0.15);
+                  color: var(--color-accent-gold-dark);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin-bottom: 18px;
+                "
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  width="24"
+                  height="24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                  />
+                </svg>
+              </div>
+              <h3
+                style="
+                  font-size: 1.2rem;
+                  margin-bottom: 10px;
+                  color: var(--color-primary-900);
+                "
+              >
+                Milestone-Gated Deliverables
+              </h3>
+              <p
+                style="
+                  font-size: 0.88rem;
+                  color: var(--text-body);
+                  line-height: 1.6;
+                "
+              >
+                Every retainer phase is tied to auditable milestones—from
+                confidential information memorandums (CIM) and financial models
+                to fairness opinions and regulatory submissions authenticated by
+                client counsel.
+              </p>
+            </div>
+
+            <div class="service-card" style="padding: 32px 28px">
+              <div
+                style="
+                  width: 48px;
+                  height: 48px;
+                  border-radius: var(--radius-md);
+                  background: rgba(59, 89, 124, 0.15);
+                  color: var(--color-accent-blue);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin-bottom: 18px;
+                "
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  width="24"
+                  height="24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+              <h3
+                style="
+                  font-size: 1.2rem;
+                  margin-bottom: 10px;
+                  color: var(--color-primary-900);
+                "
+              >
+                Air-Gapped Confidentiality
+              </h3>
+              <p
+                style="
+                  font-size: 0.88rem;
+                  color: var(--text-body);
+                  line-height: 1.6;
+                "
+              >
+                Deal room documents and valuation metrics are protected by
+                zero-knowledge 256-bit AES encryption with localized data
+                residency routing, strict non-circumvention charters, and zero
+                conflicting positions.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -1193,10 +1990,10 @@
               engagement proposal.
             </p>
             <div class="cta-buttons">
-              <a href="contact.html" class="btn btn-primary btn-lg"
+              <a href="404.html" class="btn btn-primary btn-lg"
                 >Request Proposal</a
               >
-              <a href="about.html" class="btn btn-secondary btn-lg"
+              <a href="404.html" class="btn btn-secondary btn-lg"
                 >Learn More About Our Team</a
               >
             </div>
@@ -1214,6 +2011,8 @@
               ><img
                 src="assets/images/logoStackly.webp"
                 alt="Stackly Logo"
+                width="170"
+                height="38"
                 style="height: 38px; max-width: 170px; object-fit: contain"
             /></a>
             <p>
@@ -1313,7 +2112,7 @@
             <ul>
               <li><a href="index.html">Home Overview</a></li>
               <li><a href="about.html">Executive Heritage</a></li>
-              <li><a href="404.html">Advisory Services</a></li>
+              <li><a href="services.html">Advisory Services</a></li>
               <li><a href="pricing.html">Engagement Models</a></li>
               <li><a href="contact.html">Global Headquarters</a></li>
             </ul>

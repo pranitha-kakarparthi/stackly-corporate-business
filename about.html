@@ -32,6 +32,8 @@
           src="assets/images/logoStackly.webp"
           alt="Stackly Logo"
           class="loader-logo"
+          width="170"
+          height="38"
           style="height: 38px; max-width: 170px; object-fit: contain"
         />
         <div class="loader-spinner" aria-hidden="true"></div>
@@ -46,6 +48,8 @@
           <img
             src="assets/images/logoStackly.webp"
             alt="Stackly Logo"
+            width="170"
+            height="38"
             style="height: 38px; max-width: 170px; object-fit: contain"
           />
         </a>
@@ -122,6 +126,27 @@
 
     <!-- Mobile Overlay -->
     <div class="mobile-nav-overlay" role="dialog" aria-modal="true">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="brand-logo" aria-label="Stackly Home">
+          <img
+            src="assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            width="150"
+            height="34"
+            style="height: 34px; max-width: 150px; object-fit: contain"
+          />
+        </a>
+        <button class="mobile-nav-close" aria-label="Close navigation menu">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
       <ul class="mobile-nav-links">
         <li><a href="index.html" class="mobile-nav-link">Home</a></li>
         <li>
@@ -149,7 +174,7 @@
     <main id="main-content">
       <!-- PAGE HERO -->
       <section class="page-hero" aria-label="About Page Hero">
-        <div class="container" data-aos="fade-down">
+        <div class="container">
           <ul class="breadcrumb">
             <li><a href="index.html">Home</a></li>
             <li>/</li>
@@ -308,7 +333,7 @@
                 style="
                   margin: 0 auto 20px;
                   background: rgba(16, 185, 129, 0.15);
-                  color: #10b981;
+                  color: var(--color-accent-green);
                 "
               >
                 <svg
@@ -339,7 +364,7 @@
                   border-top: 1px solid rgba(255, 255, 255, 0.08);
                   font-size: 0.78rem;
                   font-weight: 700;
-                  color: #10b981;
+                  color: var(--color-accent-green);
                 "
               >
                 Modeling: Multi-Scenario DCF & LBO
@@ -352,7 +377,7 @@
                 style="
                   margin: 0 auto 20px;
                   background: rgba(197, 168, 128, 0.18);
-                  color: #c5a880;
+                  color: var(--color-accent-gold-light);
                 "
               >
                 <svg
@@ -418,6 +443,8 @@
               <img
                 src="assets/images/exec-ceo.webp"
                 alt="Victoria Alexander"
+                width="130"
+                height="130"
                 style="
                   width: 130px;
                   height: 130px;
@@ -463,6 +490,8 @@
               <img
                 src="assets/images/exec-cfo.webp"
                 alt="Marcus Sterling"
+                width="130"
+                height="130"
                 style="
                   width: 130px;
                   height: 130px;
@@ -508,6 +537,8 @@
               <img
                 src="assets/images/exec-partner.webp"
                 alt="Elena Rostova"
+                width="130"
+                height="130"
                 style="
                   width: 130px;
                   height: 130px;
@@ -553,6 +584,8 @@
               <img
                 src="assets/images/exec-advisory.webp"
                 alt="David Chen"
+                width="130"
+                height="130"
                 style="
                   width: 130px;
                   height: 130px;
@@ -705,7 +738,10 @@
             >
               <span
                 class="milestone-year-pill"
-                style="background: rgba(59, 130, 246, 0.12); color: #2563eb"
+                style="
+                  background: rgba(59, 89, 124, 0.15);
+                  color: var(--color-accent-blue);
+                "
               >
                 <span>2018</span> &bull; <span>European Desk</span>
               </span>
@@ -738,7 +774,7 @@
                   padding-top: 14px;
                   font-size: 0.78rem;
                   font-weight: 700;
-                  color: #2563eb;
+                  color: var(--color-accent-blue);
                 "
               >
                 Impact: $2.5B Cross-Border AUM
@@ -1046,10 +1082,10 @@
               managing partners.
             </p>
             <div class="cta-buttons">
-              <a href="contact.html" class="btn btn-primary btn-lg"
+              <a href="404.html" class="btn btn-primary btn-lg"
                 >Request Confidential Consultation</a
               >
-              <a href="services.html" class="btn btn-secondary btn-lg"
+              <a href="404.html" class="btn btn-secondary btn-lg"
                 >Explore Services</a
               >
             </div>
@@ -1067,6 +1103,8 @@
               ><img
                 src="assets/images/logoStackly.webp"
                 alt="Stackly Logo"
+                width="170"
+                height="38"
                 style="height: 38px; max-width: 170px; object-fit: contain"
             /></a>
             <p>
@@ -1166,7 +1204,7 @@
             <ul>
               <li><a href="index.html">Home Overview</a></li>
               <li><a href="about.html">Executive Heritage</a></li>
-              <li><a href="404.html">Advisory Services</a></li>
+              <li><a href="services.html">Advisory Services</a></li>
               <li><a href="pricing.html">Engagement Models</a></li>
               <li><a href="contact.html">Global Headquarters</a></li>
             </ul>

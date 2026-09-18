@@ -17,6 +17,33 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <script>
+      // Immediate role-based gateway router matching stackly-it-solutions architecture
+      (function () {
+        try {
+          var raw = localStorage.getItem("cb_currentUser");
+          if (!raw) {
+            window.location.replace("sign-in.html");
+            return;
+          }
+          var sess = JSON.parse(raw);
+          var role = (sess && sess.role ? sess.role : "admin").toLowerCase();
+          if (role === "manager") {
+            window.location.replace("dashboard-manager.html");
+          } else if (role === "employee") {
+            window.location.replace("dashboard-employee.html");
+          } else if (role === "customer") {
+            window.location.replace("dashboard-customer.html");
+          } else if (role === "vendor") {
+            window.location.replace("dashboard-vendor.html");
+          } else {
+            window.location.replace("dashboard-admin.html");
+          }
+        } catch (e) {
+          window.location.replace("sign-in.html");
+        }
+      })();
+    </script>
   </head>
   <body class="dashboard-body">
     <div class="dashboard-wrapper">
@@ -27,25 +54,49 @@
         aria-label="Dashboard Sidebar"
       >
         <div class="dash-sidebar-header">
-          <a href="index.html" aria-label="Stackly Home">
+          <a
+            href="index.html"
+            aria-label="Stackly Home"
+            class="dash-brand-link"
+          >
             <img
               src="assets/images/logoStackly.webp"
               alt="Stackly Logo"
-              style="height: 36px; max-width: 160px; object-fit: contain"
+              width="160"
+              height="36"
+              class="dash-brand-img"
             />
           </a>
-        </div>
-
-        <div class="dash-role-badge-box">
-          <span id="dash-role-tag" class="current-role-tag"
-            >Institutional Access</span
+          <button
+            class="dash-mobile-close-btn"
+            id="dash-mobile-close"
+            aria-label="Close navigation menu"
           >
+            <svg
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              width="20"
+              height="20"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </div>
 
         <ul class="dash-nav-menu">
           <li class="dash-nav-heading">Core Modules</li>
-          <li class="dash-nav-item active" data-tooltip="Overview">
-            <a href="dashboard.html" draggable="false">
+          <li
+            class="dash-nav-item active"
+            data-tooltip="Overview"
+            data-view="overview"
+          >
+            <a href="#overview" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -57,12 +108,22 @@
               <span>Overview</span>
             </a>
             <div class="menu-popover-tag" role="tooltip">
-              <span class="tag-status-badge">Active View</span>
-              <span class="tag-title-text">Overview</span>
+              <div class="tag-header">
+                <span class="tag-status-badge">Active View</span>
+                <strong class="tag-title-text">Overview</strong>
+              </div>
+              <p class="tag-desc-text">
+                Real-time executive telemetry, deal pipeline velocity & live KPI
+                metrics.
+              </p>
             </div>
           </li>
-          <li class="dash-nav-item" data-tooltip="Transactions & Deals">
-            <a href="404.html" draggable="false">
+          <li
+            class="dash-nav-item"
+            data-tooltip="Transactions & Deals"
+            data-view="transactions"
+          >
+            <a href="#transactions" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -74,12 +135,22 @@
               <span>Transactions & Deals</span>
             </a>
             <div class="menu-popover-tag" role="tooltip">
-              <span class="tag-status-badge">Mandates</span>
-              <span class="tag-title-text">Transactions & Deals</span>
+              <div class="tag-header">
+                <span class="tag-status-badge">Mandates</span>
+                <strong class="tag-title-text">Transactions & Deals</strong>
+              </div>
+              <p class="tag-desc-text">
+                Active M&A transactions, corporate divestitures & due diligence
+                tracking.
+              </p>
             </div>
           </li>
-          <li class="dash-nav-item" data-tooltip="Capital Allocation">
-            <a href="404.html" draggable="false">
+          <li
+            class="dash-nav-item"
+            data-tooltip="Capital Allocation"
+            data-view="capital"
+          >
+            <a href="#capital" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -91,12 +162,22 @@
               <span>Capital Allocation</span>
             </a>
             <div class="menu-popover-tag" role="tooltip">
-              <span class="tag-status-badge">Treasury</span>
-              <span class="tag-title-text">Capital Allocation</span>
+              <div class="tag-header">
+                <span class="tag-status-badge">Treasury</span>
+                <strong class="tag-title-text">Capital Allocation</strong>
+              </div>
+              <p class="tag-desc-text">
+                Treasury deployment, syndication funds & mezzanine debt
+                facilities.
+              </p>
             </div>
           </li>
-          <li class="dash-nav-item" data-tooltip="Deliverables Vault">
-            <a href="404.html" draggable="false">
+          <li
+            class="dash-nav-item"
+            data-tooltip="Deliverables Vault"
+            data-view="vault"
+          >
+            <a href="#vault" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -108,12 +189,22 @@
               <span>Deliverables Vault</span>
             </a>
             <div class="menu-popover-tag" role="tooltip">
-              <span class="tag-status-badge">Vault</span>
-              <span class="tag-title-text">Deliverables Vault</span>
+              <div class="tag-header">
+                <span class="tag-status-badge">Vault</span>
+                <strong class="tag-title-text">Deliverables Vault</strong>
+              </div>
+              <p class="tag-desc-text">
+                Cryptographic deal rooms, board solvency opinions & data
+                compliance.
+              </p>
             </div>
           </li>
-          <li class="dash-nav-item" data-tooltip="Financial Analytics">
-            <a href="404.html" draggable="false">
+          <li
+            class="dash-nav-item"
+            data-tooltip="Financial Analytics"
+            data-view="analytics"
+          >
+            <a href="#analytics" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -125,12 +216,22 @@
               <span>Financial Analytics</span>
             </a>
             <div class="menu-popover-tag" role="tooltip">
-              <span class="tag-status-badge">Metrics</span>
-              <span class="tag-title-text">Financial Analytics</span>
+              <div class="tag-header">
+                <span class="tag-status-badge">Metrics</span>
+                <strong class="tag-title-text">Financial Analytics</strong>
+              </div>
+              <p class="tag-desc-text">
+                Dynamic EBITDA run-rates, burn models & valuation sensitivity
+                tables.
+              </p>
             </div>
           </li>
-          <li class="dash-nav-item" data-tooltip="Governance & Audit">
-            <a href="404.html" draggable="false">
+          <li
+            class="dash-nav-item"
+            data-tooltip="Governance & Audit"
+            data-view="governance"
+          >
+            <a href="#governance" draggable="false">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -142,8 +243,14 @@
               <span>Governance & Audit</span>
             </a>
             <div class="menu-popover-tag" role="tooltip">
-              <span class="tag-status-badge">Audit</span>
-              <span class="tag-title-text">Governance & Audit</span>
+              <div class="tag-header">
+                <span class="tag-status-badge">Audit</span>
+                <strong class="tag-title-text">Governance & Audit</strong>
+              </div>
+              <p class="tag-desc-text">
+                Regulatory clearances, SOC2/ISO audit trails & GDPR
+                certifications.
+              </p>
             </div>
           </li>
         </ul>
@@ -169,6 +276,13 @@
         </div>
       </aside>
 
+      <!-- MOBILE SIDEBAR BACKDROP -->
+      <div
+        class="dash-sidebar-backdrop"
+        id="dash-sidebar-backdrop"
+        aria-hidden="true"
+      ></div>
+
       <!-- MAIN DASHBOARD CONTENT -->
       <div class="dash-main">
         <!-- TOPBAR -->
@@ -193,12 +307,6 @@
                 />
               </svg>
             </button>
-            <div class="dash-greeting-wrap">
-              <h2 id="dash-greeting-title">Good afternoon, Executive</h2>
-              <div class="dash-greeting-time">
-                Stackly Encrypted Session • Verified TLS 1.3
-              </div>
-            </div>
           </div>
 
           <div class="dash-topbar-right">
@@ -228,454 +336,722 @@
 
         <!-- DASHBOARD BODY CONTENT (5 SECTIONS) -->
         <main class="dash-content">
-          <!-- SECTION 1: 4 KPI / STATS CARDS -->
-          <section
-            id="dash-stats-grid"
-            class="dash-stats-grid"
-            aria-label="Key Performance Indicators"
-          ></section>
+          <!-- VIEW 1: EXECUTIVE OVERVIEW -->
+          <div
+            id="view-overview"
+            class="dash-view active-view"
+            aria-label="Executive Overview"
+          >
+            <!-- SECTION 1: 4 KPI / STATS CARDS -->
+            <section
+              id="dash-stats-grid"
+              class="dash-stats-grid"
+              aria-label="Key Performance Indicators"
+            ></section>
 
-          <!-- SECTION 2 & 3: 2-COLUMN GRID (ANALYTICS CHART & TIMELINE) -->
-          <div class="dash-grid-2col">
-            <!-- SECTION 2: Vector Analytics Chart Panel -->
-            <section class="dash-panel" aria-label="Deal Velocity Trajectory">
-              <div class="dash-panel-header">
-                <h3>Deal Flow Velocity & Capital Trajectory (Q2–Q3)</h3>
-                <span
-                  class="user-greeting-pill"
-                  style="
-                    background: rgba(197, 168, 128, 0.15);
-                    color: var(--color-accent-gold-dark);
-                    border-color: rgba(197, 168, 128, 0.35);
-                  "
-                >
-                  <span class="pulse-dot"></span>
-                  <span>Live Feed</span>
-                </span>
-              </div>
-              <div id="dash-chart-wrap" class="chart-container"></div>
-            </section>
-
-            <!-- SECTION 3: Recent Activity Timeline Panel -->
-            <section class="dash-panel" aria-label="Activity and Audit Stream">
-              <div class="dash-panel-header">
-                <h3>Activity & Audit Log</h3>
-                <a href="404.html" class="btn btn-subtle btn-sm"
-                  >Export Stream</a
-                >
-              </div>
-              <ul id="dash-timeline-list" class="activity-list"></ul>
-            </section>
-          </div>
-
-          <!-- SECTION 4: SECTOR PORTFOLIO ALLOCATION & PERFORMANCE BENCHMARK (CHARTS & GRAPHS) -->
-          <div class="chart-grid-2col">
-            <!-- Sub-section: Sector Capital Allocation Donut Chart -->
-            <section class="dash-panel" aria-label="Sector Capital Allocation">
-              <div class="dash-panel-header">
-                <h3>Sector Portfolio Capital Allocation ($4.80B Total)</h3>
-                <span
-                  class="user-greeting-pill"
-                  style="
-                    background: rgba(158, 133, 104, 0.12);
-                    color: var(--color-accent-gold-dark);
-                    border-color: rgba(158, 133, 104, 0.3);
-                  "
-                >
-                  <span>AUM Q3 Active</span>
-                </span>
-              </div>
-              <div class="sector-chart-body">
-                <div class="donut-svg-wrap">
-                  <svg viewBox="0 0 160 160" width="100%" height="100%">
-                    <!-- Donut Segments (Circumference ~ 376.99) -->
-                    <circle
-                      cx="80"
-                      cy="80"
-                      r="60"
-                      fill="transparent"
-                      stroke="#f1f3f5"
-                      stroke-width="24"
-                    />
-                    <!-- Enterprise Tech 38.5% (145.1) -->
-                    <circle
-                      cx="80"
-                      cy="80"
-                      r="60"
-                      fill="transparent"
-                      stroke="#9E8568"
-                      stroke-width="24"
-                      stroke-dasharray="145.1 231.9"
-                      stroke-dashoffset="0"
-                    />
-                    <!-- Energy Transition 25.0% (94.25) -->
-                    <circle
-                      cx="80"
-                      cy="80"
-                      r="60"
-                      fill="transparent"
-                      stroke="#10B981"
-                      stroke-width="24"
-                      stroke-dasharray="94.25 282.74"
-                      stroke-dashoffset="-145.1"
-                    />
-                    <!-- Healthcare & Bio-Assets 19.8% (74.6) -->
-                    <circle
-                      cx="80"
-                      cy="80"
-                      r="60"
-                      fill="transparent"
-                      stroke="#3B82F6"
-                      stroke-width="24"
-                      stroke-dasharray="74.6 302.4"
-                      stroke-dashoffset="-239.35"
-                    />
-                    <!-- Cross-Border Logistics 16.7% (63.0) -->
-                    <circle
-                      cx="80"
-                      cy="80"
-                      r="60"
-                      fill="transparent"
-                      stroke="#F59E0B"
-                      stroke-width="24"
-                      stroke-dasharray="63.0 314.0"
-                      stroke-dashoffset="-313.95"
-                    />
-                    <!-- Donut Center Label -->
-                    <text
-                      x="80"
-                      y="74"
-                      text-anchor="middle"
-                      font-size="18"
-                      font-weight="800"
-                      fill="#0F172A"
-                    >
-                      $4.8B
-                    </text>
-                    <text
-                      x="80"
-                      y="92"
-                      text-anchor="middle"
-                      font-size="9"
-                      font-weight="700"
-                      fill="#64748B"
-                      letter-spacing="0.5"
-                    >
-                      DEPLOYED
-                    </text>
-                  </svg>
+            <!-- SECTION 2 & 3: 2-COLUMN GRID (ANALYTICS CHART & TIMELINE) -->
+            <div class="dash-grid-2col">
+              <!-- SECTION 2: Vector Analytics Chart Panel -->
+              <section class="dash-panel" aria-label="Deal Velocity Trajectory">
+                <div class="dash-panel-header">
+                  <h3>Deal Flow Velocity & Capital Trajectory (Q2–Q3)</h3>
+                  <span
+                    class="user-greeting-pill"
+                    style="
+                      background: rgba(197, 168, 128, 0.15);
+                      color: var(--color-accent-gold-dark);
+                      border-color: rgba(197, 168, 128, 0.35);
+                    "
+                  >
+                    <span class="pulse-dot"></span>
+                    <span>Live Feed</span>
+                  </span>
                 </div>
-                <div class="donut-legend-wrap">
-                  <div class="legend-metric-item">
-                    <div class="legend-metric-left">
-                      <span
-                        class="legend-color-dot"
-                        style="background: #9e8568"
-                      ></span>
-                      <span class="legend-title">Enterprise Tech & Cloud</span>
+                <div id="dash-chart-wrap" class="chart-container"></div>
+              </section>
+
+              <!-- SECTION 3: Recent Activity Timeline Panel -->
+              <section
+                class="dash-panel"
+                aria-label="Activity and Audit Stream"
+              >
+                <div class="dash-panel-header">
+                  <h3>Activity & Audit Log</h3>
+                  <button
+                    id="btn-export-overview-stream"
+                    class="btn btn-subtle btn-sm"
+                    type="button"
+                  >
+                    Export Stream
+                  </button>
+                </div>
+                <ul id="dash-timeline-list" class="activity-list"></ul>
+              </section>
+            </div>
+
+            <!-- SECTION 4: SECTOR PORTFOLIO ALLOCATION & PERFORMANCE BENCHMARK (CHARTS & GRAPHS) -->
+            <div class="chart-grid-2col">
+              <!-- Sub-section: Sector Capital Allocation Donut Chart -->
+              <section
+                class="dash-panel"
+                aria-label="Sector Capital Allocation"
+              >
+                <div class="dash-panel-header">
+                  <h3>Sector Portfolio Capital Allocation ($4.80B Total)</h3>
+                  <span
+                    class="user-greeting-pill"
+                    style="
+                      background: rgba(158, 133, 104, 0.12);
+                      color: var(--color-accent-gold-dark);
+                      border-color: rgba(158, 133, 104, 0.3);
+                    "
+                  >
+                    <span>AUM Q3 Active</span>
+                  </span>
+                </div>
+                <div class="sector-chart-body">
+                  <div class="donut-svg-wrap">
+                    <svg viewBox="0 0 160 160" width="100%" height="100%">
+                      <!-- Donut Segments (Circumference ~ 376.99) -->
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="60"
+                        fill="transparent"
+                        stroke="#f1f3f5"
+                        stroke-width="24"
+                      />
+                      <!-- Enterprise Tech 38.5% (145.1) -->
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="60"
+                        fill="transparent"
+                        stroke="#9E8568"
+                        stroke-width="24"
+                        stroke-dasharray="145.1 231.9"
+                        stroke-dashoffset="0"
+                      />
+                      <!-- Energy Transition 25.0% (94.25) -->
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="60"
+                        fill="transparent"
+                        stroke="var(--color-accent-green)"
+                        stroke-width="24"
+                        stroke-dasharray="94.25 282.74"
+                        stroke-dashoffset="-145.1"
+                      />
+                      <!-- Healthcare & Bio-Assets 19.8% (74.6) -->
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="60"
+                        fill="transparent"
+                        stroke="#3b597c"
+                        stroke-width="24"
+                        stroke-dasharray="74.6 302.4"
+                        stroke-dashoffset="-239.35"
+                      />
+                      <!-- Cross-Border Logistics 16.7% (63.0) -->
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="60"
+                        fill="transparent"
+                        stroke="#F59E0B"
+                        stroke-width="24"
+                        stroke-dasharray="63.0 314.0"
+                        stroke-dashoffset="-313.95"
+                      />
+                      <!-- Donut Center Label -->
+                      <text
+                        x="80"
+                        y="74"
+                        text-anchor="middle"
+                        font-size="18"
+                        font-weight="800"
+                        fill="#0F172A"
+                      >
+                        $4.8B
+                      </text>
+                      <text
+                        x="80"
+                        y="92"
+                        text-anchor="middle"
+                        font-size="9"
+                        font-weight="700"
+                        fill="#64748B"
+                        letter-spacing="0.5"
+                      >
+                        DEPLOYED
+                      </text>
+                    </svg>
+                  </div>
+                  <div class="donut-legend-wrap">
+                    <div class="legend-metric-item">
+                      <div class="legend-metric-left">
+                        <span
+                          class="legend-color-dot"
+                          style="background: #9e8568"
+                        ></span>
+                        <span class="legend-title"
+                          >Enterprise Tech & Cloud</span
+                        >
+                      </div>
+                      <div class="legend-metric-right">
+                        <span class="legend-val">$1.85B</span>
+                        <span class="legend-pct">(38.5%)</span>
+                      </div>
                     </div>
-                    <div class="legend-metric-right">
-                      <span class="legend-val">$1.85B</span>
-                      <span class="legend-pct">(38.5%)</span>
+                    <div class="legend-metric-item">
+                      <div class="legend-metric-left">
+                        <span
+                          class="legend-color-dot"
+                          style="background: var(--color-accent-green)"
+                        ></span>
+                        <span class="legend-title"
+                          >Energy Transition & Infra</span
+                        >
+                      </div>
+                      <div class="legend-metric-right">
+                        <span class="legend-val">$1.20B</span>
+                        <span class="legend-pct">(25.0%)</span>
+                      </div>
+                    </div>
+                    <div class="legend-metric-item">
+                      <div class="legend-metric-left">
+                        <span
+                          class="legend-color-dot"
+                          style="background: #3b597c"
+                        ></span>
+                        <span class="legend-title"
+                          >Healthcare & Bio-Assets</span
+                        >
+                      </div>
+                      <div class="legend-metric-right">
+                        <span class="legend-val">$950M</span>
+                        <span class="legend-pct">(19.8%)</span>
+                      </div>
+                    </div>
+                    <div class="legend-metric-item">
+                      <div class="legend-metric-left">
+                        <span
+                          class="legend-color-dot"
+                          style="background: #f59e0b"
+                        ></span>
+                        <span class="legend-title">Cross-Border Logistics</span>
+                      </div>
+                      <div class="legend-metric-right">
+                        <span class="legend-val">$800M</span>
+                        <span class="legend-pct">(16.7%)</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="legend-metric-item">
-                    <div class="legend-metric-left">
+                </div>
+              </section>
+
+              <!-- Sub-section: Quarterly Net IRR Performance Benchmarking -->
+              <section
+                class="dash-panel"
+                aria-label="Quarterly Benchmark Comparison"
+              >
+                <div class="dash-panel-header">
+                  <h3>Quarterly Net IRR Performance Benchmarking</h3>
+                  <div
+                    style="
+                      display: flex;
+                      gap: 12px;
+                      font-size: 0.78rem;
+                      font-weight: 700;
+                    "
+                  >
+                    <span
+                      style="
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 5px;
+                        color: #9e8568;
+                      "
+                    >
                       <span
-                        class="legend-color-dot"
-                        style="background: #10b981"
+                        style="
+                          width: 8px;
+                          height: 8px;
+                          border-radius: 2px;
+                          background: #9e8568;
+                        "
                       ></span>
-                      <span class="legend-title"
-                        >Energy Transition & Infra</span
+                      Stackly Portfolio
+                    </span>
+                    <span
+                      style="
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 5px;
+                        color: #94a3b8;
+                      "
+                    >
+                      <span
+                        style="
+                          width: 8px;
+                          height: 8px;
+                          border-radius: 2px;
+                          background: #94a3b8;
+                        "
+                      ></span>
+                      Cambridge PE Index
+                    </span>
+                  </div>
+                </div>
+                <div class="benchmark-chart-body">
+                  <div class="bar-group-row">
+                    <div class="bar-label-row">
+                      <span>Q3 2025 (Current Period)</span>
+                      <span
+                        >Stackly: 24.8% &bull; Index: 14.2% (+10.6% Alpha)</span
                       >
                     </div>
-                    <div class="legend-metric-right">
-                      <span class="legend-val">$1.20B</span>
-                      <span class="legend-pct">(25.0%)</span>
+                    <div class="bar-track-wrapper">
+                      <div class="bar-track">
+                        <div
+                          class="bar-fill-stackly"
+                          style="width: 82.6%"
+                        ></div>
+                      </div>
+                      <div class="bar-track">
+                        <div class="bar-fill-index" style="width: 47.3%"></div>
+                      </div>
                     </div>
                   </div>
-                  <div class="legend-metric-item">
-                    <div class="legend-metric-left">
+
+                  <div class="bar-group-row">
+                    <div class="bar-label-row">
+                      <span>Q2 2025</span>
                       <span
-                        class="legend-color-dot"
-                        style="background: #3b82f6"
-                      ></span>
-                      <span class="legend-title">Healthcare & Bio-Assets</span>
+                        >Stackly: 22.4% &bull; Index: 13.8% (+8.6% Alpha)</span
+                      >
                     </div>
-                    <div class="legend-metric-right">
-                      <span class="legend-val">$950M</span>
-                      <span class="legend-pct">(19.8%)</span>
+                    <div class="bar-track-wrapper">
+                      <div class="bar-track">
+                        <div
+                          class="bar-fill-stackly"
+                          style="width: 74.6%"
+                        ></div>
+                      </div>
+                      <div class="bar-track">
+                        <div class="bar-fill-index" style="width: 46%"></div>
+                      </div>
                     </div>
                   </div>
-                  <div class="legend-metric-item">
-                    <div class="legend-metric-left">
+
+                  <div class="bar-group-row">
+                    <div class="bar-label-row">
+                      <span>Q1 2025</span>
                       <span
-                        class="legend-color-dot"
-                        style="background: #f59e0b"
-                      ></span>
-                      <span class="legend-title">Cross-Border Logistics</span>
+                        >Stackly: 26.1% &bull; Index: 15.1% (+11.0% Alpha)</span
+                      >
                     </div>
-                    <div class="legend-metric-right">
-                      <span class="legend-val">$800M</span>
-                      <span class="legend-pct">(16.7%)</span>
+                    <div class="bar-track-wrapper">
+                      <div class="bar-track">
+                        <div class="bar-fill-stackly" style="width: 87%"></div>
+                      </div>
+                      <div class="bar-track">
+                        <div class="bar-fill-index" style="width: 50.3%"></div>
+                      </div>
                     </div>
+                  </div>
+
+                  <div class="bar-group-row">
+                    <div class="bar-label-row">
+                      <span>Q4 2024</span>
+                      <span
+                        >Stackly: 21.0% &bull; Index: 12.9% (+8.1% Alpha)</span
+                      >
+                    </div>
+                    <div class="bar-track-wrapper">
+                      <div class="bar-track">
+                        <div class="bar-fill-stackly" style="width: 70%"></div>
+                      </div>
+                      <div class="bar-track">
+                        <div class="bar-fill-index" style="width: 43%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- SECTION 5: EXECUTIVE MANDATE MILESTONE TRACKER & CAPITAL DRAWDOWN SCHEDULE -->
+            <section
+              class="dash-panel"
+              aria-label="Milestones and Drawdowns"
+              style="margin-bottom: 28px"
+            >
+              <div class="dash-panel-header">
+                <h3>Active Deal Pipeline & Capital Drawdown Schedule</h3>
+                <a href="#governance" class="btn btn-subtle btn-sm"
+                  >Audit Dossier</a
+                >
+              </div>
+              <div class="milestones-grid">
+                <div class="milestone-card">
+                  <div class="milestone-card-top">
+                    <div>
+                      <div class="milestone-card-title">
+                        Project Titan Cross-Border Carveout
+                      </div>
+                      <div class="milestone-entity">
+                        Target: Nordic Industrial Robotics Group
+                      </div>
+                    </div>
+                    <span
+                      class="milestone-stage-badge"
+                      style="
+                        background: rgba(16, 185, 129, 0.12);
+                        color: #059669;
+                      "
+                      >Closing Ready</span
+                    >
+                  </div>
+                  <div class="milestone-progress-box">
+                    <div class="progress-header">
+                      <span>Regulatory & Anti-Trust Sign-off</span>
+                      <span>92%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                      <div class="progress-bar-fill" style="width: 92%"></div>
+                    </div>
+                  </div>
+                  <div class="milestone-meta-row">
+                    <span>Drawdown: $420M</span>
+                    <span>Lead: V. Alexander (Senior Partner)</span>
+                  </div>
+                </div>
+
+                <div class="milestone-card">
+                  <div class="milestone-card-top">
+                    <div>
+                      <div class="milestone-card-title">
+                        Helios Energy Asset Recapitalization
+                      </div>
+                      <div class="milestone-entity">
+                        Sponsor: Brookfield Mediterranean Fund
+                      </div>
+                    </div>
+                    <span
+                      class="milestone-stage-badge"
+                      style="
+                        background: rgba(59, 89, 124, 0.15);
+                        color: var(--color-accent-blue);
+                      "
+                      >Due Diligence</span
+                    >
+                  </div>
+                  <div class="milestone-progress-box">
+                    <div class="progress-header">
+                      <span>Tax Structure & Mezzanine Syndication</span>
+                      <span>68%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                      <div class="progress-bar-fill" style="width: 68%"></div>
+                    </div>
+                  </div>
+                  <div class="milestone-meta-row">
+                    <span>Drawdown: $280M</span>
+                    <span>Lead: M. Sterling (Partner)</span>
+                  </div>
+                </div>
+
+                <div class="milestone-card">
+                  <div class="milestone-card-top">
+                    <div>
+                      <div class="milestone-card-title">
+                        Vanguard Logistics APAC Expansion
+                      </div>
+                      <div class="milestone-entity">
+                        Client: Singapore Sovereign Co-Investment
+                      </div>
+                    </div>
+                    <span
+                      class="milestone-stage-badge"
+                      style="
+                        background: rgba(245, 158, 11, 0.12);
+                        color: #d97706;
+                      "
+                      >Mandate Structuring</span
+                    >
+                  </div>
+                  <div class="milestone-progress-box">
+                    <div class="progress-header">
+                      <span>Synergy Modeling & Term Sheet Delivery</span>
+                      <span>45%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                      <div class="progress-bar-fill" style="width: 45%"></div>
+                    </div>
+                  </div>
+                  <div class="milestone-meta-row">
+                    <span>Drawdown: $150M</span>
+                    <span>Lead: E. Rostova (Associate)</span>
                   </div>
                 </div>
               </div>
             </section>
 
-            <!-- Sub-section: Quarterly Net IRR Performance Benchmarking -->
+            <!-- SECTION 6: DATA TABLE SECTION -->
             <section
               class="dash-panel"
-              aria-label="Quarterly Benchmark Comparison"
+              aria-label="Mandates and User Directory"
+              style="margin-bottom: 30px"
+            >
+              <div class="data-table-toolbar">
+                <h3
+                  id="dash-table-title"
+                  style="font-size: 1.15rem; margin-bottom: 0"
+                >
+                  Directory & Mandates
+                </h3>
+                <div class="table-filter-group">
+                  <input
+                    type="text"
+                    id="table-search"
+                    class="table-search-input"
+                    placeholder="Search mandates, users, status..."
+                  />
+                  <a
+                    href="#transactions"
+                    id="btn-goto-new-mandate"
+                    class="btn btn-primary btn-sm"
+                  >
+                    <svg
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      width="16"
+                      height="16"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                    <span>New Mandate</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="custom-table">
+                  <thead id="dash-table-head"></thead>
+                  <tbody id="dash-table-body"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- SECTION 5: INSTITUTIONAL GOVERNANCE & AUDIT ACCREDITATION -->
+            <section
+              class="dash-panel"
+              aria-label="Governance and Compliance Verification"
             >
               <div class="dash-panel-header">
-                <h3>Quarterly Net IRR Performance Benchmarking</h3>
-                <div
+                <h3>Institutional Compliance & Data Vault Security</h3>
+                <span
+                  class="user-greeting-pill"
                   style="
-                    display: flex;
-                    gap: 12px;
-                    font-size: 0.78rem;
-                    font-weight: 700;
+                    background: rgba(35, 67, 56, 0.12);
+                    color: #234338;
+                    border-color: rgba(35, 67, 56, 0.3);
                   "
                 >
                   <span
+                    class="pulse-dot"
                     style="
-                      display: inline-flex;
-                      align-items: center;
-                      gap: 5px;
-                      color: #9e8568;
+                      background-color: #234338;
+                      box-shadow: 0 0 6px #234338;
                     "
-                  >
-                    <span
-                      style="
-                        width: 8px;
-                        height: 8px;
-                        border-radius: 2px;
-                        background: #9e8568;
-                      "
-                    ></span>
-                    Stackly Portfolio
-                  </span>
-                  <span
-                    style="
-                      display: inline-flex;
-                      align-items: center;
-                      gap: 5px;
-                      color: #94a3b8;
-                    "
-                  >
-                    <span
-                      style="
-                        width: 8px;
-                        height: 8px;
-                        border-radius: 2px;
-                        background: #94a3b8;
-                      "
-                    ></span>
-                    Cambridge PE Index
-                  </span>
-                </div>
+                  ></span>
+                  <span>Audited Active</span>
+                </span>
               </div>
-              <div class="benchmark-chart-body">
-                <div class="bar-group-row">
-                  <div class="bar-label-row">
-                    <span>Q3 2025 (Current Period)</span>
-                    <span
-                      >Stackly: 24.8% &bull; Index: 14.2% (+10.6% Alpha)</span
-                    >
-                  </div>
-                  <div class="bar-track-wrapper">
-                    <div class="bar-track">
-                      <div class="bar-fill-stackly" style="width: 82.6%"></div>
-                    </div>
-                    <div class="bar-track">
-                      <div class="bar-fill-index" style="width: 47.3%"></div>
-                    </div>
-                  </div>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                  gap: 20px;
+                "
+              >
+                <div
+                  style="
+                    background: #f9f8f5;
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-md);
+                    padding: 20px;
+                  "
+                >
+                  <h4
+                    style="
+                      font-size: 1rem;
+                      margin-bottom: 6px;
+                      color: var(--color-primary-900);
+                    "
+                  >
+                    SOC 2 Type II Attestation
+                  </h4>
+                  <p style="font-size: 0.85rem; margin-bottom: 10px">
+                    Continuous third-party security audits verifying end-to-end
+                    cryptographic deal vault controls.
+                  </p>
+                  <span
+                    style="font-size: 0.78rem; font-weight: 700; color: #234338"
+                    >Status: Verified 2026</span
+                  >
                 </div>
-
-                <div class="bar-group-row">
-                  <div class="bar-label-row">
-                    <span>Q2 2025</span>
-                    <span
-                      >Stackly: 22.4% &bull; Index: 13.8% (+8.6% Alpha)</span
-                    >
-                  </div>
-                  <div class="bar-track-wrapper">
-                    <div class="bar-track">
-                      <div class="bar-fill-stackly" style="width: 74.6%"></div>
-                    </div>
-                    <div class="bar-track">
-                      <div class="bar-fill-index" style="width: 46%"></div>
-                    </div>
-                  </div>
+                <div
+                  style="
+                    background: #f9f8f5;
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-md);
+                    padding: 20px;
+                  "
+                >
+                  <h4
+                    style="
+                      font-size: 1rem;
+                      margin-bottom: 6px;
+                      color: var(--color-primary-900);
+                    "
+                  >
+                    ISO/IEC 27001 Certified
+                  </h4>
+                  <p style="font-size: 0.85rem; margin-bottom: 10px">
+                    Information security management systems compliance across
+                    all 22 international operating jurisdictions.
+                  </p>
+                  <span
+                    style="font-size: 0.78rem; font-weight: 700; color: #234338"
+                    >Status: Recertified</span
+                  >
                 </div>
-
-                <div class="bar-group-row">
-                  <div class="bar-label-row">
-                    <span>Q1 2025</span>
-                    <span
-                      >Stackly: 26.1% &bull; Index: 15.1% (+11.0% Alpha)</span
-                    >
-                  </div>
-                  <div class="bar-track-wrapper">
-                    <div class="bar-track">
-                      <div class="bar-fill-stackly" style="width: 87%"></div>
-                    </div>
-                    <div class="bar-track">
-                      <div class="bar-fill-index" style="width: 50.3%"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="bar-group-row">
-                  <div class="bar-label-row">
-                    <span>Q4 2024</span>
-                    <span
-                      >Stackly: 21.0% &bull; Index: 12.9% (+8.1% Alpha)</span
-                    >
-                  </div>
-                  <div class="bar-track-wrapper">
-                    <div class="bar-track">
-                      <div class="bar-fill-stackly" style="width: 70%"></div>
-                    </div>
-                    <div class="bar-track">
-                      <div class="bar-fill-index" style="width: 43%"></div>
-                    </div>
-                  </div>
+                <div
+                  style="
+                    background: #f9f8f5;
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-md);
+                    padding: 20px;
+                  "
+                >
+                  <h4
+                    style="
+                      font-size: 1rem;
+                      margin-bottom: 6px;
+                      color: var(--color-primary-900);
+                    "
+                  >
+                    GDPR & CCPA Compliant
+                  </h4>
+                  <p style="font-size: 0.85rem; margin-bottom: 10px">
+                    Automated data residency and jurisdictional sovereignty
+                    routing for cross-border transaction data.
+                  </p>
+                  <span
+                    style="font-size: 0.78rem; font-weight: 700; color: #234338"
+                    >Status: Fully Compliant</span
+                  >
                 </div>
               </div>
             </section>
           </div>
+          <!-- END VIEW 1: EXECUTIVE OVERVIEW -->
 
-          <!-- SECTION 5: EXECUTIVE MANDATE MILESTONE TRACKER & CAPITAL DRAWDOWN SCHEDULE -->
-          <section
-            class="dash-panel"
-            aria-label="Milestones and Drawdowns"
-            style="margin-bottom: 28px"
+          <!-- VIEW 2: TRANSACTIONS & DEALS -->
+          <div
+            id="view-transactions"
+            class="dash-view"
+            aria-label="Transactions & Deals"
           >
-            <div class="dash-panel-header">
-              <h3>Active Deal Pipeline & Capital Drawdown Schedule</h3>
-              <a href="404.html" class="btn btn-subtle btn-sm">Audit Dossier</a>
-            </div>
-            <div class="milestones-grid">
-              <div class="milestone-card">
-                <div class="milestone-card-top">
-                  <div>
-                    <div class="milestone-card-title">
-                      Project Titan Cross-Border Carveout
-                    </div>
-                    <div class="milestone-entity">
-                      Target: Nordic Industrial Robotics Group
-                    </div>
-                  </div>
-                  <span
-                    class="milestone-stage-badge"
-                    style="background: rgba(16, 185, 129, 0.12); color: #059669"
-                    >Closing Ready</span
-                  >
+            <div class="view-header-strip">
+              <div class="view-header-main">
+                <div class="view-header-title-row">
+                  <h2>Transactions & M&A Mandate Pipeline</h2>
+                  <span class="view-header-badge">14 Engagements Active</span>
                 </div>
-                <div class="milestone-progress-box">
-                  <div class="progress-header">
-                    <span>Regulatory & Anti-Trust Sign-off</span>
-                    <span>92%</span>
-                  </div>
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 92%"></div>
-                  </div>
-                </div>
-                <div class="milestone-meta-row">
-                  <span>Drawdown: $420M</span>
-                  <span>Lead: V. Alexander (Senior Partner)</span>
-                </div>
+                <p class="view-header-subtitle">
+                  Live multi-stage deal progression, due diligence rooms &
+                  corporate divestiture tracking.
+                </p>
               </div>
-
-              <div class="milestone-card">
-                <div class="milestone-card-top">
-                  <div>
-                    <div class="milestone-card-title">
-                      Helios Energy Asset Recapitalization
-                    </div>
-                    <div class="milestone-entity">
-                      Sponsor: Brookfield Mediterranean Fund
-                    </div>
-                  </div>
-                  <span
-                    class="milestone-stage-badge"
-                    style="background: rgba(59, 130, 246, 0.12); color: #2563eb"
-                    >Due Diligence</span
-                  >
+              <div class="view-header-stats-row">
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Aggregated EV</span>
+                  <span class="view-stat-chip-val">$3.45B</span>
                 </div>
-                <div class="milestone-progress-box">
-                  <div class="progress-header">
-                    <span>Tax Structure & Mezzanine Syndication</span>
-                    <span>68%</span>
-                  </div>
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 68%"></div>
-                  </div>
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Avg Velocity</span>
+                  <span class="view-stat-chip-val">42 Days to LOI</span>
                 </div>
-                <div class="milestone-meta-row">
-                  <span>Drawdown: $280M</span>
-                  <span>Lead: M. Sterling (Partner)</span>
-                </div>
-              </div>
-
-              <div class="milestone-card">
-                <div class="milestone-card-top">
-                  <div>
-                    <div class="milestone-card-title">
-                      Vanguard Logistics APAC Expansion
-                    </div>
-                    <div class="milestone-entity">
-                      Client: Singapore Sovereign Co-Investment
-                    </div>
-                  </div>
-                  <span
-                    class="milestone-stage-badge"
-                    style="background: rgba(245, 158, 11, 0.12); color: #d97706"
-                    >Mandate Structuring</span
-                  >
-                </div>
-                <div class="milestone-progress-box">
-                  <div class="progress-header">
-                    <span>Synergy Modeling & Term Sheet Delivery</span>
-                    <span>45%</span>
-                  </div>
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 45%"></div>
-                  </div>
-                </div>
-                <div class="milestone-meta-row">
-                  <span>Drawdown: $150M</span>
-                  <span>Lead: E. Rostova (Associate)</span>
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Closing in Q3</span>
+                  <span class="view-stat-chip-val">3 Mandates</span>
                 </div>
               </div>
             </div>
-          </section>
 
-          <!-- SECTION 6: DATA TABLE SECTION -->
-          <section
-            class="dash-panel"
-            aria-label="Mandates and User Directory"
-            style="margin-bottom: 30px"
-          >
-            <div class="data-table-toolbar">
-              <h3
-                id="dash-table-title"
-                style="font-size: 1.15rem; margin-bottom: 0"
+            <!-- Action & Filter Bar -->
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 22px;
+              "
+            >
+              <div class="filter-pill-group" id="tx-filter-pills">
+                <button
+                  type="button"
+                  class="filter-pill active"
+                  data-filter="all"
+                >
+                  All Sectors (14)
+                </button>
+                <button type="button" class="filter-pill" data-filter="tech">
+                  Enterprise SaaS & Tech
+                </button>
+                <button type="button" class="filter-pill" data-filter="energy">
+                  Clean Energy & Infra
+                </button>
+                <button type="button" class="filter-pill" data-filter="health">
+                  Life Sciences & Health
+                </button>
+                <button type="button" class="filter-pill" data-filter="fintech">
+                  FinTech & Payments
+                </button>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  flex-wrap: wrap;
+                "
               >
-                Directory & Mandates
-              </h3>
-              <div class="table-filter-group">
                 <input
                   type="text"
-                  id="table-search"
+                  id="tx-search-input"
                   class="table-search-input"
-                  placeholder="Search mandates, users, status..."
+                  placeholder="Search deals, sectors, partners..."
+                  style="width: 240px; margin: 0"
                 />
-                <a href="404.html" class="btn btn-primary btn-sm">
+                <button
+                  type="button"
+                  id="tx-open-modal-btn"
+                  class="btn btn-primary btn-sm"
+                >
                   <svg
                     fill="none"
                     viewBox="0 0 24 24"
@@ -690,129 +1066,2551 @@
                       d="M12 4v16m8-8H4"
                     />
                   </svg>
-                  <span>New Mandate</span>
-                </a>
+                  <span>+ New Mandate</span>
+                </button>
               </div>
             </div>
 
-            <div class="table-responsive">
-              <table class="custom-table">
-                <thead id="dash-table-head"></thead>
-                <tbody id="dash-table-body"></tbody>
-              </table>
-            </div>
-          </section>
+            <!-- KANBAN BOARD (4 COLUMNS) -->
+            <div class="kanban-board-grid" id="tx-kanban-board">
+              <!-- Col 1: Sourcing -->
+              <div class="kanban-col" data-stage="sourcing">
+                <div class="kanban-col-header">
+                  <div class="kanban-col-title-wrap">
+                    <span class="kanban-col-dot dot-sourcing"></span>
+                    <span class="kanban-col-title">Sourcing & Screening</span>
+                  </div>
+                  <span class="kanban-col-count" id="count-col-sourcing"
+                    >3</span
+                  >
+                </div>
+                <div class="kanban-col-cards" id="cards-col-sourcing">
+                  <div class="kanban-card" data-sector="tech" data-id="deal-1">
+                    <span class="kanban-card-sector">Enterprise SaaS</span>
+                    <div class="kanban-card-title">
+                      Nordic Cloud Infrastructure
+                    </div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$650M EV</span>
+                      <span class="kanban-card-partner">Elena Rostova</span>
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: var(--text-muted)"
+                        >Confidential CIM</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-1')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="kanban-card"
+                    data-sector="health"
+                    data-id="deal-2"
+                  >
+                    <span class="kanban-card-sector">Life Sciences</span>
+                    <div class="kanban-card-title">Quantum BioPharma Core</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$280M EV</span>
+                      <span class="kanban-card-partner">Marcus Sterling</span>
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: var(--text-muted)"
+                        >Pitch Deck Review</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-2')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="kanban-card"
+                    data-sector="industrial"
+                    data-id="deal-3"
+                  >
+                    <span class="kanban-card-sector">Transportation</span>
+                    <div class="kanban-card-title">Apex Global Logistics</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$420M EV</span>
+                      <span class="kanban-card-partner"
+                        >Victoria Alexander</span
+                      >
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: var(--text-muted)"
+                        >IOI Submitted</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-3')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-          <!-- SECTION 5: INSTITUTIONAL GOVERNANCE & AUDIT ACCREDITATION -->
-          <section
-            class="dash-panel"
-            aria-label="Governance and Compliance Verification"
+              <!-- Col 2: Due Diligence -->
+              <div class="kanban-col" data-stage="dd">
+                <div class="kanban-col-header">
+                  <div class="kanban-col-title-wrap">
+                    <span class="kanban-col-dot dot-dd"></span>
+                    <span class="kanban-col-title">Due Diligence & QofE</span>
+                  </div>
+                  <span class="kanban-col-count" id="count-col-dd">4</span>
+                </div>
+                <div class="kanban-col-cards" id="cards-col-dd">
+                  <div
+                    class="kanban-card"
+                    data-sector="energy"
+                    data-id="deal-4"
+                  >
+                    <span class="kanban-card-sector">Clean Energy</span>
+                    <div class="kanban-card-title">
+                      Helios Solar Infrastructure
+                    </div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$850M EV</span>
+                      <span class="kanban-card-partner"
+                        >Victoria Alexander</span
+                      >
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #eab308; font-weight: 600"
+                        >Phase II Audit</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-4')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="kanban-card"
+                    data-sector="fintech"
+                    data-id="deal-5"
+                  >
+                    <span class="kanban-card-sector">FinTech & Payments</span>
+                    <div class="kanban-card-title">
+                      Sovereign Gateway Systems
+                    </div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$310M EV</span>
+                      <span class="kanban-card-partner">Elena Rostova</span>
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #eab308; font-weight: 600"
+                        >QofE Draft Ready</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-5')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="kanban-card"
+                    data-sector="health"
+                    data-id="deal-6"
+                  >
+                    <span class="kanban-card-sector">Healthcare</span>
+                    <div class="kanban-card-title">
+                      Alpine MedTech Diagnostics
+                    </div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$195M EV</span>
+                      <span class="kanban-card-partner">Marcus Sterling</span>
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #eab308; font-weight: 600"
+                        >FDA Clearance Review</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-6')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                  <div class="kanban-card" data-sector="tech" data-id="deal-7">
+                    <span class="kanban-card-sector">Enterprise SaaS</span>
+                    <div class="kanban-card-title">Veridian Cyber Sentinel</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$380M EV</span>
+                      <span class="kanban-card-partner"
+                        >Victoria Alexander</span
+                      >
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #eab308; font-weight: 600"
+                        >IP Code Audit</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-7')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 3: LOI & Terms -->
+              <div class="kanban-col" data-stage="loi">
+                <div class="kanban-col-header">
+                  <div class="kanban-col-title-wrap">
+                    <span class="kanban-col-dot dot-loi"></span>
+                    <span class="kanban-col-title">LOI & Term Sheet</span>
+                  </div>
+                  <span class="kanban-col-count" id="count-col-loi">4</span>
+                </div>
+                <div class="kanban-col-cards" id="cards-col-loi">
+                  <div
+                    class="kanban-card"
+                    data-sector="industrial"
+                    data-id="deal-8"
+                  >
+                    <span class="kanban-card-sector">Aerospace</span>
+                    <div class="kanban-card-title">Horizon Aero Dynamics</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$520M EV</span>
+                      <span class="kanban-card-partner">Marcus Sterling</span>
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #8b5cf6; font-weight: 600"
+                        >Exclusivity Signed</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-8')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="kanban-card"
+                    data-sector="fintech"
+                    data-id="deal-9"
+                  >
+                    <span class="kanban-card-sector">FinTech</span>
+                    <div class="kanban-card-title">Baltic FinTech Alliance</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$175M EV</span>
+                      <span class="kanban-card-partner">Elena Rostova</span>
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #8b5cf6; font-weight: 600"
+                        >Board Ratification</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-9')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="kanban-card"
+                    data-sector="energy"
+                    data-id="deal-10"
+                  >
+                    <span class="kanban-card-sector">Clean Energy</span>
+                    <div class="kanban-card-title">Lumina Green Hydrogen</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$330M EV</span>
+                      <span class="kanban-card-partner"
+                        >Victoria Alexander</span
+                      >
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #8b5cf6; font-weight: 600"
+                        >Terms Agreed</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-10')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                  <div class="kanban-card" data-sector="tech" data-id="deal-11">
+                    <span class="kanban-card-sector">Enterprise SaaS</span>
+                    <div class="kanban-card-title">
+                      OmniRetail Logistics Core
+                    </div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$260M EV</span>
+                      <span class="kanban-card-partner">Marcus Sterling</span>
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #8b5cf6; font-weight: 600"
+                        >Tax Structuring</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="window.advanceDealStage('deal-11')"
+                      >
+                        Advance →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 4: Definitive Closing -->
+              <div class="kanban-col" data-stage="closing">
+                <div class="kanban-col-header">
+                  <div class="kanban-col-title-wrap">
+                    <span class="kanban-col-dot dot-closing"></span>
+                    <span class="kanban-col-title">Closing & Escrow</span>
+                  </div>
+                  <span class="kanban-col-count" id="count-col-closing">3</span>
+                </div>
+                <div class="kanban-col-cards" id="cards-col-closing">
+                  <div
+                    class="kanban-card"
+                    data-sector="industrial"
+                    data-id="deal-12"
+                  >
+                    <span class="kanban-card-sector">Real Estate</span>
+                    <div class="kanban-card-title">
+                      Atlas Cold Chain Storage
+                    </div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$210M EV</span>
+                      <span class="kanban-card-partner"
+                        >Victoria Alexander</span
+                      >
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #10b981; font-weight: 700"
+                        >Wiring Escrow</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="
+                          window.showDashToast(
+                            'Atlas Cold Chain funds verified in escrow.',
+                            'success'
+                          )
+                        "
+                      >
+                        Verify ✓
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="kanban-card"
+                    data-sector="fintech"
+                    data-id="deal-13"
+                  >
+                    <span class="kanban-card-sector">Financial Services</span>
+                    <div class="kanban-card-title">Sterling Wealth Capital</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$490M EV</span>
+                      <span class="kanban-card-partner">Marcus Sterling</span>
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #10b981; font-weight: 700"
+                        >Signatures Sealed</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="
+                          window.showDashToast(
+                            'Sterling Wealth definitive merger agreement signed.',
+                            'success'
+                          )
+                        "
+                      >
+                        Verify ✓
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="kanban-card"
+                    data-sector="energy"
+                    data-id="deal-14"
+                  >
+                    <span class="kanban-card-sector"
+                      >Energy Infrastructure</span
+                    >
+                    <div class="kanban-card-title">Project Titan Carveout</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$1.20B EV</span>
+                      <span class="kanban-card-partner"
+                        >Victoria Alexander</span
+                      >
+                    </div>
+                    <div class="kanban-card-actions">
+                      <span style="color: #10b981; font-weight: 700"
+                        >Hart-Scott Cleared</span
+                      >
+                      <button
+                        type="button"
+                        class="btn-advance"
+                        onclick="
+                          window.showDashToast(
+                            'Project Titan regulatory antitrust confirmed.',
+                            'success'
+                          )
+                        "
+                      >
+                        Verify ✓
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Transaction Summary Table -->
+            <section class="dash-panel" aria-label="Transaction Ledger Table">
+              <div class="dash-panel-header">
+                <h3>Comprehensive M&A Transaction Ledger</h3>
+                <span class="user-greeting-pill">
+                  <span class="pulse-dot"></span>
+                  <span>Audited Ledger</span>
+                </span>
+              </div>
+              <div class="table-responsive">
+                <table class="custom-table" id="tx-table">
+                  <thead>
+                    <tr>
+                      <th>Engagement / Target</th>
+                      <th>Sector</th>
+                      <th>Enterprise Value</th>
+                      <th>Current Phase</th>
+                      <th>Lead Partner</th>
+                      <th>Expected Closing</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tx-table-body">
+                    <tr>
+                      <td><strong>Helios Solar Infrastructure</strong></td>
+                      <td>Clean Energy</td>
+                      <td>
+                        <strong style="color: var(--color-primary-900)"
+                          >$850M</strong
+                        >
+                      </td>
+                      <td>
+                        <span class="status-badge status-active"
+                          >Due Diligence</span
+                        >
+                      </td>
+                      <td>Victoria Alexander</td>
+                      <td>Q3 2026</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-subtle btn-sm"
+                          onclick="
+                            window.inspectDealModal(
+                              'Helios Solar',
+                              '$850M',
+                              'Clean Energy'
+                            )
+                          "
+                        >
+                          Inspect Terms
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Project Titan Carveout</strong></td>
+                      <td>Energy Infra</td>
+                      <td>
+                        <strong style="color: var(--color-primary-900)"
+                          >$1.20B</strong
+                        >
+                      </td>
+                      <td>
+                        <span class="status-badge status-active"
+                          >Closing / Escrow</span
+                        >
+                      </td>
+                      <td>Victoria Alexander</td>
+                      <td>Sept 2026</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-subtle btn-sm"
+                          onclick="
+                            window.inspectDealModal(
+                              'Project Titan',
+                              '$1.20B',
+                              'Energy Infra'
+                            )
+                          "
+                        >
+                          Inspect Terms
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Nordic Cloud Infrastructure</strong></td>
+                      <td>Enterprise SaaS</td>
+                      <td>
+                        <strong style="color: var(--color-primary-900)"
+                          >$650M</strong
+                        >
+                      </td>
+                      <td>
+                        <span class="status-badge status-pending"
+                          >Sourcing / Review</span
+                        >
+                      </td>
+                      <td>Elena Rostova</td>
+                      <td>Q4 2026</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-subtle btn-sm"
+                          onclick="
+                            window.inspectDealModal(
+                              'Nordic Cloud',
+                              '$650M',
+                              'Enterprise SaaS'
+                            )
+                          "
+                        >
+                          Inspect Terms
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Horizon Aero Dynamics</strong></td>
+                      <td>Aerospace</td>
+                      <td>
+                        <strong style="color: var(--color-primary-900)"
+                          >$520M</strong
+                        >
+                      </td>
+                      <td>
+                        <span class="status-badge status-active"
+                          >LOI Executed</span
+                        >
+                      </td>
+                      <td>Marcus Sterling</td>
+                      <td>Q3 2026</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-subtle btn-sm"
+                          onclick="
+                            window.inspectDealModal(
+                              'Horizon Aero',
+                              '$520M',
+                              'Aerospace'
+                            )
+                          "
+                        >
+                          Inspect Terms
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+          <!-- END VIEW 2: TRANSACTIONS & DEALS -->
+
+          <!-- VIEW 3: CAPITAL ALLOCATION & TREASURY -->
+          <div
+            id="view-capital"
+            class="dash-view"
+            aria-label="Capital Allocation & Treasury"
           >
-            <div class="dash-panel-header">
-              <h3>Institutional Compliance & Data Vault Security</h3>
-              <span
-                class="user-greeting-pill"
+            <div class="view-header-strip">
+              <div class="view-header-main">
+                <div class="view-header-title-row">
+                  <h2>Treasury Syndication & Capital Deployment Engine</h2>
+                  <span class="view-header-badge"
+                    >Real-time Solvency Model</span
+                  >
+                </div>
+                <p class="view-header-subtitle">
+                  Dynamic asset tranche balancing, cost-of-capital optimization
+                  & syndicated liquidity facilities.
+                </p>
+              </div>
+              <div class="view-header-stats-row">
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Total Active AUM</span>
+                  <span class="view-stat-chip-val">$4.80B</span>
+                </div>
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Uncalled Dry Powder</span>
+                  <span class="view-stat-chip-val">$1.12B</span>
+                </div>
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Deployment Pacing</span>
+                  <span class="view-stat-chip-val">92% On-Target</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modeler Container -->
+            <div class="capital-modeler-container">
+              <!-- Left: Sliders Panel -->
+              <div class="slider-group-box">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <h3
+                    style="
+                      font-size: 1.05rem;
+                      font-weight: 700;
+                      color: var(--color-primary-900);
+                      margin: 0;
+                    "
+                  >
+                    Tranche Allocation Modeler
+                  </h3>
+                  <div style="display: flex; gap: 6px">
+                    <button
+                      type="button"
+                      class="btn btn-subtle btn-sm"
+                      id="preset-conservative"
+                    >
+                      Conservative
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-subtle btn-sm"
+                      id="preset-balanced"
+                    >
+                      Balanced
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-subtle btn-sm"
+                      id="preset-aggressive"
+                    >
+                      Aggressive
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Slider 1 -->
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label">
+                      <span
+                        class="alloc-legend-dot"
+                        style="background: #234338"
+                      ></span>
+                      Senior Secured Revolver & First Lien
+                    </span>
+                    <span class="slider-val-badge" id="val-badge-senior"
+                      >45%</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-senior"
+                    class="dash-range-slider"
+                    min="15"
+                    max="75"
+                    value="45"
+                  />
+                </div>
+
+                <!-- Slider 2 -->
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label">
+                      <span
+                        class="alloc-legend-dot"
+                        style="background: #c5a880"
+                      ></span>
+                      Mezzanine & Subordinated Credit
+                    </span>
+                    <span class="slider-val-badge" id="val-badge-mezz"
+                      >25%</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-mezz"
+                    class="dash-range-slider"
+                    min="10"
+                    max="50"
+                    value="25"
+                  />
+                </div>
+
+                <!-- Slider 3 -->
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label">
+                      <span
+                        class="alloc-legend-dot"
+                        style="background: #4f46e5"
+                      ></span>
+                      Strategic Growth Equity
+                    </span>
+                    <span class="slider-val-badge" id="val-badge-equity"
+                      >20%</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-equity"
+                    class="dash-range-slider"
+                    min="5"
+                    max="45"
+                    value="20"
+                  />
+                </div>
+
+                <!-- Slider 4 -->
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label">
+                      <span
+                        class="alloc-legend-dot"
+                        style="background: #dc2626"
+                      ></span>
+                      Special Situations & Opportunistic
+                    </span>
+                    <span class="slider-val-badge" id="val-badge-special"
+                      >10%</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-special"
+                    class="dash-range-slider"
+                    min="0"
+                    max="25"
+                    value="10"
+                  />
+                </div>
+
+                <!-- Visualizer Segmented Bar -->
+                <div>
+                  <div
+                    style="
+                      font-size: 0.76rem;
+                      font-weight: 700;
+                      color: var(--text-secondary);
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Dynamic Tranche Distribution
+                  </div>
+                  <div
+                    class="allocation-bar-visualizer"
+                    id="alloc-visualizer-bar"
+                  >
+                    <div
+                      class="alloc-seg alloc-seg-senior"
+                      id="seg-senior"
+                      style="width: 45%"
+                    >
+                      Senior 45%
+                    </div>
+                    <div
+                      class="alloc-seg alloc-seg-mezz"
+                      id="seg-mezz"
+                      style="width: 25%"
+                    >
+                      Mezz 25%
+                    </div>
+                    <div
+                      class="alloc-seg alloc-seg-equity"
+                      id="seg-equity"
+                      style="width: 20%"
+                    >
+                      Equity 20%
+                    </div>
+                    <div
+                      class="alloc-seg alloc-seg-special"
+                      id="seg-special"
+                      style="width: 10%"
+                    >
+                      10%
+                    </div>
+                  </div>
+                  <div class="allocation-legend-row">
+                    <span
+                      ><span
+                        class="alloc-legend-dot"
+                        style="background: #234338"
+                      ></span>
+                      Senior ($2.16B)</span
+                    >
+                    <span
+                      ><span
+                        class="alloc-legend-dot"
+                        style="background: #c5a880"
+                      ></span>
+                      Mezzanine ($1.20B)</span
+                    >
+                    <span
+                      ><span
+                        class="alloc-legend-dot"
+                        style="background: #4f46e5"
+                      ></span>
+                      Equity ($0.96B)</span
+                    >
+                    <span
+                      ><span
+                        class="alloc-legend-dot"
+                        style="background: #dc2626"
+                      ></span>
+                      Special ($0.48B)</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Dynamic Calculations Output Card -->
+              <div
+                class="dash-panel"
                 style="
-                  background: rgba(27, 67, 50, 0.12);
-                  color: #1b4332;
-                  border-color: rgba(27, 67, 50, 0.3);
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
                 "
               >
-                <span
-                  class="pulse-dot"
-                  style="background-color: #1b4332; box-shadow: 0 0 6px #1b4332"
-                ></span>
-                <span>Audited Active</span>
-              </span>
+                <div class="dash-panel-header">
+                  <h3>Live Modeler Telemetry</h3>
+                  <span class="view-header-badge">Calculated Run-Rate</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    padding: 12px 0;
+                  "
+                >
+                  <div
+                    style="
+                      background: #fbfaf8;
+                      border: 1px solid var(--border-subtle);
+                      border-radius: var(--radius-md);
+                      padding: 16px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-size: 0.72rem;
+                        text-transform: uppercase;
+                        color: var(--text-muted);
+                        font-weight: 700;
+                      "
+                    >
+                      Projected Blended Yield
+                    </div>
+                    <div
+                      id="out-blended-yield"
+                      style="
+                        font-size: 2rem;
+                        font-weight: 800;
+                        color: var(--color-primary-900);
+                        margin: 4px 0;
+                      "
+                    >
+                      9.82% IRR
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.8rem;
+                        color: var(--color-accent-gold-dark);
+                        font-weight: 600;
+                      "
+                    >
+                      +165 bps over Benchmark Index
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: 1fr 1fr;
+                      gap: 12px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: #fbfaf8;
+                        border: 1px solid var(--border-subtle);
+                        border-radius: var(--radius-md);
+                        padding: 14px;
+                      "
+                    >
+                      <div
+                        style="
+                          font-size: 0.7rem;
+                          text-transform: uppercase;
+                          color: var(--text-muted);
+                          font-weight: 600;
+                        "
+                      >
+                        Weighted Risk Index
+                      </div>
+                      <div
+                        id="out-risk-index"
+                        style="
+                          font-size: 1.25rem;
+                          font-weight: 800;
+                          color: var(--color-primary-900);
+                        "
+                      >
+                        2.68 / 5.0
+                      </div>
+                      <div
+                        style="
+                          font-size: 0.74rem;
+                          color: #166534;
+                          font-weight: 600;
+                        "
+                      >
+                        Low-Moderate Risk
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        background: #fbfaf8;
+                        border: 1px solid var(--border-subtle);
+                        border-radius: var(--radius-md);
+                        padding: 14px;
+                      "
+                    >
+                      <div
+                        style="
+                          font-size: 0.7rem;
+                          text-transform: uppercase;
+                          color: var(--text-muted);
+                          font-weight: 600;
+                        "
+                      >
+                        Annual Net Cash Flow
+                      </div>
+                      <div
+                        id="out-annual-cashflow"
+                        style="
+                          font-size: 1.25rem;
+                          font-weight: 800;
+                          color: var(--color-primary-900);
+                        "
+                      >
+                        $471.4M / yr
+                      </div>
+                      <div style="font-size: 0.74rem; color: var(--text-muted)">
+                        Quarterly Distributable
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  style="
+                    border-top: 1px solid var(--border-subtle);
+                    padding-top: 14px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <span style="font-size: 0.8rem; color: var(--text-muted)"
+                    >Solvency Stress-Test: Passed</span
+                  >
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    onclick="
+                      window.showDashToast(
+                        'Tranche allocation model committed to Investment Committee docket.',
+                        'success'
+                      )
+                    "
+                  >
+                    Commit Allocation
+                  </button>
+                </div>
+              </div>
             </div>
+
+            <!-- Active Credit Facilities -->
+            <div style="margin-top: 12px">
+              <h3
+                style="
+                  font-size: 1.15rem;
+                  font-weight: 700;
+                  color: var(--color-primary-900);
+                  margin-bottom: 16px;
+                "
+              >
+                Active Syndicated Credit Facilities & Liquidity Reserves
+              </h3>
+              <div class="facilities-grid">
+                <!-- Facility 1 -->
+                <div class="facility-card">
+                  <div class="facility-card-top">
+                    <div>
+                      <div class="facility-card-title">
+                        $1.20B Revolver Facility
+                      </div>
+                      <div style="font-size: 0.78rem; color: var(--text-muted)">
+                        JPMorgan Chase & Barclays Syndicate
+                      </div>
+                    </div>
+                    <span class="facility-card-rate">SOFR + 215 bps</span>
+                  </div>
+                  <div style="font-size: 0.82rem; color: var(--text-secondary)">
+                    Drawn: <strong>$816M</strong> (68%) • Available:
+                    <strong>$384M</strong>
+                  </div>
+                  <div class="progress-bar-bg" style="height: 8px">
+                    <div class="progress-bar-fill" style="width: 68%"></div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-subtle btn-sm"
+                    onclick="
+                      window.simulateFacilityDrawdown('Revolver Facility', 50)
+                    "
+                  >
+                    Simulate $50M Drawdown
+                  </button>
+                </div>
+
+                <!-- Facility 2 -->
+                <div class="facility-card">
+                  <div class="facility-card-top">
+                    <div>
+                      <div class="facility-card-title">$2.00B Term Loan B</div>
+                      <div style="font-size: 0.78rem; color: var(--text-muted)">
+                        Goldman Sachs & Morgan Stanley
+                      </div>
+                    </div>
+                    <span class="facility-card-rate">SOFR + 350 bps</span>
+                  </div>
+                  <div style="font-size: 0.82rem; color: var(--text-secondary)">
+                    Drawn: <strong>$1.64B</strong> (82%) • Available:
+                    <strong>$360M</strong>
+                  </div>
+                  <div class="progress-bar-bg" style="height: 8px">
+                    <div class="progress-bar-fill" style="width: 82%"></div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-subtle btn-sm"
+                    onclick="
+                      window.simulateFacilityDrawdown('Term Loan B', 100)
+                    "
+                  >
+                    Simulate $100M Drawdown
+                  </button>
+                </div>
+
+                <!-- Facility 3 -->
+                <div class="facility-card">
+                  <div class="facility-card-top">
+                    <div>
+                      <div class="facility-card-title">
+                        $600M ESG Green Bond
+                      </div>
+                      <div style="font-size: 0.78rem; color: var(--text-muted)">
+                        BNP Paribas & Credit Agricole
+                      </div>
+                    </div>
+                    <span class="facility-card-rate">5.125% Fixed</span>
+                  </div>
+                  <div style="font-size: 0.82rem; color: var(--text-secondary)">
+                    Drawn: <strong>$270M</strong> (45%) • Available:
+                    <strong>$330M</strong>
+                  </div>
+                  <div class="progress-bar-bg" style="height: 8px">
+                    <div class="progress-bar-fill" style="width: 45%"></div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-subtle btn-sm"
+                    onclick="
+                      window.simulateFacilityDrawdown(
+                        'Green Transition Bond',
+                        25
+                      )
+                    "
+                  >
+                    Simulate $25M Drawdown
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END VIEW 3: CAPITAL ALLOCATION & TREASURY -->
+
+          <!-- VIEW 4: DELIVERABLES VAULT -->
+          <div
+            id="view-vault"
+            class="dash-view"
+            aria-label="Deliverables Vault"
+          >
+            <div class="view-header-strip">
+              <div class="view-header-main">
+                <div class="view-header-title-row">
+                  <h2>Cryptographic Deliverables Vault & VDR</h2>
+                  <span class="view-header-badge"
+                    >FIPS 140-2 Level 3 Enclave</span
+                  >
+                </div>
+                <p class="view-header-subtitle">
+                  Audited data rooms, executed agreements, SHA-256 Merkle root
+                  verification & compliance archives.
+                </p>
+              </div>
+              <div class="view-header-stats-row">
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Vault Assets</span>
+                  <span class="view-stat-chip-val">38 Documents</span>
+                </div>
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Encrypted Size</span>
+                  <span class="view-stat-chip-val">4.62 GB</span>
+                </div>
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Integrity Status</span>
+                  <span class="view-stat-chip-val" style="color: #10b981"
+                    >100% Sealed</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Drag and Drop Dropzone -->
+            <div class="vault-dropzone" id="vault-dropzone">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.75"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                />
+              </svg>
+              <div class="vault-dropzone-title">
+                Drag & drop executed files or board dockets to securely encrypt
+              </div>
+              <div class="vault-dropzone-desc">
+                Automatic AES-256 envelope encryption, HSM key signing, and
+                SHA-256 ledger registration. Supported formats: PDF, DOCX, XLSX,
+                PGP.
+              </div>
+              <input type="file" id="vault-file-input" style="display: none" />
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                onclick="document.getElementById('vault-file-input').click()"
+              >
+                Browse Local Enclave
+              </button>
+              <div class="vault-upload-progress" id="vault-upload-progress">
+                <div
+                  class="vault-upload-progress-fill"
+                  id="vault-upload-progress-fill"
+                ></div>
+              </div>
+            </div>
+
+            <!-- Filter & Search Bar -->
             <div
               style="
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 20px;
+                flex-wrap: wrap;
               "
             >
-              <div
-                style="
-                  background: #f9f8f5;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 20px;
-                "
-              >
-                <h4
-                  style="
-                    font-size: 1rem;
-                    margin-bottom: 6px;
-                    color: var(--color-primary-900);
-                  "
+              <div class="filter-pill-group" id="vault-filter-pills">
+                <button
+                  type="button"
+                  class="filter-pill active"
+                  data-filter="all"
                 >
-                  SOC 2 Type II Attestation
-                </h4>
-                <p style="font-size: 0.85rem; margin-bottom: 10px">
-                  Continuous third-party security audits verifying end-to-end
-                  cryptographic deal vault controls.
-                </p>
-                <span
-                  style="font-size: 0.78rem; font-weight: 700; color: #1b4332"
-                  >Status: Verified 2026</span
+                  All Documents (6)
+                </button>
+                <button type="button" class="filter-pill" data-filter="legal">
+                  Legal & M&A
+                </button>
+                <button
+                  type="button"
+                  class="filter-pill"
+                  data-filter="financial"
                 >
+                  Financial & Audits
+                </button>
+                <button
+                  type="button"
+                  class="filter-pill"
+                  data-filter="regulatory"
+                >
+                  Regulatory Clearances
+                </button>
               </div>
-              <div
-                style="
-                  background: #f9f8f5;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 20px;
-                "
-              >
-                <h4
-                  style="
-                    font-size: 1rem;
-                    margin-bottom: 6px;
-                    color: var(--color-primary-900);
-                  "
-                >
-                  ISO/IEC 27001 Certified
-                </h4>
-                <p style="font-size: 0.85rem; margin-bottom: 10px">
-                  Information security management systems compliance across all
-                  22 international operating jurisdictions.
-                </p>
-                <span
-                  style="font-size: 0.78rem; font-weight: 700; color: #1b4332"
-                  >Status: Recertified</span
-                >
+              <input
+                type="text"
+                id="vault-search-input"
+                class="table-search-input"
+                placeholder="Search deliverables by name or hash..."
+                style="width: 260px; margin: 0"
+              />
+            </div>
+
+            <!-- Vault Ledger Table -->
+            <section class="dash-panel" aria-label="Cryptographic Ledger Table">
+              <div class="table-responsive">
+                <table class="custom-table" id="vault-table">
+                  <thead>
+                    <tr>
+                      <th>Document Name</th>
+                      <th>Category</th>
+                      <th>Mandate / Deal</th>
+                      <th>Cryptographic SHA-256</th>
+                      <th>File Size</th>
+                      <th>Timestamp</th>
+                      <th>Verification & Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="vault-table-body">
+                    <tr data-category="legal">
+                      <td>
+                        <div
+                          style="display: flex; align-items: center; gap: 8px"
+                        >
+                          <svg
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            width="18"
+                            height="18"
+                            style="color: var(--color-accent-gold-dark)"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
+                          </svg>
+                          <strong
+                            >Titan_Definitive_Merger_Agreement_Executed.pdf</strong
+                          >
+                        </div>
+                      </td>
+                      <td>
+                        <span class="status-badge status-active"
+                          >Legal & M&A</span
+                        >
+                      </td>
+                      <td>Project Titan</td>
+                      <td>
+                        <span class="hash-code-snippet">8f9a2e...b31c</span>
+                      </td>
+                      <td>14.8 MB</td>
+                      <td>Today, 09:24 AM</td>
+                      <td>
+                        <div style="display: flex; gap: 6px">
+                          <button
+                            type="button"
+                            class="btn btn-subtle btn-sm"
+                            onclick="
+                              window.verifyVaultChecksum(
+                                'Titan_Definitive_Merger_Agreement_Executed.pdf',
+                                '8f9a2e48dc0a49f1b31c778401'
+                              )
+                            "
+                          >
+                            Verify
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-secondary-light btn-sm"
+                            onclick="
+                              window.downloadVaultFile(
+                                'Titan_Definitive_Merger_Agreement_Executed.pdf'
+                              )
+                            "
+                          >
+                            Download
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr data-category="financial">
+                      <td>
+                        <div
+                          style="display: flex; align-items: center; gap: 8px"
+                        >
+                          <svg
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            width="18"
+                            height="18"
+                            style="color: #3b82f6"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
+                          </svg>
+                          <strong
+                            >Apex_Logistics_QofE_Final_Independent_Audit.pdf</strong
+                          >
+                        </div>
+                      </td>
+                      <td>
+                        <span class="status-badge status-active"
+                          >Financial & Audits</span
+                        >
+                      </td>
+                      <td>Apex Logistics</td>
+                      <td>
+                        <span class="hash-code-snippet">3a7b1c...99e2</span>
+                      </td>
+                      <td>32.4 MB</td>
+                      <td>Yesterday</td>
+                      <td>
+                        <div style="display: flex; gap: 6px">
+                          <button
+                            type="button"
+                            class="btn btn-subtle btn-sm"
+                            onclick="
+                              window.verifyVaultChecksum(
+                                'Apex_Logistics_QofE_Final_Independent_Audit.pdf',
+                                '3a7b1c66df0478a299e2'
+                              )
+                            "
+                          >
+                            Verify
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-secondary-light btn-sm"
+                            onclick="
+                              window.downloadVaultFile(
+                                'Apex_Logistics_QofE_Final_Independent_Audit.pdf'
+                              )
+                            "
+                          >
+                            Download
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr data-category="regulatory">
+                      <td>
+                        <div
+                          style="display: flex; align-items: center; gap: 8px"
+                        >
+                          <svg
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            width="18"
+                            height="18"
+                            style="color: #10b981"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                            />
+                          </svg>
+                          <strong
+                            >Antitrust_DOJ_HSR_Premerger_Clearance.pdf</strong
+                          >
+                        </div>
+                      </td>
+                      <td>
+                        <span class="status-badge status-active"
+                          >Regulatory Clearances</span
+                        >
+                      </td>
+                      <td>Project Titan</td>
+                      <td>
+                        <span class="hash-code-snippet">c40f88...a5e9</span>
+                      </td>
+                      <td>6.1 MB</td>
+                      <td>Sep 14, 2026</td>
+                      <td>
+                        <div style="display: flex; gap: 6px">
+                          <button
+                            type="button"
+                            class="btn btn-subtle btn-sm"
+                            onclick="
+                              window.verifyVaultChecksum(
+                                'Antitrust_DOJ_HSR_Premerger_Clearance.pdf',
+                                'c40f8812bb33ea5e9'
+                              )
+                            "
+                          >
+                            Verify
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-secondary-light btn-sm"
+                            onclick="
+                              window.downloadVaultFile(
+                                'Antitrust_DOJ_HSR_Premerger_Clearance.pdf'
+                              )
+                            "
+                          >
+                            Download
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr data-category="financial">
+                      <td>
+                        <div
+                          style="display: flex; align-items: center; gap: 8px"
+                        >
+                          <svg
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            width="18"
+                            height="18"
+                            style="color: #3b82f6"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
+                          </svg>
+                          <strong
+                            >Morgan_Advisory_Fairness_Solvency_Opinion.pdf</strong
+                          >
+                        </div>
+                      </td>
+                      <td>
+                        <span class="status-badge status-active"
+                          >Financial & Audits</span
+                        >
+                      </td>
+                      <td>Atlas Storage</td>
+                      <td>
+                        <span class="hash-code-snippet">6e11dd...442a</span>
+                      </td>
+                      <td>19.7 MB</td>
+                      <td>Sep 12, 2026</td>
+                      <td>
+                        <div style="display: flex; gap: 6px">
+                          <button
+                            type="button"
+                            class="btn btn-subtle btn-sm"
+                            onclick="
+                              window.verifyVaultChecksum(
+                                'Morgan_Advisory_Fairness_Solvency_Opinion.pdf',
+                                '6e11dd881a442a'
+                              )
+                            "
+                          >
+                            Verify
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-secondary-light btn-sm"
+                            onclick="
+                              window.downloadVaultFile(
+                                'Morgan_Advisory_Fairness_Solvency_Opinion.pdf'
+                              )
+                            "
+                          >
+                            Download
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr data-category="legal">
+                      <td>
+                        <div
+                          style="display: flex; align-items: center; gap: 8px"
+                        >
+                          <svg
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            width="18"
+                            height="18"
+                            style="color: var(--color-accent-gold-dark)"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
+                          </svg>
+                          <strong
+                            >Helios_Solar_Confidential_CIM_v4.2.pdf</strong
+                          >
+                        </div>
+                      </td>
+                      <td>
+                        <span class="status-badge status-active"
+                          >Legal & M&A</span
+                        >
+                      </td>
+                      <td>Helios Solar</td>
+                      <td>
+                        <span class="hash-code-snippet">9d55aa...ef01</span>
+                      </td>
+                      <td>48.2 MB</td>
+                      <td>Sep 10, 2026</td>
+                      <td>
+                        <div style="display: flex; gap: 6px">
+                          <button
+                            type="button"
+                            class="btn btn-subtle btn-sm"
+                            onclick="
+                              window.verifyVaultChecksum(
+                                'Helios_Solar_Confidential_CIM_v4.2.pdf',
+                                '9d55aa4113ef01'
+                              )
+                            "
+                          >
+                            Verify
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-secondary-light btn-sm"
+                            onclick="
+                              window.downloadVaultFile(
+                                'Helios_Solar_Confidential_CIM_v4.2.pdf'
+                              )
+                            "
+                          >
+                            Download
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr data-category="regulatory">
+                      <td>
+                        <div
+                          style="display: flex; align-items: center; gap: 8px"
+                        >
+                          <svg
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            width="18"
+                            height="18"
+                            style="color: #10b981"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                            />
+                          </svg>
+                          <strong
+                            >SOC2_Type_II_Annual_Attestation_Report_2026.pdf</strong
+                          >
+                        </div>
+                      </td>
+                      <td>
+                        <span class="status-badge status-active"
+                          >Regulatory Clearances</span
+                        >
+                      </td>
+                      <td>Corporate Business</td>
+                      <td>
+                        <span class="hash-code-snippet">1b77ce...02fa</span>
+                      </td>
+                      <td>8.4 MB</td>
+                      <td>Sep 01, 2026</td>
+                      <td>
+                        <div style="display: flex; gap: 6px">
+                          <button
+                            type="button"
+                            class="btn btn-subtle btn-sm"
+                            onclick="
+                              window.verifyVaultChecksum(
+                                'SOC2_Type_II_Annual_Attestation_Report_2026.pdf',
+                                '1b77ce910002fa'
+                              )
+                            "
+                          >
+                            Verify
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-secondary-light btn-sm"
+                            onclick="
+                              window.downloadVaultFile(
+                                'SOC2_Type_II_Annual_Attestation_Report_2026.pdf'
+                              )
+                            "
+                          >
+                            Download
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div
-                style="
-                  background: #f9f8f5;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 20px;
-                "
-              >
-                <h4
-                  style="
-                    font-size: 1rem;
-                    margin-bottom: 6px;
-                    color: var(--color-primary-900);
-                  "
-                >
-                  GDPR & CCPA Compliant
-                </h4>
-                <p style="font-size: 0.85rem; margin-bottom: 10px">
-                  Automated data residency and jurisdictional sovereignty
-                  routing for cross-border transaction data.
+            </section>
+          </div>
+          <!-- END VIEW 4: DELIVERABLES VAULT -->
+
+          <!-- VIEW 5: FINANCIAL ANALYTICS & SENSITIVITIES -->
+          <div
+            id="view-analytics"
+            class="dash-view"
+            aria-label="Financial Analytics"
+          >
+            <div class="view-header-strip">
+              <div class="view-header-main">
+                <div class="view-header-title-row">
+                  <h2>Financial Analytics & Valuation Sensitivity Modeler</h2>
+                  <span class="view-header-badge"
+                    >Multi-Factor EV Simulator</span
+                  >
+                </div>
+                <p class="view-header-subtitle">
+                  Interactive corporate valuation sensitivities, run-rate EBITDA
+                  stress-testing & exit multiple expansion tables.
                 </p>
-                <span
-                  style="font-size: 0.78rem; font-weight: 700; color: #1b4332"
-                  >Status: Fully Compliant</span
-                >
+              </div>
+              <div class="view-header-stats-row">
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label"
+                    >Base Enterprise Value</span
+                  >
+                  <span class="view-stat-chip-val" id="sens-top-ev"
+                    >$3.94B</span
+                  >
+                </div>
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Baseline EBITDA</span>
+                  <span class="view-stat-chip-val" id="sens-top-ebitda"
+                    >$272M</span
+                  >
+                </div>
+                <div class="view-stat-chip">
+                  <span class="view-stat-chip-label">Rule of 40 Score</span>
+                  <span class="view-stat-chip-val" style="color: #10b981"
+                    >54.2%</span
+                  >
+                </div>
               </div>
             </div>
-          </section>
+
+            <!-- Modeler Container -->
+            <div class="sensitivity-modeler-container">
+              <!-- Left: Sliders & Outputs -->
+              <div class="slider-group-box">
+                <h3
+                  style="
+                    font-size: 1.05rem;
+                    font-weight: 700;
+                    color: var(--color-primary-900);
+                    margin: 0;
+                  "
+                >
+                  Valuation Assumptions & Inputs
+                </h3>
+
+                <!-- Slider: Revenue -->
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label"
+                      >Annual Run-Rate Net Revenue ($M)</span
+                    >
+                    <span class="slider-val-badge" id="val-badge-revenue"
+                      >$850M</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-revenue"
+                    class="dash-range-slider"
+                    min="200"
+                    max="2000"
+                    step="25"
+                    value="850"
+                  />
+                </div>
+
+                <!-- Slider: Margin -->
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label">Adjusted EBITDA Margin (%)</span>
+                    <span class="slider-val-badge" id="val-badge-margin"
+                      >32.0%</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-margin"
+                    class="dash-range-slider"
+                    min="15"
+                    max="50"
+                    step="1"
+                    value="32"
+                  />
+                </div>
+
+                <!-- Slider: Exit Multiple -->
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label"
+                      >Implied EV / EBITDA Exit Multiple</span
+                    >
+                    <span class="slider-val-badge" id="val-badge-multiple"
+                      >14.5x</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-multiple"
+                    class="dash-range-slider"
+                    min="8"
+                    max="24"
+                    step="0.5"
+                    value="14.5"
+                  />
+                </div>
+
+                <!-- 4 KPI Stat Outputs -->
+                <div class="sensitivity-stats-grid">
+                  <div class="sens-stat-badge">
+                    <span class="sens-stat-label">Calculated EBITDA</span>
+                    <span class="sens-stat-val" id="out-calc-ebitda"
+                      >$272.0M</span
+                    >
+                  </div>
+                  <div class="sens-stat-badge">
+                    <span class="sens-stat-label"
+                      >Implied Enterprise Value</span
+                    >
+                    <span
+                      class="sens-stat-val"
+                      id="out-calc-ev"
+                      style="color: var(--color-accent-gold-dark)"
+                      >$3,944M</span
+                    >
+                  </div>
+                  <div class="sens-stat-badge">
+                    <span class="sens-stat-label"
+                      >Equity Value (Net of $450M Debt)</span
+                    >
+                    <span class="sens-stat-val" id="out-calc-equity"
+                      >$3,494M</span
+                    >
+                  </div>
+                  <div class="sens-stat-badge">
+                    <span class="sens-stat-label">Implied EV / Revenue</span>
+                    <span class="sens-stat-val" id="out-calc-ev-rev"
+                      >4.64x</span
+                    >
+                  </div>
+                </div>
+
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-top: 1px solid var(--border-subtle);
+                    padding-top: 14px;
+                  "
+                >
+                  <button
+                    type="button"
+                    class="btn btn-subtle btn-sm"
+                    id="btn-reset-sensitivity"
+                  >
+                    Reset to Base Case
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    onclick="
+                      window.showDashToast(
+                        'Valuation model exported to Investment Memo format.',
+                        'success'
+                      )
+                    "
+                  >
+                    Export Memo
+                  </button>
+                </div>
+              </div>
+
+              <!-- Right: Interactive 2D Sensitivity Matrix Table -->
+              <div class="dash-panel">
+                <div class="dash-panel-header">
+                  <h3>Enterprise Value Sensitivity Matrix ($MM)</h3>
+                  <span class="view-header-badge">Interactive Cell Snap</span>
+                </div>
+                <p
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-muted);
+                    margin-bottom: 12px;
+                  "
+                >
+                  Values represent Enterprise Value ($M) at different EBITDA
+                  Margin (rows) and Exit Multiple (columns) intersections. Click
+                  any cell to snap sliders.
+                </p>
+                <div class="matrix-table-wrap">
+                  <table
+                    class="sensitivity-matrix-table"
+                    id="sens-matrix-table"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Margin \ Multiple</th>
+                        <th>10.0x</th>
+                        <th>12.0x</th>
+                        <th>14.0x</th>
+                        <th>16.0x</th>
+                        <th>18.0x</th>
+                        <th>20.0x</th>
+                      </tr>
+                    </thead>
+                    <tbody id="sens-matrix-tbody">
+                      <!-- Generated dynamically by dashboard.js -->
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  style="
+                    margin-top: 14px;
+                    font-size: 0.76rem;
+                    color: var(--text-secondary);
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                  "
+                >
+                  <span
+                    style="
+                      display: inline-block;
+                      width: 12px;
+                      height: 12px;
+                      background: rgba(197, 168, 128, 0.4);
+                      outline: 2px solid var(--color-accent-gold);
+                      border-radius: 2px;
+                    "
+                  ></span>
+                  <span
+                    >Active valuation quadrant corresponding to current slider
+                    inputs.</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END VIEW 5: FINANCIAL ANALYTICS & SENSITIVITIES -->
+
+          <!-- VIEW 6: GOVERNANCE & AUDIT -->
+          <div
+            id="view-governance"
+            class="dash-view"
+            aria-label="Governance & Audit"
+          >
+            <div class="view-header-strip">
+              <div class="view-header-main">
+                <div class="view-header-title-row">
+                  <h2>Enterprise Governance, Risk & Immutable Audit Trail</h2>
+                  <span class="view-header-badge">SOC-2 & SEC Rule 17a-4</span>
+                </div>
+                <p class="view-header-subtitle">
+                  Fiduciary compliance controls, real-time cryptographic audit
+                  logging & regulatory governance scorecards.
+                </p>
+              </div>
+              <div class="view-header-stats-row">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  id="btn-run-sec-scan"
+                >
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="16"
+                    height="16"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                  <span>Run Security Verification Scan</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Interactive Security Scanner Box -->
+            <div class="security-scanner-card" id="sec-scanner-box">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <div>
+                  <strong
+                    style="color: var(--color-primary-900); font-size: 0.95rem"
+                    >System Cryptographic Ledger Health</strong
+                  >
+                  <div
+                    style="font-size: 0.8rem; color: var(--text-muted)"
+                    id="sec-scanner-status"
+                  >
+                    100% Operational • Merkle root verified against
+                    decentralized archive
+                  </div>
+                </div>
+                <span class="status-badge status-active" id="sec-scanner-badge"
+                  >Verified Nominal</span
+                >
+              </div>
+              <div class="scanner-progress-track" id="sec-scanner-track">
+                <div class="scanner-progress-bar" id="sec-scanner-bar"></div>
+              </div>
+            </div>
+
+            <!-- Compliance Framework Cards -->
+            <div class="dash-grid-2col" style="margin-bottom: 24px">
+              <div class="dash-panel">
+                <div class="dash-panel-header">
+                  <h3>Global Regulatory Certifications</h3>
+                  <span class="user-greeting-pill">Annual Recertification</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px">
+                  <div
+                    style="
+                      background: #fbfaf8;
+                      border: 1px solid var(--border-subtle);
+                      border-radius: var(--radius-md);
+                      padding: 14px;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <div>
+                      <strong
+                        style="
+                          color: var(--color-primary-900);
+                          font-size: 0.9rem;
+                        "
+                        >SOC 2 Type II Attestation</strong
+                      >
+                      <div style="font-size: 0.78rem; color: var(--text-muted)">
+                        Independent Trust Services Criteria audit
+                      </div>
+                    </div>
+                    <span class="status-badge status-active"
+                      >100% Validated</span
+                    >
+                  </div>
+                  <div
+                    style="
+                      background: #fbfaf8;
+                      border: 1px solid var(--border-subtle);
+                      border-radius: var(--radius-md);
+                      padding: 14px;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <div>
+                      <strong
+                        style="
+                          color: var(--color-primary-900);
+                          font-size: 0.9rem;
+                        "
+                        >ISO/IEC 27001:2022 Certified</strong
+                      >
+                      <div style="font-size: 0.78rem; color: var(--text-muted)">
+                        Information security management system
+                      </div>
+                    </div>
+                    <span class="status-badge status-active">Recertified</span>
+                  </div>
+                  <div
+                    style="
+                      background: #fbfaf8;
+                      border: 1px solid var(--border-subtle);
+                      border-radius: var(--radius-md);
+                      padding: 14px;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <div>
+                      <strong
+                        style="
+                          color: var(--color-primary-900);
+                          font-size: 0.9rem;
+                        "
+                        >SEC Rule 17a-4 Compliance</strong
+                      >
+                      <div style="font-size: 0.78rem; color: var(--text-muted)">
+                        WORM immutable electronic record retention
+                      </div>
+                    </div>
+                    <span class="status-badge status-active">Compliant</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fiduciary Governance Oversight -->
+              <div class="dash-panel">
+                <div class="dash-panel-header">
+                  <h3>Fiduciary Committee Oversight</h3>
+                  <span class="user-greeting-pill">Q3 Governance</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px">
+                  <div
+                    style="
+                      background: #fbfaf8;
+                      border: 1px solid var(--border-subtle);
+                      border-radius: var(--radius-md);
+                      padding: 14px;
+                    "
+                  >
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 4px;
+                      "
+                    >
+                      <strong
+                        style="
+                          color: var(--color-primary-900);
+                          font-size: 0.9rem;
+                        "
+                        >Investment Committee Quorum</strong
+                      >
+                      <span
+                        style="
+                          font-size: 0.78rem;
+                          font-weight: 700;
+                          color: #10b981;
+                        "
+                        >7/7 Members Seated</span
+                      >
+                    </div>
+                    <p
+                      style="
+                        font-size: 0.8rem;
+                        color: var(--text-muted);
+                        margin: 0;
+                      "
+                    >
+                      Unanimous approval required for tranches exceeding $250M
+                      single-asset exposure.
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      background: #fbfaf8;
+                      border: 1px solid var(--border-subtle);
+                      border-radius: var(--radius-md);
+                      padding: 14px;
+                    "
+                  >
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 4px;
+                      "
+                    >
+                      <strong
+                        style="
+                          color: var(--color-primary-900);
+                          font-size: 0.9rem;
+                        "
+                        >Cryptographic Key Ceremony</strong
+                      >
+                      <span
+                        style="
+                          font-size: 0.78rem;
+                          font-weight: 700;
+                          color: #10b981;
+                        "
+                        >Executed Q2</span
+                      >
+                    </div>
+                    <p
+                      style="
+                        font-size: 0.8rem;
+                        color: var(--text-muted);
+                        margin: 0;
+                      "
+                    >
+                      3-of-5 M-of-N multi-signature threshold key rotation
+                      completed with external auditors.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Immutable Audit Stream Log -->
+            <section class="dash-panel" aria-label="Immutable Audit Log">
+              <div class="dash-panel-header">
+                <h3>Immutable Audit Stream & Telemetry Log</h3>
+                <div style="display: flex; gap: 8px">
+                  <button
+                    type="button"
+                    class="btn btn-subtle btn-sm"
+                    id="btn-export-gov-csv"
+                  >
+                    Export CSV
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-subtle btn-sm"
+                    id="btn-export-gov-json"
+                  >
+                    Export JSON
+                  </button>
+                </div>
+              </div>
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  gap: 12px;
+                  margin-bottom: 16px;
+                  flex-wrap: wrap;
+                "
+              >
+                <div class="filter-pill-group" id="gov-filter-pills">
+                  <button
+                    type="button"
+                    class="filter-pill active"
+                    data-filter="all"
+                  >
+                    All Events (8)
+                  </button>
+                  <button type="button" class="filter-pill" data-filter="auth">
+                    Authentication & IAM
+                  </button>
+                  <button
+                    type="button"
+                    class="filter-pill"
+                    data-filter="transaction"
+                  >
+                    Transaction Changes
+                  </button>
+                  <button
+                    type="button"
+                    class="filter-pill"
+                    data-filter="export"
+                  >
+                    Data Room Export
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  id="gov-search-input"
+                  class="table-search-input"
+                  placeholder="Search audit trail..."
+                  style="width: 220px; margin: 0"
+                />
+              </div>
+
+              <ul class="audit-stream-list" id="gov-audit-list">
+                <li class="audit-stream-item" data-category="auth">
+                  <div>
+                    <div
+                      style="
+                        font-size: 0.88rem;
+                        font-weight: 700;
+                        color: var(--color-primary-900);
+                      "
+                    >
+                      TLS 1.3 cryptographic session verified for Victoria
+                      Alexander
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      Actor: victoria.alexander@corporatebusiness.com • IP:
+                      198.51.100.42 • SHA-256: 0b42f1
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <span class="audit-severity-tag sev-nominal">Nominal</span>
+                    <span
+                      style="
+                        font-size: 0.76rem;
+                        color: var(--text-muted);
+                        white-space: nowrap;
+                      "
+                      >4m ago</span
+                    >
+                  </div>
+                </li>
+                <li class="audit-stream-item" data-category="transaction">
+                  <div>
+                    <div
+                      style="
+                        font-size: 0.88rem;
+                        font-weight: 700;
+                        color: var(--color-primary-900);
+                      "
+                    >
+                      Project Titan Definitive Agreement term sheet updated to
+                      Phase IV
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      Actor: marcus.sterling@corporatebusiness.com • IP:
+                      203.0.113.19 • SHA-256: 8f9a2e
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <span class="audit-severity-tag sev-audit">Audit</span>
+                    <span
+                      style="
+                        font-size: 0.76rem;
+                        color: var(--text-muted);
+                        white-space: nowrap;
+                      "
+                      >18m ago</span
+                    >
+                  </div>
+                </li>
+                <li class="audit-stream-item" data-category="export">
+                  <div>
+                    <div
+                      style="
+                        font-size: 0.88rem;
+                        font-weight: 700;
+                        color: var(--color-primary-900);
+                      "
+                    >
+                      Apex Logistics QofE independent audit exported to Virtual
+                      Data Room
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      Actor: elena.rostova@corporatebusiness.com • IP:
+                      198.51.100.11 • SHA-256: 3a7b1c
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <span class="audit-severity-tag sev-nominal">Nominal</span>
+                    <span
+                      style="
+                        font-size: 0.76rem;
+                        color: var(--text-muted);
+                        white-space: nowrap;
+                      "
+                      >1h ago</span
+                    >
+                  </div>
+                </li>
+                <li class="audit-stream-item" data-category="auth">
+                  <div>
+                    <div
+                      style="
+                        font-size: 0.88rem;
+                        font-weight: 700;
+                        color: var(--color-primary-900);
+                      "
+                    >
+                      Automated SOC-2 continuous monitoring agent health-check
+                      completed
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      Actor: System Daemon • Node: aws-us-east-1a • SHA-256:
+                      7d14ac
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <span class="audit-severity-tag sev-nominal">Nominal</span>
+                    <span
+                      style="
+                        font-size: 0.76rem;
+                        color: var(--text-muted);
+                        white-space: nowrap;
+                      "
+                      >2h ago</span
+                    >
+                  </div>
+                </li>
+                <li class="audit-stream-item" data-category="transaction">
+                  <div>
+                    <div
+                      style="
+                        font-size: 0.88rem;
+                        font-weight: 700;
+                        color: var(--color-primary-900);
+                      "
+                    >
+                      Senior Secured Revolver facility drawdown simulated:
+                      $50,000,000
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      Actor: victoria.alexander@corporatebusiness.com • Treasury
+                      Enclave • SHA-256: e512bc
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <span class="audit-severity-tag sev-audit">Audit</span>
+                    <span
+                      style="
+                        font-size: 0.76rem;
+                        color: var(--text-muted);
+                        white-space: nowrap;
+                      "
+                      >3h ago</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+          <!-- END VIEW 6: GOVERNANCE & AUDIT -->
         </main>
+        <!-- END DASHBOARD BODY CONTENT -->
+
+        <!-- MODAL: NEW MANDATE QUICK ENTRY -->
+        <div
+          id="dash-new-mandate-modal"
+          class="dash-modal-backdrop"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-mandate-title"
+        >
+          <div class="dash-modal-card">
+            <div class="dash-modal-header">
+              <h3 id="modal-mandate-title">Add New M&A Mandate</h3>
+              <button
+                type="button"
+                class="dash-modal-close-btn"
+                id="btn-close-mandate-modal"
+                aria-label="Close modal"
+              >
+                &times;
+              </button>
+            </div>
+            <form id="form-new-mandate">
+              <div class="dash-modal-body">
+                <div class="dash-form-group">
+                  <label class="dash-form-label" for="mandate-name"
+                    >Target / Mandate Name *</label
+                  >
+                  <input
+                    type="text"
+                    id="mandate-name"
+                    class="dash-form-input"
+                    placeholder="e.g. Project Meridian Aerospace"
+                    required
+                  />
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 14px;
+                  "
+                >
+                  <div class="dash-form-group">
+                    <label class="dash-form-label" for="mandate-sector"
+                      >Industry Sector *</label
+                    >
+                    <select
+                      id="mandate-sector"
+                      class="dash-form-select"
+                      required
+                    >
+                      <option value="tech">Enterprise SaaS & Tech</option>
+                      <option value="energy">Clean Energy & Infra</option>
+                      <option value="health">Life Sciences & Health</option>
+                      <option value="fintech">FinTech & Payments</option>
+                      <option value="industrial">Logistics & Industrial</option>
+                    </select>
+                  </div>
+                  <div class="dash-form-group">
+                    <label class="dash-form-label" for="mandate-valuation"
+                      >Enterprise Valuation ($M) *</label
+                    >
+                    <input
+                      type="number"
+                      id="mandate-valuation"
+                      class="dash-form-input"
+                      placeholder="e.g. 450"
+                      min="1"
+                      required
+                    />
+                  </div>
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 14px;
+                  "
+                >
+                  <div class="dash-form-group">
+                    <label class="dash-form-label" for="mandate-stage"
+                      >Pipeline Phase *</label
+                    >
+                    <select
+                      id="mandate-stage"
+                      class="dash-form-select"
+                      required
+                    >
+                      <option value="sourcing">Sourcing & Screening</option>
+                      <option value="dd">Due Diligence & QofE</option>
+                      <option value="loi">LOI & Term Sheet</option>
+                      <option value="closing">Closing & Escrow</option>
+                    </select>
+                  </div>
+                  <div class="dash-form-group">
+                    <label class="dash-form-label" for="mandate-partner"
+                      >Lead Partner *</label
+                    >
+                    <input
+                      type="text"
+                      id="mandate-partner"
+                      class="dash-form-input"
+                      value="Victoria Alexander"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="dash-modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary-light btn-sm"
+                  id="btn-cancel-mandate-modal"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  Add to Pipeline
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- MODAL: INSPECT TERMS DETAILS -->
+        <div
+          id="dash-inspect-modal"
+          class="dash-modal-backdrop"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-inspect-title"
+        >
+          <div class="dash-modal-card">
+            <div class="dash-modal-header">
+              <h3 id="modal-inspect-title">Deal Term Sheet Summary</h3>
+              <button
+                type="button"
+                class="dash-modal-close-btn"
+                id="btn-close-inspect-modal"
+                aria-label="Close modal"
+              >
+                &times;
+              </button>
+            </div>
+            <div class="dash-modal-body" id="modal-inspect-body">
+              <!-- Dynamically filled -->
+            </div>
+            <div class="dash-modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary-light btn-sm"
+                id="btn-dismiss-inspect-modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                onclick="
+                  window.showDashToast(
+                    'Full confidential term sheet downloaded to secure enclave.',
+                    'success'
+                  )
+                "
+              >
+                Download Executed PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOAST NOTIFICATION CONTAINER -->
+        <div
+          id="dash-toast-container"
+          class="dash-toast-container"
+          aria-live="polite"
+        ></div>
       </div>
     </div>
 

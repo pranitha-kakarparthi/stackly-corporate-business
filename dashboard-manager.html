@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manager Workspace | Stackly</title>
+    <meta
+      name="description"
+      content="Stackly Manager Workspace - Strategic Capital Allocations, M&A Pipeline Velocity, and Advisory Squad Allocation."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem("cb_currentUser");
+          if (!raw) {
+            window.location.replace("sign-in.html");
+          }
+        } catch (e) {
+          window.location.replace("sign-in.html");
+        }
+      })();
+    </script>
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard-wrapper">
+      <!-- COLLAPSIBLE SIDEBAR -->
+      <aside
+        class="dash-sidebar"
+        role="navigation"
+        aria-label="Manager Navigation Sidebar"
+      >
+        <div class="dash-sidebar-header">
+          <a
+            href="index.html"
+            aria-label="Stackly Home"
+            class="dash-brand-link"
+          >
+            <img
+              src="assets/images/logoStackly.webp"
+              alt="Stackly Logo"
+              width="160"
+              height="36"
+              class="dash-brand-img"
+            />
+          </a>
+          <button
+            class="dash-mobile-close-btn"
+            id="dash-mobile-close"
+            aria-label="Close Mobile Navigation"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <ul class="dash-nav-menu">
+          <li class="dash-nav-heading">Manager Console</li>
+          <li class="dash-nav-item active" data-tooltip="Capital Allocation">
+            <a href="#manager-telemetry" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Allocations Pacing</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Mandate Pipeline">
+            <a href="#manager-kanban" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                />
+              </svg>
+              <span>Mandates Kanban</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Squad Capacity">
+            <a href="#manager-squads" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              <span>Advisory Squads</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Client Milestones">
+            <a href="#manager-milestones" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                />
+              </svg>
+              <span>Deal Milestones</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Treasury Facilities">
+            <a href="#manager-facilities" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
+                />
+              </svg>
+              <span>Treasury Facilities</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- SIDEBAR COLLAPSE TRIGGER -->
+        <div class="dash-sidebar-bottom">
+          <button
+            class="sidebar-collapse-btn"
+            id="sidebar-collapse-trigger"
+            title="Collapse / Expand Sidebar"
+            aria-label="Toggle Desktop Sidebar"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+              />
+            </svg>
+            <span class="collapse-label">Collapse Menu</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MOBILE SIDEBAR BACKDROP -->
+      <div class="dash-sidebar-backdrop" id="dash-sidebar-backdrop"></div>
+
+      <!-- MAIN CONTENT WRAPPER -->
+      <div class="dash-main">
+        <!-- PERMANENTLY FIXED TOPBAR -->
+        <header class="dash-topbar" role="banner">
+          <div class="dash-topbar-left">
+            <button class="sidebar-toggle-btn" aria-label="Open Sidebar Menu">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="dash-topbar-right">
+            <!-- User Profile Area -->
+            <div class="user-profile-badge">
+              <div id="dash-user-initials" class="user-avatar-initials">MS</div>
+              <div class="user-info-text">
+                <span id="dash-user-name" class="user-display-name"
+                  >Marcus Sterling</span
+                >
+                <span id="dash-user-role" class="user-role-label"
+                  >Manager Access</span
+                >
+              </div>
+            </div>
+
+            <!-- Primary CTA: Sign Out -->
+            <button
+              onclick="
+                window.CB_Storage
+                  ? window.CB_Storage.logout()
+                  : (window.location.href = 'sign-in.html')
+              "
+              class="btn btn-secondary-light btn-sm"
+              title="End Session"
+            >
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- DASHBOARD BODY CONTENT -->
+        <main class="dash-content">
+          <!-- HERO BANNER SECTION -->
+          <div class="dash-hero-banner" id="manager-telemetry">
+            <div class="dash-hero-eyebrow">
+              <span class="pulse-dot"></span>
+              <span>Strategic Capital Allocations & Pacing</span>
+            </div>
+            <h1 class="dash-hero-title">
+              <span id="greetingTime">Good afternoon</span>,
+              <span class="gradient-text" id="greetingName"
+                >Marcus Sterling.</span
+              >
+            </h1>
+            <p class="dash-hero-desc">
+              Advisory squad capacity, mandate closing velocities, and quarterly
+              fund drawdown schedules are tracking on target for Q3 2026.
+            </p>
+          </div>
+
+          <!-- SECTION 1: 4 KPI STATS CARDS -->
+          <section class="dash-stats-grid" aria-label="Manager KPIs">
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Pipeline Under Review</span>
+                <span class="stat-icon-wrap icon-blue">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">$840M</div>
+              <div class="stat-delta positive"><span>+18.5% QoQ</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Active M&A Mandates</span>
+                <span class="stat-icon-wrap icon-emerald">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">14 Deals</div>
+              <div class="stat-delta positive">
+                <span>8 in Due Diligence</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Advisory Squad Utilization</span>
+                <span class="stat-icon-wrap icon-purple">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">91.4%</div>
+              <div class="stat-delta positive"><span>Optimal Pacing</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Quarterly Target Pacing</span>
+                <span class="stat-icon-wrap icon-amber">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">114%</div>
+              <div class="stat-delta positive"><span>+$120M Ahead</span></div>
+            </div>
+          </section>
+
+          <!-- SECTION 2: ACTIVE MANDATE KANBAN PIPELINE -->
+          <section
+            class="dash-panel"
+            id="manager-kanban"
+            style="margin-bottom: 28px"
+          >
+            <div class="dash-panel-header">
+              <h3>Active M&A Mandate Kanban Pipeline ($3.45B Total EV)</h3>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                onclick="
+                  window.showDashToast(
+                    'New mandate registration drawer opened.',
+                    'info'
+                  )
+                "
+              >
+                + New Mandate
+              </button>
+            </div>
+
+            <div class="kanban-board-grid">
+              <!-- Sourcing -->
+              <div class="kanban-col">
+                <div class="kanban-col-header">
+                  <div class="kanban-col-title-wrap">
+                    <span class="kanban-col-dot dot-sourcing"></span>
+                    <span class="kanban-col-title">Sourcing (3)</span>
+                  </div>
+                </div>
+                <div class="kanban-col-cards">
+                  <div class="kanban-card">
+                    <span class="kanban-card-sector">Enterprise SaaS</span>
+                    <div class="kanban-card-title">
+                      Nordic Cloud Infrastructure
+                    </div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$650M EV</span>
+                    </div>
+                  </div>
+                  <div class="kanban-card">
+                    <span class="kanban-card-sector">Life Sciences</span>
+                    <div class="kanban-card-title">Quantum BioPharma Core</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$280M EV</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Due Diligence -->
+              <div class="kanban-col">
+                <div class="kanban-col-header">
+                  <div class="kanban-col-title-wrap">
+                    <span class="kanban-col-dot dot-dd"></span>
+                    <span class="kanban-col-title">Due Diligence (4)</span>
+                  </div>
+                </div>
+                <div class="kanban-col-cards">
+                  <div class="kanban-card">
+                    <span class="kanban-card-sector">Clean Energy</span>
+                    <div class="kanban-card-title">
+                      Helios Solar Infrastructure
+                    </div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$850M EV</span>
+                    </div>
+                  </div>
+                  <div class="kanban-card">
+                    <span class="kanban-card-sector">FinTech</span>
+                    <div class="kanban-card-title">
+                      Sovereign Gateway Systems
+                    </div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$310M EV</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- LOI & Terms -->
+              <div class="kanban-col">
+                <div class="kanban-col-header">
+                  <div class="kanban-col-title-wrap">
+                    <span class="kanban-col-dot dot-loi"></span>
+                    <span class="kanban-col-title">LOI & Terms (4)</span>
+                  </div>
+                </div>
+                <div class="kanban-col-cards">
+                  <div class="kanban-card">
+                    <span class="kanban-card-sector">Aerospace</span>
+                    <div class="kanban-card-title">Horizon Aero Dynamics</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$520M EV</span>
+                    </div>
+                  </div>
+                  <div class="kanban-card">
+                    <span class="kanban-card-sector">Clean Energy</span>
+                    <div class="kanban-card-title">Lumina Green Hydrogen</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$330M EV</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Closing -->
+              <div class="kanban-col">
+                <div class="kanban-col-header">
+                  <div class="kanban-col-title-wrap">
+                    <span class="kanban-col-dot dot-closing"></span>
+                    <span class="kanban-col-title">Closing & Escrow (3)</span>
+                  </div>
+                </div>
+                <div class="kanban-col-cards">
+                  <div class="kanban-card">
+                    <span class="kanban-card-sector">Logistics</span>
+                    <div class="kanban-card-title">Project Titan Carveout</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$1.20B EV</span>
+                    </div>
+                  </div>
+                  <div class="kanban-card">
+                    <span class="kanban-card-sector">Wealth Tech</span>
+                    <div class="kanban-card-title">Sterling Wealth Capital</div>
+                    <div class="kanban-card-val-row">
+                      <span class="kanban-card-val">$490M EV</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 3: ADVISORY SQUAD WORKLOAD ALLOCATION -->
+          <section
+            class="dash-panel"
+            id="manager-squads"
+            style="margin-bottom: 28px"
+          >
+            <div class="dash-panel-header">
+              <h3>Advisory Squad Capacity & Deal Team Utilization</h3>
+              <button
+                type="button"
+                class="btn btn-subtle btn-sm"
+                onclick="
+                  window.showDashToast(
+                    'Squad workload report dispatched to Investment Committee.',
+                    'success'
+                  )
+                "
+              >
+                Rebalance Squads
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Advisory Squad</th>
+                    <th>Lead Partner</th>
+                    <th>Active Mandates</th>
+                    <th>Total EV Assigned</th>
+                    <th>Capacity Utilization</th>
+                    <th>Sprint Velocity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Squad Alpha (Tech & Clean Energy)</strong></td>
+                    <td>Victoria Alexander</td>
+                    <td>5 Mandates</td>
+                    <td>$2.05B</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px">
+                        <div
+                          class="progress-bar-bg"
+                          style="width: 80px; height: 6px"
+                        >
+                          <div
+                            class="progress-bar-fill"
+                            style="width: 94%"
+                          ></div>
+                        </div>
+                        <span style="font-size: 0.78rem; font-weight: 700"
+                          >94%</span
+                        >
+                      </div>
+                    </td>
+                    <td>
+                      <span class="status-badge status-active">Optimal</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Squad Beta (FinTech & Industrial)</strong></td>
+                    <td>Marcus Sterling</td>
+                    <td>6 Mandates</td>
+                    <td>$980M</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px">
+                        <div
+                          class="progress-bar-bg"
+                          style="width: 80px; height: 6px"
+                        >
+                          <div
+                            class="progress-bar-fill"
+                            style="width: 88%"
+                          ></div>
+                        </div>
+                        <span style="font-size: 0.78rem; font-weight: 700"
+                          >88%</span
+                        >
+                      </div>
+                    </td>
+                    <td>
+                      <span class="status-badge status-active"
+                        >High Velocity</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Squad Gamma (Special Situations)</strong></td>
+                    <td>Elena Rostova</td>
+                    <td>3 Mandates</td>
+                    <td>$420M</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px">
+                        <div
+                          class="progress-bar-bg"
+                          style="width: 80px; height: 6px"
+                        >
+                          <div
+                            class="progress-bar-fill"
+                            style="width: 72%"
+                          ></div>
+                        </div>
+                        <span style="font-size: 0.78rem; font-weight: 700"
+                          >72%</span
+                        >
+                      </div>
+                    </td>
+                    <td>
+                      <span class="status-badge status-pending"
+                        >Bench Available</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 4: CLIENT MANDATE MILESTONES -->
+          <section
+            class="dash-panel"
+            id="manager-milestones"
+            style="margin-bottom: 28px"
+          >
+            <div class="dash-panel-header">
+              <h3>Active Mandate Milestone Tracking & Closing Schedules</h3>
+              <span class="user-greeting-pill">Q3 Pacing</span>
+            </div>
+            <div class="milestones-grid">
+              <div class="milestone-card">
+                <div class="milestone-card-top">
+                  <div>
+                    <div class="milestone-card-title">
+                      Project Titan Carveout
+                    </div>
+                    <div class="milestone-entity">
+                      Energy Infrastructure • $1.20B
+                    </div>
+                  </div>
+                  <span class="milestone-stage-badge status-active"
+                    >Closing</span
+                  >
+                </div>
+                <div class="milestone-progress-box">
+                  <div class="progress-header">
+                    <span>Definitive Escrow Wiring</span>
+                    <span>88% Complete</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 88%"></div>
+                  </div>
+                </div>
+                <div class="milestone-meta-row">
+                  <span>Lead: V. Alexander</span>
+                  <span>Target Close: Sep 28, 2026</span>
+                </div>
+              </div>
+
+              <div class="milestone-card">
+                <div class="milestone-card-top">
+                  <div>
+                    <div class="milestone-card-title">
+                      Apex Logistics Acquisition
+                    </div>
+                    <div class="milestone-entity">
+                      Supply Chain Logistics • $420M
+                    </div>
+                  </div>
+                  <span class="milestone-stage-badge status-active"
+                    >QofE Final</span
+                  >
+                </div>
+                <div class="milestone-progress-box">
+                  <div class="progress-header">
+                    <span>Independent Audit Review</span>
+                    <span>74% Complete</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 74%"></div>
+                  </div>
+                </div>
+                <div class="milestone-meta-row">
+                  <span>Lead: M. Sterling</span>
+                  <span>Target Close: Oct 15, 2026</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 5: SYNDICATED TREASURY FACILITIES -->
+          <section class="dash-panel" id="manager-facilities">
+            <div class="dash-panel-header">
+              <h3>
+                Syndicated Credit Facilities & Liquidity Reserves ($4.80B)
+              </h3>
+              <button
+                type="button"
+                class="btn btn-subtle btn-sm"
+                onclick="
+                  window.showDashToast(
+                    'Facility reconciliation generated.',
+                    'info'
+                  )
+                "
+              >
+                Facility Audit
+              </button>
+            </div>
+            <div class="facilities-grid">
+              <div class="facility-card">
+                <div class="facility-card-top">
+                  <div>
+                    <div class="facility-card-title">
+                      $1.20B Revolver Facility
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      JPMorgan Chase & Barclays Syndicate
+                    </div>
+                  </div>
+                  <span class="facility-card-rate">SOFR + 215 bps</span>
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-secondary)">
+                  Drawn: <strong>$816M</strong> (68%) • Available:
+                  <strong>$384M</strong>
+                </div>
+                <div class="progress-bar-bg" style="height: 8px">
+                  <div class="progress-bar-fill" style="width: 68%"></div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-subtle btn-sm"
+                  onclick="
+                    window.showDashToast(
+                      'Simulated $50M drawdown for Revolver Facility.',
+                      'success'
+                    )
+                  "
+                >
+                  Drawdown $50M
+                </button>
+              </div>
+
+              <div class="facility-card">
+                <div class="facility-card-top">
+                  <div>
+                    <div class="facility-card-title">$2.00B Term Loan B</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      Goldman Sachs & Morgan Stanley
+                    </div>
+                  </div>
+                  <span class="facility-card-rate">SOFR + 350 bps</span>
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-secondary)">
+                  Drawn: <strong>$1.64B</strong> (82%) • Available:
+                  <strong>$360M</strong>
+                </div>
+                <div class="progress-bar-bg" style="height: 8px">
+                  <div class="progress-bar-fill" style="width: 82%"></div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-subtle btn-sm"
+                  onclick="
+                    window.showDashToast(
+                      'Simulated $100M drawdown for Term Loan B.',
+                      'success'
+                    )
+                  "
+                >
+                  Drawdown $100M
+                </button>
+              </div>
+
+              <div class="facility-card">
+                <div class="facility-card-top">
+                  <div>
+                    <div class="facility-card-title">$600M ESG Green Bond</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      BNP Paribas & Credit Agricole
+                    </div>
+                  </div>
+                  <span class="facility-card-rate">5.125% Fixed</span>
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-secondary)">
+                  Drawn: <strong>$270M</strong> (45%) • Available:
+                  <strong>$330M</strong>
+                </div>
+                <div class="progress-bar-bg" style="height: 8px">
+                  <div class="progress-bar-fill" style="width: 45%"></div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-subtle btn-sm"
+                  onclick="
+                    window.showDashToast(
+                      'Simulated $25M drawdown for Green Bond.',
+                      'success'
+                    )
+                  "
+                >
+                  Drawdown $25M
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div
+      id="dash-toast-container"
+      class="dash-toast-container"
+      aria-live="polite"
+    ></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

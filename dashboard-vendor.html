@@ -1,0 +1,1112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Syndicate Counsel & Vendor Portal | Stackly</title>
+    <meta
+      name="description"
+      content="Stackly Legal Counsel & Advisory Vendor Portal - Retainer Mandates, Solvency Opinions, Regulatory Clearances, and Milestone Escrow."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem("cb_currentUser");
+          if (!raw) {
+            window.location.replace("sign-in.html");
+          }
+        } catch (e) {
+          window.location.replace("sign-in.html");
+        }
+      })();
+    </script>
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard-wrapper">
+      <!-- COLLAPSIBLE SIDEBAR -->
+      <aside
+        class="dash-sidebar"
+        role="navigation"
+        aria-label="Vendor Navigation Sidebar"
+      >
+        <div class="dash-sidebar-header">
+          <a
+            href="index.html"
+            aria-label="Stackly Home"
+            class="dash-brand-link"
+          >
+            <img
+              src="assets/images/logoStackly.webp"
+              alt="Stackly Logo"
+              width="160"
+              height="36"
+              class="dash-brand-img"
+            />
+          </a>
+          <button
+            class="dash-mobile-close-btn"
+            id="dash-mobile-close"
+            aria-label="Close Mobile Navigation"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <ul class="dash-nav-menu">
+          <li class="dash-nav-heading">Counsel & Syndicate</li>
+          <li class="dash-nav-item active" data-tooltip="Retainer Contracts">
+            <a href="#ven-contracts" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <span>Retainer Contracts</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Deliverables Docket">
+            <a href="#ven-deliverables" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                />
+              </svg>
+              <span>Deliverables Docket</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Regulatory Filings">
+            <a href="#ven-regulatory" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                />
+              </svg>
+              <span>Antitrust Clearances</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Milestone Escrow">
+            <a href="#ven-invoicing" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              <span>Escrow & Billing</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Compliance & NDAs">
+            <a href="#ven-compliance" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+              <span>Compliance & NDAs</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- SIDEBAR COLLAPSE TRIGGER -->
+        <div class="dash-sidebar-bottom">
+          <button
+            class="sidebar-collapse-btn"
+            id="sidebar-collapse-trigger"
+            title="Collapse / Expand Sidebar"
+            aria-label="Toggle Desktop Sidebar"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+              />
+            </svg>
+            <span class="collapse-label">Collapse Menu</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MOBILE SIDEBAR BACKDROP -->
+      <div class="dash-sidebar-backdrop" id="dash-sidebar-backdrop"></div>
+
+      <!-- MAIN CONTENT WRAPPER -->
+      <div class="dash-main">
+        <!-- PERMANENTLY FIXED TOPBAR -->
+        <header class="dash-topbar" role="banner">
+          <div class="dash-topbar-left">
+            <button class="sidebar-toggle-btn" aria-label="Open Sidebar Menu">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="dash-topbar-right">
+            <!-- User Profile Area -->
+            <div class="user-profile-badge">
+              <div id="dash-user-initials" class="user-avatar-initials">SJ</div>
+              <div class="user-info-text">
+                <span id="dash-user-name" class="user-display-name"
+                  >Sarah Jenkins</span
+                >
+                <span id="dash-user-role" class="user-role-label"
+                  >Vendor Access</span
+                >
+              </div>
+            </div>
+
+            <!-- Primary CTA: Sign Out -->
+            <button
+              onclick="
+                window.CB_Storage
+                  ? window.CB_Storage.logout()
+                  : (window.location.href = 'sign-in.html')
+              "
+              class="btn btn-secondary-light btn-sm"
+              title="End Session"
+            >
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- DASHBOARD BODY CONTENT -->
+        <main class="dash-content">
+          <!-- HERO BANNER SECTION -->
+          <div class="dash-hero-banner" id="ven-contracts">
+            <div class="dash-hero-top">
+              <div>
+                <span class="dash-hero-eyebrow">Syndicate Partner Portal</span>
+                <h1 class="dash-hero-title">
+                  External Legal & Advisory Retainer Workspace
+                </h1>
+                <p class="dash-hero-desc">
+                  Overseeing transatlantic legal mandates, statutory solvency
+                  opinions, antitrust merger clearances, and milestone escrow
+                  disbursements for Stackly Capital partners.
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  onclick="
+                    window.showDashToast(
+                      'Opening Solvency Opinion submission wizard...',
+                      'info'
+                    )
+                  "
+                >
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    style="width: 16px; height: 16px; margin-right: 6px"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                  Submit Solvency Opinion
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary-light btn-sm"
+                  onclick="
+                    window.showDashToast(
+                      'Downloading active engagement retainer schedule (PDF)...',
+                      'success'
+                    )
+                  "
+                >
+                  Download Engagement Letter
+                </button>
+              </div>
+            </div>
+
+            <!-- SECTION 1: KEY RETAINER METRICS -->
+            <div class="dash-stats-grid" style="margin-top: 24px">
+              <div class="dash-stat-card">
+                <div class="dash-stat-header">
+                  <span class="dash-stat-label">Committed Retainer Value</span>
+                  <span class="dash-stat-badge badge-success">+14.5% YoY</span>
+                </div>
+                <div class="dash-stat-value">$3.25M</div>
+                <div class="dash-stat-caption">
+                  Across 6 active transatlantic M&A engagements
+                </div>
+              </div>
+
+              <div class="dash-stat-card">
+                <div class="dash-stat-header">
+                  <span class="dash-stat-label">Active Mandates</span>
+                  <span class="dash-stat-badge badge-primary">Legal Lead</span>
+                </div>
+                <div class="dash-stat-value">6 Deals</div>
+                <div class="dash-stat-caption">
+                  2 Solvency Opinions, 4 Regulatory Filings
+                </div>
+              </div>
+
+              <div class="dash-stat-card">
+                <div class="dash-stat-header">
+                  <span class="dash-stat-label">Deliverable Pacing</span>
+                  <span class="dash-stat-badge badge-success"
+                    >100% On-Track</span
+                  >
+                </div>
+                <div class="dash-stat-value">0 Overdue</div>
+                <div class="dash-stat-caption">
+                  All statutory closing deadlines satisfied
+                </div>
+              </div>
+
+              <div class="dash-stat-card">
+                <div class="dash-stat-header">
+                  <span class="dash-stat-label">Escrow Released YTD</span>
+                  <span class="dash-stat-badge badge-info">Verified</span>
+                </div>
+                <div class="dash-stat-value">$850,000</div>
+                <div class="dash-stat-caption">
+                  Milestone wire transfers processed via JP Morgan
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: DELIVERABLES DOCKET & SOLVENCY OPINIONS -->
+          <section class="dash-card" id="ven-deliverables">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Statutory Deliverables & Solvency Docket
+                </h3>
+                <p class="dash-card-subtitle">
+                  Formal legal opinions, debt covenants reviews, and
+                  transactional closing certificates.
+                </p>
+              </div>
+              <span class="user-greeting-pill">4 Deliverables in Flight</span>
+            </div>
+
+            <div class="dash-table-wrap">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Deliverable Name</th>
+                    <th>Associated Mandate</th>
+                    <th>Governing Law</th>
+                    <th>Target Filing Date</th>
+                    <th>Review Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div
+                        style="
+                          font-weight: 700;
+                          color: var(--color-primary-900);
+                        "
+                      >
+                        Project Apex Solvency Opinion
+                      </div>
+                      <div
+                        style="font-size: 0.75rem; color: var(--text-secondary)"
+                      >
+                        Independent Balance Sheet & Cash Flow Solvency
+                        Certificate
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge badge-primary">Project Apex</span>
+                    </td>
+                    <td>Delaware / NY Law</td>
+                    <td>Oct 15, 2026</td>
+                    <td>
+                      <span class="badge badge-success">Partner Signed</span>
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-subtle btn-xs"
+                        onclick="
+                          window.showDashToast(
+                            'Downloading Apex Solvency Opinion packet...',
+                            'success'
+                          )
+                        "
+                      >
+                        Download PDF
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div
+                        style="
+                          font-weight: 700;
+                          color: var(--color-primary-900);
+                        "
+                      >
+                        Nordic Renewables Escrow Release
+                      </div>
+                      <div
+                        style="font-size: 0.75rem; color: var(--text-secondary)"
+                      >
+                        Closing Settlement & Seller Escrow Instruction Memo
+                      </div>
+                    </td>
+                    <td><span class="badge badge-info">Nordic Wind</span></td>
+                    <td>Swedish / English Law</td>
+                    <td>Nov 01, 2026</td>
+                    <td>
+                      <span class="badge badge-warning"
+                        >Awaiting Bank Signoff</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-subtle btn-xs"
+                        onclick="
+                          window.showDashToast(
+                            'Escrow reminder ping sent to custodian bank.',
+                            'info'
+                          )
+                        "
+                      >
+                        Ping Custodian
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div
+                        style="
+                          font-weight: 700;
+                          color: var(--color-primary-900);
+                        "
+                      >
+                        Project Titan Cross-Border Tax Structuring
+                      </div>
+                      <div
+                        style="font-size: 0.75rem; color: var(--text-secondary)"
+                      >
+                        Section 368 Reorganization Memorandum
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge badge-primary">Titan Acquisition</span>
+                    </td>
+                    <td>US Internal Revenue Code</td>
+                    <td>Nov 18, 2026</td>
+                    <td>
+                      <span class="badge badge-info">Internal Review</span>
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-subtle btn-xs"
+                        onclick="
+                          window.showDashToast(
+                            'Tax memo draft uploaded for general partner review.',
+                            'success'
+                          )
+                        "
+                      >
+                        Upload Draft
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div
+                        style="
+                          font-weight: 700;
+                          color: var(--color-primary-900);
+                        "
+                      >
+                        Helvetia Logistics Fairness Opinion
+                      </div>
+                      <div
+                        style="font-size: 0.75rem; color: var(--text-secondary)"
+                      >
+                        Special Committee Transaction Valuation Assessment
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge badge-success">Helvetia Special</span>
+                    </td>
+                    <td>Swiss Commercial Code</td>
+                    <td>Dec 05, 2026</td>
+                    <td>
+                      <span class="badge badge-primary"
+                        >Drafting In-Progress</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-subtle btn-xs"
+                        onclick="
+                          window.showDashToast(
+                            'Opening secure drafting notepad...',
+                            'info'
+                          )
+                        "
+                      >
+                        Edit Working Paper
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 3: REGULATORY & ANTITRUST CLEARANCES -->
+          <section class="dash-card" id="ven-regulatory">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Antitrust & Cross-Border Regulatory Clearances
+                </h3>
+                <p class="dash-card-subtitle">
+                  Statutory merger control tracking across North American and
+                  European regulatory bodies.
+                </p>
+              </div>
+              <button
+                class="btn btn-secondary-light btn-sm"
+                onclick="
+                  window.showDashToast(
+                    'Statutory filing scheduler launched.',
+                    'info'
+                  )
+                "
+              >
+                Log Regulatory Action
+              </button>
+            </div>
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 16px;
+              "
+            >
+              <!-- FTC / DOJ -->
+              <div
+                style="
+                  background: #fbfaf8;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-md);
+                  padding: 16px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <div>
+                    <strong
+                      style="
+                        color: var(--color-primary-900);
+                        font-size: 0.95rem;
+                      "
+                      >US FTC / DOJ Hart-Scott-Rodino</strong
+                    >
+                    <div
+                      style="font-size: 0.75rem; color: var(--text-secondary)"
+                    >
+                      Docket # HSR-2026-8941 • Project Apex
+                    </div>
+                  </div>
+                  <span class="badge badge-success">Cleared</span>
+                </div>
+                <div style="margin: 12px 0">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 0.75rem;
+                      color: var(--text-secondary);
+                      margin-bottom: 4px;
+                    "
+                  >
+                    <span>Waiting Period Pacing</span>
+                    <span>30 / 30 Days (Early Termination Granted)</span>
+                  </div>
+                  <div
+                    style="
+                      height: 6px;
+                      background: #e2e8f0;
+                      border-radius: 3px;
+                      overflow: hidden;
+                    "
+                  >
+                    <div
+                      style="width: 100%; height: 100%; background: #16a34a"
+                    ></div>
+                  </div>
+                </div>
+                <div
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-muted);
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <span>Expiry: Granted Sep 12, 2026</span>
+                  <a
+                    href="javascript:void(0)"
+                    onclick="
+                      window.showDashToast(
+                        'FTC Early Termination letter opened in secure viewer.',
+                        'info'
+                      )
+                    "
+                    style="color: var(--color-accent-gold); font-weight: 600"
+                    >View Letter</a
+                  >
+                </div>
+              </div>
+
+              <!-- EU DG COMP -->
+              <div
+                style="
+                  background: #fbfaf8;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-md);
+                  padding: 16px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <div>
+                    <strong
+                      style="
+                        color: var(--color-primary-900);
+                        font-size: 0.95rem;
+                      "
+                      >European Commission DG COMP</strong
+                    >
+                    <div
+                      style="font-size: 0.75rem; color: var(--text-secondary)"
+                    >
+                      Case M.11942 • Nordic Renewables
+                    </div>
+                  </div>
+                  <span class="badge badge-info">Phase 1 Review</span>
+                </div>
+                <div style="margin: 12px 0">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 0.75rem;
+                      color: var(--text-secondary);
+                      margin-bottom: 4px;
+                    "
+                  >
+                    <span>Statutory Deadline</span>
+                    <span>18 / 25 Working Days</span>
+                  </div>
+                  <div
+                    style="
+                      height: 6px;
+                      background: #e2e8f0;
+                      border-radius: 3px;
+                      overflow: hidden;
+                    "
+                  >
+                    <div
+                      style="width: 72%; height: 100%; background: #2563eb"
+                    ></div>
+                  </div>
+                </div>
+                <div
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-muted);
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <span>Expected Decision: Oct 24, 2026</span>
+                  <a
+                    href="javascript:void(0)"
+                    onclick="
+                      window.showDashToast(
+                        'Form CO submission dossier downloaded.',
+                        'info'
+                      )
+                    "
+                    style="color: var(--color-accent-gold); font-weight: 600"
+                    >View Form CO</a
+                  >
+                </div>
+              </div>
+
+              <!-- UK CMA -->
+              <div
+                style="
+                  background: #fbfaf8;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-md);
+                  padding: 16px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <div>
+                    <strong
+                      style="
+                        color: var(--color-primary-900);
+                        font-size: 0.95rem;
+                      "
+                      >UK Competition & Markets (CMA)</strong
+                    >
+                    <div
+                      style="font-size: 0.75rem; color: var(--text-secondary)"
+                    >
+                      Mandate Ref CMA/ME/7041 • Titan Acq
+                    </div>
+                  </div>
+                  <span class="badge badge-warning">Pre-Notification</span>
+                </div>
+                <div style="margin: 12px 0">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 0.75rem;
+                      color: var(--text-secondary);
+                      margin-bottom: 4px;
+                    "
+                  >
+                    <span>Briefing Paper Stage</span>
+                    <span>Pre-filing discussions in progress</span>
+                  </div>
+                  <div
+                    style="
+                      height: 6px;
+                      background: #e2e8f0;
+                      border-radius: 3px;
+                      overflow: hidden;
+                    "
+                  >
+                    <div
+                      style="width: 35%; height: 100%; background: #d97706"
+                    ></div>
+                  </div>
+                </div>
+                <div
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-muted);
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <span>Meeting Date: Oct 08, 2026</span>
+                  <a
+                    href="javascript:void(0)"
+                    onclick="
+                      window.showDashToast(
+                        'CMA Briefing Memorandum opened.',
+                        'info'
+                      )
+                    "
+                    style="color: var(--color-accent-gold); font-weight: 600"
+                    >Briefing Notes</a
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 4: INVOICING, RETAINER ESCROW & MILESTONE PAYMENTS -->
+          <section class="dash-card" id="ven-invoicing">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Retainer Escrow & Milestone Payment Ledger
+                </h3>
+                <p class="dash-card-subtitle">
+                  Statutory legal retainer drawdowns, disbursement receipts, and
+                  wire confirmations.
+                </p>
+              </div>
+              <button
+                class="btn btn-primary btn-sm"
+                onclick="
+                  window.showDashToast(
+                    'New Fee Note Submission form initialized.',
+                    'info'
+                  )
+                "
+              >
+                Submit Fee Note
+              </button>
+            </div>
+
+            <div class="dash-table-wrap">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Invoice / Mandate</th>
+                    <th>Milestone Description</th>
+                    <th>Billed Hours / Fee</th>
+                    <th>Escrow Drawdown</th>
+                    <th>Disbursement Date</th>
+                    <th>Payment Status</th>
+                    <th>Receipt</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong style="color: var(--color-primary-900)"
+                        >INV-2026-0891</strong
+                      >
+                      <div
+                        style="font-size: 0.75rem; color: var(--text-secondary)"
+                      >
+                        Project Apex HSR Filing Fee & Counsel
+                      </div>
+                    </td>
+                    <td>Antitrust Clearance & Solvency Draft</td>
+                    <td>142.5 hrs • $285,000</td>
+                    <td>$285,000 released</td>
+                    <td>Sep 14, 2026</td>
+                    <td>
+                      <span class="badge badge-success"
+                        >Disbursed via Wire</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-subtle btn-xs"
+                        onclick="
+                          window.showDashToast(
+                            'Downloading Wire Confirmation FedWire #89421...',
+                            'success'
+                          )
+                        "
+                      >
+                        FedWire Receipt
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong style="color: var(--color-primary-900)"
+                        >INV-2026-0904</strong
+                      >
+                      <div
+                        style="font-size: 0.75rem; color: var(--text-secondary)"
+                      >
+                        Nordic Wind SPA Drafting
+                      </div>
+                    </td>
+                    <td>Share Purchase Agreement Finalization</td>
+                    <td>110.0 hrs • $220,000</td>
+                    <td>$220,000 in escrow</td>
+                    <td>Pending Closing</td>
+                    <td>
+                      <span class="badge badge-info">Approved for Closing</span>
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-subtle btn-xs"
+                        onclick="
+                          window.showDashToast(
+                            'Downloading fee note preview INV-2026-0904...',
+                            'info'
+                          )
+                        "
+                      >
+                        Fee Note PDF
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong style="color: var(--color-primary-900)"
+                        >INV-2026-0922</strong
+                      >
+                      <div
+                        style="font-size: 0.75rem; color: var(--text-secondary)"
+                      >
+                        Titan Reorganization Memorandum
+                      </div>
+                    </td>
+                    <td>Section 368 Tax structuring memorandum</td>
+                    <td>68.0 hrs • $136,000</td>
+                    <td>$136,000 escrow hold</td>
+                    <td>Oct 30, 2026</td>
+                    <td>
+                      <span class="badge badge-warning">Partner Review</span>
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-subtle btn-xs"
+                        onclick="
+                          window.showDashToast(
+                            'Detailed time log exported (CSV).',
+                            'success'
+                          )
+                        "
+                      >
+                        Export Timesheet
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 5: SYNDICATE COMPLIANCE & CONFLICT ATTESTATION -->
+          <section class="dash-card" id="ven-compliance">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Syndicate Compliance & Ethical Wall Attestations
+                </h3>
+                <p class="dash-card-subtitle">
+                  Third-party SOC-2 certifications, conflict check waivers, and
+                  mutual NDA sealing records.
+                </p>
+              </div>
+              <span class="user-greeting-pill">All Attestations Current</span>
+            </div>
+
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 16px;
+              "
+            >
+              <div
+                style="
+                  background: #fbfaf8;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-md);
+                  padding: 18px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <strong
+                    style="color: var(--color-primary-900); font-size: 0.95rem"
+                    >Annual Ethical Wall Recertification</strong
+                  >
+                  <span class="badge badge-success">Valid through 2027</span>
+                </div>
+                <p
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-secondary);
+                    line-height: 1.45;
+                    margin-bottom: 14px;
+                  "
+                >
+                  Conflict clearance certifying complete information barrier
+                  separation between Stackly portfolio companies and conflicting
+                  banking syndicate advisory desks.
+                </p>
+                <button
+                  type="button"
+                  class="btn btn-subtle btn-xs"
+                  onclick="
+                    window.showDashToast(
+                      'Downloading signed Ethical Wall Certificate...',
+                      'success'
+                    )
+                  "
+                >
+                  Download Certificate (PDF)
+                </button>
+              </div>
+
+              <div
+                style="
+                  background: #fbfaf8;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-md);
+                  padding: 18px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <strong
+                    style="color: var(--color-primary-900); font-size: 0.95rem"
+                    >Master Syndicate NDA Protocol</strong
+                  >
+                  <span class="badge badge-success"
+                    >Cryptographically Sealed</span
+                  >
+                </div>
+                <p
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-secondary);
+                    line-height: 1.45;
+                    margin-bottom: 14px;
+                  "
+                >
+                  Multi-party bilateral non-disclosure agreement with 256-bit
+                  SHA-256 seal covering virtual data room disclosures and
+                  proprietary diligence financial models.
+                </p>
+                <button
+                  type="button"
+                  class="btn btn-subtle btn-xs"
+                  onclick="
+                    window.showDashToast(
+                      'SHA-256 NDA Fingerprint: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+                      'info'
+                    )
+                  "
+                >
+                  Verify Hash Digest
+                </button>
+              </div>
+
+              <div
+                style="
+                  background: #fbfaf8;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-md);
+                  padding: 18px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <strong
+                    style="color: var(--color-primary-900); font-size: 0.95rem"
+                    >SOC-2 Type II Compliance Audit</strong
+                  >
+                  <span class="badge badge-success">Clean Opinion</span>
+                </div>
+                <p
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--text-secondary);
+                    line-height: 1.45;
+                    margin-bottom: 14px;
+                  "
+                >
+                  Verified by Deloitte & Touche LLP. Security, availability, and
+                  confidentiality trust services criteria satisfied for legal
+                  syndicate operations.
+                </p>
+                <button
+                  type="button"
+                  class="btn btn-subtle btn-xs"
+                  onclick="
+                    window.showDashToast(
+                      'Auditor SOC-2 Executive Summary rendered.',
+                      'success'
+                    )
+                  "
+                >
+                  View Executive Summary
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div
+      id="dash-toast-container"
+      class="dash-toast-container"
+      aria-live="polite"
+    ></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

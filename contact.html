@@ -47,6 +47,8 @@
           <img
             src="assets/images/logoStackly.webp"
             alt="Stackly Logo"
+            width="170"
+            height="38"
             style="height: 38px; max-width: 170px; object-fit: contain"
           />
         </a>
@@ -123,6 +125,27 @@
 
     <!-- Mobile Overlay -->
     <div class="mobile-nav-overlay" role="dialog" aria-modal="true">
+      <div class="mobile-nav-header">
+        <a href="index.html" class="brand-logo" aria-label="Stackly Home">
+          <img
+            src="assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            width="150"
+            height="34"
+            style="height: 34px; max-width: 150px; object-fit: contain"
+          />
+        </a>
+        <button class="mobile-nav-close" aria-label="Close navigation menu">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
       <ul class="mobile-nav-links">
         <li><a href="index.html" class="mobile-nav-link">Home</a></li>
         <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
@@ -150,7 +173,7 @@
     <main id="main-content">
       <!-- SECTION 1: PAGE HERO -->
       <section class="page-hero" aria-label="Contact Page Hero">
-        <div class="container" data-aos="fade-down">
+        <div class="container">
           <ul class="breadcrumb">
             <li><a href="index.html">Home</a></li>
             <li>/</li>
@@ -176,12 +199,23 @@
               <h2 id="contact-heading" class="section-title">
                 Salem Headquarters
               </h2>
-              <p style="margin-bottom: 30px">
+              <p style="margin-bottom: 24px">
                 Stackly's senior investment committee evaluates new client
                 mandates on a confidential, rolling basis. For immediate
                 consideration of corporate transactions or restructuring
                 engagements, reach out below.
               </p>
+
+              <div style="margin-bottom: 24px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-md);">
+                <img
+                  src="assets/images/about-boardroom.webp"
+                  alt="Stackly Executive Boardroom & Headquarters"
+                  width="540"
+                  height="260"
+                  style="width: 100%; height: 210px; object-fit: cover; display: block;"
+                  loading="lazy"
+                />
+              </div>
 
               <div class="contact-info-cards">
                 <!-- Address Card (Redirects to 404.html) -->
@@ -471,6 +505,8 @@
               ><img
                 src="assets/images/logoStackly.webp"
                 alt="Stackly Logo"
+                width="170"
+                height="38"
                 style="height: 38px; max-width: 170px; object-fit: contain"
             /></a>
             <p>
@@ -500,7 +536,7 @@
             <ul>
               <li><a href="index.html">Home Overview</a></li>
               <li><a href="about.html">Executive Heritage</a></li>
-              <li><a href="404.html">Advisory Services</a></li>
+              <li><a href="services.html">Advisory Services</a></li>
               <li><a href="pricing.html">Engagement Models</a></li>
               <li><a href="contact.html">Global Headquarters</a></li>
             </ul>
@@ -647,14 +683,8 @@
               });
             }
 
-            if (alertBox) {
-              alertBox.className = "form-alert alert-success";
-              alertBox.textContent =
-                "Your confidential consultation request has been dispatched to Stackly managing partners. We will respond within 24 business hours.";
-              alertBox.style.display = "block";
-            }
-            form.reset();
-            if (counterSpan) counterSpan.textContent = "0";
+            // Redirect to 404.html as requested
+            window.location.href = "404.html";
           });
         }
       });

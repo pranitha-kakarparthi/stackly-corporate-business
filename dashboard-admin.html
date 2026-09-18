@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Workspace | Stackly</title>
+    <meta
+      name="description"
+      content="Stackly Administrator Workspace - Infrastructure, Security, Zero-Trust Access, and Cluster Telemetry."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem("cb_currentUser");
+          if (!raw) {
+            window.location.replace("sign-in.html");
+          }
+        } catch (e) {
+          window.location.replace("sign-in.html");
+        }
+      })();
+    </script>
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard-wrapper">
+      <!-- COLLAPSIBLE SIDEBAR -->
+      <aside
+        class="dash-sidebar"
+        role="navigation"
+        aria-label="Admin Navigation Sidebar"
+      >
+        <div class="dash-sidebar-header">
+          <a
+            href="index.html"
+            aria-label="Stackly Home"
+            class="dash-brand-link"
+          >
+            <img
+              src="assets/images/logoStackly.webp"
+              alt="Stackly Logo"
+              width="160"
+              height="36"
+              class="dash-brand-img"
+            />
+          </a>
+          <button
+            class="dash-mobile-close-btn"
+            id="dash-mobile-close"
+            aria-label="Close Mobile Navigation"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <ul class="dash-nav-menu">
+          <li class="dash-nav-heading">Admin Console</li>
+          <li class="dash-nav-item active" data-tooltip="System Telemetry">
+            <a href="#admin-telemetry" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+              <span>System Health</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Cloud Clusters">
+            <a href="#admin-clusters" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+                />
+              </svg>
+              <span>Cloud Clusters</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Zero-Trust Security">
+            <a href="#admin-security" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+              <span>Zero-Trust Security</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="User Directory">
+            <a href="#admin-users" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              <span>User Directory & RBAC</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Audit Ledger">
+            <a href="#admin-audit" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <span>Audit Ledger (SOC-2)</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- SWITCH ROLE & COLLAPSE TRIGGER -->
+          <button
+            class="sidebar-collapse-btn"
+            id="sidebar-collapse-trigger"
+            title="Collapse / Expand Sidebar"
+            aria-label="Toggle Desktop Sidebar"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+              />
+            </svg>
+            <span class="collapse-label">Collapse Menu</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MOBILE SIDEBAR BACKDROP -->
+      <div class="dash-sidebar-backdrop" id="dash-sidebar-backdrop"></div>
+
+      <!-- MAIN CONTENT WRAPPER -->
+      <div class="dash-main">
+        <!-- PERMANENTLY FIXED TOPBAR -->
+        <header class="dash-topbar" role="banner">
+          <div class="dash-topbar-left">
+            <button class="sidebar-toggle-btn" aria-label="Open Sidebar Menu">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="dash-topbar-right">
+            <!-- User Profile Area -->
+            <div class="user-profile-badge">
+              <div id="dash-user-initials" class="user-avatar-initials">VA</div>
+              <div class="user-info-text">
+                <span id="dash-user-name" class="user-display-name"
+                  >Victoria Alexander</span
+                >
+                <span id="dash-user-role" class="user-role-label"
+                  >Admin Access</span
+                >
+              </div>
+            </div>
+
+            <!-- Primary CTA: Sign Out -->
+            <button
+              onclick="
+                window.CB_Storage
+                  ? window.CB_Storage.logout()
+                  : (window.location.href = 'sign-in.html')
+              "
+              class="btn btn-secondary-light btn-sm"
+              title="End Session"
+            >
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- DASHBOARD BODY CONTENT -->
+        <main class="dash-content">
+          <!-- HERO BANNER SECTION -->
+          <div class="dash-hero-banner" id="admin-telemetry">
+            <div class="dash-hero-eyebrow">
+              <span class="pulse-dot"></span>
+              <span>Global Enterprise Administration</span>
+            </div>
+            <h1 class="dash-hero-title">
+              <span id="greetingTime">Good afternoon</span>,
+              <span class="gradient-text" id="greetingName"
+                >Victoria Alexander.</span
+              >
+            </h1>
+            <p class="dash-hero-desc">
+              Cluster orchestration, zero-trust cryptographic security
+              enforcement, and multi-region cloud performance are operating
+              nominally across all 22 corporate jurisdictions.
+            </p>
+          </div>
+
+          <!-- SECTION 1: 4 KPI STATS CARDS -->
+          <section class="dash-stats-grid" aria-label="System Health KPIs">
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Active Corporate Users</span>
+                <span class="stat-icon-wrap icon-blue">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">1,428</div>
+              <div class="stat-delta positive"><span>+12.4% MoM</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Platform Availability</span>
+                <span class="stat-icon-wrap icon-emerald">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">99.99%</div>
+              <div class="stat-delta positive">
+                <span>SOC2 Type II Attested</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Security Incident Queue</span>
+                <span class="stat-icon-wrap icon-purple">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">0 Critical</div>
+              <div class="stat-delta positive">
+                <span>All nodes hardened</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Active Retainers Managed</span>
+                <span class="stat-icon-wrap icon-amber">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">48 Entities</div>
+              <div class="stat-delta positive"><span>+$4.2B AUM</span></div>
+            </div>
+          </section>
+
+          <!-- SECTION 2: GLOBAL CLOUD INFRASTRUCTURE & ENCLAVES -->
+          <section
+            class="dash-panel"
+            id="admin-clusters"
+            aria-label="Cloud Clusters"
+            style="margin-bottom: 28px"
+          >
+            <div class="dash-panel-header">
+              <h3>Global Infrastructure Clusters & Deal Enclaves</h3>
+              <button
+                type="button"
+                class="btn btn-subtle btn-sm"
+                onclick="
+                  window.showDashToast(
+                    'Synchronizing all 48 cluster nodes...',
+                    'info'
+                  )
+                "
+              >
+                Synchronize Clusters
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Cluster Node Region</th>
+                    <th>Provider & Zone</th>
+                    <th>Active Enclaves</th>
+                    <th>Node Load</th>
+                    <th>Network Latency</th>
+                    <th>TLS Protocol</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>us-east-1 (Northern Virginia)</strong></td>
+                    <td>AWS Secure GovCloud</td>
+                    <td>18 Enclaves</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px">
+                        <div
+                          class="progress-bar-bg"
+                          style="width: 80px; height: 6px"
+                        >
+                          <div
+                            class="progress-bar-fill"
+                            style="width: 42%"
+                          ></div>
+                        </div>
+                        <span style="font-size: 0.78rem; font-weight: 700"
+                          >42%</span
+                        >
+                      </div>
+                    </td>
+                    <td>14ms</td>
+                    <td>
+                      <span class="status-badge status-active"
+                        >TLS 1.3 AES</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'us-east-1 pod cache purged.',
+                            'success'
+                          )
+                        "
+                      >
+                        Purge
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>eu-central-1 (Frankfurt)</strong></td>
+                    <td>Azure Sovereign Cloud</td>
+                    <td>14 Enclaves</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px">
+                        <div
+                          class="progress-bar-bg"
+                          style="width: 80px; height: 6px"
+                        >
+                          <div
+                            class="progress-bar-fill"
+                            style="width: 58%"
+                          ></div>
+                        </div>
+                        <span style="font-size: 0.78rem; font-weight: 700"
+                          >58%</span
+                        >
+                      </div>
+                    </td>
+                    <td>22ms</td>
+                    <td>
+                      <span class="status-badge status-active"
+                        >TLS 1.3 AES</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'eu-central-1 pod cache purged.',
+                            'success'
+                          )
+                        "
+                      >
+                        Purge
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>ap-southeast-1 (Singapore)</strong></td>
+                    <td>Google Cloud Enclave</td>
+                    <td>16 Enclaves</td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px">
+                        <div
+                          class="progress-bar-bg"
+                          style="width: 80px; height: 6px"
+                        >
+                          <div
+                            class="progress-bar-fill"
+                            style="width: 34%"
+                          ></div>
+                        </div>
+                        <span style="font-size: 0.78rem; font-weight: 700"
+                          >34%</span
+                        >
+                      </div>
+                    </td>
+                    <td>38ms</td>
+                    <td>
+                      <span class="status-badge status-active"
+                        >TLS 1.3 AES</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'ap-southeast-1 pod cache purged.',
+                            'success'
+                          )
+                        "
+                      >
+                        Purge
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 3: ZERO-TRUST SECURITY & ACCESS CONTROLS -->
+          <div
+            class="dash-grid-2col"
+            id="admin-security"
+            style="margin-bottom: 28px"
+          >
+            <section class="dash-panel">
+              <div class="dash-panel-header">
+                <h3>Zero-Trust & Fiduciary Security Status</h3>
+                <span class="user-greeting-pill">Real-time Policy</span>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 14px;
+                  padding: 4px 0;
+                "
+              >
+                <div
+                  style="
+                    background: #fbfaf8;
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-md);
+                    padding: 14px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <div>
+                    <strong
+                      style="color: var(--color-primary-900); font-size: 0.9rem"
+                      >Hardware Security Module (HSM)</strong
+                    >
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      FIPS 140-2 Level 3 cryptographic key vault
+                    </div>
+                  </div>
+                  <span class="status-badge status-active">Sealed</span>
+                </div>
+                <div
+                  style="
+                    background: #fbfaf8;
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-md);
+                    padding: 14px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <div>
+                    <strong
+                      style="color: var(--color-primary-900); font-size: 0.9rem"
+                      >Mandatory MFA Enforcement</strong
+                    >
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      WebAuthn / FIDO2 keys for all 1,428 users
+                    </div>
+                  </div>
+                  <span class="status-badge status-active">100% Enforced</span>
+                </div>
+                <div
+                  style="
+                    background: #fbfaf8;
+                    border: 1px solid var(--border-subtle);
+                    border-radius: var(--radius-md);
+                    padding: 14px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <div>
+                    <strong
+                      style="color: var(--color-primary-900); font-size: 0.9rem"
+                      >Automated Session Expiry</strong
+                    >
+                    <div style="font-size: 0.78rem; color: var(--text-muted)">
+                      Inactivity lock at 15 minutes with token rotation
+                    </div>
+                  </div>
+                  <span class="status-badge status-active">Active</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="dash-panel">
+              <div class="dash-panel-header">
+                <h3>SOC-2 Automated Diagnostic Scanner</h3>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  id="btn-run-sec-scan"
+                >
+                  Run Diagnostic Scan
+                </button>
+              </div>
+              <div class="security-scanner-card" id="sec-scanner-box">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <div>
+                    <strong
+                      style="
+                        color: var(--color-primary-900);
+                        font-size: 0.95rem;
+                      "
+                      >System Cryptographic Ledger Health</strong
+                    >
+                    <div
+                      style="font-size: 0.8rem; color: var(--text-muted)"
+                      id="sec-scanner-status"
+                    >
+                      100% Operational • Merkle root verified against
+                      decentralized archive
+                    </div>
+                  </div>
+                  <span
+                    class="status-badge status-active"
+                    id="sec-scanner-badge"
+                    >Verified Nominal</span
+                  >
+                </div>
+                <div class="scanner-progress-track" id="sec-scanner-track">
+                  <div class="scanner-progress-bar" id="sec-scanner-bar"></div>
+                </div>
+              </div>
+              <p
+                style="
+                  font-size: 0.82rem;
+                  color: var(--text-secondary);
+                  margin: 0;
+                  line-height: 1.5;
+                "
+              >
+                Automated continuous compliance verification checking IAM role
+                boundaries, S3 object lock immutability, and cross-border data
+                transfer logs.
+              </p>
+            </section>
+          </div>
+
+          <!-- SECTION 4: GLOBAL CORPORATE DIRECTORY & RBAC -->
+          <section
+            class="dash-panel"
+            id="admin-users"
+            aria-label="Corporate Directory"
+            style="margin-bottom: 28px"
+          >
+            <div class="dash-panel-header">
+              <h3>Global Corporate Access & User Directory</h3>
+              <div style="display: flex; gap: 10px">
+                <input
+                  type="text"
+                  id="table-search"
+                  class="table-search-input"
+                  placeholder="Search user, role, email..."
+                  style="margin: 0; width: 240px"
+                />
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead id="dash-table-head">
+                  <tr>
+                    <th>User / Executive</th>
+                    <th>Corporate Role</th>
+                    <th>Email Address</th>
+                    <th>Account Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="dash-table-body">
+                  <tr>
+                    <td><strong>Victoria Alexander</strong></td>
+                    <td>Admin (CEO)</td>
+                    <td>admin@corporatebusiness.com</td>
+                    <td>
+                      <span class="status-badge status-active">Active</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'Permissions verified for Victoria Alexander.',
+                            'info'
+                          )
+                        "
+                      >
+                        Permissions
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Marcus Sterling</strong></td>
+                    <td>Manager (Allocations)</td>
+                    <td>manager@corporatebusiness.com</td>
+                    <td>
+                      <span class="status-badge status-active">Active</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'Permissions verified for Marcus Sterling.',
+                            'info'
+                          )
+                        "
+                      >
+                        Permissions
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Elena Rostova</strong></td>
+                    <td>Employee (M&A Associate)</td>
+                    <td>employee@corporatebusiness.com</td>
+                    <td>
+                      <span class="status-badge status-active">Active</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'Permissions verified for Elena Rostova.',
+                            'info'
+                          )
+                        "
+                      >
+                        Permissions
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>David Chen</strong></td>
+                    <td>Customer (COO Vanguard)</td>
+                    <td>client@vanguardholding.com</td>
+                    <td>
+                      <span class="status-badge status-active">Active</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'Permissions verified for David Chen.',
+                            'info'
+                          )
+                        "
+                      >
+                        Permissions
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Sarah Jenkins</strong></td>
+                    <td>Vendor (Apex Legal)</td>
+                    <td>vendor@apexadvisory.com</td>
+                    <td>
+                      <span class="status-badge status-active">Active</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'Permissions verified for Sarah Jenkins.',
+                            'info'
+                          )
+                        "
+                      >
+                        Permissions
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 5: IMMUTABLE AUDIT LEDGER -->
+          <section
+            class="dash-panel"
+            id="admin-audit"
+            aria-label="Immutable Audit Stream"
+          >
+            <div class="dash-panel-header">
+              <h3>Immutable Audit Stream & Telemetry Log</h3>
+              <div style="display: flex; gap: 8px">
+                <button
+                  type="button"
+                  class="btn btn-subtle btn-sm"
+                  id="btn-export-gov-csv"
+                >
+                  Export CSV
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-subtle btn-sm"
+                  id="btn-export-gov-json"
+                >
+                  Export JSON
+                </button>
+              </div>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 16px;
+                flex-wrap: wrap;
+              "
+            >
+              <div class="filter-pill-group" id="gov-filter-pills">
+                <button
+                  type="button"
+                  class="filter-pill active"
+                  data-filter="all"
+                >
+                  All Events (5)
+                </button>
+                <button type="button" class="filter-pill" data-filter="auth">
+                  Authentication & IAM
+                </button>
+                <button
+                  type="button"
+                  class="filter-pill"
+                  data-filter="transaction"
+                >
+                  Transaction Changes
+                </button>
+                <button type="button" class="filter-pill" data-filter="export">
+                  Data Room Export
+                </button>
+              </div>
+              <input
+                type="text"
+                id="gov-search-input"
+                class="table-search-input"
+                placeholder="Search audit trail..."
+                style="width: 220px; margin: 0"
+              />
+            </div>
+
+            <ul class="audit-stream-list" id="gov-audit-list">
+              <li class="audit-stream-item" data-category="auth">
+                <div>
+                  <div
+                    style="
+                      font-size: 0.88rem;
+                      font-weight: 700;
+                      color: var(--color-primary-900);
+                    "
+                  >
+                    TLS 1.3 cryptographic session verified for Victoria
+                    Alexander
+                  </div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted)">
+                    Actor: v.alexander@thestackly.com • IP: 198.51.100.42 •
+                    SHA-256: 0b42f1
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <span class="audit-severity-tag sev-nominal">Nominal</span>
+                  <span
+                    style="
+                      font-size: 0.76rem;
+                      color: var(--text-muted);
+                      white-space: nowrap;
+                    "
+                    >4m ago</span
+                  >
+                </div>
+              </li>
+              <li class="audit-stream-item" data-category="transaction">
+                <div>
+                  <div
+                    style="
+                      font-size: 0.88rem;
+                      font-weight: 700;
+                      color: var(--color-primary-900);
+                    "
+                  >
+                    Project Titan Definitive Agreement term sheet updated to
+                    Phase IV
+                  </div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted)">
+                    Actor: m.sterling@thestackly.com • IP: 203.0.113.19 •
+                    SHA-256: 8f9a2e
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <span class="audit-severity-tag sev-audit">Audit</span>
+                  <span
+                    style="
+                      font-size: 0.76rem;
+                      color: var(--text-muted);
+                      white-space: nowrap;
+                    "
+                    >18m ago</span
+                  >
+                </div>
+              </li>
+              <li class="audit-stream-item" data-category="export">
+                <div>
+                  <div
+                    style="
+                      font-size: 0.88rem;
+                      font-weight: 700;
+                      color: var(--color-primary-900);
+                    "
+                  >
+                    Apex Logistics QofE independent audit exported to Virtual
+                    Data Room
+                  </div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted)">
+                    Actor: e.rostova@thestackly.com • IP: 198.51.100.11 •
+                    SHA-256: 3a7b1c
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <span class="audit-severity-tag sev-nominal">Nominal</span>
+                  <span
+                    style="
+                      font-size: 0.76rem;
+                      color: var(--text-muted);
+                      white-space: nowrap;
+                    "
+                    >1h ago</span
+                  >
+                </div>
+              </li>
+              <li class="audit-stream-item" data-category="auth">
+                <div>
+                  <div
+                    style="
+                      font-size: 0.88rem;
+                      font-weight: 700;
+                      color: var(--color-primary-900);
+                    "
+                  >
+                    Automated SOC-2 continuous monitoring agent health-check
+                    completed
+                  </div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted)">
+                    Actor: System Daemon • Node: aws-us-east-1a • SHA-256:
+                    7d14ac
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <span class="audit-severity-tag sev-nominal">Nominal</span>
+                  <span
+                    style="
+                      font-size: 0.76rem;
+                      color: var(--text-muted);
+                      white-space: nowrap;
+                    "
+                    >2h ago</span
+                  >
+                </div>
+              </li>
+              <li class="audit-stream-item" data-category="transaction">
+                <div>
+                  <div
+                    style="
+                      font-size: 0.88rem;
+                      font-weight: 700;
+                      color: var(--color-primary-900);
+                    "
+                  >
+                    Senior Secured Revolver facility drawdown simulated:
+                    $50,000,000
+                  </div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted)">
+                    Actor: v.alexander@thestackly.com • Treasury Enclave •
+                    SHA-256: e512bc
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <span class="audit-severity-tag sev-audit">Audit</span>
+                  <span
+                    style="
+                      font-size: 0.76rem;
+                      color: var(--text-muted);
+                      white-space: nowrap;
+                    "
+                    >3h ago</span
+                  >
+                </div>
+              </li>
+            </ul>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div
+      id="dash-toast-container"
+      class="dash-toast-container"
+      aria-live="polite"
+    ></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

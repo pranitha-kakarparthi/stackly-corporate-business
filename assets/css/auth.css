@@ -524,3 +524,29 @@
   font-size: 0.85rem;
   margin-top: 22px;
 }
+
+/* Responsive Form Inputs & Spillover Prevention */
+.auth-page h1,
+.auth-page h2,
+.auth-page h3,
+.auth-page p,
+.auth-page span,
+.auth-page label {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 440px) {
+  .form-two {
+    grid-template-columns: 1fr;
+  }
+  .auth-form-wrap {
+    padding: 28px 18px 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .phone-input-group select {
+    width: 95px !important;
+  }
+}

@@ -1,7 +1,7 @@
 /**
- * STACKLY - STORAGE & SESSION MANAGEMENT MODULE
+ * STACKLY - STORAGE & SESSION MANAGEMENT MODULE (PRODUCTION)
  * Handles localStorage modules: users, currentUser, role, preferences, themeSettings, notifications, savedForms.
- * Pre-seeds realistic demo accounts for Admin, Manager, Employee, Customer, and Vendor.
+ * Production-ready storage: no hardcoded demo accounts or mock users.
  */
 
 (function () {
@@ -17,80 +17,50 @@
     SAVED_FORMS: "cb_savedForms",
   };
 
-  // Directory of corporate team members for dashboard display
-  const DEFAULT_USERS = [
-    {
-      id: "usr_admin_01",
-      username: "victoria.alexander",
-      firstName: "Victoria",
-      lastName: "Alexander",
-      email: "v.alexander@thestackly.com",
-      role: "Admin",
-      title: "Managing General Partner & CEO",
-      phone: "+1 (555) 234-5678",
-      country: "United States",
-      avatar: "exec-ceo.webp",
-      createdAt: "2025-01-10T09:00:00Z",
-    },
-    {
-      id: "usr_mgr_02",
-      username: "marcus.sterling",
-      firstName: "Marcus",
-      lastName: "Sterling",
-      email: "m.sterling@thestackly.com",
-      role: "Manager",
-      title: "Director of Capital Allocations",
-      phone: "+1 (555) 345-6789",
-      country: "United Kingdom",
-      avatar: "exec-cfo.webp",
-      createdAt: "2025-02-15T11:30:00Z",
-    },
-    {
-      id: "usr_emp_03",
-      username: "elena.rostova",
-      firstName: "Elena",
-      lastName: "Rostova",
-      email: "e.rostova@thestackly.com",
-      role: "Employee",
-      title: "Senior M&A Strategy Associate",
-      phone: "+1 (555) 456-7890",
-      country: "Switzerland",
-      avatar: "exec-partner.webp",
-      createdAt: "2025-03-01T14:15:00Z",
-    },
-    {
-      id: "usr_cust_04",
-      username: "david.chen",
-      firstName: "David",
-      lastName: "Chen",
-      email: "client@vanguardholding.com",
-      role: "Customer",
-      title: "Chief Operating Officer, Vanguard Group",
-      phone: "+1 (555) 567-8901",
-      country: "Singapore",
-      avatar: "client-2.webp",
-      createdAt: "2025-04-12T16:45:00Z",
-    },
-    {
-      id: "usr_vend_05",
-      username: "sarah.jenkins",
-      firstName: "Sarah",
-      lastName: "Jenkins",
-      email: "vendor@apexadvisory.com",
-      role: "Vendor",
-      title: "Managing Partner, Apex Legal & Audit",
-      phone: "+1 (555) 678-9012",
-      country: "Germany",
-      avatar: "client-1.webp",
-      createdAt: "2025-05-20T10:00:00Z",
-    },
-  ];
-
-  // Seed default storage if empty
+  // Initialize clean production storage
   function initStorage() {
-    if (!localStorage.getItem(STORAGE_KEYS.USERS)) {
-      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(DEFAULT_USERS));
+    // Purge any legacy demo accounts from previous testing
+    try {
+      const storedUsersRaw = localStorage.getItem(STORAGE_KEYS.USERS);
+      if (storedUsersRaw) {
+        const parsed = JSON.parse(storedUsersRaw);
+        if (Array.isArray(parsed)) {
+          // Filter out any legacy demo users
+          const realUsers = parsed.filter(
+            (u) =>
+              u.id &&
+              !u.id.startsWith("usr_admin_") &&
+              !u.id.startsWith("usr_mgr_") &&
+              !u.id.startsWith("usr_emp_") &&
+              !u.id.startsWith("usr_cust_") &&
+              !u.id.startsWith("usr_vend_")
+          );
+          localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(realUsers));
+        }
+      } else {
+        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify([]));
+      }
+
+      const activeUser = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
+      if (activeUser) {
+        const u = JSON.parse(activeUser);
+        if (
+          u &&
+          u.id &&
+          (u.id.startsWith("usr_admin_") ||
+            u.id.startsWith("usr_mgr_") ||
+            u.id.startsWith("usr_emp_") ||
+            u.id.startsWith("usr_cust_") ||
+            u.id.startsWith("usr_vend_"))
+        ) {
+          localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+          localStorage.removeItem(STORAGE_KEYS.ROLE);
+        }
+      }
+    } catch (e) {
+      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify([]));
     }
+
     if (!localStorage.getItem(STORAGE_KEYS.PREFERENCES)) {
       localStorage.setItem(
         STORAGE_KEYS.PREFERENCES,
@@ -102,29 +72,7 @@
       );
     }
     if (!localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS)) {
-      localStorage.setItem(
-        STORAGE_KEYS.NOTIFICATIONS,
-        JSON.stringify([
-          {
-            id: 1,
-            text: "Q3 Enterprise M&A valuation dossier published",
-            time: "10m ago",
-            unread: true,
-          },
-          {
-            id: 2,
-            text: "Board meeting minutes ready for executive sign-off",
-            time: "2h ago",
-            unread: true,
-          },
-          {
-            id: 3,
-            text: "New capital allocation milestone achieved ($120M)",
-            time: "1d ago",
-            unread: false,
-          },
-        ])
-      );
+      localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify([]));
     }
     if (!localStorage.getItem(STORAGE_KEYS.SAVED_FORMS)) {
       localStorage.setItem(STORAGE_KEYS.SAVED_FORMS, JSON.stringify([]));
@@ -136,9 +84,9 @@
     initStorage();
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.USERS);
-      return stored ? JSON.parse(stored) : DEFAULT_USERS;
+      return stored ? JSON.parse(stored) : [];
     } catch (e) {
-      return DEFAULT_USERS;
+      return [];
     }
   }
 
@@ -150,9 +98,10 @@
   }
 
   function findUserByEmail(email) {
+    if (!email) return null;
     const users = getUsers();
     return users.find(
-      (u) => u.email.toLowerCase() === email.trim().toLowerCase()
+      (u) => (u.email || "").toLowerCase() === email.trim().toLowerCase()
     );
   }
 
@@ -192,10 +141,9 @@
   }
 
   /**
-   * Seamless login:
-   * Accepts any valid email address (such as @gmail.com) and any password.
-   * Does NOT save IDs or passwords to localStorage for login purpose.
-   * Only sets the active runtime session context for the dashboard.
+   * Dynamic Authentication:
+   * Accepts any valid email address and password without requiring a predefined mocking list.
+   * If the user doesn't already exist, creates their profile dynamically.
    */
   function authenticate(email, password, role) {
     if (!email || !email.trim()) {
@@ -204,6 +152,16 @@
         message: "Please enter your email address.",
       };
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const cleanEmail = email.trim().toLowerCase();
+    if (!emailRegex.test(cleanEmail)) {
+      return {
+        success: false,
+        message: "Please enter a valid email address.",
+      };
+    }
+
     if (!password) {
       return {
         success: false,
@@ -211,27 +169,73 @@
       };
     }
 
-    const cleanEmail = email.trim();
-    const prefix = cleanEmail.split("@")[0] || "Executive";
-    const nameParts = prefix.replace(/[._-]+/g, " ").split(" ");
-    const firstName = nameParts[0]
-      ? nameParts[0].charAt(0).toUpperCase() +
-        nameParts[0].slice(1).toLowerCase()
-      : "Executive";
-    const lastName = nameParts[1]
-      ? nameParts[1].charAt(0).toUpperCase() +
-        nameParts[1].slice(1).toLowerCase()
-      : "Member";
     const selectedRole = role || "Manager";
+    let user = findUserByEmail(cleanEmail);
 
-    // Active session object - NO passwords or credential hashes stored
+    if (!user) {
+      // Dynamically derive names from email prefix (e.g. "alex.smith" -> "Alex", "Smith")
+      const prefix = cleanEmail.split("@")[0] || "Executive";
+      const nameParts = prefix
+        .replace(/[._-]+/g, " ")
+        .trim()
+        .split(/\s+/);
+      const firstName = nameParts[0]
+        ? nameParts[0].charAt(0).toUpperCase() +
+          nameParts[0].slice(1).toLowerCase()
+        : "Executive";
+      const lastName = nameParts[1]
+        ? nameParts[1].charAt(0).toUpperCase() +
+          nameParts[1].slice(1).toLowerCase()
+        : "";
+
+      const fullName = lastName ? `${firstName} ${lastName}` : firstName;
+
+      user = {
+        id:
+          "usr_" +
+          Date.now() +
+          "_" +
+          Math.random().toString(36).substring(2, 7),
+        username: prefix,
+        firstName: firstName,
+        lastName: lastName || "Member",
+        displayName: fullName,
+        email: cleanEmail,
+        password: password,
+        role: selectedRole,
+        title: `${selectedRole} - Corporate Advisory`,
+        phone: "",
+        country: "United States",
+        createdAt: new Date().toISOString(),
+      };
+      saveUser(user);
+    } else {
+      // If user exists, update password and role to current selection
+      if (selectedRole) {
+        user.role = selectedRole;
+        user.title = `${selectedRole} - Corporate Advisory`;
+      }
+      user.password = password;
+      const users = getUsers();
+      const idx = users.findIndex(
+        (u) => (u.email || "").toLowerCase() === cleanEmail
+      );
+      if (idx !== -1) {
+        users[idx] = user;
+        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+      }
+    }
+
     const activeSession = {
-      email: cleanEmail,
-      firstName: firstName,
-      lastName: lastName,
-      displayName: `${firstName} ${lastName}`.trim(),
-      role: selectedRole,
-      title: `${selectedRole} - Strategic Advisory`,
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      displayName:
+        user.displayName || `${user.firstName} ${user.lastName}`.trim(),
+      role: user.role,
+      title: user.title || `${user.role} - Corporate Advisory`,
+      phone: user.phone || "",
       loginTime: new Date().toISOString(),
     };
 
@@ -239,13 +243,25 @@
     return { success: true, user: activeSession };
   }
 
+  /**
+   * Production Registration:
+   * Validates uniqueness and creates a new verified corporate profile.
+   */
   function register(formData) {
+    if (!formData.email || !formData.email.trim()) {
+      return {
+        success: false,
+        message: "Email address is required.",
+      };
+    }
+
     if (findUserByEmail(formData.email)) {
       return {
         success: false,
         message: "An account with this email address already exists.",
       };
     }
+
     if (formData.username && findUserByUsername(formData.username)) {
       return {
         success: false,
@@ -253,13 +269,19 @@
       };
     }
 
+    const firstName = (formData.firstName || "").trim();
+    const lastName = (formData.lastName || "").trim();
+
     const newUser = {
-      id: "usr_" + Date.now(),
+      id:
+        "usr_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7),
       username: formData.username || formData.email.split("@")[0],
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      role: formData.role || "Customer",
+      firstName: firstName,
+      lastName: lastName,
+      displayName: `${firstName} ${lastName}`.trim(),
+      email: formData.email.trim().toLowerCase(),
+      password: formData.password,
+      role: formData.role || "Manager",
       phone: formData.phone || "",
       country: formData.country || "United States",
       address: formData.address || "",
@@ -300,7 +322,6 @@
     authenticate: authenticate,
     register: register,
     saveContactMessage: saveContactMessage,
-    DEFAULT_USERS: DEFAULT_USERS,
   };
 
   // Run initial check

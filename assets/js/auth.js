@@ -4,7 +4,7 @@
  * - Password show/hide toggle
  * - Password strength meter & live requirements checklist
  * - Country code & mobile validation
- * - Role selector & Demo Quick Fill buttons
+ * - Role selector
  * - LocalStorage session storage & routing
  */
 
@@ -104,39 +104,6 @@
     });
   }
 
-  // 3. Demo Role Quick Fill Helper (Frictionless Testing)
-  function initDemoRoleQuickBar() {
-    const demoButtons = document.querySelectorAll(".demo-pill-btn");
-    if (!demoButtons.length) return;
-
-    const emailInput = document.getElementById("signin-email");
-    const passInput = document.getElementById("signin-password");
-    const roleSelect = document.getElementById("signin-role");
-
-    demoButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const role = btn.getAttribute("data-role");
-        const defaultUsers = window.CB_Storage
-          ? window.CB_Storage.DEFAULT_USERS
-          : [];
-        const found = defaultUsers.find((u) => u.role === role);
-
-        if (found) {
-          if (emailInput) emailInput.value = found.email;
-          if (passInput) passInput.value = found.password;
-          if (roleSelect) roleSelect.value = found.role;
-
-          // Clear validation errors
-          document
-            .querySelectorAll(".is-invalid")
-            .forEach((el) => el.classList.remove("is-invalid"));
-          const alert = document.getElementById("auth-alert");
-          if (alert) alert.style.display = "none";
-        }
-      });
-    });
-  }
-
   // 4. Sign In Form Handler
   function initSignInForm() {
     const form = document.getElementById("signin-form");
@@ -171,10 +138,7 @@
         firstInvalid = firstInvalid || password;
       }
 
-      if (!role.value) {
-        role.classList.add("is-invalid");
-        firstInvalid = firstInvalid || role;
-      }
+      const selectedRole = role && role.value ? role.value : "Manager";
 
       if (firstInvalid) {
         firstInvalid.focus();
@@ -185,7 +149,7 @@
       const result = window.CB_Storage.authenticate(
         emailVal,
         passVal,
-        role.value
+        selectedRole
       );
       if (result.success) {
         if (alert) {
@@ -366,7 +330,6 @@
   document.addEventListener("DOMContentLoaded", () => {
     initPasswordToggles();
     initPasswordStrengthMeter();
-    initDemoRoleQuickBar();
     initSignInForm();
     initSignUpForm();
     init404RedirectTriggers();

@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Workspace | Stackly</title>
+    <meta
+      name="description"
+      content="Stackly Employee Workspace - M&A Execution, Diligence Workstreams, and Valuation Modeling."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem("cb_currentUser");
+          if (!raw) {
+            window.location.replace("sign-in.html");
+          }
+        } catch (e) {
+          window.location.replace("sign-in.html");
+        }
+      })();
+    </script>
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard-wrapper">
+      <!-- COLLAPSIBLE SIDEBAR -->
+      <aside
+        class="dash-sidebar"
+        role="navigation"
+        aria-label="Employee Navigation Sidebar"
+      >
+        <div class="dash-sidebar-header">
+          <a
+            href="index.html"
+            aria-label="Stackly Home"
+            class="dash-brand-link"
+          >
+            <img
+              src="assets/images/logoStackly.webp"
+              alt="Stackly Logo"
+              width="160"
+              height="36"
+              class="dash-brand-img"
+            />
+          </a>
+          <button
+            class="dash-mobile-close-btn"
+            id="dash-mobile-close"
+            aria-label="Close Mobile Navigation"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <ul class="dash-nav-menu">
+          <li class="dash-nav-heading">Associate Desk</li>
+          <li class="dash-nav-item active" data-tooltip="My Workstream">
+            <a href="#emp-workstream" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                />
+              </svg>
+              <span>My Workstreams</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Diligence Queue">
+            <a href="#emp-diligence" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <span>Diligence Queue</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Valuation Modeler">
+            <a href="#emp-valuation" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+              <span>Valuation Modeler</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Data Room Staging">
+            <a href="#emp-vdr" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+                />
+              </svg>
+              <span>VDR Staging</span>
+            </a>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Time & Utilization">
+            <a href="#emp-time" draggable="false">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Hours & Utilization</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- SIDEBAR COLLAPSE TRIGGER -->
+        <div class="dash-sidebar-bottom">
+          <button
+            class="sidebar-collapse-btn"
+            id="sidebar-collapse-trigger"
+            title="Collapse / Expand Sidebar"
+            aria-label="Toggle Desktop Sidebar"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+              />
+            </svg>
+            <span class="collapse-label">Collapse Menu</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MOBILE SIDEBAR BACKDROP -->
+      <div class="dash-sidebar-backdrop" id="dash-sidebar-backdrop"></div>
+
+      <!-- MAIN CONTENT WRAPPER -->
+      <div class="dash-main">
+        <!-- PERMANENTLY FIXED TOPBAR -->
+        <header class="dash-topbar" role="banner">
+          <div class="dash-topbar-left">
+            <button class="sidebar-toggle-btn" aria-label="Open Sidebar Menu">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="dash-topbar-right">
+            <!-- User Profile Area -->
+            <div class="user-profile-badge">
+              <div id="dash-user-initials" class="user-avatar-initials">ER</div>
+              <div class="user-info-text">
+                <span id="dash-user-name" class="user-display-name"
+                  >Elena Rostova</span
+                >
+                <span id="dash-user-role" class="user-role-label"
+                  >Employee Access</span
+                >
+              </div>
+            </div>
+
+            <!-- Primary CTA: Sign Out -->
+            <button
+              onclick="
+                window.CB_Storage
+                  ? window.CB_Storage.logout()
+                  : (window.location.href = 'sign-in.html')
+              "
+              class="btn btn-secondary-light btn-sm"
+              title="End Session"
+            >
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- DASHBOARD BODY CONTENT -->
+        <main class="dash-content">
+          <!-- HERO BANNER SECTION -->
+          <div class="dash-hero-banner" id="emp-workstream">
+            <div class="dash-hero-eyebrow">
+              <span class="pulse-dot"></span>
+              <span>M&A Strategy & Advisory Execution</span>
+            </div>
+            <h1 class="dash-hero-title">
+              <span id="greetingTime">Good afternoon</span>,
+              <span class="gradient-text" id="greetingName"
+                >Elena Rostova.</span
+              >
+            </h1>
+            <p class="dash-hero-desc">
+              Financial modeling, due diligence workstreams, and confidential
+              information memorandums are ready for Investment Committee review.
+            </p>
+          </div>
+
+          <!-- SECTION 1: 4 KPI STATS CARDS -->
+          <section class="dash-stats-grid" aria-label="Employee KPIs">
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Active Mandate Deals</span>
+                <span class="stat-icon-wrap icon-blue">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">4 Deals</div>
+              <div class="stat-delta positive">
+                <span>Titan, Apex, Helios, Sovereign</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Due Diligence Checklist</span>
+                <span class="stat-icon-wrap icon-emerald">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">18 Items</div>
+              <div class="stat-delta positive">
+                <span>14 Completed (78%)</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Financial Model Accuracy</span>
+                <span class="stat-icon-wrap icon-purple">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">94.2%</div>
+              <div class="stat-delta positive"><span>Audit Verified</span></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <span class="stat-label">Weekly Billable Hours</span>
+                <span class="stat-icon-wrap icon-amber">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div class="stat-value">38.5 hrs</div>
+              <div class="stat-delta positive">
+                <span>96% Target Pacing</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 2: DUE DILIGENCE WORKSTREAMS & TASK QUEUE -->
+          <section
+            class="dash-panel"
+            id="emp-diligence"
+            style="margin-bottom: 28px"
+          >
+            <div class="dash-panel-header">
+              <h3>Due Diligence Workstreams & Assigned Tasks</h3>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                onclick="
+                  window.showDashToast(
+                    'New diligence checklist task appended.',
+                    'success'
+                  )
+                "
+              >
+                + New Task
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Deliverable / Task</th>
+                    <th>Engagement Target</th>
+                    <th>Due Date</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong
+                        >Quality of Earnings (QofE) EBITDA
+                        Reconciliation</strong
+                      >
+                    </td>
+                    <td>Project Apex Logistics</td>
+                    <td>Tomorrow, 5:00 PM</td>
+                    <td>
+                      <span
+                        class="status-badge"
+                        style="background: #fee2e2; color: #991b1b"
+                        >High Priority</span
+                      >
+                    </td>
+                    <td>
+                      <span class="status-badge status-active"
+                        >Review Draft</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'QofE model opened in spreadsheet viewer.',
+                            'info'
+                          )
+                        "
+                      >
+                        Open Model
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong
+                        >Antitrust HSR Premerger Regulatory Filings
+                        Review</strong
+                      >
+                    </td>
+                    <td>Project Titan Carveout</td>
+                    <td>Sep 22, 2026</td>
+                    <td>
+                      <span
+                        class="status-badge"
+                        style="background: #fef9c3; color: #854d0e"
+                        >Medium</span
+                      >
+                    </td>
+                    <td>
+                      <span class="status-badge status-active"
+                        >In Progress</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'Antitrust docket marked as reviewed.',
+                            'success'
+                          )
+                        "
+                      >
+                        Complete
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong
+                        >Confidential Information Memorandum (CIM v4.2)</strong
+                      >
+                    </td>
+                    <td>Helios Solar Infra</td>
+                    <td>Sep 25, 2026</td>
+                    <td>
+                      <span
+                        class="status-badge"
+                        style="background: #dcfce7; color: #166534"
+                        >Normal</span
+                      >
+                    </td>
+                    <td>
+                      <span class="status-badge status-pending"
+                        >Pending Review</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-subtle btn-sm"
+                        onclick="
+                          window.showDashToast(
+                            'CIM deck exported to PDF.',
+                            'info'
+                          )
+                        "
+                      >
+                        Export Deck
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 3: VALUATION SENSITIVITY CALCULATOR -->
+          <section
+            class="dash-panel"
+            id="emp-valuation"
+            style="margin-bottom: 28px"
+          >
+            <div class="dash-panel-header">
+              <h3>Valuation Sensitivity Modeler (Run-Rate EBITDA)</h3>
+              <span class="user-greeting-pill">Interactive Calculation</span>
+            </div>
+            <div class="sensitivity-modeler-container">
+              <div class="slider-group-box">
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label">Annual Revenue ($M)</span>
+                    <span class="slider-val-badge" id="val-badge-revenue"
+                      >$850M</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-revenue"
+                    class="dash-range-slider"
+                    min="200"
+                    max="2000"
+                    step="25"
+                    value="850"
+                  />
+                </div>
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label">EBITDA Margin (%)</span>
+                    <span class="slider-val-badge" id="val-badge-margin"
+                      >32.0%</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-margin"
+                    class="dash-range-slider"
+                    min="15"
+                    max="50"
+                    step="1"
+                    value="32"
+                  />
+                </div>
+                <div class="slider-item">
+                  <div class="slider-header-row">
+                    <span class="slider-label">EV / EBITDA Multiple</span>
+                    <span class="slider-val-badge" id="val-badge-multiple"
+                      >14.5x</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="slider-multiple"
+                    class="dash-range-slider"
+                    min="8"
+                    max="24"
+                    step="0.5"
+                    value="14.5"
+                  />
+                </div>
+                <div class="sensitivity-stats-grid">
+                  <div class="sens-stat-badge">
+                    <span class="sens-stat-label">Calculated EBITDA</span>
+                    <span class="sens-stat-val" id="out-calc-ebitda"
+                      >$272.0M</span
+                    >
+                  </div>
+                  <div class="sens-stat-badge">
+                    <span class="sens-stat-label">Enterprise Value</span>
+                    <span
+                      class="sens-stat-val"
+                      id="out-calc-ev"
+                      style="color: var(--color-accent-gold-dark)"
+                      >$3,944M</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style="
+                  background: #ffffff;
+                  border: 1px solid var(--border-subtle);
+                  border-radius: var(--radius-md);
+                  padding: 18px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
+                "
+              >
+                <div>
+                  <h4
+                    style="
+                      font-size: 1rem;
+                      color: var(--color-primary-900);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Associate Valuation Memo Notes
+                  </h4>
+                  <p
+                    style="
+                      font-size: 0.82rem;
+                      color: var(--text-secondary);
+                      line-height: 1.5;
+                      margin-bottom: 14px;
+                    "
+                  >
+                    Valuation benchmarked against median private equity buyout
+                    multiples in clean energy and enterprise software. Projected
+                    5-year exit multiple expansion models 1.8x MOIC.
+                  </p>
+                  <div
+                    style="
+                      background: #fbfaf8;
+                      border: 1px solid var(--border-subtle);
+                      border-radius: 4px;
+                      padding: 10px;
+                      font-size: 0.78rem;
+                    "
+                  >
+                    <strong>Lead Partner Sign-Off:</strong> Marcus Sterling
+                    (Pending committee ratification)
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  style="margin-top: 16px"
+                  onclick="
+                    window.showDashToast(
+                      'Valuation model snapshot attached to Deal Docket.',
+                      'success'
+                    )
+                  "
+                >
+                  Save Snapshot to Docket
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 4: VIRTUAL DATA ROOM STAGING -->
+          <section class="dash-panel" id="emp-vdr" style="margin-bottom: 28px">
+            <div class="dash-panel-header">
+              <h3>Virtual Data Room (VDR) Deliverables Staging</h3>
+              <span class="user-greeting-pill">AES-256 HSM Enclave</span>
+            </div>
+            <div class="vault-dropzone" id="vault-dropzone">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.75"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                />
+              </svg>
+              <div class="vault-dropzone-title">
+                Drag & drop financial models or contracts to encrypt & upload
+              </div>
+              <div class="vault-dropzone-desc">
+                Automatic SHA-256 hash sealing, DLP virus scanning, and audit
+                logging.
+              </div>
+              <input type="file" id="vault-file-input" style="display: none" />
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                onclick="document.getElementById('vault-file-input').click()"
+              >
+                Browse Local Enclave
+              </button>
+              <div class="vault-upload-progress" id="vault-upload-progress">
+                <div
+                  class="vault-upload-progress-fill"
+                  id="vault-upload-progress-fill"
+                ></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 5: TIME LOGGING & UTILIZATION -->
+          <section class="dash-panel" id="emp-time">
+            <div class="dash-panel-header">
+              <h3>Weekly Advisory Time Logging & Utilization</h3>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                onclick="
+                  window.showDashToast(
+                    'Logged 4.5 hours to Project Titan Carveout.',
+                    'success'
+                  )
+                "
+              >
+                + Log Advisory Hours
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Engagement Project</th>
+                    <th>Activity Type</th>
+                    <th>Hours Logged (Week 38)</th>
+                    <th>Billable Rate</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Project Titan Carveout</strong></td>
+                    <td>Financial Modeling & Solvency Analysis</td>
+                    <td>16.5 hrs</td>
+                    <td>$450 / hr</td>
+                    <td>
+                      <span class="status-badge status-active">Approved</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Apex Logistics M&A</strong></td>
+                    <td>QofE Accounting & Due Diligence</td>
+                    <td>14.0 hrs</td>
+                    <td>$450 / hr</td>
+                    <td>
+                      <span class="status-badge status-active">Approved</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Helios Solar Infrastructure</strong></td>
+                    <td>CIM Pitch & Capital Syndication Deck</td>
+                    <td>8.0 hrs</td>
+                    <td>$450 / hr</td>
+                    <td>
+                      <span class="status-badge status-pending"
+                        >Pending Partner Review</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div
+      id="dash-toast-container"
+      class="dash-toast-container"
+      aria-live="polite"
+    ></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

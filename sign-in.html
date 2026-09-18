@@ -46,7 +46,13 @@
       <section class="auth-story" aria-label="Stackly Workspace Identity">
         <div class="brand-wrap">
           <a href="index.html" aria-label="Return to Stackly Homepage">
-            <img src="assets/images/logoStackly.webp" alt="Stackly" />
+            <img
+              src="assets/images/logoStackly.webp"
+              alt="Stackly Logo"
+              width="170"
+              height="38"
+              style="height: 38px; max-width: 170px; object-fit: contain"
+            />
           </a>
         </div>
 
@@ -61,6 +67,69 @@
             One clear view for the people, capital allocations, and mandates
             moving your enterprise forward.
           </p>
+          <div
+            style="
+              margin: 20px 0 12px;
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              border: 1px solid rgba(197, 168, 128, 0.3);
+              box-shadow: var(--shadow-md);
+              position: relative;
+              background: #0f172a;
+            "
+          >
+            <img
+              src="assets/images/auth-trust.webp"
+              alt="Institutional Security and Access Control"
+              width="480"
+              height="240"
+              style="
+                width: 100%;
+                height: 240px;
+                object-fit: cover;
+                object-position: center 36%;
+                display: block;
+              "
+              loading="lazy"
+            />
+            <div
+              style="
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(
+                  180deg,
+                  transparent 0%,
+                  rgba(15, 23, 42, 0.85) 100%
+                );
+                padding: 14px 16px 10px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              "
+            >
+              <span
+                style="
+                  width: 8px;
+                  height: 8px;
+                  border-radius: 50%;
+                  background: var(--color-accent-gold);
+                  box-shadow: 0 0 6px var(--color-accent-gold);
+                "
+              ></span>
+              <span
+                style="
+                  font-size: 0.76rem;
+                  font-weight: 700;
+                  color: #ffffff;
+                  letter-spacing: 0.4px;
+                  text-transform: uppercase;
+                "
+                >Verified Institutional Desk &bull; Private Advisory</span
+              >
+            </div>
+          </div>
         </div>
 
         <div class="auth-trust">
@@ -185,16 +254,14 @@
 
           <!-- Login as Role -->
           <div class="form-group">
-            <label for="signin-role">Login as <b>*</b></label>
-            <select id="signin-role" required>
-              <option value="">Choose a role</option>
+            <label for="signin-role">Login as Role</label>
+            <select id="signin-role">
+              <option value="Manager" selected>Manager</option>
               <option value="Admin">Admin</option>
-              <option value="Manager">Manager</option>
               <option value="Employee">Employee</option>
               <option value="Customer">Customer</option>
               <option value="Vendor">Vendor</option>
             </select>
-            <div class="field-error-msg">Please select a role.</div>
           </div>
 
           <div class="auth-options">

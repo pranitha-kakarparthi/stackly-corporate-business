@@ -388,6 +388,19 @@
     });
   }
 
+  // 7. Auto-focus on First Form Field
+  function initAutoFocus() {
+    const signinEmail = document.getElementById("signin-email");
+    if (signinEmail) {
+      signinEmail.focus();
+      return;
+    }
+    const signupFirstname = document.getElementById("signup-firstname");
+    if (signupFirstname) {
+      signupFirstname.focus();
+    }
+  }
+
   // Initializer
   document.addEventListener("DOMContentLoaded", () => {
     initPasswordToggles();
@@ -395,5 +408,6 @@
     initSignInForm();
     initSignUpForm();
     init404RedirectTriggers();
+    initAutoFocus();
   });
 })();

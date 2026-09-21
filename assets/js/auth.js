@@ -146,7 +146,7 @@
       }
 
       const passVal = password ? password.value : "";
-      if (!passVal || passVal.trim().length === 0) {
+      if (!passVal || !passwordRegex.test(passVal)) {
         if (password) password.classList.add("is-invalid");
         firstInvalid = firstInvalid || password;
       }
@@ -300,9 +300,9 @@
         firstInvalid = firstInvalid || role;
       }
 
-      // Validate Phone (Mandatory numeric-only mobile number >= 7 digits)
+      // Validate Phone (Mandatory numeric-only mobile number >= 10 digits)
       const cleanPhone = phone ? phone.value.replace(/\D/g, "") : "";
-      if (!cleanPhone || cleanPhone.length < 7) {
+      if (!cleanPhone || cleanPhone.length < 10) {
         if (phone) phone.classList.add("is-invalid");
         firstInvalid = firstInvalid || phone;
       }

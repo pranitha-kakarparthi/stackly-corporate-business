@@ -158,11 +158,6 @@
         <li>
           <a href="contact.html" class="mobile-nav-link active">Contact Us</a>
         </li>
-        <li>
-          <a href="dashboard.html" class="mobile-nav-link"
-            >Executive Dashboard</a
-          >
-        </li>
       </ul>
       <div class="mobile-nav-actions">
         <a href="sign-in.html" class="btn btn-secondary btn-lg">Sign In</a>
@@ -339,10 +334,11 @@
                     id="contact-name"
                     class="form-input"
                     placeholder="e.g. Robert Vance"
+                    pattern="^[A-Za-z\s]+$"
                     required
                   />
                   <div class="field-error-msg">
-                    Please provide your full name.
+                    Please provide your full name (letters only).
                   </div>
                 </div>
 
@@ -391,12 +387,13 @@
                       class="form-input"
                       inputmode="numeric"
                       pattern="[0-9]*"
+                      minlength="10"
                       placeholder="10-digit mobile number"
                       required
                     />
                   </div>
                   <div class="field-error-msg">
-                    Please enter a valid numeric phone number.
+                    Please enter a valid mobile number (min 10 digits).
                   </div>
                 </div>
 
@@ -635,6 +632,14 @@
         const subject = document.getElementById("contact-subject");
         const message = document.getElementById("contact-message");
 
+        // Live sanitization for name (alphabetical characters and spaces only)
+        if (name) {
+          name.addEventListener("input", (e) => {
+            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+            name.classList.remove("is-invalid");
+          });
+        }
+
         // Live sanitization for phone (numeric digits only)
         if (phone) {
           phone.addEventListener("input", (e) => {
@@ -643,7 +648,7 @@
           });
         }
 
-        [name, email, message].forEach((el) => {
+        [email, message].forEach((el) => {
           if (el) {
             el.addEventListener("input", () => el.classList.remove("is-invalid"));
           }
@@ -662,7 +667,8 @@
             );
             if (alertBox) alertBox.style.display = "none";
 
-            if (!name.value.trim()) {
+            const nameRegex = /^[a-zA-Z\s]+$/;
+            if (!name.value.trim() || !nameRegex.test(name.value.trim())) {
               name.classList.add("is-invalid");
               firstInvalid = firstInvalid || name;
             }
@@ -674,7 +680,7 @@
             }
 
             const cleanPhone = phone ? phone.value.replace(/\D/g, "") : "";
-            if (!cleanPhone || cleanPhone.length < 7) {
+            if (!cleanPhone || cleanPhone.length < 10) {
               phone.classList.add("is-invalid");
               firstInvalid = firstInvalid || phone;
             }

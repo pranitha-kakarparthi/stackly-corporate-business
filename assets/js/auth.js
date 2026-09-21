@@ -146,7 +146,7 @@
       }
 
       const passVal = password ? password.value : "";
-      if (!passVal || !passwordRegex.test(passVal)) {
+      if (!passVal || passVal.trim().length === 0) {
         if (password) password.classList.add("is-invalid");
         firstInvalid = firstInvalid || password;
       }
@@ -172,12 +172,13 @@
       if (result.success) {
         if (alert) {
           alert.className = "form-alert alert-success";
-          alert.textContent = `Welcome back, ${result.user.firstName}! Redirecting to Executive Portal...`;
+          alert.textContent = `Welcome back, ${result.user.firstName}! Redirecting to ${selectedRole} Workspace...`;
           alert.style.display = "block";
         }
+        const targetPage = `dashboard-${selectedRole.toLowerCase()}.html`;
         setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 800);
+          window.location.href = targetPage;
+        }, 500);
       } else {
         if (alert) {
           alert.className = "form-alert";

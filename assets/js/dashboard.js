@@ -10,9 +10,23 @@
   "use strict";
 
   // 1. Session & Auth Guard (Strict Production RBAC)
-  const currentUser = window.CB_Storage
-    ? window.CB_Storage.getCurrentUser()
-    : null;
+  let currentUser = null;
+  try {
+    if (
+      window.CB_Storage &&
+      typeof window.CB_Storage.getCurrentUser === "function"
+    ) {
+      currentUser = window.CB_Storage.getCurrentUser();
+    }
+    if (!currentUser) {
+      const raw = localStorage.getItem("cb_currentUser");
+      if (raw) {
+        currentUser = JSON.parse(raw);
+      }
+    }
+  } catch (e) {
+    currentUser = null;
+  }
 
   if (!currentUser) {
     window.location.replace("sign-in.html");
@@ -450,17 +464,7 @@
         currentUser.firstName[0] + currentUser.lastName[0]
       ).toUpperCase();
 
-    // Dynamic greeting calculation
-    const hour = new Date().getHours();
-    let timeGreeting = "Good afternoon";
-    if (hour >= 5 && hour < 12) timeGreeting = "Good morning";
-    else if (hour >= 17 && hour < 21) timeGreeting = "Good evening";
-    else if (hour >= 21 || hour < 5) timeGreeting = "Good night";
-
-    const greetingTitle = document.getElementById("dash-greeting-title");
-    if (greetingTitle) {
-      greetingTitle.textContent = `${timeGreeting}, ${currentUser.firstName}`;
-    }
+    // No navbar greeting - clean view titles only
 
     // Render 4 Stat Cards
     const statsContainer = document.getElementById("dash-stats-grid");
@@ -626,28 +630,33 @@
   function updateUserProfileHeaders() {
     if (!currentUser) return;
     const displayName =
+      currentUser.displayName ||
       currentUser.name ||
       `${currentUser.firstName || ""} ${currentUser.lastName || ""}`.trim() ||
       "Executive";
     const roleName = currentUser.role || "Admin";
 
     const userNameEl =
+      document.querySelector("#dashUserName") ||
       document.querySelector("#dash-user-name") ||
       document.querySelector("#userName");
     const userRoleEl =
+      document.querySelector("#dashRoleBadge") ||
       document.querySelector("#dash-user-role") ||
       document.querySelector("#userRole");
     const userAvatarEl =
+      document.querySelector("#dashUserAvatar") ||
       document.querySelector("#dash-user-initials") ||
       document.querySelector("#userAvatar");
-    const greetingTitleEl = document.querySelector("#dash-greeting-title");
+    const userEmailEl = document.querySelector("#dashUserEmail");
     const greetingNameEl =
       document.querySelector("#dash-greeting-name") ||
       document.querySelector("#greetingName");
     const timezonePillEl = document.querySelector("#dash-timezone-pill");
 
     if (userNameEl) userNameEl.textContent = displayName;
-    if (userRoleEl) userRoleEl.textContent = `${roleName} Access`;
+    if (userRoleEl) userRoleEl.textContent = roleName;
+    if (userEmailEl) userEmailEl.textContent = currentUser.email || "";
     if (userAvatarEl) {
       const parts = displayName.split(" ").filter(Boolean);
       const initials =
@@ -659,23 +668,34 @@
       userAvatarEl.textContent = initials;
     }
 
-    const now = new Date();
-    const hours = now.getHours();
-    let timeGreeting = "Good morning";
-    if (hours >= 12 && hours < 17) {
-      timeGreeting = "Good afternoon";
-    } else if (hours >= 17 || hours < 5) {
-      timeGreeting = "Good evening";
-    }
-
-    if (greetingTitleEl) {
-      greetingTitleEl.textContent = `${timeGreeting}, ${displayName.split(" ")[0]}`;
-    }
     if (greetingNameEl) {
       greetingNameEl.textContent = `${displayName}.`;
     }
 
+    // Attach Logout Handlers
+    const logoutBtns = document.querySelectorAll(
+      "#dashLogoutBtn, .dash-logout-btn"
+    );
+    logoutBtns.forEach((btn) => {
+      btn.onclick = function (e) {
+        e.preventDefault();
+        if (
+          window.CB_Storage &&
+          typeof window.CB_Storage.logout === "function"
+        ) {
+          window.CB_Storage.logout();
+        } else {
+          try {
+            localStorage.removeItem("cb_currentUser");
+            localStorage.removeItem("cb_role");
+          } catch (err) {}
+          window.location.href = "sign-in.html";
+        }
+      };
+    });
+
     if (timezonePillEl) {
+      const now = new Date();
       const tzString =
         Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
       const timeString = now.toLocaleTimeString([], {
@@ -689,7 +709,10 @@
   // 8. Mobile Sidebar Toggle & Fixed Drawer
   function initSidebarToggle() {
     const toggleBtn = document.querySelector(".sidebar-toggle-btn");
-    const closeBtn = document.getElementById("dash-mobile-close");
+    const closeBtn =
+      document.getElementById("dash-mobile-close") ||
+      document.getElementById("sidebarCloseBtn") ||
+      document.querySelector(".sidebar-close-btn");
     const sidebar = document.querySelector(".dash-sidebar");
     const backdrop = document.getElementById("dash-sidebar-backdrop");
 
@@ -716,10 +739,14 @@
     if (toggleBtn) {
       toggleBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        if (sidebar.classList.contains("sidebar-open")) {
-          closeMobileDrawer();
-        } else {
-          openMobileDrawer();
+        if (window.innerWidth < 992) {
+          if (sidebar.classList.contains("sidebar-open")) {
+            closeMobileDrawer();
+          } else {
+            openMobileDrawer();
+          }
+        } else if (typeof window.toggleDesktopCollapse === "function") {
+          window.toggleDesktopCollapse();
         }
       });
     }
@@ -760,14 +787,20 @@
     const wrapper = document.querySelector(".dashboard-wrapper");
     const sidebar = document.querySelector(".dash-sidebar");
     const navItems = document.querySelectorAll(".dash-nav-item");
-    if (!wrapper) return;
 
-    function syncTooltips(isCollapsed) {
+    function isCollapsed() {
+      return (
+        document.body.classList.contains("sidebar-collapsed") ||
+        (wrapper && wrapper.classList.contains("sidebar-collapsed"))
+      );
+    }
+
+    function syncTooltips(collapsed) {
       navItems.forEach((item) => {
         const link = item.querySelector("a");
         const tipText = item.getAttribute("data-tooltip");
         if (link) {
-          if (isCollapsed && tipText) {
+          if (collapsed && tipText) {
             link.setAttribute("title", tipText);
           } else {
             link.removeAttribute("title");
@@ -776,8 +809,37 @@
       });
     }
 
+    function setCollapsed(collapse) {
+      document.body.classList.toggle("sidebar-collapsed", collapse);
+      if (wrapper) wrapper.classList.toggle("sidebar-collapsed", collapse);
+      try {
+        localStorage.setItem(
+          "cb_sidebar_collapsed",
+          collapse ? "true" : "false"
+        );
+      } catch (e) {}
+
+      collapseBtns.forEach((btn) => {
+        const label = btn.querySelector(".collapse-label");
+        if (label) {
+          label.textContent = collapse ? "Expand Menu" : "Collapse Menu";
+        }
+        btn.setAttribute("aria-expanded", !collapse);
+        btn.setAttribute(
+          "title",
+          collapse ? "Expand Sidebar" : "Collapse Sidebar"
+        );
+      });
+      syncTooltips(collapse);
+    }
+
+    window.toggleDesktopCollapse = function () {
+      setCollapsed(!isCollapsed());
+    };
+
     collapseBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
         // If on mobile screen, this button closes the full-screen drawer
         if (window.innerWidth < 992) {
           if (sidebar && sidebar.classList.contains("sidebar-open")) {
@@ -792,13 +854,7 @@
           }
         }
 
-        const isCollapsed = wrapper.classList.toggle("sidebar-collapsed");
-        const label = btn.querySelector(".collapse-label");
-        if (label) {
-          label.textContent = isCollapsed ? "Expand Menu" : "Collapse Menu";
-        }
-        btn.setAttribute("aria-expanded", !isCollapsed);
-        syncTooltips(isCollapsed);
+        setCollapsed(!isCollapsed());
       });
     });
 
@@ -812,7 +868,7 @@
         link.addEventListener("dragstart", (e) => e.preventDefault());
 
         link.addEventListener("click", () => {
-          if (wrapper.classList.contains("sidebar-collapsed")) {
+          if (isCollapsed()) {
             navItems.forEach((i) => i.classList.remove("highlighted"));
             item.classList.add("highlighted");
             setTimeout(() => {
@@ -822,7 +878,7 @@
         });
 
         link.addEventListener("focus", () => {
-          if (wrapper.classList.contains("sidebar-collapsed")) {
+          if (isCollapsed()) {
             item.classList.add("highlighted");
           }
         });
@@ -833,8 +889,17 @@
       }
     });
 
-    // Initial tooltip sync based on wrapper state
-    syncTooltips(wrapper.classList.contains("sidebar-collapsed"));
+    // Restore saved collapse state if on desktop
+    try {
+      const saved = localStorage.getItem("cb_sidebar_collapsed");
+      if (saved === "true" && window.innerWidth >= 992) {
+        setCollapsed(true);
+      } else {
+        syncTooltips(isCollapsed());
+      }
+    } catch (e) {
+      syncTooltips(isCollapsed());
+    }
   }
 
   // =========================================================
@@ -881,20 +946,102 @@
   // =========================================================
   // 11. DASHBOARD HASH ROUTER
   // =========================================================
-  const VALID_VIEWS = [
-    "overview",
-    "transactions",
-    "capital",
-    "vault",
-    "analytics",
-    "governance",
-  ];
-
-  const VIEW_HEADER_MAP = {
+  const ROLE_VIEW_HEADER_MAP = {
+    // Admin
     overview: {
-      title: "Good afternoon, Executive",
-      time: "Stackly Encrypted Session • Verified TLS 1.3",
+      title: "System Health & Executive Overview",
+      time: "All Systems Operational • SOC-2 Type II",
     },
+    clusters: {
+      title: "Cloud Infrastructure & Deal Enclaves",
+      time: "48 Global Nodes Active • 99.99% SLA",
+    },
+    security: {
+      title: "Zero-Trust & Perimeter Defense",
+      time: "FIPS 140-2 Level 3 Hardware Enclave",
+    },
+    users: {
+      title: "Corporate Directory & RBAC Matrix",
+      time: "1,428 Verified Enterprise Accounts",
+    },
+    audit: {
+      title: "SOC-2 Immutable Audit Ledger",
+      time: "Cryptographically Verified Block Chain",
+    },
+
+    // Manager
+    kanban: {
+      title: "Active Mandates Kanban Pipeline",
+      time: "14 Engagements • $4.8B Aggregate Value",
+    },
+    squads: {
+      title: "Advisory Squad Capacity & Workload",
+      time: "Senior Partners & Lead Associates",
+    },
+    milestones: {
+      title: "Transaction Milestones & Conditions",
+      time: "Critical Path Timeline Synchronized",
+    },
+    facilities: {
+      title: "Syndicated Treasury & Credit Facilities",
+      time: "Capital Allocation & Liquidity Pacing",
+    },
+
+    // Employee
+    diligence: {
+      title: "Due Diligence & Workstream Tracker",
+      time: "M&A Task Docket • Priority Queue",
+    },
+    valuation: {
+      title: "DCF & LBO Financial Sensitivity Modeler",
+      time: "Dynamic Scenario Simulator",
+    },
+    vdr: {
+      title: "Virtual Data Room Staging & Indexing",
+      time: "Confidential Deal Room Repository",
+    },
+    time: {
+      title: "Time Docket & Utilization Tracking",
+      time: "Billable Hours & Client Engagement Codes",
+    },
+
+    // Customer
+    tranches: {
+      title: "Asset Class Allocation & Yield Tranches",
+      time: "Blended IRR 24.2% • Co-Investment Docket",
+    },
+    dossiers: {
+      title: "Confidential Investor Dossiers & VDR",
+      time: "256-Bit Encrypted Data Room",
+    },
+    payouts: {
+      title: "Capital Calls & Distribution Schedule",
+      time: "Verified Wire Routing & Tax Forms",
+    },
+    concierge: {
+      title: "Senior Partner Direct Concierge",
+      time: "Encrypted Executive Dispatch Channel",
+    },
+
+    // Vendor
+    deliverables: {
+      title: "Milestone Deliverables & Fairness Opinions",
+      time: "Under NDA & Fiduciary Covenant",
+    },
+    regulatory: {
+      title: "Antitrust & Cross-Border Clearances",
+      time: "FTC, DOJ, EC, SAMR Jurisdictions",
+    },
+    billing: {
+      title: "Escrow Billing & Milestone Invoicing",
+      time: "Smart Contract Escrow Releases",
+    },
+    compliance: {
+      title: "Syndicate Compliance & Attestation",
+      time: "Annual Fiduciary & Conflict Clearance",
+    },
+
+    // Legacy Aliases
     transactions: {
       title: "Transactions & Mandate Pipeline",
       time: "14 Active Engagements • Real-time Sync",
@@ -918,8 +1065,24 @@
   };
 
   function switchView(viewName) {
-    if (!VALID_VIEWS.includes(viewName)) {
+    if (!viewName) viewName = "overview";
+
+    // Normalize any prefixes like admin-clusters -> clusters
+    const cleanName = viewName.replace(
+      /^(admin-|manager-|emp-|cust-|ven-)/,
+      ""
+    );
+
+    // Check if target container exists
+    let targetEl = document.getElementById(`view-${cleanName}`);
+    if (!targetEl) {
+      targetEl = document.getElementById(`view-${viewName}`);
+    }
+    if (!targetEl) {
+      targetEl = document.getElementById("view-overview");
       viewName = "overview";
+    } else {
+      viewName = targetEl.id.replace("view-", "");
     }
 
     // Toggle active view container
@@ -935,32 +1098,42 @@
     // Toggle active nav menu item
     const navItems = document.querySelectorAll(".dash-nav-item");
     navItems.forEach((item) => {
-      if (item.getAttribute("data-view") === viewName) {
+      const itemDataView = item.getAttribute("data-view") || "";
+      const link = item.querySelector("a");
+      const linkHref = link
+        ? link
+            .getAttribute("href")
+            .replace("#", "")
+            .replace(/^(admin-|manager-|emp-|cust-|ven-)/, "")
+        : "";
+
+      if (
+        itemDataView === viewName ||
+        linkHref === viewName ||
+        (viewName === "overview" &&
+          (itemDataView === "" || linkHref === "overview" || linkHref === ""))
+      ) {
         item.classList.add("active");
       } else {
         item.classList.remove("active");
       }
     });
 
-    // Update greeting/topbar titles
-    const titleEl = document.getElementById("dash-greeting-title");
+    // Update topbar view title & breadcrumbs (NO greeting in navbar)
+    const titleEl =
+      document.getElementById("dash-greeting-title") ||
+      document.getElementById("dash-view-title");
+    const crumbViewEl = document.getElementById("crumbView");
     const timeEl = document.querySelector(".dash-greeting-time");
-    const meta = VIEW_HEADER_MAP[viewName];
-    if (meta) {
-      if (titleEl) {
-        if (viewName === "overview") {
-          const user = window.CB_Storage
-            ? window.CB_Storage.getCurrentUser()
-            : null;
-          const firstName = user ? user.name.split(" ")[0] : "Executive";
-          titleEl.textContent = `Good afternoon, ${firstName}`;
-        } else {
-          titleEl.textContent = meta.title;
-        }
-      }
-      if (timeEl) {
-        timeEl.textContent = meta.time;
-      }
+    const meta = ROLE_VIEW_HEADER_MAP[viewName];
+    if (titleEl && meta) {
+      titleEl.textContent = meta.title;
+    }
+    if (crumbViewEl && meta) {
+      crumbViewEl.textContent = meta.title;
+    }
+    if (timeEl && meta) {
+      timeEl.textContent = meta.time;
     }
 
     // Close mobile drawer if open
@@ -1796,6 +1969,182 @@
     }
   }
 
+  // Universal Interactive Components Controller
+  function initInteractiveComponents() {
+    // 1. Live Table Search Filter
+    document.addEventListener("input", (e) => {
+      const searchInput = e.target.closest(
+        ".dash-search-input, [data-table-search]"
+      );
+      if (!searchInput) return;
+
+      const query = searchInput.value.trim().toLowerCase();
+      const targetTableId = searchInput.getAttribute("data-table-search");
+      const panel =
+        searchInput.closest(".dash-panel") || searchInput.closest(".dash-view");
+      const table = targetTableId
+        ? document.getElementById(targetTableId)
+        : panel
+          ? panel.querySelector("table")
+          : null;
+
+      if (!table) return;
+      const rows = table.querySelectorAll("tbody tr");
+      let visibleCount = 0;
+
+      rows.forEach((row) => {
+        // Skip empty state rows
+        if (row.classList.contains("empty-state-row")) return;
+        const text = row.textContent.toLowerCase();
+        const matches = !query || text.includes(query);
+        row.style.display = matches ? "" : "none";
+        if (matches) visibleCount++;
+      });
+
+      // Handle empty state row if present
+      const emptyRow = table.querySelector(".empty-state-row");
+      if (emptyRow) {
+        emptyRow.style.display = visibleCount === 0 ? "" : "none";
+      }
+    });
+
+    // 2. Status Pill Filters
+    document.addEventListener("click", (e) => {
+      const pill = e.target.closest(".status-filter-pill, .status-tab-btn");
+      if (!pill) return;
+
+      const filterGroup = pill.parentElement;
+      if (filterGroup) {
+        filterGroup
+          .querySelectorAll(".status-filter-pill, .status-tab-btn")
+          .forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+      }
+
+      const filterVal = (
+        pill.getAttribute("data-status") ||
+        pill.textContent ||
+        ""
+      )
+        .trim()
+        .toLowerCase();
+      const panel = pill.closest(".dash-panel") || pill.closest(".dash-view");
+      if (!panel) return;
+
+      const rows = panel.querySelectorAll("tbody tr");
+      rows.forEach((row) => {
+        if (row.classList.contains("empty-state-row")) return;
+        if (filterVal === "all" || filterVal === "") {
+          row.style.display = "";
+        } else {
+          const badgeText =
+            row
+              .querySelector(".status-badge, .badge, .status-tag, .audit-badge")
+              ?.textContent.toLowerCase() || "";
+          row.style.display = badgeText.includes(filterVal) ? "" : "none";
+        }
+      });
+    });
+
+    // 3. DCF Valuation Range Sliders (Employee Dashboard)
+    const waccSlider = document.getElementById("val-wacc-slider");
+    const growthSlider = document.getElementById("val-growth-slider");
+    const exitSlider = document.getElementById("val-exit-slider");
+
+    if (waccSlider && growthSlider && exitSlider) {
+      function recalculateDCF() {
+        const wacc = parseFloat(waccSlider.value);
+        const growth = parseFloat(growthSlider.value);
+        const exitMult = parseFloat(exitSlider.value);
+
+        const waccVal = document.getElementById("val-wacc-val");
+        const growthVal = document.getElementById("val-growth-val");
+        const exitVal = document.getElementById("val-exit-val");
+
+        if (waccVal) waccVal.textContent = `${wacc.toFixed(1)}%`;
+        if (growthVal) growthVal.textContent = `${growth.toFixed(1)}%`;
+        if (exitVal) exitVal.textContent = `${exitMult.toFixed(1)}x`;
+
+        // Baseline financial metrics
+        const ebitda = 120; // $120M
+        const fcf5 = 92; // $92M
+        const netDebt = 160; // $160M
+        const shares = 18.5; // 18.5M shares
+
+        // Compute Enterprise Value & Equity Value
+        const denom = Math.max(0.015, (wacc - growth) / 100);
+        const pvExplicit = 310 * (1 - (wacc - 9) * 0.04);
+        const tv = (ebitda * exitMult) / Math.pow(1 + wacc / 100, 5);
+        const ev = Math.round((pvExplicit + tv) * 10) / 10;
+        const equity = Math.round((ev - netDebt) * 10) / 10;
+        const sharePrice = Math.round((equity / shares) * 100) / 100;
+
+        const evRes = document.getElementById("val-ev-result");
+        const eqRes = document.getElementById("val-equity-result");
+        const shareRes = document.getElementById("val-share-result");
+
+        if (evRes)
+          evRes.textContent = `$${ev.toLocaleString("en-US", { minimumFractionDigits: 1 })}M`;
+        if (eqRes)
+          eqRes.textContent = `$${equity.toLocaleString("en-US", { minimumFractionDigits: 1 })}M`;
+        if (shareRes) shareRes.textContent = `$${sharePrice.toFixed(2)}`;
+      }
+
+      [waccSlider, growthSlider, exitSlider].forEach((slider) => {
+        slider.addEventListener("input", recalculateDCF);
+      });
+      recalculateDCF();
+    }
+
+    // 4. Diligence Task Checkboxes (Employee Dashboard)
+    document.addEventListener("change", (e) => {
+      const chk = e.target.closest(".diligence-task-check");
+      if (!chk) return;
+
+      const row = chk.closest("tr") || chk.closest(".task-item");
+      if (row) {
+        if (chk.checked) {
+          row.classList.add("task-completed");
+          const badge = row.querySelector(".status-badge");
+          if (badge) {
+            badge.className = "status-badge status-emerald";
+            badge.textContent = "Complete";
+          }
+        } else {
+          row.classList.remove("task-completed");
+          const badge = row.querySelector(".status-badge");
+          if (badge) {
+            badge.className = "status-badge status-blue";
+            badge.textContent = "In Progress";
+          }
+        }
+      }
+
+      // Update progress bar if present
+      const allTasks = document.querySelectorAll(".diligence-task-check");
+      const doneTasks = document.querySelectorAll(
+        ".diligence-task-check:checked"
+      );
+      if (allTasks.length > 0) {
+        const pct = Math.round((doneTasks.length / allTasks.length) * 100);
+        const pBar = document.getElementById("diligence-progress-bar");
+        const pText = document.getElementById("diligence-progress-text");
+        if (pBar) pBar.style.width = `${pct}%`;
+        if (pText)
+          pText.textContent = `${pct}% Complete (${doneTasks.length}/${allTasks.length})`;
+      }
+    });
+
+    // 5. Actionable Items Redirect to 404
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".action-404-btn, [data-action='404']");
+      if (btn) {
+        e.preventDefault();
+        window.location.href = "404.html";
+      }
+    });
+  }
+
   // Initializer
   document.addEventListener("DOMContentLoaded", () => {
     const initialRole = currentUser.role || "Admin";
@@ -1812,5 +2161,6 @@
     initVaultModule();
     initAnalyticsModule();
     initGovernanceModule();
+    initInteractiveComponents();
   });
 })();

@@ -3,1020 +3,2167 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Workspace | Stackly</title>
-    <meta
-      name="description"
-      content="Stackly Administrator Workspace - Infrastructure, Security, Zero-Trust Access, and Cluster Telemetry."
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <title>Admin Console - Stackly Corporate Business</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/dashboard.css" />
-    <script>
-      (function () {
-        try {
-          var raw = localStorage.getItem("cb_currentUser");
-          if (!raw) {
-            window.location.replace("sign-in.html");
-          }
-        } catch (e) {
-          window.location.replace("sign-in.html");
-        }
-      })();
-    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="dashboard-body">
-    <div class="dashboard-wrapper">
-      <!-- COLLAPSIBLE SIDEBAR -->
-      <aside
-        class="dash-sidebar"
-        role="navigation"
-        aria-label="Admin Navigation Sidebar"
-      >
-        <div class="dash-sidebar-header">
-          <a
-            href="../index.html"
-            aria-label="Stackly Home"
-            class="dash-brand-link"
-          >
-            <img
-              src="../assets/images/logoStackly.webp"
-              alt="Stackly Logo"
-              width="160"
-              height="36"
-              class="dash-brand-img"
-            />
-          </a>
-          <button
-            class="dash-mobile-close-btn"
-            id="dash-mobile-close"
-            aria-label="Close Mobile Navigation"
-          >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
+    <aside class="dash-sidebar" id="dashSidebar">
+      <div class="dash-sidebar-header">
+        <a
+          href="../index.html"
+          class="dash-brand-link"
+          aria-label="Stackly Home"
+        >
+          <img
+            src="../assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            width="160"
+            height="36"
+            class="dash-brand-img"
+            style="height: 36px; max-width: 160px; object-fit: contain"
+          />
+        </a>
+        <button
+          class="sidebar-close-btn"
+          id="sidebarCloseBtn"
+          aria-label="Close Sidebar"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
 
-        <ul class="dash-nav-menu">
-          <li class="dash-nav-heading">Admin Console</li>
-          <li class="dash-nav-item active" data-tooltip="System Telemetry">
-            <a href="#admin-telemetry" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-              </svg>
-              <span>System Health</span>
-            </a>
+      <div class="dash-user-card">
+        <div class="dash-avatar-wrapper">
+          <div class="dash-avatar" id="dashUserAvatar">AD</div>
+          <span class="dash-status-dot online"></span>
+        </div>
+        <div class="dash-user-info">
+          <h4 id="dashUserName">Victoria Alexander</h4>
+          <span class="dash-role-badge" id="dashRoleBadge"
+            >System Administrator</span
+          >
+          <span class="dash-user-email" id="dashUserEmail"
+            >admin@stacklycorp.com</span
+          >
+        </div>
+      </div>
+
+      <nav class="dash-nav">
+        <div class="dash-nav-section-title">Infrastructure Core</div>
+        <ul class="dash-nav-list">
+          <li
+            class="dash-nav-item active"
+            data-view="overview"
+            data-tooltip="System Health"
+          >
+            <a href="#overview"
+              ><i class="fas fa-server"></i><span>System Health</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Cloud Clusters">
-            <a href="#admin-clusters" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
-                />
-              </svg>
-              <span>Cloud Clusters</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="clusters"
+            data-tooltip="Cloud Clusters"
+          >
+            <a href="#clusters"
+              ><i class="fas fa-network-wired"></i><span>Cloud Clusters</span
+              ><span class="nav-counter">5</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Zero-Trust Security">
-            <a href="#admin-security" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                />
-              </svg>
-              <span>Zero-Trust Security</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="security"
+            data-tooltip="Zero-Trust Security"
+          >
+            <a href="#security"
+              ><i class="fas fa-user-shield"></i
+              ><span>Zero-Trust Security</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="User Directory">
-            <a href="#admin-users" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-              <span>User Directory & RBAC</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="users"
+            data-tooltip="User Directory & RBAC"
+          >
+            <a href="#users"
+              ><i class="fas fa-users-cog"></i
+              ><span>User Directory & RBAC</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Audit Ledger">
-            <a href="#admin-audit" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              <span>Audit Ledger (SOC-2)</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="audit"
+            data-tooltip="Audit Ledger (SOC-2)"
+          >
+            <a href="#audit"
+              ><i class="fas fa-history"></i
+              ><span>Audit Ledger (SOC-2)</span></a
+            >
           </li>
         </ul>
 
-        <!-- SWITCH ROLE & COLLAPSE TRIGGER -->
-          <button
-            class="sidebar-collapse-btn"
-            id="sidebar-collapse-trigger"
-            title="Collapse / Expand Sidebar"
-            aria-label="Toggle Desktop Sidebar"
-          >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-              />
-            </svg>
-            <span class="collapse-label">Collapse Menu</span>
-          </button>
-        </div>
-      </aside>
-
-      <!-- MOBILE SIDEBAR BACKDROP -->
-      <div class="dash-sidebar-backdrop" id="dash-sidebar-backdrop"></div>
-
-      <!-- MAIN CONTENT WRAPPER -->
-      <div class="dash-main">
-        <!-- PERMANENTLY FIXED TOPBAR -->
-        <header class="dash-topbar" role="banner">
-          <div class="dash-topbar-left">
-            <button class="sidebar-toggle-btn" aria-label="Open Sidebar Menu">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div class="dash-topbar-right">
-            <!-- User Profile Area -->
-            <div class="user-profile-badge">
-              <div id="dash-user-initials" class="user-avatar-initials">VA</div>
-              <div class="user-info-text">
-                <span id="dash-user-name" class="user-display-name"
-                  >Victoria Alexander</span
-                >
-                <span id="dash-user-role" class="user-role-label"
-                  >Admin Access</span
-                >
-              </div>
-            </div>
-
-            <!-- Primary CTA: Sign Out -->
-            <button
-              onclick="
-                window.CB_Storage
-                  ? window.CB_Storage.logout()
-                  : (window.location.href = 'sign-in.html')
-              "
-              class="btn btn-secondary-light btn-sm"
-              title="End Session"
+        <div class="dash-nav-section-title">System & Governance</div>
+        <ul class="dash-nav-list">
+          <li class="dash-nav-item" data-tooltip="HSM Key Vault">
+            <a href="404.html"
+              ><i class="fas fa-microchip"></i><span>HSM Key Vault</span></a
             >
-              <span>Sign Out</span>
-            </button>
-          </div>
-        </header>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Backup & Disaster Recovery">
+            <a href="404.html"
+              ><i class="fas fa-database"></i
+              ><span>Backup & Disaster Recovery</span></a
+            >
+          </li>
+        </ul>
+      </nav>
 
-        <!-- DASHBOARD BODY CONTENT -->
-        <main class="dash-content">
-          <!-- HERO BANNER SECTION -->
-          <div class="dash-hero-banner" id="admin-telemetry">
-            <div class="dash-hero-eyebrow">
-              <span class="pulse-dot"></span>
-              <span>Global Enterprise Administration</span>
-            </div>
-            <h1 class="dash-hero-title">
-              <span id="greetingTime">Good afternoon</span>,
-              <span class="gradient-text" id="greetingName"
-                >Victoria Alexander.</span
-              >
-            </h1>
-            <p class="dash-hero-desc">
-              Cluster orchestration, zero-trust cryptographic security
-              enforcement, and multi-region cloud performance are operating
-              nominally across all 22 corporate jurisdictions.
-            </p>
-          </div>
+      <div class="dash-sidebar-footer">
+        <a href="../index.html" class="dash-sidebar-link"
+          ><i class="fas fa-globe"></i><span>Public Portal</span></a
+        >
+        <button class="dash-logout-btn" id="dashLogoutBtn">
+          <i class="fas fa-sign-out-alt"></i><span>Secure Logout</span>
+        </button>
+        <button
+          class="sidebar-collapse-btn"
+          id="sidebarCollapseBtn"
+          aria-label="Collapse Navigation Menu"
+          title="Collapse Sidebar"
+        >
+          <i class="fas fa-angle-double-left collapse-icon"></i>
+          <span class="collapse-label">Collapse Menu</span>
+        </button>
+      </div>
+    </aside>
 
-          <!-- SECTION 1: 4 KPI STATS CARDS -->
-          <section class="dash-stats-grid" aria-label="System Health KPIs">
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Active Corporate Users</span>
-                <span class="stat-icon-wrap icon-blue">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">1,428</div>
-              <div class="stat-delta positive"><span>+12.4% MoM</span></div>
-            </div>
+    <div
+      class="dash-sidebar-backdrop"
+      id="dash-sidebar-backdrop"
+      aria-hidden="true"
+    ></div>
 
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Platform Availability</span>
-                <span class="stat-icon-wrap icon-emerald">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">99.99%</div>
-              <div class="stat-delta positive">
-                <span>SOC2 Type II Attested</span>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Security Incident Queue</span>
-                <span class="stat-icon-wrap icon-purple">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">0 Critical</div>
-              <div class="stat-delta positive">
-                <span>All nodes hardened</span>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Active Retainers Managed</span>
-                <span class="stat-icon-wrap icon-amber">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">48 Entities</div>
-              <div class="stat-delta positive"><span>+$4.2B AUM</span></div>
-            </div>
-          </section>
-
-          <!-- SECTION 2: GLOBAL CLOUD INFRASTRUCTURE & ENCLAVES -->
-          <section
-            class="dash-panel"
-            id="admin-clusters"
-            aria-label="Cloud Clusters"
-            style="margin-bottom: 28px"
+    <div class="dash-main-wrapper">
+      <header class="dash-topbar" role="banner">
+        <div class="dash-topbar-left">
+          <button
+            class="sidebar-toggle-btn"
+            id="sidebarToggleBtn"
+            aria-label="Toggle Sidebar"
           >
-            <div class="dash-panel-header">
-              <h3>Global Infrastructure Clusters & Deal Enclaves</h3>
-              <button
-                type="button"
-                class="btn btn-subtle btn-sm"
-                onclick="
-                  window.showDashToast(
-                    'Synchronizing all 48 cluster nodes...',
-                    'info'
-                  )
-                "
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="dash-breadcrumb">
+            <span class="crumb-root">Workspace</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-role" id="crumbRole">Admin Console</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-view" id="crumbView">System Health</span>
+          </div>
+        </div>
+
+        <div class="dash-topbar-right">
+          <div class="topbar-chip">
+            <i class="fas fa-clock text-accent"></i
+            ><span id="dashLiveTime">UTC 00:00</span>
+          </div>
+          <div class="topbar-chip">
+            <i class="fas fa-shield-alt text-success"></i
+            ><span>SOC-2 Operational</span>
+          </div>
+          <a href="404.html" class="topbar-action-icon" title="System Alerts"
+            ><i class="fas fa-bell"></i><span class="badge-dot"></span
+          ></a>
+          <a href="404.html" class="topbar-action-icon" title="SecOps Chat"
+            ><i class="fas fa-comments"></i
+          ></a>
+          <a href="404.html" class="btn btn-sm btn-primary action-404-btn"
+            ><i class="fas fa-plus"></i> Deploy Pod</a
+          >
+        </div>
+      </header>
+
+      <main class="dash-content">
+        <!-- =========================================================
+           VIEW 1: SYSTEM HEALTH & OVERVIEW
+           ========================================================= -->
+        <div id="view-overview" class="dash-view active-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Enterprise Infrastructure Health & Executive Overview
+              </h2>
+              <p class="view-subtitle">
+                Zero-trust security mesh, Kubernetes pod clusters, and global
+                latency monitoring across all regions.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-download"></i> Export Telemetry (CSV)</a
               >
-                Synchronize Clusters
-              </button>
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-sync-alt"></i> Force Mesh Sync</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Active Corporate Users</span>
+                <h3 class="stat-value">1,428</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> +12.4% MoM</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Global Threat Prevention</span>
+                <h3 class="stat-value">99.98%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> Zero Critical CVEs</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-server"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Active Node Clusters</span>
+                <h3 class="stat-value">24 / 24</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check-circle"></i> 100% Operational</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-tachometer-alt"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Global P99 Latency</span>
+                <h3 class="stat-value">14.2 ms</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-bolt"></i> Low Jitter (±0.4ms)</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Global Infrastructure Orchestration Matrix -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Global Infrastructure Orchestration Matrix
+                </h3>
+                <p class="dash-card-subtitle">
+                  Real-time status of microservices, database replicas, and edge
+                  API gateways.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-admin-infra"
+                  placeholder="Search services, regions, pods..."
+                />
+                <a href="404.html" class="btn btn-sm btn-secondary"
+                  ><i class="fas fa-filter"></i> Filter Nodes</a
+                >
+              </div>
             </div>
             <div class="table-responsive">
-              <table class="custom-table">
+              <table class="dash-table" id="table-admin-infra">
                 <thead>
                   <tr>
-                    <th>Cluster Node Region</th>
-                    <th>Provider & Zone</th>
-                    <th>Active Enclaves</th>
-                    <th>Node Load</th>
-                    <th>Network Latency</th>
-                    <th>TLS Protocol</th>
+                    <th>Service Cluster</th>
+                    <th>Primary Region</th>
+                    <th>Instances</th>
+                    <th>CPU Load</th>
+                    <th>Memory Allocated</th>
+                    <th>Uptime</th>
+                    <th>Health Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Core Authentication Mesh</strong></td>
+                    <td>us-east-1 (N. Virginia)</td>
+                    <td>12 Pods</td>
+                    <td>28.4%</td>
+                    <td>14.2 GB / 32 GB</td>
+                    <td>99.998%</td>
+                    <td>
+                      <span class="status-pill status-closed">Nominal</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Metrics</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Encrypted VDR Vault</strong></td>
+                    <td>ch-zur-1 (Zurich Private)</td>
+                    <td>16 Pods</td>
+                    <td>42.1%</td>
+                    <td>38.6 GB / 64 GB</td>
+                    <td>100.000%</td>
+                    <td>
+                      <span class="status-pill status-closed">Nominal</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Metrics</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Financial Modeling Compute</strong></td>
+                    <td>eu-fra-1 (Frankfurt)</td>
+                    <td>8 Pods</td>
+                    <td>61.5%</td>
+                    <td>44.0 GB / 64 GB</td>
+                    <td>99.985%</td>
+                    <td>
+                      <span class="status-pill status-active">High Load</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-primary"
+                        >Scale Pods</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Deal Pipeline Ingestion API</strong></td>
+                    <td>us-west-2 (Oregon)</td>
+                    <td>6 Pods</td>
+                    <td>19.8%</td>
+                    <td>8.4 GB / 16 GB</td>
+                    <td>99.995%</td>
+                    <td>
+                      <span class="status-pill status-closed">Nominal</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Metrics</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Global Compliance Ledger</strong></td>
+                    <td>ap-tokyo-1 (Tokyo)</td>
+                    <td>10 Pods</td>
+                    <td>33.0%</td>
+                    <td>19.8 GB / 32 GB</td>
+                    <td>99.999%</td>
+                    <td>
+                      <span class="status-pill status-closed">Nominal</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Metrics</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Sovereign Regional Cloud Pods Breakdown -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Sovereign Regional Cloud Pods Health
+                </h3>
+                <p class="dash-card-subtitle">
+                  Zero-egress private compute clusters dedicated to confidential
+                  deal data.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-layer-group"></i> Manage VPCs</a
+              >
+            </div>
+            <div class="dash-grid-2">
+              <div
+                class="dash-card"
+                style="margin-bottom: 0; background: rgba(255, 255, 255, 0.02)"
+              >
+                <h4 style="font-size: 0.95rem; margin-bottom: 10px">
+                  <i class="fas fa-shield-alt text-accent"></i> Swiss Sovereign
+                  Vault (Zurich)
+                </h4>
+                <p class="text-muted text-sm">
+                  Hardware Security Module (HSM) FIPS 140-3 Level 4 partition.
+                  Zero third-party cloud interconnect.
+                </p>
+                <div
+                  class="progress-bar-container"
+                  style="
+                    background: rgba(255, 255, 255, 0.08);
+                    height: 8px;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin: 12px 0 6px;
+                  "
+                >
+                  <div
+                    style="width: 58%; height: 100%; background: #22c55e"
+                  ></div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 0.78rem;
+                    color: var(--text-muted);
+                  "
+                >
+                  <span>Utilized: 58% (37.1 GB)</span>
+                  <span>Capacity: 64.0 GB</span>
+                </div>
+              </div>
+
+              <div
+                class="dash-card"
+                style="margin-bottom: 0; background: rgba(255, 255, 255, 0.02)"
+              >
+                <h4 style="font-size: 0.95rem; margin-bottom: 10px">
+                  <i class="fas fa-flag-usa text-blue"></i> US FedRAMP High
+                  Isolation (N. Virginia)
+                </h4>
+                <p class="text-muted text-sm">
+                  ITAR and DoD Cloud Security Level 5 approved container mesh
+                  for aerospace M&A transactions.
+                </p>
+                <div
+                  class="progress-bar-container"
+                  style="
+                    background: rgba(255, 255, 255, 0.08);
+                    height: 8px;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin: 12px 0 6px;
+                  "
+                >
+                  <div
+                    style="width: 72%; height: 100%; background: #3b82f6"
+                  ></div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 0.78rem;
+                    color: var(--text-muted);
+                  "
+                >
+                  <span>Utilized: 72% (92.4 GB)</span>
+                  <span>Capacity: 128.0 GB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Live SecOps Threat Detection Feed -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Real-Time Threat Detection Log</h3>
+                <span class="badge badge-success">Zero Active Breaches</span>
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-shield-virus"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Automated IP Block:</strong> 185.220.101.44
+                      blocked after 5 failed OAuth2 token exchange attempts.
+                    </p>
+                    <span class="feed-time"
+                      >14 minutes ago • Edge WAF Rule #892</span
+                    >
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-key"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Automated Key Rotation:</strong> AES-256 GCM
+                      master envelope keys rotated across all active VDR rooms.
+                    </p>
+                    <span class="feed-time"
+                      >1 hour ago • AWS KMS Scheduler</span
+                    >
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-purple">
+                    <i class="fas fa-user-lock"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Privileged Elevation:</strong> Managing Director
+                      M. Sterling accessed Deal Valkyrie Tier-1 clean room.
+                    </p>
+                    <span class="feed-time"
+                      >2 hours ago • Biometric MFA Verified</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer"
+                style="
+                  padding-top: 15px;
+                  border-top: 1px solid var(--border-color);
+                "
+              >
+                <a
+                  href="404.html"
+                  class="btn btn-sm btn-outline w-100 text-center"
+                  ><i class="fas fa-shield-alt"></i> Open SecOps Console</a
+                >
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Global Latency & Edge Routing</h3>
+                <a href="404.html" class="btn btn-xs btn-outline">BGP Routes</a>
+              </div>
+              <div class="table-responsive">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Edge PoP</th>
+                      <th>Average RTT</th>
+                      <th>Packet Loss</th>
+                      <th>Traffic Share</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>New York (JFK-1)</td>
+                      <td><strong class="text-success">6.2 ms</strong></td>
+                      <td>0.000%</td>
+                      <td>42%</td>
+                    </tr>
+                    <tr>
+                      <td>London (LHR-2)</td>
+                      <td><strong class="text-success">9.8 ms</strong></td>
+                      <td>0.000%</td>
+                      <td>28%</td>
+                    </tr>
+                    <tr>
+                      <td>Frankfurt (FRA-1)</td>
+                      <td><strong class="text-success">11.4 ms</strong></td>
+                      <td>0.001%</td>
+                      <td>18%</td>
+                    </tr>
+                    <tr>
+                      <td>Tokyo (NRT-1)</td>
+                      <td><strong class="text-success">22.6 ms</strong></td>
+                      <td>0.000%</td>
+                      <td>12%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div
+                class="card-footer"
+                style="
+                  padding-top: 15px;
+                  border-top: 1px solid var(--border-color);
+                "
+              >
+                <a
+                  href="404.html"
+                  class="btn btn-sm btn-secondary w-100 text-center"
+                  ><i class="fas fa-bolt"></i> Run Global Traceroute</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Administrative Control & Deployment Console -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Emergency Admin Actions & Failover Staging
+                </h3>
+                <p class="dash-card-subtitle">
+                  Execute cluster failover drills, trigger cache purges, or
+                  export cryptographic proofs.
+                </p>
+              </div>
+              <span class="badge badge-warning"
+                >Tier-0 Authorization Required</span
+              >
+            </div>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap">
+              <a href="404.html" class="btn btn-secondary action-404-btn"
+                ><i class="fas fa-sync-alt"></i> Flush Edge Cloudflare Cache</a
+              >
+              <a href="404.html" class="btn btn-secondary action-404-btn"
+                ><i class="fas fa-lock"></i> Force Global Session
+                Invalidation</a
+              >
+              <a href="404.html" class="btn btn-secondary action-404-btn"
+                ><i class="fas fa-shield-virus"></i> Re-verify Immutable SHA-256
+                Hashes</a
+              >
+              <a href="404.html" class="btn btn-primary action-404-btn"
+                ><i class="fas fa-file-export"></i> Generate SOC-2 Auditor
+                Evidence Pack</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 2: CLOUD CLUSTERS
+           ========================================================= -->
+        <div id="view-clusters" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Multi-Region Kubernetes Cloud Clusters</h2>
+              <p class="view-subtitle">
+                High-availability sovereign cloud mesh with zero-egress
+                encryption and auto-scaling pods.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-chart-line"></i> Prometheus Metrics</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-plus"></i> Provision New Cluster</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-cubes"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Total Running Pods</span>
+                <h3 class="stat-value">62 Pods</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 100% Healthy</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-microchip"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Cluster CPU Usage</span>
+                <h3 class="stat-value">34.8%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-down"></i> Headroom Available</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-memory"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">RAM Allocated</span>
+                <h3 class="stat-value">124 GB / 256 GB</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-database"></i> 48.4% Capacity</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-route"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Multi-Region Failover</span>
+                <h3 class="stat-value">Hot-Standby</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check-double"></i> RPO < 1s, RTO < 10s</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Regional Cloud Pods Table with Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Regional Kubernetes Node Clusters
+                </h3>
+                <p class="dash-card-subtitle">
+                  Active cluster telemetry and node pool auto-scaling
+                  parameters.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-clusters-list"
+                  placeholder="Search clusters, regions, nodes..."
+                />
+                <div class="filter-pill-group">
+                  <button class="status-filter-pill active" data-status="all">
+                    All (5)
+                  </button>
+                  <button class="status-filter-pill" data-status="Nominal">
+                    Nominal (4)
+                  </button>
+                  <button class="status-filter-pill" data-status="High Load">
+                    High Load (1)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-clusters-list">
+                <thead>
+                  <tr>
+                    <th>Cluster ID</th>
+                    <th>Region / Jurisdiction</th>
+                    <th>Node Type</th>
+                    <th>Pods Active</th>
+                    <th>CPU Allocation</th>
+                    <th>Memory</th>
+                    <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>us-east-1 (Northern Virginia)</strong></td>
-                    <td>AWS Secure GovCloud</td>
-                    <td>18 Enclaves</td>
+                    <td><code>k8s-us-east-prod</code></td>
+                    <td><strong>US East (Virginia)</strong></td>
+                    <td>c6i.4xlarge (Dedicated)</td>
+                    <td>18 pods</td>
+                    <td>32.4%</td>
+                    <td>42.8 GB</td>
                     <td>
-                      <div style="display: flex; align-items: center; gap: 8px">
-                        <div
-                          class="progress-bar-bg"
-                          style="width: 80px; height: 6px"
-                        >
-                          <div
-                            class="progress-bar-fill"
-                            style="width: 42%"
-                          ></div>
-                        </div>
-                        <span style="font-size: 0.78rem; font-weight: 700"
-                          >42%</span
-                        >
-                      </div>
-                    </td>
-                    <td>14ms</td>
-                    <td>
-                      <span class="status-badge status-active"
-                        >TLS 1.3 AES</span
-                      >
+                      <span class="status-pill status-closed">Nominal</span>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'us-east-1 pod cache purged.',
-                            'success'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Configure</a
                       >
-                        Purge
-                      </button>
                     </td>
                   </tr>
                   <tr>
-                    <td><strong>eu-central-1 (Frankfurt)</strong></td>
-                    <td>Azure Sovereign Cloud</td>
-                    <td>14 Enclaves</td>
+                    <td><code>k8s-eu-fra-prod</code></td>
+                    <td><strong>EU Central (Frankfurt)</strong></td>
+                    <td>m6i.4xlarge (GDPR Vault)</td>
+                    <td>14 pods</td>
+                    <td>68.2%</td>
+                    <td>48.2 GB</td>
                     <td>
-                      <div style="display: flex; align-items: center; gap: 8px">
-                        <div
-                          class="progress-bar-bg"
-                          style="width: 80px; height: 6px"
-                        >
-                          <div
-                            class="progress-bar-fill"
-                            style="width: 58%"
-                          ></div>
-                        </div>
-                        <span style="font-size: 0.78rem; font-weight: 700"
-                          >58%</span
-                        >
-                      </div>
-                    </td>
-                    <td>22ms</td>
-                    <td>
-                      <span class="status-badge status-active"
-                        >TLS 1.3 AES</span
-                      >
+                      <span class="status-pill status-active">High Load</span>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'eu-central-1 pod cache purged.',
-                            'success'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-primary"
+                        >Scale +2 Nodes</a
                       >
-                        Purge
-                      </button>
                     </td>
                   </tr>
                   <tr>
-                    <td><strong>ap-southeast-1 (Singapore)</strong></td>
-                    <td>Google Cloud Enclave</td>
-                    <td>16 Enclaves</td>
+                    <td><code>k8s-ch-zur-vault</code></td>
+                    <td><strong>Switzerland (Zurich Private)</strong></td>
+                    <td>Bare-Metal HSM Node</td>
+                    <td>12 pods</td>
+                    <td>22.1%</td>
+                    <td>31.4 GB</td>
                     <td>
-                      <div style="display: flex; align-items: center; gap: 8px">
-                        <div
-                          class="progress-bar-bg"
-                          style="width: 80px; height: 6px"
-                        >
-                          <div
-                            class="progress-bar-fill"
-                            style="width: 34%"
-                          ></div>
-                        </div>
-                        <span style="font-size: 0.78rem; font-weight: 700"
-                          >34%</span
-                        >
-                      </div>
-                    </td>
-                    <td>38ms</td>
-                    <td>
-                      <span class="status-badge status-active"
-                        >TLS 1.3 AES</span
-                      >
+                      <span class="status-pill status-closed">Nominal</span>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'ap-southeast-1 pod cache purged.',
-                            'success'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Configure</a
                       >
-                        Purge
-                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>k8s-ap-tok-prod</code></td>
+                    <td><strong>APAC (Tokyo)</strong></td>
+                    <td>c6i.2xlarge</td>
+                    <td>10 pods</td>
+                    <td>29.5%</td>
+                    <td>22.0 GB</td>
+                    <td>
+                      <span class="status-pill status-closed">Nominal</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Configure</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>k8s-uk-lon-prod</code></td>
+                    <td><strong>UK (London Docklands)</strong></td>
+                    <td>m6i.2xlarge</td>
+                    <td>8 pods</td>
+                    <td>24.0%</td>
+                    <td>18.5 GB</td>
+                    <td>
+                      <span class="status-pill status-closed">Nominal</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Configure</a
+                      >
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </section>
-
-          <!-- SECTION 3: ZERO-TRUST SECURITY & ACCESS CONTROLS -->
-          <div
-            class="dash-grid-2col"
-            id="admin-security"
-            style="margin-bottom: 28px"
-          >
-            <section class="dash-panel">
-              <div class="dash-panel-header">
-                <h3>Zero-Trust & Fiduciary Security Status</h3>
-                <span class="user-greeting-pill">Real-time Policy</span>
-              </div>
-              <div
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  gap: 14px;
-                  padding: 4px 0;
-                "
-              >
-                <div
-                  style="
-                    background: #fbfaf8;
-                    border: 1px solid var(--border-subtle);
-                    border-radius: var(--radius-md);
-                    padding: 14px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  "
-                >
-                  <div>
-                    <strong
-                      style="color: var(--color-primary-900); font-size: 0.9rem"
-                      >Hardware Security Module (HSM)</strong
-                    >
-                    <div style="font-size: 0.78rem; color: var(--text-muted)">
-                      FIPS 140-2 Level 3 cryptographic key vault
-                    </div>
-                  </div>
-                  <span class="status-badge status-active">Sealed</span>
-                </div>
-                <div
-                  style="
-                    background: #fbfaf8;
-                    border: 1px solid var(--border-subtle);
-                    border-radius: var(--radius-md);
-                    padding: 14px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  "
-                >
-                  <div>
-                    <strong
-                      style="color: var(--color-primary-900); font-size: 0.9rem"
-                      >Mandatory MFA Enforcement</strong
-                    >
-                    <div style="font-size: 0.78rem; color: var(--text-muted)">
-                      WebAuthn / FIDO2 keys for all 1,428 users
-                    </div>
-                  </div>
-                  <span class="status-badge status-active">100% Enforced</span>
-                </div>
-                <div
-                  style="
-                    background: #fbfaf8;
-                    border: 1px solid var(--border-subtle);
-                    border-radius: var(--radius-md);
-                    padding: 14px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  "
-                >
-                  <div>
-                    <strong
-                      style="color: var(--color-primary-900); font-size: 0.9rem"
-                      >Automated Session Expiry</strong
-                    >
-                    <div style="font-size: 0.78rem; color: var(--text-muted)">
-                      Inactivity lock at 15 minutes with token rotation
-                    </div>
-                  </div>
-                  <span class="status-badge status-active">Active</span>
-                </div>
-              </div>
-            </section>
-
-            <section class="dash-panel">
-              <div class="dash-panel-header">
-                <h3>SOC-2 Automated Diagnostic Scanner</h3>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  id="btn-run-sec-scan"
-                >
-                  Run Diagnostic Scan
-                </button>
-              </div>
-              <div class="security-scanner-card" id="sec-scanner-box">
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  "
-                >
-                  <div>
-                    <strong
-                      style="
-                        color: var(--color-primary-900);
-                        font-size: 0.95rem;
-                      "
-                      >System Cryptographic Ledger Health</strong
-                    >
-                    <div
-                      style="font-size: 0.8rem; color: var(--text-muted)"
-                      id="sec-scanner-status"
-                    >
-                      100% Operational • Merkle root verified against
-                      decentralized archive
-                    </div>
-                  </div>
-                  <span
-                    class="status-badge status-active"
-                    id="sec-scanner-badge"
-                    >Verified Nominal</span
-                  >
-                </div>
-                <div class="scanner-progress-track" id="sec-scanner-track">
-                  <div class="scanner-progress-bar" id="sec-scanner-bar"></div>
-                </div>
-              </div>
-              <p
-                style="
-                  font-size: 0.82rem;
-                  color: var(--text-secondary);
-                  margin: 0;
-                  line-height: 1.5;
-                "
-              >
-                Automated continuous compliance verification checking IAM role
-                boundaries, S3 object lock immutability, and cross-border data
-                transfer logs.
-              </p>
-            </section>
           </div>
 
-          <!-- SECTION 4: GLOBAL CORPORATE DIRECTORY & RBAC -->
-          <section
-            class="dash-panel"
-            id="admin-users"
-            aria-label="Corporate Directory"
-            style="margin-bottom: 28px"
-          >
-            <div class="dash-panel-header">
-              <h3>Global Corporate Access & User Directory</h3>
-              <div style="display: flex; gap: 10px">
+          <!-- Section 3: In-Depth Sovereign Cluster Cards -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Swiss Sovereign Vault (Zurich) Deep Telemetry
+                </h3>
+              </div>
+              <p class="text-sm text-muted">
+                Dedicated infrastructure for European private wealth and
+                cross-border M&A clean rooms. ISO 27001 and FINMA circular
+                compliant.
+              </p>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-lock"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>HSM Partition:</strong> Thales Luna 7 HSM online.
+                      Zero key extraction policy enforced.
+                    </p>
+                    <span class="feed-time">Status: 100% Healthy</span>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-server"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Disaster Recovery Replication:</strong>
+                      Synchronous continuous replication to Geneva bunker node
+                      active.
+                    </p>
+                    <span class="feed-time">Sync Latency: 1.8 ms</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Node Auto-Scaling & Quota Controls
+                </h3>
+              </div>
+              <p class="text-sm text-muted">
+                Horizontal Pod Autoscaler (HPA) policies trigger when sustained
+                CPU exceeds 75% for 3 minutes.
+              </p>
+              <div class="table-responsive">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Workload</th>
+                      <th>Min Pods</th>
+                      <th>Max Pods</th>
+                      <th>Trigger Target</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Valuation Sandbox Compute</td>
+                      <td>4</td>
+                      <td>32</td>
+                      <td>CPU > 70%</td>
+                    </tr>
+                    <tr>
+                      <td>VDR PDF Redaction OCR</td>
+                      <td>2</td>
+                      <td>16</td>
+                      <td>Queue > 50 docs</td>
+                    </tr>
+                    <tr>
+                      <td>Biometric MFA Gateway</td>
+                      <td>6</td>
+                      <td>24</td>
+                      <td>Req/sec > 2,000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Live Cluster Event Stream -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Cluster Lifecycle & Deployment Audit Log
+                </h3>
+                <p class="dash-card-subtitle">
+                  Kubernetes master controller events and pod rescheduling
+                  telemetry.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-xs btn-outline"
+                >Stream Raw JSON</a
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Cluster</th>
+                    <th>Event Type</th>
+                    <th>Source Component</th>
+                    <th>Description</th>
+                    <th>Severity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Today, 10:45:12</td>
+                    <td><code>k8s-eu-fra-prod</code></td>
+                    <td>ScaleUp</td>
+                    <td>horizontal-pod-autoscaler</td>
+                    <td>
+                      Scaled deployment 'dcf-engine' from 6 to 8 replicas (CPU
+                      72%)
+                    </td>
+                    <td><span class="badge badge-info">Info</span></td>
+                  </tr>
+                  <tr>
+                    <td>Today, 09:12:05</td>
+                    <td><code>k8s-us-east-prod</code></td>
+                    <td>RollingUpdate</td>
+                    <td>kube-controller-manager</td>
+                    <td>
+                      Zero-downtime rolling deployment of 'auth-gateway-v4.14'
+                      completed
+                    </td>
+                    <td><span class="badge badge-success">Success</span></td>
+                  </tr>
+                  <tr>
+                    <td>Today, 06:00:00</td>
+                    <td><code>k8s-ch-zur-vault</code></td>
+                    <td>KeyRotation</td>
+                    <td>vault-agent-init</td>
+                    <td>
+                      FIPS Level 4 HSM daily master seed handshake verified
+                    </td>
+                    <td><span class="badge badge-success">Success</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 5: Staging & Deployment Console -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Cluster Maintenance & Rolling Deployment Console
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Target Cluster</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>k8s-us-east-prod (US East)</option>
+                    <option>k8s-eu-fra-prod (EU Frankfurt)</option>
+                    <option>k8s-ch-zur-vault (Zurich Private)</option>
+                    <option>k8s-ap-tok-prod (Tokyo)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Operation Type</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Drain Node for Security Patching</option>
+                    <option>Trigger Zero-Downtime Rolling Restart</option>
+                    <option>Simulate Multi-Region Failover Drill</option>
+                    <option>Flush Distributed Redis Memory Cache</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Approval Ticket Reference</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="CHG-2026-9912"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-play"></i> Execute Verified Operation
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 3: ZERO-TRUST SECURITY
+           ========================================================= -->
+        <div id="view-security" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Zero-Trust Network Architecture & Threat Intelligence
+              </h2>
+              <p class="view-subtitle">
+                Context-aware access policies, hardware security modules (HSM),
+                and perimeter intrusion prevention.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-file-contract"></i> SOC-2 Compliance
+                Evidence</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-ban"></i> Quarantine IP CIDR</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-shield-virus"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Blocked Incursions (30d)</span>
+                <h3 class="stat-value">14,892</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 100% Contained at Edge</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-id-badge"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Active MFA Sessions</span>
+                <h3 class="stat-value">342 Validated</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-fingerprint"></i> WebAuthn / FIDO2</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">TLS 1.3 Strict Cipher</span>
+                <h3 class="stat-value">100% Strict</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-key"></i> Elliptic Curve X25519</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-bug"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Known CVE Exposure</span>
+                <h3 class="stat-value">0 High / 0 Crit</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-shield-alt"></i> Continuous Snyk Scan</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Threat Detection Table with Search & Status Filter -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Live Security Telemetry & Perimeter Incursion Logs
+                </h3>
+                <p class="dash-card-subtitle">
+                  Automated Web Application Firewall (WAF) rule triggers and
+                  mitigation status.
+                </p>
+              </div>
+              <div class="card-header-tools">
                 <input
                   type="text"
-                  id="table-search"
-                  class="table-search-input"
-                  placeholder="Search user, role, email..."
-                  style="margin: 0; width: 240px"
+                  class="dash-search-input"
+                  data-table-search="table-security-telemetry"
+                  placeholder="Search IP, event, rule..."
                 />
+                <div class="filter-pill-group">
+                  <button class="status-filter-pill active" data-status="all">
+                    All (4)
+                  </button>
+                  <button class="status-filter-pill" data-status="Blocked">
+                    Blocked (2)
+                  </button>
+                  <button class="status-filter-pill" data-status="Quarantined">
+                    Quarantined (1)
+                  </button>
+                  <button class="status-filter-pill" data-status="Authorized">
+                    Authorized (1)
+                  </button>
+                </div>
               </div>
             </div>
             <div class="table-responsive">
-              <table class="custom-table">
-                <thead id="dash-table-head">
+              <table class="dash-table" id="table-security-telemetry">
+                <thead>
                   <tr>
-                    <th>User / Executive</th>
-                    <th>Corporate Role</th>
-                    <th>Email Address</th>
-                    <th>Account Status</th>
+                    <th>Timestamp</th>
+                    <th>Source IP / CIDR</th>
+                    <th>Geographic Origin</th>
+                    <th>Event Category</th>
+                    <th>Target Resource</th>
+                    <th>Firewall Action</th>
+                    <th>Threat Score</th>
+                    <th>Inspect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>14:22:01</td>
+                    <td><code>185.220.101.44</code></td>
+                    <td>Tor Exit Node (NL)</td>
+                    <td>Brute-Force OAuth2 Token</td>
+                    <td>/api/v2/auth/token</td>
+                    <td><span class="badge badge-danger">Blocked</span></td>
+                    <td>
+                      <span class="text-danger font-weight-bold">98/100</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Forensic</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>13:48:19</td>
+                    <td><code>91.240.118.12</code></td>
+                    <td>Data Center (RU)</td>
+                    <td>Directory Traversal Attempt</td>
+                    <td>/vdr/files/download?path=..</td>
+                    <td><span class="badge badge-danger">Blocked</span></td>
+                    <td>
+                      <span class="text-danger font-weight-bold">94/100</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Forensic</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>11:15:40</td>
+                    <td><code>194.26.29.112</code></td>
+                    <td>Hosting Provider (DE)</td>
+                    <td>Credential Stuffing Pattern</td>
+                    <td>/auth/login-mfa</td>
+                    <td>
+                      <span class="badge badge-warning">Quarantined</span>
+                    </td>
+                    <td>
+                      <span class="text-warning font-weight-bold">81/100</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Forensic</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>09:30:14</td>
+                    <td><code>198.51.100.22</code></td>
+                    <td>White & Case HQ (US)</td>
+                    <td>Clean Room Access Token</td>
+                    <td>/vdr/folders/4.0</td>
+                    <td><span class="badge badge-success">Authorized</span></td>
+                    <td>
+                      <span class="text-success font-weight-bold">0/100</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Forensic</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Zero-Trust Access Policies & IP Allowlist Grid -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Enforced Zero-Trust Security Policies
+                </h3>
+              </div>
+              <ul class="task-list">
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" checked disabled />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Hardware Token (YubiKey / WebAuthn) required for Tier-1
+                      M&A rooms</span
+                    >
+                    <span class="task-meta text-success"
+                      ><i class="fas fa-check-circle"></i> Strict Enforcement
+                      Active</span
+                    >
+                  </div>
+                </li>
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" checked disabled />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Dynamic Watermark stamping on all PDF/XLS documents with
+                      user IP & timestamp</span
+                    >
+                    <span class="task-meta text-success"
+                      ><i class="fas fa-check-circle"></i> DRM Engine
+                      Active</span
+                    >
+                  </div>
+                </li>
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" checked disabled />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Session timeout capped at 15 minutes of inactivity across
+                      administrative roles</span
+                    >
+                    <span class="task-meta text-success"
+                      ><i class="fas fa-check-circle"></i> Zero-Dwell Time
+                      Enforced</span
+                    >
+                  </div>
+                </li>
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" checked disabled />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Automated IP geographic bounding (geofencing) for
+                      privileged employee roles</span
+                    >
+                    <span class="task-meta text-success"
+                      ><i class="fas fa-check-circle"></i> Perimeter Geofencing
+                      Active</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Cryptographic Certificates & Key Expiry Docket
+                </h3>
+                <a href="404.html" class="btn btn-xs btn-outline">Renew Keys</a>
+              </div>
+              <div class="table-responsive">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Domain / Subsystem</th>
+                      <th>Certificate Authority</th>
+                      <th>Expires</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>*.stacklycorp.com</code></td>
+                      <td>DigiCert Global EV Root CA</td>
+                      <td>Apr 2028</td>
+                      <td><span class="badge badge-success">Valid</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>vault.ch.stacklycorp.com</code></td>
+                      <td>SwissSign Platinum CA</td>
+                      <td>Nov 2027</td>
+                      <td><span class="badge badge-success">Valid</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>api.mesh.stacklycorp.com</code></td>
+                      <td>Let's Encrypt ISRG Root X1</td>
+                      <td>Nov 2026</td>
+                      <td>
+                        <span class="badge badge-info">Auto-Renewing</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: SecOps Quarantine Staging Form -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Emergency IP Blacklist & Threat Quarantine Command
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Offending IP Address or CIDR Range</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. 198.51.100.0/24"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Quarantine Duration</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>1 Hour (Temporary Rate Limit)</option>
+                    <option>24 Hours (Suspicious Probing)</option>
+                    <option>Permanent Blacklist (Confirmed Malicious)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Incident Ticket Reference</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="INC-SEC-8921"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-ban"></i> Apply Immediate Perimeter Block
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 4: USER DIRECTORY & RBAC
+           ========================================================= -->
+        <div id="view-users" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Enterprise User Directory & Role-Based Access Control (RBAC)
+              </h2>
+              <p class="view-subtitle">
+                Manage executive permissions, privileged roles, biometric
+                credentials, and identity lifecycle.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-user-plus"></i> Invite Corporate User</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-download"></i> Export User List</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-user-friends"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Total Provisioned Users</span>
+                <h3 class="stat-value">1,428</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 100% SSO Synced</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-user-shield"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Privileged Access Roles</span>
+                <h3 class="stat-value">48 Admins / MDs</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-key"></i> Dual-Approval Needed</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-fingerprint"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Hardware MFA Adoption</span>
+                <h3 class="stat-value">98.4%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> Mandated by SOC-2</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-user-clock"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Pending Provision Requests</span>
+                <h3 class="stat-value">3 Pending</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-clock"></i> SLA: 4 Hours</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: User Directory Table with Search & Status Filters -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Corporate User Directory & Entitlements
+                </h3>
+                <p class="dash-card-subtitle">
+                  Active user directory synchronized with Okta and Microsoft
+                  Entra ID.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-users-directory"
+                  placeholder="Search name, email, role, squad..."
+                />
+                <div class="filter-pill-group">
+                  <button class="status-filter-pill active" data-status="all">
+                    All (6)
+                  </button>
+                  <button class="status-filter-pill" data-status="Admin">
+                    Admin (1)
+                  </button>
+                  <button class="status-filter-pill" data-status="Manager">
+                    Manager (1)
+                  </button>
+                  <button class="status-filter-pill" data-status="Employee">
+                    Employee (2)
+                  </button>
+                  <button class="status-filter-pill" data-status="Vendor">
+                    Vendor (1)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-users-directory">
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Department / Deal Squad</th>
+                    <th>MFA Method</th>
+                    <th>Last Login</th>
+                    <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody id="dash-table-body">
+                <tbody>
                   <tr>
                     <td><strong>Victoria Alexander</strong></td>
-                    <td>Admin (CEO)</td>
-                    <td>admin@corporatebusiness.com</td>
+                    <td>admin@stacklycorp.com</td>
+                    <td><span class="badge badge-danger">Admin</span></td>
+                    <td>Infrastructure & SecOps</td>
+                    <td><span class="badge badge-success">YubiKey 5C</span></td>
+                    <td>Now (Active)</td>
                     <td>
-                      <span class="status-badge status-active">Active</span>
+                      <span class="status-pill status-closed">Active</span>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'Permissions verified for Victoria Alexander.',
-                            'info'
-                          )
-                        "
-                      >
-                        Permissions
-                      </button>
+                      <a href="404.html" class="btn btn-xs btn-outline">Edit</a>
                     </td>
                   </tr>
                   <tr>
                     <td><strong>Marcus Sterling</strong></td>
-                    <td>Manager (Allocations)</td>
-                    <td>manager@corporatebusiness.com</td>
+                    <td>m.sterling@stacklycorp.com</td>
+                    <td><span class="badge badge-warning">Manager</span></td>
+                    <td>M&A Advisory Lead (Squad Alpha)</td>
                     <td>
-                      <span class="status-badge status-active">Active</span>
+                      <span class="badge badge-success">FIDO2 TouchID</span>
+                    </td>
+                    <td>12 mins ago</td>
+                    <td>
+                      <span class="status-pill status-closed">Active</span>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'Permissions verified for Marcus Sterling.',
-                            'info'
-                          )
-                        "
-                      >
-                        Permissions
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>Elena Rostova</strong></td>
-                    <td>Employee (M&A Associate)</td>
-                    <td>employee@corporatebusiness.com</td>
-                    <td>
-                      <span class="status-badge status-active">Active</span>
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'Permissions verified for Elena Rostova.',
-                            'info'
-                          )
-                        "
-                      >
-                        Permissions
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>David Chen</strong></td>
-                    <td>Customer (COO Vanguard)</td>
-                    <td>client@vanguardholding.com</td>
-                    <td>
-                      <span class="status-badge status-active">Active</span>
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'Permissions verified for David Chen.',
-                            'info'
-                          )
-                        "
-                      >
-                        Permissions
-                      </button>
+                      <a href="404.html" class="btn btn-xs btn-outline">Edit</a>
                     </td>
                   </tr>
                   <tr>
                     <td><strong>Sarah Jenkins</strong></td>
-                    <td>Vendor (Apex Legal)</td>
-                    <td>vendor@apexadvisory.com</td>
+                    <td>s.jenkins@stacklycorp.com</td>
+                    <td><span class="badge badge-info">Employee</span></td>
+                    <td>Senior Valuation Associate</td>
                     <td>
-                      <span class="status-badge status-active">Active</span>
+                      <span class="badge badge-success">Okta Verify Push</span>
+                    </td>
+                    <td>35 mins ago</td>
+                    <td>
+                      <span class="status-pill status-closed">Active</span>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'Permissions verified for Sarah Jenkins.',
-                            'info'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-outline">Edit</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>David Chen</strong></td>
+                    <td>d.chen@stacklycorp.com</td>
+                    <td><span class="badge badge-info">Employee</span></td>
+                    <td>Due Diligence Lead</td>
+                    <td>
+                      <span class="badge badge-success">FIDO2 WebAuthn</span>
+                    </td>
+                    <td>2 hours ago</td>
+                    <td>
+                      <span class="status-pill status-closed">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline">Edit</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Sovereign Capital LP</strong></td>
+                    <td>investor@vanguard-holdings.ch</td>
+                    <td><span class="badge badge-primary">Customer</span></td>
+                    <td>Zurich Co-Investment Fund IV</td>
+                    <td>
+                      <span class="badge badge-success"
+                        >SwissSign EV Token</span
                       >
-                        Permissions
-                      </button>
+                    </td>
+                    <td>Yesterday</td>
+                    <td>
+                      <span class="status-pill status-closed">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline">Edit</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>White & Case Counsel</strong></td>
+                    <td>advisory@whitecase-counsel.com</td>
+                    <td><span class="badge badge-secondary">Vendor</span></td>
+                    <td>Special Anti-Trust Legal Counsel</td>
+                    <td>
+                      <span class="badge badge-success">Duo Security MFA</span>
+                    </td>
+                    <td>Sep 19, 2026</td>
+                    <td>
+                      <span class="status-pill status-closed">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline">Edit</a>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </section>
+          </div>
 
-          <!-- SECTION 5: IMMUTABLE AUDIT LEDGER -->
-          <section
-            class="dash-panel"
-            id="admin-audit"
-            aria-label="Immutable Audit Stream"
-          >
-            <div class="dash-panel-header">
-              <h3>Immutable Audit Stream & Telemetry Log</h3>
-              <div style="display: flex; gap: 8px">
-                <button
-                  type="button"
-                  class="btn btn-subtle btn-sm"
-                  id="btn-export-gov-csv"
-                >
-                  Export CSV
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-subtle btn-sm"
-                  id="btn-export-gov-json"
-                >
-                  Export JSON
-                </button>
+          <!-- Section 3: RBAC Entitlement Matrix -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Role-Based Access Control (RBAC) Permission Matrix
+                </h3>
+                <p class="dash-card-subtitle">
+                  Granular capability allocation by authenticated corporate
+                  persona.
+                </p>
               </div>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-lock"></i> Edit Roles</a
+              >
             </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>System Capability</th>
+                    <th>Admin</th>
+                    <th>Manager</th>
+                    <th>Employee</th>
+                    <th>Customer (LP)</th>
+                    <th>Vendor (Counsel)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Cluster & Node Infrastructure Management</td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i> Full
+                      Control
+                    </td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                  </tr>
+                  <tr>
+                    <td>Deal Mandate Pipeline & Squad Assignment</td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i> Admin
+                      View
+                    </td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i> Full
+                      Control
+                    </td>
+                    <td><i class="fas fa-eye text-info"></i> Assigned Only</td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                  </tr>
+                  <tr>
+                    <td>DCF & Valuation Sensitivity Modeler</td>
+                    <td><i class="fas fa-eye text-info"></i> Read Only</td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i> Signoff
+                    </td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i>
+                      Interactive Full
+                    </td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                  </tr>
+                  <tr>
+                    <td>Co-Investment Tranche Allocation & Wires</td>
+                    <td>
+                      <i class="fas fa-shield-alt text-info"></i> Audit Log
+                    </td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i> Syndicate
+                    </td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i> Allocate
+                      & Wire
+                    </td>
+                    <td><i class="fas fa-times-circle text-muted"></i> None</td>
+                  </tr>
+                  <tr>
+                    <td>Legal Opinions & Antitrust Deliverables</td>
+                    <td>
+                      <i class="fas fa-shield-alt text-info"></i> Security Log
+                    </td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i> Approve
+                    </td>
+                    <td><i class="fas fa-eye text-info"></i> Read Only</td>
+                    <td><i class="fas fa-eye text-info"></i> PPM Access</td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i> Upload &
+                      Submit
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 12px;
-                margin-bottom: 16px;
-                flex-wrap: wrap;
+          <!-- Section 4: Provisioning Form -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">Provision New Corporate Identity</h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
               "
+              style="padding: 10px 0"
             >
-              <div class="filter-pill-group" id="gov-filter-pills">
-                <button
-                  type="button"
-                  class="filter-pill active"
-                  data-filter="all"
-                >
-                  All Events (5)
-                </button>
-                <button type="button" class="filter-pill" data-filter="auth">
-                  Authentication & IAM
-                </button>
-                <button
-                  type="button"
-                  class="filter-pill"
-                  data-filter="transaction"
-                >
-                  Transaction Changes
-                </button>
-                <button type="button" class="filter-pill" data-filter="export">
-                  Data Room Export
-                </button>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Katherine Vance"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Corporate Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="e.g. k.vance@stacklycorp.com"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Assigned Persona / Role</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>System Administrator (Tier 0)</option>
+                    <option>Transaction Manager (Managing Director)</option>
+                    <option>Execution Associate (Employee)</option>
+                    <option>Institutional LP (Customer)</option>
+                    <option>Special Counsel / Advisor (Vendor)</option>
+                  </select>
+                </div>
               </div>
-              <input
-                type="text"
-                id="gov-search-input"
-                class="table-search-input"
-                placeholder="Search audit trail..."
-                style="width: 220px; margin: 0"
-              />
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-envelope"></i> Send Encrypted Onboarding Invite
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 5: AUDIT LEDGER (SOC-2)
+           ========================================================= -->
+        <div id="view-audit" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Immutable Cryptographic Audit Trail & Compliance Ledger
+              </h2>
+              <p class="view-subtitle">
+                Chronological tamper-evident SHA-256 block ledger recording all
+                transactions, clean room accesses, and administrative changes.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-shield-alt"></i> Verify Blockchain Root</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-file-export"></i> Export SOC-2 Report</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-link"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Block Ledger Height</span>
+                <h3 class="stat-value">#1,894,221</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-cube"></i> Real-time Sealing</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-check-double"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Cryptographic Integrity</span>
+                <h3 class="stat-value">100.00%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> Zero Hash Collisions</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Compliance Certifications</span>
+                <h3 class="stat-value">SOC-2 Type II</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-award"></i> ISO 27001 / GDPR</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-history"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">WORM Retention Horizon</span>
+                <h3 class="stat-value">7 Years Strict</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-archive"></i> FINMA & SEC 17a-4</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Immutable Event Ledger Table with Live Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">Immutable SHA-256 Event Ledger</h3>
+                <p class="dash-card-subtitle">
+                  Every administrative access, document decryption, and deal
+                  signoff is cryptographically sealed.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-audit-ledger"
+                  placeholder="Search hash, actor, event, IP..."
+                />
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-audit-ledger">
+                <thead>
+                  <tr>
+                    <th>Block #</th>
+                    <th>Timestamp (UTC)</th>
+                    <th>Actor / Entity</th>
+                    <th>Action / Event</th>
+                    <th>Target Entity</th>
+                    <th>SHA-256 Merkle Hash</th>
+                    <th>Verification</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>#1894221</code></td>
+                    <td>2026-09-21 14:15:02</td>
+                    <td><strong>M. Vance (Managing Partner)</strong></td>
+                    <td>Signed Definitive Agreement</td>
+                    <td>Deal Valkyrie (SPV-4)</td>
+                    <td>
+                      <code style="font-size: 0.75rem"
+                        >7f8a9e4b...d1c2b3a4</code
+                      >
+                    </td>
+                    <td>
+                      <span class="badge badge-success"
+                        ><i class="fas fa-check"></i> Sealed</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>#1894220</code></td>
+                    <td>2026-09-21 13:42:19</td>
+                    <td><strong>White & Case Counsel</strong></td>
+                    <td>Uploaded HSR Whitepaper</td>
+                    <td>FTC Filing Packet</td>
+                    <td>
+                      <code style="font-size: 0.75rem"
+                        >3a2b1c0d...9e8f7a6b</code
+                      >
+                    </td>
+                    <td>
+                      <span class="badge badge-success"
+                        ><i class="fas fa-check"></i> Sealed</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>#1894219</code></td>
+                    <td>2026-09-21 11:20:44</td>
+                    <td><strong>Sovereign Capital LP</strong></td>
+                    <td>Fedwire Confirmation $32M</td>
+                    <td>Buyout Fund IV Payout</td>
+                    <td>
+                      <code style="font-size: 0.75rem"
+                        >1c2d3e4f...5a6b7c8d</code
+                      >
+                    </td>
+                    <td>
+                      <span class="badge badge-success"
+                        ><i class="fas fa-check"></i> Sealed</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>#1894218</code></td>
+                    <td>2026-09-21 09:05:12</td>
+                    <td><strong>V. Alexander (Admin)</strong></td>
+                    <td>HSM FIPS Seed Handshake</td>
+                    <td>Zurich Vault Cluster</td>
+                    <td>
+                      <code style="font-size: 0.75rem"
+                        >9b8a7c6d...4e3f2a1b</code
+                      >
+                    </td>
+                    <td>
+                      <span class="badge badge-success"
+                        ><i class="fas fa-check"></i> Sealed</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>#1894217</code></td>
+                    <td>2026-09-21 07:30:00</td>
+                    <td><strong>S. Jenkins (Associate)</strong></td>
+                    <td>Updated DCF Sensitivity Model</td>
+                    <td>Project Valkyrie v4.2</td>
+                    <td>
+                      <code style="font-size: 0.75rem"
+                        >4d3c2b1a...8f9e0a1b</code
+                      >
+                    </td>
+                    <td>
+                      <span class="badge badge-success"
+                        ><i class="fas fa-check"></i> Sealed</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Compliance Framework Certification Status -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Auditor Attestations & Standards
+                </h3>
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>SOC-2 Type II (AICPA):</strong> Unqualified clean
+                      audit opinion issued by Ernst & Young LLP for Security,
+                      Availability, and Confidentiality.
+                    </p>
+                    <span class="feed-time">Period: Oct 2025 – Sep 2026</span>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-globe-europe"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>GDPR Article 30 Audit:</strong> Data Protection
+                      Impact Assessment (DPIA) validated zero third-party
+                      cross-border transfers.
+                    </p>
+                    <span class="feed-time">Re-certified Aug 2026</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <ul class="audit-stream-list" id="gov-audit-list">
-              <li class="audit-stream-item" data-category="auth">
-                <div>
-                  <div
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Cryptographic Evidence Extraction
+                </h3>
+              </div>
+              <p class="text-sm text-muted">
+                Generate cryptographically signed proof bundles for submission
+                to external SEC, FTC, or judicial auditors.
+              </p>
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
+                "
+                style="padding: 10px 0"
+              >
+                <div class="form-group">
+                  <label>Audit Scope Date Range</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="2026-09-01 to 2026-09-21"
                     style="
-                      font-size: 0.88rem;
-                      font-weight: 700;
-                      color: var(--color-primary-900);
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Evidence Classification</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
                     "
                   >
-                    TLS 1.3 cryptographic session verified for Victoria
-                    Alexander
-                  </div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted)">
-                    Actor: v.alexander@thestackly.com • IP: 198.51.100.42 •
-                    SHA-256: 0b42f1
-                  </div>
+                    <option>Full Forensic WORM Ledger with Merkle Roots</option>
+                    <option>Zero-Trust Access & Identity Elevation Only</option>
+                    <option>VDR Clean Room Document Download Audit</option>
+                  </select>
                 </div>
-                <div style="display: flex; align-items: center; gap: 10px">
-                  <span class="audit-severity-tag sev-nominal">Nominal</span>
-                  <span
-                    style="
-                      font-size: 0.76rem;
-                      color: var(--text-muted);
-                      white-space: nowrap;
-                    "
-                    >4m ago</span
-                  >
-                </div>
-              </li>
-              <li class="audit-stream-item" data-category="transaction">
-                <div>
-                  <div
-                    style="
-                      font-size: 0.88rem;
-                      font-weight: 700;
-                      color: var(--color-primary-900);
-                    "
-                  >
-                    Project Titan Definitive Agreement term sheet updated to
-                    Phase IV
-                  </div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted)">
-                    Actor: m.sterling@thestackly.com • IP: 203.0.113.19 •
-                    SHA-256: 8f9a2e
-                  </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px">
-                  <span class="audit-severity-tag sev-audit">Audit</span>
-                  <span
-                    style="
-                      font-size: 0.76rem;
-                      color: var(--text-muted);
-                      white-space: nowrap;
-                    "
-                    >18m ago</span
-                  >
-                </div>
-              </li>
-              <li class="audit-stream-item" data-category="export">
-                <div>
-                  <div
-                    style="
-                      font-size: 0.88rem;
-                      font-weight: 700;
-                      color: var(--color-primary-900);
-                    "
-                  >
-                    Apex Logistics QofE independent audit exported to Virtual
-                    Data Room
-                  </div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted)">
-                    Actor: e.rostova@thestackly.com • IP: 198.51.100.11 •
-                    SHA-256: 3a7b1c
-                  </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px">
-                  <span class="audit-severity-tag sev-nominal">Nominal</span>
-                  <span
-                    style="
-                      font-size: 0.76rem;
-                      color: var(--text-muted);
-                      white-space: nowrap;
-                    "
-                    >1h ago</span
-                  >
-                </div>
-              </li>
-              <li class="audit-stream-item" data-category="auth">
-                <div>
-                  <div
-                    style="
-                      font-size: 0.88rem;
-                      font-weight: 700;
-                      color: var(--color-primary-900);
-                    "
-                  >
-                    Automated SOC-2 continuous monitoring agent health-check
-                    completed
-                  </div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted)">
-                    Actor: System Daemon • Node: aws-us-east-1a • SHA-256:
-                    7d14ac
-                  </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px">
-                  <span class="audit-severity-tag sev-nominal">Nominal</span>
-                  <span
-                    style="
-                      font-size: 0.76rem;
-                      color: var(--text-muted);
-                      white-space: nowrap;
-                    "
-                    >2h ago</span
-                  >
-                </div>
-              </li>
-              <li class="audit-stream-item" data-category="transaction">
-                <div>
-                  <div
-                    style="
-                      font-size: 0.88rem;
-                      font-weight: 700;
-                      color: var(--color-primary-900);
-                    "
-                  >
-                    Senior Secured Revolver facility drawdown simulated:
-                    $50,000,000
-                  </div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted)">
-                    Actor: v.alexander@thestackly.com • Treasury Enclave •
-                    SHA-256: e512bc
-                  </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px">
-                  <span class="audit-severity-tag sev-audit">Audit</span>
-                  <span
-                    style="
-                      font-size: 0.76rem;
-                      color: var(--text-muted);
-                      white-space: nowrap;
-                    "
-                    >3h ago</span
-                  >
-                </div>
-              </li>
-            </ul>
-          </section>
-        </main>
-      </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-file-archive"></i> Download Cryptographic
+                  Evidence Archive
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-    <div
-      id="dash-toast-container"
-      class="dash-toast-container"
-      aria-live="polite"
-    ></div>
-
-    <!-- Scripts -->
     <script src="../assets/js/storage.js"></script>
     <script src="../assets/js/dashboard.js"></script>
-    <script src="../assets/js/main.js"></script>
   </body>
 </html>

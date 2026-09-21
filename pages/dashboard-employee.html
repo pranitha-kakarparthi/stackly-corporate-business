@@ -3,363 +3,777 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Employee Workspace | Stackly</title>
-    <meta
-      name="description"
-      content="Stackly Employee Workspace - M&A Execution, Diligence Workstreams, and Valuation Modeling."
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <title>Employee Workspace - Stackly Corporate Business</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/dashboard.css" />
-    <script>
-      (function () {
-        try {
-          var raw = localStorage.getItem("cb_currentUser");
-          if (!raw) {
-            window.location.replace("sign-in.html");
-          }
-        } catch (e) {
-          window.location.replace("sign-in.html");
-        }
-      })();
-    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="dashboard-body">
-    <div class="dashboard-wrapper">
-      <!-- COLLAPSIBLE SIDEBAR -->
-      <aside
-        class="dash-sidebar"
-        role="navigation"
-        aria-label="Employee Navigation Sidebar"
-      >
-        <div class="dash-sidebar-header">
-          <a
-            href="../index.html"
-            aria-label="Stackly Home"
-            class="dash-brand-link"
-          >
-            <img
-              src="../assets/images/logoStackly.webp"
-              alt="Stackly Logo"
-              width="160"
-              height="36"
-              class="dash-brand-img"
-            />
-          </a>
-          <button
-            class="dash-mobile-close-btn"
-            id="dash-mobile-close"
-            aria-label="Close Mobile Navigation"
-          >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
+    <aside class="dash-sidebar" id="dashSidebar">
+      <div class="dash-sidebar-header">
+        <a
+          href="../index.html"
+          class="dash-brand-link"
+          aria-label="Stackly Home"
+        >
+          <img
+            src="../assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            width="160"
+            height="36"
+            class="dash-brand-img"
+            style="height: 36px; max-width: 160px; object-fit: contain"
+          />
+        </a>
+        <button
+          class="sidebar-close-btn"
+          id="sidebarCloseBtn"
+          aria-label="Close Sidebar"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
 
-        <ul class="dash-nav-menu">
-          <li class="dash-nav-heading">Associate Desk</li>
-          <li class="dash-nav-item active" data-tooltip="My Workstream">
-            <a href="#emp-workstream" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-                />
-              </svg>
-              <span>My Workstreams</span>
-            </a>
+      <div class="dash-user-card">
+        <div class="dash-avatar-wrapper">
+          <div class="dash-avatar" id="dashUserAvatar">EP</div>
+          <span class="dash-status-dot online"></span>
+        </div>
+        <div class="dash-user-info">
+          <h4 id="dashUserName">Senior Associate</h4>
+          <span class="dash-role-badge" id="dashRoleBadge"
+            >Execution Associate</span
+          >
+          <span class="dash-user-email" id="dashUserEmail"
+            >associate@stacklycorp.com</span
+          >
+        </div>
+      </div>
+
+      <nav class="dash-nav">
+        <div class="dash-nav-section-title">Core Execution</div>
+        <ul class="dash-nav-list">
+          <li
+            class="dash-nav-item active"
+            data-view="overview"
+            data-tooltip="Execution Hub"
+          >
+            <a href="#overview"
+              ><i class="fas fa-th-large"></i><span>Execution Hub</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Diligence Queue">
-            <a href="#emp-diligence" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              <span>Diligence Queue</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="diligence"
+            data-tooltip="Diligence Tracker"
+          >
+            <a href="#diligence"
+              ><i class="fas fa-tasks"></i><span>Diligence Tracker</span
+              ><span class="nav-counter">18</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Valuation Modeler">
-            <a href="#emp-valuation" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                />
-              </svg>
-              <span>Valuation Modeler</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="valuation"
+            data-tooltip="DCF & Valuation"
+          >
+            <a href="#valuation"
+              ><i class="fas fa-calculator"></i><span>DCF & Valuation</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Data Room Staging">
-            <a href="#emp-vdr" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
-                />
-              </svg>
-              <span>VDR Staging</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="vdr"
+            data-tooltip="VDR Staging Room"
+          >
+            <a href="#vdr"
+              ><i class="fas fa-folder-open"></i
+              ><span>VDR Staging Room</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Time & Utilization">
-            <a href="#emp-time" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span>Hours & Utilization</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="time"
+            data-tooltip="Timesheet & Ledger"
+          >
+            <a href="#time"
+              ><i class="fas fa-business-time"></i
+              ><span>Timesheet & Ledger</span></a
+            >
           </li>
         </ul>
 
-        <!-- SIDEBAR COLLAPSE TRIGGER -->
-        <div class="dash-sidebar-bottom">
+        <div class="dash-nav-section-title">System & Security</div>
+        <ul class="dash-nav-list">
+          <li class="dash-nav-item" data-tooltip="Biometric Audit">
+            <a href="404.html"
+              ><i class="fas fa-fingerprint"></i><span>Biometric Audit</span></a
+            >
+          </li>
+          <li class="dash-nav-item" data-tooltip="Execution Manual">
+            <a href="404.html"
+              ><i class="fas fa-book"></i><span>Execution Manual</span></a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <div class="dash-sidebar-footer">
+        <a href="../index.html" class="dash-sidebar-link"
+          ><i class="fas fa-globe"></i><span>Public Portal</span></a
+        >
+        <button class="dash-logout-btn" id="dashLogoutBtn">
+          <i class="fas fa-sign-out-alt"></i><span>Secure Logout</span>
+        </button>
+        <button
+          class="sidebar-collapse-btn"
+          id="sidebarCollapseBtn"
+          aria-label="Collapse Navigation Menu"
+          title="Collapse Sidebar"
+        >
+          <i class="fas fa-angle-double-left collapse-icon"></i>
+          <span class="collapse-label">Collapse Menu</span>
+        </button>
+      </div>
+    </aside>
+
+    <div
+      class="dash-sidebar-backdrop"
+      id="dash-sidebar-backdrop"
+      aria-hidden="true"
+    ></div>
+
+    <div class="dash-main-wrapper">
+      <header class="dash-topbar" role="banner">
+        <div class="dash-topbar-left">
           <button
-            class="sidebar-collapse-btn"
-            id="sidebar-collapse-trigger"
-            title="Collapse / Expand Sidebar"
-            aria-label="Toggle Desktop Sidebar"
+            class="sidebar-toggle-btn"
+            id="sidebarToggleBtn"
+            aria-label="Toggle Sidebar"
           >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-              />
-            </svg>
-            <span class="collapse-label">Collapse Menu</span>
+            <i class="fas fa-bars"></i>
           </button>
+          <div class="dash-breadcrumb">
+            <span class="crumb-root">Workspace</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-role" id="crumbRole">Employee Workspace</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-view" id="crumbView">Execution Hub</span>
+          </div>
         </div>
-      </aside>
 
-      <!-- MOBILE SIDEBAR BACKDROP -->
-      <div class="dash-sidebar-backdrop" id="dash-sidebar-backdrop"></div>
+        <div class="dash-topbar-right">
+          <div class="topbar-chip">
+            <i class="fas fa-clock text-accent"></i
+            ><span id="dashLiveTime">UTC 00:00</span>
+          </div>
+          <div class="topbar-chip">
+            <i class="fas fa-shield-virus text-success"></i
+            ><span>Confidential Tier-2</span>
+          </div>
+          <a href="404.html" class="topbar-action-icon" title="Notifications"
+            ><i class="fas fa-bell"></i><span class="badge-dot"></span
+          ></a>
+          <a href="404.html" class="topbar-action-icon" title="Deal Vault Chat"
+            ><i class="fas fa-comments"></i
+          ></a>
+          <a href="404.html" class="btn btn-sm btn-primary action-404-btn"
+            ><i class="fas fa-plus"></i> New Memo</a
+          >
+        </div>
+      </header>
 
-      <!-- MAIN CONTENT WRAPPER -->
-      <div class="dash-main">
-        <!-- PERMANENTLY FIXED TOPBAR -->
-        <header class="dash-topbar" role="banner">
-          <div class="dash-topbar-left">
-            <button class="sidebar-toggle-btn" aria-label="Open Sidebar Menu">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
+      <main class="dash-content">
+        <!-- =========================================================
+           VIEW 1: OVERVIEW
+           ========================================================= -->
+        <div id="view-overview" class="dash-view active-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Transaction Execution Dashboard</h2>
+              <p class="view-subtitle">
+                Live tracking of active advisory mandates, diligence findings,
+                and valuation modeling iterations.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-file-export"></i> Export Weekly Summary</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-sync-alt"></i> Sync CapIQ Feeds</a
+              >
+            </div>
           </div>
 
-          <div class="dash-topbar-right">
-            <!-- User Profile Area -->
-            <div class="user-profile-badge">
-              <div id="dash-user-initials" class="user-avatar-initials">ER</div>
-              <div class="user-info-text">
-                <span id="dash-user-name" class="user-display-name"
-                  >Elena Rostova</span
-                >
-                <span id="dash-user-role" class="user-role-label"
-                  >Employee Access</span
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Active Mandates</span>
+                <h3 class="stat-value">4 Live Deals</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> $6.8B Aggregate EV</span
                 >
               </div>
             </div>
-
-            <!-- Primary CTA: Sign Out -->
-            <button
-              onclick="
-                window.CB_Storage
-                  ? window.CB_Storage.logout()
-                  : (window.location.href = 'sign-in.html')
-              "
-              class="btn btn-secondary-light btn-sm"
-              title="End Session"
-            >
-              <span>Sign Out</span>
-            </button>
-          </div>
-        </header>
-
-        <!-- DASHBOARD BODY CONTENT -->
-        <main class="dash-content">
-          <!-- HERO BANNER SECTION -->
-          <div class="dash-hero-banner" id="emp-workstream">
-            <div class="dash-hero-eyebrow">
-              <span class="pulse-dot"></span>
-              <span>M&A Strategy & Advisory Execution</span>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-clipboard-check"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Pending Diligence Items</span>
+                <h3 class="stat-value">18 Open / 42 Total</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-clock"></i> 4 Flagged as Critical</span
+                >
+              </div>
             </div>
-            <h1 class="dash-hero-title">
-              <span id="greetingTime">Good afternoon</span>,
-              <span class="gradient-text" id="greetingName"
-                >Elena Rostova.</span
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-sliders-h"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Valuation Models</span>
+                <h3 class="stat-value">3 Active Iterations</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check-circle"></i> Valkyrie v4.2
+                  Approved</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-hourglass-half"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Target Close Horizon</span>
+                <h3 class="stat-value">14 Days</h3>
+                <span class="stat-trend negative"
+                  ><i class="fas fa-exclamation-circle"></i> Project
+                  Valkyrie</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Active Workstreams Table with Live Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Live Transaction Workstream Docket
+                </h3>
+                <p class="dash-card-subtitle">
+                  Assigned deal deliverables, client review stages, and
+                  committee deadlines.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-emp-workstream"
+                  placeholder="Search deals, stages, leads..."
+                />
+                <a href="404.html" class="btn btn-sm btn-secondary"
+                  ><i class="fas fa-filter"></i> Filter Mandates</a
+                >
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-emp-workstream">
+                <thead>
+                  <tr>
+                    <th>Deal Code</th>
+                    <th>Client / Target</th>
+                    <th>Transaction Type</th>
+                    <th>Execution Lead</th>
+                    <th>Stage</th>
+                    <th>Status</th>
+                    <th>Target Sign</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td><strong>AeroDynamics Corp</strong></td>
+                    <td>Sell-Side M&A ($2.8B)</td>
+                    <td>M. Henderson (MD)</td>
+                    <td>
+                      <span class="status-pill status-active"
+                        >Definitive Agreement</span
+                      >
+                    </td>
+                    <td>
+                      <span class="badge badge-warning">High Priority</span>
+                    </td>
+                    <td>Oct 12, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal Memo</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-NEBULA</code></td>
+                    <td><strong>Apex Cloud Systems</strong></td>
+                    <td>Strategic Acquisition ($1.4B)</td>
+                    <td>E. Watson (VP)</td>
+                    <td>
+                      <span class="status-pill status-active"
+                        >Confirmatory DD</span
+                      >
+                    </td>
+                    <td><span class="badge badge-success">On Track</span></td>
+                    <td>Nov 04, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal Memo</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-OLYMPUS</code></td>
+                    <td><strong>BioGenix Therapeutics</strong></td>
+                    <td>Carve-Out & Spinoff ($1.9B)</td>
+                    <td>A. Zhang (Dir)</td>
+                    <td>
+                      <span class="status-pill status-review"
+                        >LBO Structuring</span
+                      >
+                    </td>
+                    <td><span class="badge badge-info">Model Review</span></td>
+                    <td>Nov 28, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal Memo</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-CYPHER</code></td>
+                    <td><strong>QuantumGrid Security</strong></td>
+                    <td>Series D Recapitalization ($700M)</td>
+                    <td>J. Rodriguez (VP)</td>
+                    <td>
+                      <span class="status-pill status-closed"
+                        >Term Sheet Signed</span
+                      >
+                    </td>
+                    <td><span class="badge badge-success">Approved</span></td>
+                    <td>Dec 15, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal Memo</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-HELIOS</code></td>
+                    <td><strong>Nordic CleanPower Holdings</strong></td>
+                    <td>Infrastructure Buyout ($3.2B)</td>
+                    <td>S. Kakarparthi (Partner)</td>
+                    <td>
+                      <span class="status-pill status-review"
+                        >Preliminary Teaser</span
+                      >
+                    </td>
+                    <td>
+                      <span class="badge badge-secondary">Early Stage</span>
+                    </td>
+                    <td>Jan 20, 2027</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal Memo</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: CIM & Marketing Collateral Staging -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Deal Information Memoranda (CIM) Staging
+                </h3>
+                <p class="dash-card-subtitle">
+                  Confidential marketing collateral awaiting associate
+                  fact-checking and partner signoff.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-primary"
+                ><i class="fas fa-file-upload"></i> Upload Working Draft</a
               >
-            </h1>
-            <p class="dash-hero-desc">
-              Financial modeling, due diligence workstreams, and confidential
-              information memorandums are ready for Investment Committee review.
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Document Title</th>
+                    <th>Deal Code</th>
+                    <th>Version</th>
+                    <th>Pages</th>
+                    <th>Review Status</th>
+                    <th>Confidentiality Tier</th>
+                    <th>Last Modified</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong
+                        >Confidential Information Memo - AeroDynamics
+                        Corp</strong
+                      >
+                    </td>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td>v4.2-Final</td>
+                    <td>94 pp</td>
+                    <td>
+                      <span class="badge badge-success">Partner Approved</span>
+                    </td>
+                    <td>Strict NDA (Clean Room)</td>
+                    <td>Today, 09:15</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-secondary"
+                        >Open Viewer</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong
+                        >Project Nebula - Technical Synergy Appendix</strong
+                      >
+                    </td>
+                    <td><code>PRJ-NEBULA</code></td>
+                    <td>v2.1-Draft</td>
+                    <td>42 pp</td>
+                    <td>
+                      <span class="badge badge-warning"
+                        >Needs Associate Factcheck</span
+                      >
+                    </td>
+                    <td>Confidential Tier-2</td>
+                    <td>Yesterday, 18:40</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-secondary"
+                        >Open Viewer</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong
+                        >BioGenix Therapeutics Carve-Out Tax Structuring
+                        Paper</strong
+                      >
+                    </td>
+                    <td><code>PRJ-OLYMPUS</code></td>
+                    <td>v1.4</td>
+                    <td>38 pp</td>
+                    <td>
+                      <span class="badge badge-info"
+                        >External Counsel Review</span
+                      >
+                    </td>
+                    <td>Restricted / Legal Only</td>
+                    <td>Sep 18, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-secondary"
+                        >Open Viewer</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 4: Associate Tasks & Team Feed -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Execution Checklist & Deliverables
+                </h3>
+              </div>
+              <ul class="task-list">
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" checked />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Reconcile Valkyrie Q3 Adjusted EBITDA bridge with target
+                      CFO</span
+                    >
+                    <span class="task-meta text-muted"
+                      >Completed today at 08:30 by S. Associate</span
+                    >
+                  </div>
+                </li>
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Update trading comps multiples for Cloud Systems cohort
+                      (LTM EV/Revenue)</span
+                    >
+                    <span class="task-meta text-warning"
+                      >Due today at 17:00 • High priority</span
+                    >
+                  </div>
+                </li>
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Index 14 IP patent assignment deeds into VDR folder
+                      4.2</span
+                    >
+                    <span class="task-meta text-muted"
+                      >Due tomorrow at 12:00 • Project Valkyrie</span
+                    >
+                  </div>
+                </li>
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Prepare 5-page Investment Committee briefing teaser for
+                      Helios</span
+                    >
+                    <span class="task-meta text-muted"
+                      >Due Thursday • Partner review requested</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Deal Team Communications & Sync</h3>
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-comment-dots"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Marcus Vance (Partner)</strong> left comments on
+                      <code>PRJ-VALKYRIE Valuation Model v4.2</code>:
+                      <em
+                        >"Increase WACC sensitivity to 9.25% in downside
+                        case."</em
+                      >
+                    </p>
+                    <span class="feed-time">18 minutes ago</span>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-file-signature"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Legal Counsel (White & Case)</strong> uploaded
+                      updated Disclosure Schedules for Project Nebula.
+                    </p>
+                    <span class="feed-time">1 hour ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Working Paper Upload Box -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Upload Working Draft / Financial Schedule
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Associated Deal Mandate</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>PRJ-VALKYRIE - AeroDynamics Corp</option>
+                    <option>PRJ-NEBULA - Apex Cloud Systems</option>
+                    <option>PRJ-OLYMPUS - BioGenix Therapeutics</option>
+                    <option>PRJ-HELIOS - Nordic CleanPower</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Working Paper Category</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Financial Model (.XLSM / .XLSX)</option>
+                    <option>Diligence Q&A Request Response</option>
+                    <option>Executive Teaser Presentation (.PPTX)</option>
+                    <option>Legal Redline Agreement (.DOCX)</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-upload"></i> Upload & Submit for Partner Review
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 2: DILIGENCE TRACKER
+           ========================================================= -->
+        <div id="view-diligence" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Due Diligence Request Matrix & Verification
+              </h2>
+              <p class="view-subtitle">
+                Interactive tracking of request lists, audit evidence, buyer Q&A
+                logs, and red-flag escalation.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-download"></i> Export DD Checklist (XLSX)</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-plus"></i> Submit Information Request</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: Interactive Diligence Completion Progress Bar -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Active Mandate Diligence Completion Index
+                </h3>
+                <p class="dash-card-subtitle">
+                  Aggregated verification score across 5 diligence workstreams.
+                </p>
+              </div>
+              <span class="badge badge-primary" id="diligence-progress-text"
+                >14 of 18 Tasks Verified (78%)</span
+              >
+            </div>
+            <div
+              class="progress-bar-container"
+              style="
+                background: rgba(255, 255, 255, 0.06);
+                height: 10px;
+                border-radius: 5px;
+                overflow: hidden;
+                margin: 15px 0;
+              "
+            >
+              <div
+                id="diligence-progress-bar"
+                style="
+                  width: 78%;
+                  height: 100%;
+                  background: linear-gradient(
+                    90deg,
+                    var(--accent-color),
+                    #22c55e
+                  );
+                  transition: width 0.4s ease;
+                "
+              ></div>
+            </div>
+            <p class="text-muted text-sm">
+              <i class="fas fa-info-circle"></i> Check or uncheck items below to
+              interactively update the live completion tracker.
             </p>
           </div>
 
-          <!-- SECTION 1: 4 KPI STATS CARDS -->
-          <section class="dash-stats-grid" aria-label="Employee KPIs">
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Active Mandate Deals</span>
-                <span class="stat-icon-wrap icon-blue">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                    />
-                  </svg>
-                </span>
+          <!-- Section 2: Filter Pills & Search Tools -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Diligence Request Tracker (RFI Docket)
+                </h3>
               </div>
-              <div class="stat-value">4 Deals</div>
-              <div class="stat-delta positive">
-                <span>Titan, Apex, Helios, Sovereign</span>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-diligence"
+                  placeholder="Search RFIs, departments, owners..."
+                />
+                <div class="filter-pill-group">
+                  <button class="status-filter-pill active" data-status="all">
+                    All (8)
+                  </button>
+                  <button class="status-filter-pill" data-status="Active">
+                    Pending (3)
+                  </button>
+                  <button class="status-filter-pill" data-status="Completed">
+                    Verified (4)
+                  </button>
+                  <button class="status-filter-pill" data-status="Under Review">
+                    Under Review (1)
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Due Diligence Checklist</span>
-                <span class="stat-icon-wrap icon-emerald">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">18 Items</div>
-              <div class="stat-delta positive">
-                <span>14 Completed (78%)</span>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Financial Model Accuracy</span>
-                <span class="stat-icon-wrap icon-purple">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">94.2%</div>
-              <div class="stat-delta positive"><span>Audit Verified</span></div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Weekly Billable Hours</span>
-                <span class="stat-icon-wrap icon-amber">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">38.5 hrs</div>
-              <div class="stat-delta positive">
-                <span>96% Target Pacing</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- SECTION 2: DUE DILIGENCE WORKSTREAMS & TASK QUEUE -->
-          <section
-            class="dash-panel"
-            id="emp-diligence"
-            style="margin-bottom: 28px"
-          >
-            <div class="dash-panel-header">
-              <h3>Due Diligence Workstreams & Assigned Tasks</h3>
-              <button
-                type="button"
-                class="btn btn-primary btn-sm"
-                onclick="
-                  window.showDashToast(
-                    'New diligence checklist task appended.',
-                    'success'
-                  )
-                "
-              >
-                + New Task
-              </button>
             </div>
             <div class="table-responsive">
-              <table class="custom-table">
+              <table class="dash-table" id="table-diligence">
                 <thead>
                   <tr>
-                    <th>Deliverable / Task</th>
-                    <th>Engagement Target</th>
-                    <th>Due Date</th>
+                    <th style="width: 40px">Verif.</th>
+                    <th>RFI Code</th>
+                    <th>Category</th>
+                    <th>Request Description</th>
+                    <th>Assigned Specialist</th>
+                    <th>Target Firm</th>
                     <th>Priority</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -368,376 +782,1650 @@
                 <tbody>
                   <tr>
                     <td>
-                      <strong
-                        >Quality of Earnings (QofE) EBITDA
-                        Reconciliation</strong
-                      >
+                      <input
+                        type="checkbox"
+                        class="diligence-task-check"
+                        checked
+                      />
                     </td>
-                    <td>Project Apex Logistics</td>
-                    <td>Tomorrow, 5:00 PM</td>
+                    <td><code>FIN-0104</code></td>
+                    <td><strong>Financial</strong></td>
                     <td>
-                      <span
-                        class="status-badge"
-                        style="background: #fee2e2; color: #991b1b"
-                        >High Priority</span
-                      >
+                      Audited financial statements for FY2023-FY2025 with
+                      footnotes and auditor opinion
+                    </td>
+                    <td>PwC Forensic Team</td>
+                    <td>AeroDynamics</td>
+                    <td><span class="badge badge-warning">Critical</span></td>
+                    <td>
+                      <span class="status-pill status-closed">Completed</span>
                     </td>
                     <td>
-                      <span class="status-badge status-active"
-                        >Review Draft</span
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
                       >
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'QofE model opened in spreadsheet viewer.',
-                            'info'
-                          )
-                        "
-                      >
-                        Open Model
-                      </button>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <strong
-                        >Antitrust HSR Premerger Regulatory Filings
-                        Review</strong
-                      >
+                      <input
+                        type="checkbox"
+                        class="diligence-task-check"
+                        checked
+                      />
                     </td>
-                    <td>Project Titan Carveout</td>
-                    <td>Sep 22, 2026</td>
+                    <td><code>FIN-0105</code></td>
+                    <td><strong>Financial</strong></td>
                     <td>
-                      <span
-                        class="status-badge"
-                        style="background: #fef9c3; color: #854d0e"
-                        >Medium</span
-                      >
+                      Monthly trial balance schedules reconciliation with
+                      general ledger for LTM Q3
+                    </td>
+                    <td>Internal Associate</td>
+                    <td>AeroDynamics</td>
+                    <td><span class="badge badge-info">High</span></td>
+                    <td>
+                      <span class="status-pill status-closed">Completed</span>
                     </td>
                     <td>
-                      <span class="status-badge status-active"
-                        >In Progress</span
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
                       >
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'Antitrust docket marked as reviewed.',
-                            'success'
-                          )
-                        "
-                      >
-                        Complete
-                      </button>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <strong
-                        >Confidential Information Memorandum (CIM v4.2)</strong
-                      >
+                      <input type="checkbox" class="diligence-task-check" />
                     </td>
-                    <td>Helios Solar Infra</td>
-                    <td>Sep 25, 2026</td>
+                    <td><code>TAX-0201</code></td>
+                    <td><strong>Tax & Structuring</strong></td>
                     <td>
-                      <span
-                        class="status-badge"
-                        style="background: #dcfce7; color: #166534"
-                        >Normal</span
-                      >
+                      Section 382 NOL limitation analysis and historical tax
+                      returns (Federal & State)
                     </td>
+                    <td>KPMG Tax Advisory</td>
+                    <td>AeroDynamics</td>
+                    <td><span class="badge badge-warning">Critical</span></td>
                     <td>
-                      <span class="status-badge status-pending"
-                        >Pending Review</span
-                      >
+                      <span class="status-pill status-active">Active</span>
                     </td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'CIM deck exported to PDF.',
-                            'info'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
                       >
-                        Export Deck
-                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input
+                        type="checkbox"
+                        class="diligence-task-check"
+                        checked
+                      />
+                    </td>
+                    <td><code>LEG-0301</code></td>
+                    <td><strong>Legal & Regulatory</strong></td>
+                    <td>
+                      Material customer contracts representing >$1M annual
+                      recurring revenue
+                    </td>
+                    <td>Latham & Watkins</td>
+                    <td>Apex Cloud</td>
+                    <td><span class="badge badge-info">High</span></td>
+                    <td>
+                      <span class="status-pill status-closed">Completed</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" class="diligence-task-check" />
+                    </td>
+                    <td><code>CYB-0402</code></td>
+                    <td><strong>Cybersecurity</strong></td>
+                    <td>
+                      SOC 2 Type II compliance audit reports and historical
+                      penetration test logs
+                    </td>
+                    <td>Mandiant Advisory</td>
+                    <td>Apex Cloud</td>
+                    <td><span class="badge badge-warning">Critical</span></td>
+                    <td>
+                      <span class="status-pill status-review"
+                        >Under Review</span
+                      >
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input
+                        type="checkbox"
+                        class="diligence-task-check"
+                        checked
+                      />
+                    </td>
+                    <td><code>COM-0501</code></td>
+                    <td><strong>Commercial</strong></td>
+                    <td>
+                      Top 20 customer cohort retention curves and customer
+                      lifetime value (LTV) models
+                    </td>
+                    <td>McKinsey Growth DD</td>
+                    <td>Apex Cloud</td>
+                    <td><span class="badge badge-info">High</span></td>
+                    <td>
+                      <span class="status-pill status-closed">Completed</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" class="diligence-task-check" />
+                    </td>
+                    <td><code>ENV-0601</code></td>
+                    <td><strong>Environmental</strong></td>
+                    <td>
+                      Phase I Environmental Site Assessment (ESA) reports for 6
+                      fabrication sites
+                    </td>
+                    <td>ERM Global</td>
+                    <td>BioGenix</td>
+                    <td><span class="badge badge-warning">Critical</span></td>
+                    <td>
+                      <span class="status-pill status-active">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" class="diligence-task-check" />
+                    </td>
+                    <td><code>HR-0701</code></td>
+                    <td><strong>Human Capital</strong></td>
+                    <td>
+                      Executive compensation agreements, change-of-control
+                      golden parachutes, and 280G calculations
+                    </td>
+                    <td>Mercer HR Advisory</td>
+                    <td>BioGenix</td>
+                    <td><span class="badge badge-info">High</span></td>
+                    <td>
+                      <span class="status-pill status-active">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
+                      >
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </section>
+          </div>
 
-          <!-- SECTION 3: VALUATION SENSITIVITY CALCULATOR -->
-          <section
-            class="dash-panel"
-            id="emp-valuation"
-            style="margin-bottom: 28px"
-          >
-            <div class="dash-panel-header">
-              <h3>Valuation Sensitivity Modeler (Run-Rate EBITDA)</h3>
-              <span class="user-greeting-pill">Interactive Calculation</span>
+          <!-- Section 3: Buyer Inquiries & Red Flag Log -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Buyer Diligence Q&A Queue</h3>
+                <a href="404.html" class="btn btn-xs btn-secondary"
+                  >Open Q&A Portal</a
+                >
+              </div>
+              <div class="table-responsive">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Question ID</th>
+                      <th>Bidder Group</th>
+                      <th>Topic</th>
+                      <th>SLA Deadline</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>QA-VAL-042</code></td>
+                      <td>Sovereign Wealth Fund B</td>
+                      <td>Warranty liability reserve in Q2</td>
+                      <td>Today 16:00</td>
+                      <td>
+                        <a href="404.html" class="btn btn-xs btn-primary"
+                          >Draft Answer</a
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>QA-VAL-043</code></td>
+                      <td>Private Equity Bidder Alpha</td>
+                      <td>IP litigation settlement in EMEA</td>
+                      <td>Tomorrow 10:00</td>
+                      <td>
+                        <a href="404.html" class="btn btn-xs btn-primary"
+                          >Draft Answer</a
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>QA-NEB-018</code></td>
+                      <td>Strategic Tech Acquirer</td>
+                      <td>Multi-tenant database tenancy isolation</td>
+                      <td>Oct 10, 2026</td>
+                      <td>
+                        <a href="404.html" class="btn btn-xs btn-primary"
+                          >Draft Answer</a
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="sensitivity-modeler-container">
-              <div class="slider-group-box">
-                <div class="slider-item">
-                  <div class="slider-header-row">
-                    <span class="slider-label">Annual Revenue ($M)</span>
-                    <span class="slider-val-badge" id="val-badge-revenue"
-                      >$850M</span
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Identified Red Flags & Mitigation Notes
+                </h3>
+                <span class="badge badge-warning">2 Active Flags</span>
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-amber">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Environmental Liability:</strong> Fabrication site
+                      in Dresden has pending soil remediation inquiry from Saxon
+                      EPA. Estimated contingency exposure: $4.2M - $6.5M.
+                    </p>
+                    <span class="feed-time"
+                      >Assigned to: Latham & Watkins Legal DD</span
                     >
                   </div>
-                  <input
-                    type="range"
-                    id="slider-revenue"
-                    class="dash-range-slider"
-                    min="200"
-                    max="2000"
-                    step="25"
-                    value="850"
-                  />
                 </div>
-                <div class="slider-item">
-                  <div class="slider-header-row">
-                    <span class="slider-label">EBITDA Margin (%)</span>
-                    <span class="slider-val-badge" id="val-badge-margin"
-                      >32.0%</span
-                    >
+                <div class="feed-item">
+                  <div class="feed-icon bg-amber">
+                    <i class="fas fa-user-lock"></i>
                   </div>
-                  <input
-                    type="range"
-                    id="slider-margin"
-                    class="dash-range-slider"
-                    min="15"
-                    max="50"
-                    step="1"
-                    value="32"
-                  />
-                </div>
-                <div class="slider-item">
-                  <div class="slider-header-row">
-                    <span class="slider-label">EV / EBITDA Multiple</span>
-                    <span class="slider-val-badge" id="val-badge-multiple"
-                      >14.5x</span
-                    >
-                  </div>
-                  <input
-                    type="range"
-                    id="slider-multiple"
-                    class="dash-range-slider"
-                    min="8"
-                    max="24"
-                    step="0.5"
-                    value="14.5"
-                  />
-                </div>
-                <div class="sensitivity-stats-grid">
-                  <div class="sens-stat-badge">
-                    <span class="sens-stat-label">Calculated EBITDA</span>
-                    <span class="sens-stat-val" id="out-calc-ebitda"
-                      >$272.0M</span
-                    >
-                  </div>
-                  <div class="sens-stat-badge">
-                    <span class="sens-stat-label">Enterprise Value</span>
-                    <span
-                      class="sens-stat-val"
-                      id="out-calc-ev"
-                      style="color: var(--color-accent-gold-dark)"
-                      >$3,944M</span
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Key Man Dependency:</strong> CTO employment
+                      agreement does not contain enforceable 2-year non-compete
+                      covenant in California jurisdiction. Requires retention
+                      incentive pool.
+                    </p>
+                    <span class="feed-time"
+                      >Assigned to: Compensation Committee</span
                     >
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
 
+          <!-- Section 4: Diligence Request Submission Staging -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Submit New Information Request (RFI) to Target Management
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Target Mandate</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>PRJ-VALKYRIE - AeroDynamics Corp</option>
+                    <option>PRJ-NEBULA - Apex Cloud Systems</option>
+                    <option>PRJ-OLYMPUS - BioGenix Therapeutics</option>
+                    <option>PRJ-HELIOS - Nordic CleanPower</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Diligence Workstream</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Financial & Forensic Accounting</option>
+                    <option>Tax Structuring & NOL Audits</option>
+                    <option>Commercial Cohort & Retention</option>
+                    <option>Cybersecurity & Technical Debt</option>
+                    <option>Legal & Material Contracts</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Priority Rating</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Critical (Deal Blocker)</option>
+                    <option>High Priority</option>
+                    <option>Standard Diligence Scope</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Detailed Request Narrative & Evidence Required</label>
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Specify exact files, trial balances, or schedules requested..."
+                  style="
+                    background: rgba(255, 255, 255, 0.05);
+                    color: #fff;
+                    border: 1px solid var(--border-color);
+                    border-radius: 6px;
+                    padding: 10px;
+                  "
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Dispatch Formal Information
+                Request
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 3: DCF & VALUATION
+           ========================================================= -->
+        <div id="view-valuation" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Discounted Cash Flow & LBO Valuation Modeler
+              </h2>
+              <p class="view-subtitle">
+                Interactive financial engineering engine with dynamic
+                sensitivity curves and comparable market multiples.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-file-excel"></i> Download Excel Model
+                (.XLSM)</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-share-alt"></i> Publish Committee Teaser</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: Interactive Sensitivity Modeler -->
+          <div
+            class="dash-card"
+            style="border-left: 4px solid var(--accent-color)"
+          >
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  <i class="fas fa-sliders-h text-accent"></i> Real-Time DCF
+                  Sensitivity Sandbox (Project Valkyrie)
+                </h3>
+                <p class="dash-card-subtitle">
+                  Adjust key discount rates, terminal growth, and exit multiples
+                  to recalculate enterprise and equity valuations
+                  instantaneously.
+                </p>
+              </div>
+              <span class="badge badge-success">Model v4.2 Engine Live</span>
+            </div>
+
+            <div class="dash-grid-2" style="margin-top: 15px">
+              <!-- Left: Sliders -->
               <div
+                class="slider-control-panel"
                 style="
-                  background: #ffffff;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 18px;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: space-between;
+                  background: rgba(255, 255, 255, 0.02);
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 20px;
                 "
               >
-                <div>
-                  <h4
+                <h4
+                  style="
+                    font-size: 0.95rem;
+                    margin-bottom: 20px;
+                    color: var(--accent-color);
+                  "
+                >
+                  <i class="fas fa-tune"></i> Valuation Assumptions & Inputs
+                </h4>
+
+                <!-- Slider 1: WACC -->
+                <div class="slider-group" style="margin-bottom: 22px">
+                  <div
                     style="
-                      font-size: 1rem;
-                      color: var(--color-primary-900);
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
                       margin-bottom: 8px;
                     "
                   >
-                    Associate Valuation Memo Notes
-                  </h4>
-                  <p
+                    <label
+                      for="val-wacc-slider"
+                      style="font-weight: 600; font-size: 0.85rem"
+                      >Discount Rate (WACC):</label
+                    >
+                    <span
+                      id="val-wacc-val"
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-weight: 700;
+                        color: #60a5fa;
+                      "
+                      >8.5%</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="val-wacc-slider"
+                    min="5.0"
+                    max="15.0"
+                    step="0.1"
+                    value="8.5"
                     style="
-                      font-size: 0.82rem;
-                      color: var(--text-secondary);
-                      line-height: 1.5;
-                      margin-bottom: 14px;
+                      width: 100%;
+                      accent-color: var(--accent-color);
+                      cursor: pointer;
                     "
-                  >
-                    Valuation benchmarked against median private equity buyout
-                    multiples in clean energy and enterprise software. Projected
-                    5-year exit multiple expansion models 1.8x MOIC.
-                  </p>
+                  />
                   <div
                     style="
-                      background: #fbfaf8;
-                      border: 1px solid var(--border-subtle);
-                      border-radius: 4px;
-                      padding: 10px;
-                      font-size: 0.78rem;
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 0.75rem;
+                      color: var(--text-muted);
+                      margin-top: 4px;
                     "
                   >
-                    <strong>Lead Partner Sign-Off:</strong> Marcus Sterling
-                    (Pending committee ratification)
+                    <span>5.0% (Aggressive)</span>
+                    <span>10.0% (Base)</span>
+                    <span>15.0% (Conservative)</span>
                   </div>
                 </div>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  style="margin-top: 16px"
-                  onclick="
-                    window.showDashToast(
-                      'Valuation model snapshot attached to Deal Docket.',
-                      'success'
-                    )
+
+                <!-- Slider 2: Terminal Growth Rate -->
+                <div class="slider-group" style="margin-bottom: 22px">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    <label
+                      for="val-growth-slider"
+                      style="font-weight: 600; font-size: 0.85rem"
+                      >Terminal Growth Rate (g):</label
+                    >
+                    <span
+                      id="val-growth-val"
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-weight: 700;
+                        color: #34d399;
+                      "
+                      >2.5%</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="val-growth-slider"
+                    min="1.0"
+                    max="5.0"
+                    step="0.1"
+                    value="2.5"
+                    style="width: 100%; accent-color: #10b981; cursor: pointer"
+                  />
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 0.75rem;
+                      color: var(--text-muted);
+                      margin-top: 4px;
+                    "
+                  >
+                    <span>1.0% (GDP Floor)</span>
+                    <span>3.0% (Equilibrium)</span>
+                    <span>5.0% (Bullish)</span>
+                  </div>
+                </div>
+
+                <!-- Slider 3: Exit Multiple -->
+                <div class="slider-group" style="margin-bottom: 10px">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    <label
+                      for="val-exit-slider"
+                      style="font-weight: 600; font-size: 0.85rem"
+                      >EV / LTM EBITDA Exit Multiple:</label
+                    >
+                    <span
+                      id="val-exit-val"
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-weight: 700;
+                        color: #a78bfa;
+                      "
+                      >12.0x</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="val-exit-slider"
+                    min="6.0"
+                    max="20.0"
+                    step="0.5"
+                    value="12.0"
+                    style="width: 100%; accent-color: #8b5cf6; cursor: pointer"
+                  />
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 0.75rem;
+                      color: var(--text-muted);
+                      margin-top: 4px;
+                    "
+                  >
+                    <span>6.0x (Trough)</span>
+                    <span>13.0x (Median)</span>
+                    <span>20.0x (Peak)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Dynamic Output Metric Cards -->
+              <div
+                class="slider-output-panel"
+                style="display: flex; flex-direction: column; gap: 15px"
+              >
+                <div
+                  class="stat-card"
+                  style="
+                    border: 1px solid rgba(59, 130, 246, 0.3);
+                    background: rgba(59, 130, 246, 0.05);
                   "
                 >
-                  Save Snapshot to Docket
-                </button>
-              </div>
-            </div>
-          </section>
+                  <div class="stat-icon-box bg-blue">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="stat-content">
+                    <span class="stat-label"
+                      >Implied Enterprise Value (EV)</span
+                    >
+                    <h3
+                      class="stat-value"
+                      id="val-ev-result"
+                      style="font-size: 1.8rem; color: #93c5fd"
+                    >
+                      $4,280M
+                    </h3>
+                    <span class="stat-trend positive"
+                      ><i class="fas fa-check"></i> Gordon Growth & Multiples
+                      Blended</span
+                    >
+                  </div>
+                </div>
 
-          <!-- SECTION 4: VIRTUAL DATA ROOM STAGING -->
-          <section class="dash-panel" id="emp-vdr" style="margin-bottom: 28px">
-            <div class="dash-panel-header">
-              <h3>Virtual Data Room (VDR) Deliverables Staging</h3>
-              <span class="user-greeting-pill">AES-256 HSM Enclave</span>
-            </div>
-            <div class="vault-dropzone" id="vault-dropzone">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.75"
-                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                />
-              </svg>
-              <div class="vault-dropzone-title">
-                Drag & drop financial models or contracts to encrypt & upload
-              </div>
-              <div class="vault-dropzone-desc">
-                Automatic SHA-256 hash sealing, DLP virus scanning, and audit
-                logging.
-              </div>
-              <input type="file" id="vault-file-input" style="display: none" />
-              <button
-                type="button"
-                class="btn btn-secondary btn-sm"
-                onclick="document.getElementById('vault-file-input').click()"
-              >
-                Browse Local Enclave
-              </button>
-              <div class="vault-upload-progress" id="vault-upload-progress">
                 <div
-                  class="vault-upload-progress-fill"
-                  id="vault-upload-progress-fill"
-                ></div>
+                  class="stat-card"
+                  style="
+                    border: 1px solid rgba(16, 185, 129, 0.3);
+                    background: rgba(16, 185, 129, 0.05);
+                  "
+                >
+                  <div class="stat-icon-box bg-green">
+                    <i class="fas fa-coins"></i>
+                  </div>
+                  <div class="stat-content">
+                    <span class="stat-label"
+                      >Implied Equity Value (Less Net Debt $640M)</span
+                    >
+                    <h3
+                      class="stat-value"
+                      id="val-equity-result"
+                      style="font-size: 1.8rem; color: #6ee7b7"
+                    >
+                      $3,640M
+                    </h3>
+                    <span class="stat-trend positive"
+                      ><i class="fas fa-arrow-up"></i> +14.2% Premium to
+                      Market</span
+                    >
+                  </div>
+                </div>
+
+                <div
+                  class="stat-card"
+                  style="
+                    border: 1px solid rgba(139, 92, 246, 0.3);
+                    background: rgba(139, 92, 246, 0.05);
+                  "
+                >
+                  <div class="stat-icon-box bg-purple">
+                    <i class="fas fa-tag"></i>
+                  </div>
+                  <div class="stat-content">
+                    <span class="stat-label">Target Implied Share Price</span>
+                    <h3
+                      class="stat-value"
+                      id="val-share-result"
+                      style="font-size: 1.8rem; color: #c4b5fd"
+                    >
+                      $84.50
+                    </h3>
+                    <span class="stat-trend neutral"
+                      ><i class="fas fa-arrows-alt-h"></i> 43.1M Diluted Shares
+                      Outstanding</span
+                    >
+                  </div>
+                </div>
               </div>
             </div>
-          </section>
+          </div>
 
-          <!-- SECTION 5: TIME LOGGING & UTILIZATION -->
-          <section class="dash-panel" id="emp-time">
-            <div class="dash-panel-header">
-              <h3>Weekly Advisory Time Logging & Utilization</h3>
-              <button
-                type="button"
-                class="btn btn-primary btn-sm"
-                onclick="
-                  window.showDashToast(
-                    'Logged 4.5 hours to Project Titan Carveout.',
-                    'success'
-                  )
-                "
-              >
-                + Log Advisory Hours
-              </button>
+          <!-- Section 2: Trading Comparable Benchmark Table -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Trading Comparable Analysis (Public Peers Cohort)
+                </h3>
+                <p class="dash-card-subtitle">
+                  Current market valuations across peer aerospace & defense
+                  equipment contractors.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-comps"
+                  placeholder="Search ticker, company..."
+                />
+                <a href="404.html" class="btn btn-sm btn-secondary"
+                  ><i class="fas fa-sync"></i> Refresh Multiples</a
+                >
+              </div>
             </div>
             <div class="table-responsive">
-              <table class="custom-table">
+              <table class="dash-table" id="table-comps">
                 <thead>
                   <tr>
-                    <th>Engagement Project</th>
-                    <th>Activity Type</th>
-                    <th>Hours Logged (Week 38)</th>
-                    <th>Billable Rate</th>
+                    <th>Ticker</th>
+                    <th>Company Name</th>
+                    <th>Market Cap ($M)</th>
+                    <th>Enterprise Value ($M)</th>
+                    <th>EV / LTM EBITDA</th>
+                    <th>EV / NTM Revenue</th>
+                    <th>P / E (LTM)</th>
+                    <th>Operating Margin</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>NYSE: LMT</code></td>
+                    <td>Lockheed Martin Corp</td>
+                    <td>$114,200</td>
+                    <td>$132,450</td>
+                    <td>13.8x</td>
+                    <td>1.9x</td>
+                    <td>17.4x</td>
+                    <td>12.8%</td>
+                  </tr>
+                  <tr>
+                    <td><code>NYSE: RTX</code></td>
+                    <td>RTX Technologies Corp</td>
+                    <td>$142,600</td>
+                    <td>$178,100</td>
+                    <td>14.2x</td>
+                    <td>2.3x</td>
+                    <td>21.2x</td>
+                    <td>10.4%</td>
+                  </tr>
+                  <tr>
+                    <td><code>NYSE: GD</code></td>
+                    <td>General Dynamics Corp</td>
+                    <td>$81,400</td>
+                    <td>$92,800</td>
+                    <td>12.6x</td>
+                    <td>2.1x</td>
+                    <td>18.1x</td>
+                    <td>11.2%</td>
+                  </tr>
+                  <tr>
+                    <td><code>NYSE: NOC</code></td>
+                    <td>Northrop Grumman Corp</td>
+                    <td>$74,800</td>
+                    <td>$89,600</td>
+                    <td>13.1x</td>
+                    <td>2.2x</td>
+                    <td>19.5x</td>
+                    <td>10.9%</td>
+                  </tr>
+                  <tr
+                    style="
+                      background: rgba(255, 255, 255, 0.03);
+                      font-weight: 700;
+                    "
+                  >
+                    <td colspan="2">Peer Median Benchmark</td>
+                    <td>$97,800</td>
+                    <td>$112,625</td>
+                    <td class="text-accent">13.4x</td>
+                    <td class="text-accent">2.1x</td>
+                    <td class="text-accent">18.8x</td>
+                    <td class="text-accent">11.1%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Precedent M&A Transactions -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Precedent M&A Transactions Benchmark
+                </h3>
+                <p class="dash-card-subtitle">
+                  Recent strategic acquisitions and sponsor buyouts in the
+                  aerospace tech sector.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-external-link-alt"></i> PitchBook Sync</a
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Announced</th>
+                    <th>Target Company</th>
+                    <th>Acquirer / Sponsor</th>
+                    <th>Deal Value ($M)</th>
+                    <th>Implied EV / EBITDA</th>
+                    <th>Transaction Premium</th>
                     <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>Project Titan Carveout</strong></td>
-                    <td>Financial Modeling & Solvency Analysis</td>
-                    <td>16.5 hrs</td>
-                    <td>$450 / hr</td>
+                    <td>Jun 2026</td>
+                    <td>AeroSystems International</td>
+                    <td>Kohlberg Kravis Roberts (KKR)</td>
+                    <td>$4,600</td>
+                    <td>14.8x</td>
+                    <td>+32.5%</td>
+                    <td><span class="badge badge-success">Closed</span></td>
+                  </tr>
+                  <tr>
+                    <td>Feb 2026</td>
+                    <td>Orbital Dynamics Tech</td>
+                    <td>BAE Systems plc</td>
+                    <td>$2,150</td>
+                    <td>13.2x</td>
+                    <td>+28.0%</td>
+                    <td><span class="badge badge-success">Closed</span></td>
+                  </tr>
+                  <tr>
+                    <td>Nov 2025</td>
+                    <td>Vanguard Avionics Group</td>
+                    <td>Thales SA</td>
+                    <td>$3,850</td>
+                    <td>15.1x</td>
+                    <td>+34.2%</td>
+                    <td><span class="badge badge-success">Closed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 4: LBO Debt Tranche Structuring Schedule -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  LBO Debt Financing & Capital Structure Schedule
+                </h3>
+                <p class="dash-card-subtitle">
+                  Target leverage ratios, pro-forma interest coverage, and
+                  sponsor equity check.
+                </p>
+              </div>
+              <span class="badge badge-primary">5.2x Total Leverage</span>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Debt Tranche</th>
+                    <th>Facility Sizing ($M)</th>
+                    <th>Leverage (x EBITDA)</th>
+                    <th>Interest Pricing</th>
+                    <th>Amortization</th>
+                    <th>Tenor</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Revolving Credit Facility</td>
+                    <td>$200M (Undrawn)</td>
+                    <td>0.0x</td>
+                    <td>SOFR + 275 bps</td>
+                    <td>0.0% p.a.</td>
+                    <td>5 Years</td>
                     <td>
-                      <span class="status-badge status-active">Approved</span>
+                      <span class="badge badge-success">Underwritten</span>
                     </td>
                   </tr>
                   <tr>
-                    <td><strong>Apex Logistics M&A</strong></td>
-                    <td>QofE Accounting & Due Diligence</td>
-                    <td>14.0 hrs</td>
-                    <td>$450 / hr</td>
+                    <td>Senior Secured Term Loan B</td>
+                    <td>$1,200M</td>
+                    <td>3.4x</td>
+                    <td>SOFR + 375 bps</td>
+                    <td>1.0% p.a.</td>
+                    <td>7 Years</td>
                     <td>
-                      <span class="status-badge status-active">Approved</span>
+                      <span class="badge badge-success">Underwritten</span>
                     </td>
                   </tr>
                   <tr>
-                    <td><strong>Helios Solar Infrastructure</strong></td>
-                    <td>CIM Pitch & Capital Syndication Deck</td>
-                    <td>8.0 hrs</td>
-                    <td>$450 / hr</td>
+                    <td>Subordinated High-Yield Notes</td>
+                    <td>$600M</td>
+                    <td>1.7x</td>
+                    <td>8.25% Fixed</td>
+                    <td>Bullet at Maturity</td>
+                    <td>8 Years</td>
+                    <td><span class="badge badge-info">Bookbuilding</span></td>
+                  </tr>
+                  <tr
+                    style="
+                      background: rgba(255, 255, 255, 0.03);
+                      font-weight: 700;
+                    "
+                  >
+                    <td>Sponsor Equity Contribution</td>
+                    <td>$1,640M</td>
+                    <td>4.7x (Equity Check)</td>
+                    <td>Target 24% Gross IRR</td>
+                    <td>N/A</td>
+                    <td>5-7 Yr Exit</td>
+                    <td><span class="badge badge-success">Committed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 4: VDR STAGING ROOM
+           ========================================================= -->
+        <div id="view-vdr" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Virtual Data Room (VDR) Management & Staging
+              </h2>
+              <p class="view-subtitle">
+                Confidential clean room indexing, watermarking compliance, and
+                bidder access permissions.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-history"></i> Access Audit Log</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-folder-plus"></i> Stage New Folder</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-archive"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Staged Documents</span>
+                <h3 class="stat-value">1,482 Files</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-database"></i> 18.4 GB Encrypted</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-stamp"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Dynamic Watermarking</span>
+                <h3 class="stat-value">100% Active</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-lock"></i> AES-256 Strict DRM</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-users-cog"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Authorized Bidder Groups</span>
+                <h3 class="stat-value">6 Consortia</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-user-shield"></i> 38 Total Users</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-eye"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Document Views (24h)</span>
+                <h3 class="stat-value">314 Views</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-chart-line"></i> +24% Peak Activity</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: VDR Folder Directory Hierarchy -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Clean Room Folder Directory Hierarchy
+                </h3>
+                <p class="dash-card-subtitle">
+                  Project Valkyrie - Tier 1 Virtual Data Room index.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-vdr"
+                  placeholder="Search files, folders, tags..."
+                />
+                <a href="404.html" class="btn btn-sm btn-primary"
+                  ><i class="fas fa-upload"></i> Upload to Staging</a
+                >
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-vdr">
+                <thead>
+                  <tr>
+                    <th>Index</th>
+                    <th>Folder / Document Name</th>
+                    <th>File Count</th>
+                    <th>Access Tier</th>
+                    <th>Watermark</th>
+                    <th>Last Modified</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>1.0</code></td>
                     <td>
-                      <span class="status-badge status-pending"
-                        >Pending Partner Review</span
+                      <i
+                        class="fas fa-folder text-amber"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong>Corporate Governance & Incorporation</strong>
+                    </td>
+                    <td>48 files</td>
+                    <td>
+                      <span class="badge badge-success">All Bidders</span>
+                    </td>
+                    <td>User Email + IP</td>
+                    <td>Sep 14, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Explore</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>2.0</code></td>
+                    <td>
+                      <i
+                        class="fas fa-folder text-amber"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong>Financial Statements & Projections</strong>
+                    </td>
+                    <td>112 files</td>
+                    <td>
+                      <span class="badge badge-success">All Bidders</span>
+                    </td>
+                    <td>User Email + IP</td>
+                    <td>Sep 19, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Explore</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>3.0</code></td>
+                    <td>
+                      <i
+                        class="fas fa-folder text-amber"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong>Material Commercial Contracts</strong>
+                    </td>
+                    <td>284 files</td>
+                    <td>
+                      <span class="badge badge-warning"
+                        >Tier-2 Bidders Only</span
+                      >
+                    </td>
+                    <td>Strict Micro-Print</td>
+                    <td>Sep 18, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Explore</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>4.0</code></td>
+                    <td>
+                      <i
+                        class="fas fa-folder-open text-accent"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong>Intellectual Property & Patents</strong>
+                    </td>
+                    <td>96 files</td>
+                    <td>
+                      <span class="badge badge-danger">Clean Team Only</span>
+                    </td>
+                    <td>Redacted DRM</td>
+                    <td>Today, 07:45</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-primary"
+                        >Manage Staging</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>5.0</code></td>
+                    <td>
+                      <i
+                        class="fas fa-folder text-amber"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong
+                        >Real Estate, Environmental & Plant Audits</strong
+                      >
+                    </td>
+                    <td>64 files</td>
+                    <td>
+                      <span class="badge badge-success">All Bidders</span>
+                    </td>
+                    <td>User Email + IP</td>
+                    <td>Sep 15, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Explore</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>6.0</code></td>
+                    <td>
+                      <i
+                        class="fas fa-folder text-amber"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong>Regulatory & Anti-Trust Filings</strong>
+                    </td>
+                    <td>35 files</td>
+                    <td>
+                      <span class="badge badge-warning"
+                        >Tier-2 Bidders Only</span
+                      >
+                    </td>
+                    <td>User Email + IP</td>
+                    <td>Sep 17, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Explore</a
                       >
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </section>
-        </main>
-      </div>
+          </div>
+
+          <!-- Section 3: Bidder Access Permissions & Activity Docket -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Bidder Group Access Clearances</h3>
+              </div>
+              <div class="table-responsive">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Bidder Entity</th>
+                      <th>Clearance Tier</th>
+                      <th>Clean Team Lead</th>
+                      <th>Watermark Ref</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Consortium Alpha (Sponsor)</td>
+                      <td>
+                        <span class="badge badge-danger"
+                          >Tier-1 Clean Room</span
+                        >
+                      </td>
+                      <td>R. Davies (Esq.)</td>
+                      <td><code>WM-ALP-881</code></td>
+                    </tr>
+                    <tr>
+                      <td>Strategic Acquirer Beta</td>
+                      <td>
+                        <span class="badge badge-warning"
+                          >Tier-2 Commercial</span
+                        >
+                      </td>
+                      <td>L. Krol (VP Strategy)</td>
+                      <td><code>WM-BET-442</code></td>
+                    </tr>
+                    <tr>
+                      <td>Sovereign Wealth Fund C</td>
+                      <td>
+                        <span class="badge badge-success">Full Diligence</span>
+                      </td>
+                      <td>T. Al-Sayed (Director)</td>
+                      <td><code>WM-SWF-109</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Live Document Access & Download Stream
+                </h3>
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-download"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Consortium Alpha</strong> viewed
+                      <code>Folder 4.2 / Patent Assignment Deeds.pdf</code>
+                    </p>
+                    <span class="feed-time"
+                      >14 mins ago • User IP: 198.51.100.22</span
+                    >
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-eye"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Strategic Acquirer Beta</strong> opened
+                      <code>Folder 2.1 / FY25 Audited Statements.xlsx</code>
+                    </p>
+                    <span class="feed-time"
+                      >42 mins ago • User IP: 203.0.113.88</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Redaction & Staging Upload Dropzone -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Staging Upload & Automated DRM Redaction Dropzone
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Select Destination VDR Folder</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>1.0 Corporate Governance & Incorporation</option>
+                    <option>2.0 Financial Statements & Projections</option>
+                    <option>3.0 Material Commercial Contracts</option>
+                    <option>4.0 Intellectual Property & Patents</option>
+                    <option>5.0 Real Estate & Environmental Audits</option>
+                    <option>6.0 Regulatory & Anti-Trust Filings</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Dynamic Watermark Profile</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>
+                      Strict (User Email + IP + Timestamp Micro-Print)
+                    </option>
+                    <option>Standard (Confidential + Deal Code)</option>
+                    <option>
+                      Full Anonymization (Redact PII & Customer Names)
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-cloud-upload-alt"></i> Process & Stage in Clean
+                Room
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 5: TIMESHEET & LEDGER
+           ========================================================= -->
+        <div id="view-time" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Timesheet, Billing Codes & Utilization Ledger
+              </h2>
+              <p class="view-subtitle">
+                Weekly billable hours allocation, partner audit signs, and
+                advisory fee realization.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-history"></i> Historical Timesheets</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-paper-plane"></i> Submit Week for Review</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Current Week Total</span>
+                <h3 class="stat-value">54.0 Hours</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 49.5 Billable</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-percentage"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Utilization Rate</span>
+                <h3 class="stat-value">91.6%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> +6.6% Above Target</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-dollar-sign"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Standard Billing Rate</span>
+                <h3 class="stat-value">$650 / hr</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-badge-check"></i> Senior Associate</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-file-invoice-dollar"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Billable Value Generated</span>
+                <h3 class="stat-value">$32,175</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-chart-line"></i> Week Ending Sep 25</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Weekly Daily Log Table -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Daily Billable Hours Breakdown (Week 38)
+                </h3>
+                <p class="dash-card-subtitle">
+                  Detailed allocation per mandate and client billing code.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-primary"
+                ><i class="fas fa-plus"></i> Add Time Entry</a
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Mandate / Deal Code</th>
+                    <th>Activity Category</th>
+                    <th>Description of Work</th>
+                    <th>Hours</th>
+                    <th>Rate</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Monday, Sep 21</td>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td>Financial Modeling</td>
+                    <td>
+                      Updated DCF exit multiple sensitivity tables and
+                      reconciled FY25 EBITDA with client CFO
+                    </td>
+                    <td><strong>9.5 hrs</strong></td>
+                    <td>$650/hr</td>
+                    <td>$6,175</td>
+                    <td><span class="badge badge-success">Approved</span></td>
+                  </tr>
+                  <tr>
+                    <td>Tuesday, Sep 22</td>
+                    <td><code>PRJ-NEBULA</code></td>
+                    <td>Due Diligence</td>
+                    <td>
+                      Conducted diligence interview with target VP of
+                      Engineering on cloud migration roadmap
+                    </td>
+                    <td><strong>8.0 hrs</strong></td>
+                    <td>$650/hr</td>
+                    <td>$5,200</td>
+                    <td><span class="badge badge-success">Approved</span></td>
+                  </tr>
+                  <tr>
+                    <td>Wednesday, Sep 23</td>
+                    <td><code>PRJ-OLYMPUS</code></td>
+                    <td>Legal Structuring</td>
+                    <td>
+                      Carve-out shared services agreement review with White &
+                      Case outside counsel
+                    </td>
+                    <td><strong>10.5 hrs</strong></td>
+                    <td>$650/hr</td>
+                    <td>$6,825</td>
+                    <td>
+                      <span class="badge badge-info">Pending Review</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Thursday, Sep 24</td>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td>VDR Clean Room</td>
+                    <td>
+                      Audited and indexed 48 intellectual property patent deeds
+                      for bidder review
+                    </td>
+                    <td><strong>11.0 hrs</strong></td>
+                    <td>$650/hr</td>
+                    <td>$7,150</td>
+                    <td>
+                      <span class="badge badge-info">Pending Review</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Friday, Sep 25</td>
+                    <td><code>PRJ-HELIOS</code></td>
+                    <td>Marketing / CIM</td>
+                    <td>
+                      Drafted confidential executive teaser deck for preliminary
+                      sponsor outreach
+                    </td>
+                    <td><strong>10.5 hrs</strong></td>
+                    <td>$650/hr</td>
+                    <td>$6,825</td>
+                    <td><span class="badge badge-info">Draft</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Billing Codes Directory & Budget Tracking -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Approved Client Billing Codes</h3>
+              </div>
+              <div class="table-responsive">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Billing Code</th>
+                      <th>Deal Mandate</th>
+                      <th>Budget Cap</th>
+                      <th>Billed to Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>BIL-VALK-26</code></td>
+                      <td>AeroDynamics M&A</td>
+                      <td>$450,000</td>
+                      <td><strong>$382,400</strong> (85%)</td>
+                    </tr>
+                    <tr>
+                      <td><code>BIL-NEBU-18</code></td>
+                      <td>Apex Cloud Acquisition</td>
+                      <td>$280,000</td>
+                      <td><strong>$194,500</strong> (69%)</td>
+                    </tr>
+                    <tr>
+                      <td><code>BIL-OLYM-09</code></td>
+                      <td>BioGenix Carve-Out</td>
+                      <td>$350,000</td>
+                      <td><strong>$245,000</strong> (70%)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Timesheet Entry Form</h3>
+              </div>
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
+                "
+                style="padding: 10px 0"
+              >
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Deal Mandate</label>
+                    <select
+                      class="form-control"
+                      style="
+                        background: rgba(255, 255, 255, 0.05);
+                        color: #fff;
+                        border: 1px solid var(--border-color);
+                        border-radius: 6px;
+                        padding: 10px;
+                      "
+                    >
+                      <option>PRJ-VALKYRIE - AeroDynamics Corp</option>
+                      <option>PRJ-NEBULA - Apex Cloud Systems</option>
+                      <option>PRJ-OLYMPUS - BioGenix Therapeutics</option>
+                      <option>PRJ-HELIOS - Nordic CleanPower</option>
+                      <option>
+                        INTERNAL - Business Development & Pitching
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Hours Logged</label>
+                    <input
+                      type="number"
+                      step="0.5"
+                      min="0.5"
+                      max="24"
+                      value="4.0"
+                      class="form-control"
+                      style="
+                        background: rgba(255, 255, 255, 0.05);
+                        color: #fff;
+                        border: 1px solid var(--border-color);
+                        border-radius: 6px;
+                        padding: 10px;
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Work Narrative / Deliverables Achieved</label>
+                  <textarea
+                    class="form-control"
+                    rows="2"
+                    placeholder="Provide clear description for partner audit review..."
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save"></i> Save & Log Time Entry
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-    <div
-      id="dash-toast-container"
-      class="dash-toast-container"
-      aria-live="polite"
-    ></div>
-
-    <!-- Scripts -->
     <script src="../assets/js/storage.js"></script>
     <script src="../assets/js/dashboard.js"></script>
-    <script src="../assets/js/main.js"></script>
   </body>
 </html>

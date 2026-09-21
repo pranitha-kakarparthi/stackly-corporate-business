@@ -3,718 +3,1926 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Customer Workspace | Stackly</title>
-    <meta
-      name="description"
-      content="Stackly Client & Investor Portal - Portfolio Performance, Capital Calls, and Virtual Data Room."
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <title>Customer / Investor Portal - Stackly Corporate Business</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/dashboard.css" />
-    <script>
-      (function () {
-        try {
-          var raw = localStorage.getItem("cb_currentUser");
-          if (!raw) {
-            window.location.replace("sign-in.html");
-          }
-        } catch (e) {
-          window.location.replace("sign-in.html");
-        }
-      })();
-    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="dashboard-body">
-    <div class="dashboard-wrapper">
-      <!-- COLLAPSIBLE SIDEBAR -->
-      <aside
-        class="dash-sidebar"
-        role="navigation"
-        aria-label="Customer Navigation Sidebar"
-      >
-        <div class="dash-sidebar-header">
-          <a
-            href="../index.html"
-            aria-label="Stackly Home"
-            class="dash-brand-link"
-          >
-            <img
-              src="../assets/images/logoStackly.webp"
-              alt="Stackly Logo"
-              width="160"
-              height="36"
-              class="dash-brand-img"
-            />
-          </a>
-          <button
-            class="dash-mobile-close-btn"
-            id="dash-mobile-close"
-            aria-label="Close Mobile Navigation"
-          >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
+    <aside class="dash-sidebar" id="dashSidebar">
+      <div class="dash-sidebar-header">
+        <a
+          href="../index.html"
+          class="dash-brand-link"
+          aria-label="Stackly Home"
+        >
+          <img
+            src="../assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            width="160"
+            height="36"
+            class="dash-brand-img"
+            style="height: 36px; max-width: 160px; object-fit: contain"
+          />
+        </a>
+        <button
+          class="sidebar-close-btn"
+          id="sidebarCloseBtn"
+          aria-label="Close Sidebar"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
 
-        <ul class="dash-nav-menu">
-          <li class="dash-nav-heading">Investor Portal</li>
-          <li class="dash-nav-item active" data-tooltip="My Portfolio">
-            <a href="#cust-portfolio" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"
-                />
-              </svg>
-              <span>Portfolio Overview</span>
-            </a>
+      <div class="dash-user-card">
+        <div class="dash-avatar-wrapper">
+          <div class="dash-avatar" id="dashUserAvatar">LP</div>
+          <span class="dash-status-dot online"></span>
+        </div>
+        <div class="dash-user-info">
+          <h4 id="dashUserName">Sovereign Capital</h4>
+          <span class="dash-role-badge" id="dashRoleBadge"
+            >Institutional LP</span
+          >
+          <span class="dash-user-email" id="dashUserEmail"
+            >investor@vanguard-holdings.ch</span
+          >
+        </div>
+      </div>
+
+      <nav class="dash-nav">
+        <div class="dash-nav-section-title">Investor Mandates</div>
+        <ul class="dash-nav-list">
+          <li
+            class="dash-nav-item active"
+            data-view="overview"
+            data-tooltip="Portfolio Overview"
+          >
+            <a href="#overview"
+              ><i class="fas fa-chart-pie"></i
+              ><span>Portfolio Overview</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Asset Allocation">
-            <a href="#cust-allocation" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span>Asset Tranches</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="tranches"
+            data-tooltip="Co-Invest Tranches"
+          >
+            <a href="#tranches"
+              ><i class="fas fa-layer-group"></i><span>Co-Invest Tranches</span
+              ><span class="nav-counter">4</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Investor VDR">
-            <a href="#cust-vdr" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
-                />
-              </svg>
-              <span>Investor Dossiers</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="dossiers"
+            data-tooltip="Deal Dossiers"
+          >
+            <a href="#dossiers"
+              ><i class="fas fa-file-invoice"></i><span>Deal Dossiers</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Distributions Schedule">
-            <a href="#cust-distributions" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              <span>Capital Calls & Payouts</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="payouts"
+            data-tooltip="Distributions & Wires"
+          >
+            <a href="#payouts"
+              ><i class="fas fa-hand-holding-usd"></i
+              ><span>Distributions & Wires</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Partner Concierge">
-            <a href="#cust-concierge" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                />
-              </svg>
-              <span>Partner Concierge</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="concierge"
+            data-tooltip="Partner Concierge"
+          >
+            <a href="#concierge"
+              ><i class="fas fa-concierge-bell"></i
+              ><span>Partner Concierge</span></a
+            >
           </li>
         </ul>
 
-        <!-- SIDEBAR COLLAPSE TRIGGER -->
-        <div class="dash-sidebar-bottom">
-          <button
-            class="sidebar-collapse-btn"
-            id="sidebar-collapse-trigger"
-            title="Collapse / Expand Sidebar"
-            aria-label="Toggle Desktop Sidebar"
-          >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-              />
-            </svg>
-            <span class="collapse-label">Collapse Menu</span>
-          </button>
-        </div>
-      </aside>
-
-      <!-- MOBILE SIDEBAR BACKDROP -->
-      <div class="dash-sidebar-backdrop" id="dash-sidebar-backdrop"></div>
-
-      <!-- MAIN CONTENT WRAPPER -->
-      <div class="dash-main">
-        <!-- PERMANENTLY FIXED TOPBAR -->
-        <header class="dash-topbar" role="banner">
-          <div class="dash-topbar-left">
-            <button class="sidebar-toggle-btn" aria-label="Open Sidebar Menu">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div class="dash-topbar-right">
-            <!-- User Profile Area -->
-            <div class="user-profile-badge">
-              <div id="dash-user-initials" class="user-avatar-initials">DC</div>
-              <div class="user-info-text">
-                <span id="dash-user-name" class="user-display-name"
-                  >David Chen</span
-                >
-                <span id="dash-user-role" class="user-role-label"
-                  >Customer Access</span
-                >
-              </div>
-            </div>
-
-            <!-- Primary CTA: Sign Out -->
-            <button
-              onclick="
-                window.CB_Storage
-                  ? window.CB_Storage.logout()
-                  : (window.location.href = 'sign-in.html')
-              "
-              class="btn btn-secondary-light btn-sm"
-              title="End Session"
+        <div class="dash-nav-section-title">Compliance & Tax</div>
+        <ul class="dash-nav-list">
+          <li class="dash-nav-item" data-tooltip="K-1 Tax Statements">
+            <a href="404.html"
+              ><i class="fas fa-file-contract"></i
+              ><span>K-1 Tax Statements</span></a
             >
-              <span>Sign Out</span>
-            </button>
-          </div>
-        </header>
+          </li>
+          <li class="dash-nav-item" data-tooltip="FATCA / CRS Filings">
+            <a href="404.html"
+              ><i class="fas fa-shield-alt"></i
+              ><span>FATCA / CRS Filings</span></a
+            >
+          </li>
+        </ul>
+      </nav>
 
-        <!-- DASHBOARD BODY CONTENT -->
-        <main class="dash-content">
-          <!-- HERO BANNER SECTION -->
-          <div class="dash-hero-banner" id="cust-portfolio">
-            <div class="dash-hero-eyebrow">
-              <span class="pulse-dot"></span>
-              <span>Institutional Limited Partner Portal</span>
-            </div>
-            <h1 class="dash-hero-title">
-              <span id="greetingTime">Good afternoon</span>,
-              <span class="gradient-text" id="greetingName">David Chen.</span>
-            </h1>
-            <p class="dash-hero-desc">
-              Your committed capital allocations, quarterly distribution yields,
-              and confidential virtual data room dossiers are verified and up to
-              date.
-            </p>
-          </div>
+      <div class="dash-sidebar-footer">
+        <a href="../index.html" class="dash-sidebar-link"
+          ><i class="fas fa-globe"></i><span>Public Portal</span></a
+        >
+        <button class="dash-logout-btn" id="dashLogoutBtn">
+          <i class="fas fa-sign-out-alt"></i><span>Secure Logout</span>
+        </button>
+        <button
+          class="sidebar-collapse-btn"
+          id="sidebarCollapseBtn"
+          aria-label="Collapse Navigation Menu"
+          title="Collapse Sidebar"
+        >
+          <i class="fas fa-angle-double-left collapse-icon"></i>
+          <span class="collapse-label">Collapse Menu</span>
+        </button>
+      </div>
+    </aside>
 
-          <!-- SECTION 1: 4 KPI STATS CARDS -->
-          <section class="dash-stats-grid" aria-label="Customer KPIs">
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Committed Capital</span>
-                <span class="stat-icon-wrap icon-blue">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">$145.0M</div>
-              <div class="stat-delta positive">
-                <span>Fund IV & Syndicated Facility</span>
-              </div>
-            </div>
+    <div
+      class="dash-sidebar-backdrop"
+      id="dash-sidebar-backdrop"
+      aria-hidden="true"
+    ></div>
 
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Net Distributions Paid</span>
-                <span class="stat-icon-wrap icon-emerald">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">$38.2M</div>
-              <div class="stat-delta positive">
-                <span>+14.8% vs Benchmark</span>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Realized Net IRR</span>
-                <span class="stat-icon-wrap icon-purple">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">18.4%</div>
-              <div class="stat-delta positive">
-                <span>Top Decile Performance</span>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Active Portfolio Assets</span>
-                <span class="stat-icon-wrap icon-amber">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">12 Holdings</div>
-              <div class="stat-delta positive">
-                <span>0 Solvency Impairments</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- SECTION 2: ASSET CLASS ALLOCATION & YIELD TRAJECTORY -->
-          <section
-            class="dash-panel"
-            id="cust-allocation"
-            style="margin-bottom: 28px"
+    <div class="dash-main-wrapper">
+      <header class="dash-topbar" role="banner">
+        <div class="dash-topbar-left">
+          <button
+            class="sidebar-toggle-btn"
+            id="sidebarToggleBtn"
+            aria-label="Toggle Sidebar"
           >
-            <div class="dash-panel-header">
-              <h3>Portfolio Asset Tranche Allocation ($145M Total)</h3>
-              <button
-                type="button"
-                class="btn btn-subtle btn-sm"
-                onclick="
-                  window.showDashToast(
-                    'Downloaded quarterly LP capital account statement.',
-                    'success'
-                  )
-                "
-              >
-                Export LP Statement
-              </button>
-            </div>
-            <div class="allocation-bar-visualizer" style="height: 28px">
-              <div class="alloc-seg alloc-seg-senior" style="width: 45%">
-                Senior Debt (45%)
-              </div>
-              <div class="alloc-seg alloc-seg-mezz" style="width: 30%">
-                Mezzanine Credit (30%)
-              </div>
-              <div class="alloc-seg alloc-seg-equity" style="width: 25%">
-                Growth Equity (25%)
-              </div>
-            </div>
-            <div class="allocation-legend-row" style="margin-top: 14px">
-              <span
-                ><span
-                  class="alloc-legend-dot"
-                  style="background: #234338"
-                ></span>
-                Senior Secured ($65.25M • 7.4% Yield)</span
-              >
-              <span
-                ><span
-                  class="alloc-legend-dot"
-                  style="background: #c5a880"
-                ></span>
-                Mezzanine & Subordinated ($43.50M • 11.2% Yield)</span
-              >
-              <span
-                ><span
-                  class="alloc-legend-dot"
-                  style="background: #4f46e5"
-                ></span>
-                Strategic Growth Equity ($36.25M • 21.0% Target IRR)</span
-              >
-            </div>
-          </section>
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="dash-breadcrumb">
+            <span class="crumb-root">Workspace</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-role" id="crumbRole">Institutional Portal</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-view" id="crumbView">Portfolio Overview</span>
+          </div>
+        </div>
 
-          <!-- SECTION 3: VIRTUAL DATA ROOM & SOLVENCY DOSSIERS -->
-          <section class="dash-panel" id="cust-vdr" style="margin-bottom: 28px">
-            <div class="dash-panel-header">
-              <h3>Institutional Virtual Data Room (VDR) & Solvency Reports</h3>
-              <span class="user-greeting-pill">Audited Dossiers</span>
+        <div class="dash-topbar-right">
+          <div class="topbar-chip">
+            <i class="fas fa-clock text-accent"></i
+            ><span id="dashLiveTime">UTC 00:00</span>
+          </div>
+          <div class="topbar-chip">
+            <i class="fas fa-lock text-success"></i><span>Vault Encrypted</span>
+          </div>
+          <a href="404.html" class="topbar-action-icon" title="Notifications"
+            ><i class="fas fa-bell"></i><span class="badge-dot"></span
+          ></a>
+          <a href="404.html" class="topbar-action-icon" title="Partner Direct"
+            ><i class="fas fa-comments"></i
+          ></a>
+          <a href="404.html" class="btn btn-sm btn-primary action-404-btn"
+            ><i class="fas fa-wallet"></i> Capital Call Portal</a
+          >
+        </div>
+      </header>
+
+      <main class="dash-content">
+        <!-- =========================================================
+           VIEW 1: PORTFOLIO OVERVIEW
+           ========================================================= -->
+        <div id="view-overview" class="dash-view active-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Institutional Portfolio Executive Summary
+              </h2>
+              <p class="view-subtitle">
+                Consolidated asset allocation, net internal rate of return
+                (IRR), and distributions to paid-in capital (DPI).
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-file-pdf"></i> Download Q3 Tear Sheet</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-download"></i> Export Data Feed</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-vault"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Committed Capital</span>
+                <h3 class="stat-value">$450.0M</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check-circle"></i> 100% Subscribed</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Capital Deployed</span>
+                <h3 class="stat-value">$318.5M</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> 70.8% Call Rate</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Net Blended IRR</span>
+                <h3 class="stat-value">24.8%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> +4.2% vs Benchmark</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-hand-holding-usd"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Cumulative DPI</span>
+                <h3 class="stat-value">1.42x</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-money-bill-wave"></i> $452.3M Returned</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Active Portfolio Assets with Live Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Active Fund Investments & Co-Investment Vehicles
+                </h3>
+                <p class="dash-card-subtitle">
+                  Real-time fair value valuations and vintage performance
+                  metrics.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-customer-holdings"
+                  placeholder="Search funds, vintages, sectors..."
+                />
+                <a href="404.html" class="btn btn-sm btn-secondary"
+                  ><i class="fas fa-filter"></i> Filter Asset Classes</a
+                >
+              </div>
             </div>
             <div class="table-responsive">
-              <table class="custom-table">
+              <table class="dash-table" id="table-customer-holdings">
                 <thead>
                   <tr>
-                    <th>Report / Document Name</th>
-                    <th>Period</th>
+                    <th>Vehicle Name</th>
+                    <th>Vintage</th>
+                    <th>Asset Class</th>
+                    <th>Commitment</th>
+                    <th>Invested</th>
+                    <th>Current Fair Value</th>
+                    <th>Net MOIC</th>
+                    <th>Net IRR</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Stackly Global Buyout Fund IV</strong></td>
+                    <td>2022</td>
+                    <td>Private Equity Buyout</td>
+                    <td>$150.0M</td>
+                    <td>$135.0M</td>
+                    <td><strong>$248.4M</strong></td>
+                    <td>
+                      <span class="text-success font-weight-bold">1.84x</span>
+                    </td>
+                    <td>
+                      <span class="text-success font-weight-bold">28.4%</span>
+                    </td>
+                    <td>
+                      <span class="status-pill status-active"
+                        >Active Harvesting</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Stackly Direct Lending Fund II</strong></td>
+                    <td>2023</td>
+                    <td>Senior Secured Debt</td>
+                    <td>$100.0M</td>
+                    <td>$88.5M</td>
+                    <td><strong>$112.0M</strong></td>
+                    <td>
+                      <span class="text-success font-weight-bold">1.27x</span>
+                    </td>
+                    <td>
+                      <span class="text-success font-weight-bold">14.1%</span>
+                    </td>
+                    <td>
+                      <span class="status-pill status-active">Performing</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Project Valkyrie SPV Co-Invest</strong></td>
+                    <td>2026</td>
+                    <td>Aerospace & Defense</td>
+                    <td>$75.0M</td>
+                    <td>$35.0M</td>
+                    <td><strong>$48.2M</strong></td>
+                    <td>
+                      <span class="text-success font-weight-bold">1.38x</span>
+                    </td>
+                    <td>
+                      <span class="text-success font-weight-bold">31.2%</span>
+                    </td>
+                    <td>
+                      <span class="status-pill status-review"
+                        >Expansion Stage</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Stackly Clean Energy Infra Fund</strong></td>
+                    <td>2024</td>
+                    <td>Infrastructure Transition</td>
+                    <td>$125.0M</td>
+                    <td>$60.0M</td>
+                    <td><strong>$79.5M</strong></td>
+                    <td>
+                      <span class="text-success font-weight-bold">1.33x</span>
+                    </td>
+                    <td>
+                      <span class="text-success font-weight-bold">18.9%</span>
+                    </td>
+                    <td>
+                      <span class="status-pill status-active">Deploying</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Asset Class Allocation & Geographic Diversification -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Portfolio Capital Allocation Breakdown
+                </h3>
+                <p class="dash-card-subtitle">
+                  Strategic mandate weighting and risk envelope compliance.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-sliders-h"></i> Policy Target</a
+              >
+            </div>
+            <div class="dash-grid-2">
+              <div
+                class="dash-card"
+                style="margin-bottom: 0; background: rgba(255, 255, 255, 0.02)"
+              >
+                <h4 style="font-size: 0.95rem; margin-bottom: 10px">
+                  Private Equity Buyout (55% Target / 52% Actual)
+                </h4>
+                <p class="text-sm text-muted">
+                  Core buyouts in Aerospace, Mission-Critical Defense, and
+                  Enterprise Software.
+                </p>
+                <div
+                  class="progress-bar-container"
+                  style="
+                    background: rgba(255, 255, 255, 0.08);
+                    height: 8px;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin: 12px 0 6px;
+                  "
+                >
+                  <div
+                    style="width: 52%; height: 100%; background: #3b82f6"
+                  ></div>
+                </div>
+                <span class="text-sm text-muted"
+                  >Exposure: $248.4M Fair Value</span
+                >
+              </div>
+
+              <div
+                class="dash-card"
+                style="margin-bottom: 0; background: rgba(255, 255, 255, 0.02)"
+              >
+                <h4 style="font-size: 0.95rem; margin-bottom: 10px">
+                  Direct Lending & Infrastructure (45% Target / 48% Actual)
+                </h4>
+                <p class="text-sm text-muted">
+                  First lien senior secured floating rate debt and renewable
+                  energy transition assets.
+                </p>
+                <div
+                  class="progress-bar-container"
+                  style="
+                    background: rgba(255, 255, 255, 0.08);
+                    height: 8px;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin: 12px 0 6px;
+                  "
+                >
+                  <div
+                    style="width: 48%; height: 100%; background: #10b981"
+                  ></div>
+                </div>
+                <span class="text-sm text-muted"
+                  >Exposure: $191.5M Fair Value</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Upcoming Capital Calls & Notices -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Pending Capital Call Notices</h3>
+                <span class="badge badge-warning">Action Required</span>
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-amber">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Call Notice #08:</strong> Project Valkyrie SPV
+                      Tranche B Call. Amount: <strong>$12,500,000</strong>.
+                      Settlement Date: <strong>Oct 15, 2026</strong>.
+                    </p>
+                    <span class="feed-time"
+                      >Wire instructions dispatched via secure SWIFT</span
+                    >
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-check-double"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Call Notice #07:</strong> Clean Energy Infra
+                      Drawdown. Amount: <strong>$8,200,000</strong>. Settled Sep
+                      10, 2026.
+                    </p>
+                    <span class="feed-time"
+                      >Receipt confirmed by custodian bank (UBS Zurich)</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer"
+                style="
+                  padding-top: 15px;
+                  border-top: 1px solid var(--border-color);
+                "
+              >
+                <a
+                  href="404.html"
+                  class="btn btn-sm btn-primary w-100 text-center"
+                  ><i class="fas fa-university"></i> Authorize Pending Wire
+                  Transfer</a
+                >
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  LP Advisory Committee (LPAC) Briefing
+                </h3>
+                <a href="404.html" class="btn btn-xs btn-outline"
+                  >Voting Records</a
+                >
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-purple">
+                    <i class="fas fa-vote-yea"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>LPAC Resolution 2026-04:</strong> Approval of
+                      Investment Period Extension for Fund IV by 6 months to
+                      accommodate Project Helios closing.
+                    </p>
+                    <span class="feed-time"
+                      >Vote Deadline: Oct 20, 2026 • 82% Approved</span
+                    >
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-balance-scale"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Valuation Methodology Audit:</strong> Independent
+                      valuation report from Duff & Phelps (Kroll) received clean
+                      opinion.
+                    </p>
+                    <span class="feed-time">Published Sep 01, 2026</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer"
+                style="
+                  padding-top: 15px;
+                  border-top: 1px solid var(--border-color);
+                "
+              >
+                <a
+                  href="404.html"
+                  class="btn btn-sm btn-secondary w-100 text-center"
+                  ><i class="fas fa-check-circle"></i> Cast Committee Ballot</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Capital Subscription Portal Form -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Request Direct Co-Investment Allocation
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Co-Investment Vehicle</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Project Valkyrie SPV (Aerospace Sell-Side)</option>
+                    <option>Project Nebula Co-Invest (Enterprise SaaS)</option>
+                    <option>
+                      Project Helios Green Infra Bond (Nordic Wind)
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Requested Subscription Amount ($USD)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. $25,000,000"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Custodian Routing Account</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>UBS Switzerland AG (Zurich Custody #9921)</option>
+                    <option>
+                      Credit Suisse Private Banking (Geneva #4102)
+                    </option>
+                    <option>JPMorgan Chase Custody (London #7784)</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-signature"></i> Submit Subscription Indication
+                of Interest
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 2: CO-INVEST TRANCHES
+           ========================================================= -->
+        <div id="view-tranches" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Co-Investment Tranches & Yield Curves</h2>
+              <p class="view-subtitle">
+                Seniority ranking, collateral pledges, coupon terms, and
+                syndication status.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-chart-area"></i> Yield Curve Analytics</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-plus"></i> Subscribe to New Tranche</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Senior Secured Debt</span>
+                <h3 class="stat-value">SOFR + 550 bps</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 1st Lien Collateral</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-layer-group"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Mezzanine / Subordinated</span>
+                <h3 class="stat-value">13.5% Fixed</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-percentage"></i> PIK + Cash Coupon</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Equity Co-Investment</span>
+                <h3 class="stat-value">28.4% Target IRR</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> 2.5x Target MOIC</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-balance-scale"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Weighted Loan-to-Value</span>
+                <h3 class="stat-value">48.2% LTV</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-shield-check"></i> Conservative Risk
+                  Envelope</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Tranche Table with Live Filter & Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">Co-Investment Tranche Ledger</h3>
+                <p class="dash-card-subtitle">
+                  Active and staged co-investment vehicles currently open for
+                  institutional allocation.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-tranches"
+                  placeholder="Search tranches, collateral..."
+                />
+                <div class="filter-pill-group">
+                  <button class="status-filter-pill active" data-status="all">
+                    All (4)
+                  </button>
+                  <button class="status-filter-pill" data-status="Active">
+                    Active (2)
+                  </button>
+                  <button class="status-filter-pill" data-status="Deployed">
+                    Deployed (1)
+                  </button>
+                  <button class="status-filter-pill" data-status="Syndicated">
+                    Syndicated (1)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-tranches">
+                <thead>
+                  <tr>
+                    <th>Tranche ID</th>
+                    <th>Mandate</th>
+                    <th>Structure</th>
+                    <th>Facility Size</th>
+                    <th>Coupon / Hurdle</th>
+                    <th>Collateral Base</th>
+                    <th>Maturity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>TR-VALK-A</code></td>
+                    <td><strong>Project Valkyrie</strong></td>
+                    <td>Senior 1st Lien Term Loan</td>
+                    <td>$350,000,000</td>
+                    <td>SOFR + 475 bps</td>
+                    <td>100% Fixed & Current Assets</td>
+                    <td>Oct 2031</td>
+                    <td>
+                      <span class="status-pill status-active">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-primary"
+                        >Allocate</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>TR-VALK-B</code></td>
+                    <td><strong>Project Valkyrie</strong></td>
+                    <td>Subordinated Mezzanine</td>
+                    <td>$125,000,000</td>
+                    <td>12.8% (8% Cash / 4.8% PIK)</td>
+                    <td>2nd Lien Pledge</td>
+                    <td>Oct 2032</td>
+                    <td>
+                      <span class="status-pill status-active">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-primary"
+                        >Allocate</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>TR-NEBU-EQ</code></td>
+                    <td><strong>Project Nebula</strong></td>
+                    <td>Direct Equity Co-Invest</td>
+                    <td>$75,000,000</td>
+                    <td>8.0% Hurdle / 20% Carry</td>
+                    <td>Preferred Series A Shares</td>
+                    <td>Nov 2030</td>
+                    <td>
+                      <span class="status-pill status-closed">Deployed</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Tear Sheet</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>TR-HELI-INF</code></td>
+                    <td><strong>Project Helios</strong></td>
+                    <td>Senior Green Infrastructure Bond</td>
+                    <td>$500,000,000</td>
+                    <td>6.85% Semi-Annual Fixed</td>
+                    <td>Offshore Wind Turbine Fleet</td>
+                    <td>Jan 2036</td>
+                    <td>
+                      <span class="status-pill status-review">Syndicated</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Tear Sheet</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Yield Curve Analytics & Maturity Wall Profile -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Maturity Wall & Yield Profile Analytics
+                </h3>
+                <p class="dash-card-subtitle">
+                  Expected repayment horizons across co-investment debt and
+                  equity instruments.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-file-excel"></i> Export Schedule</a
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Maturity Year</th>
+                    <th>Senior Debt Principal</th>
+                    <th>Mezzanine Principal</th>
+                    <th>Expected Equity Distributions</th>
+                    <th>Total Annual Cash Flow</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2027</td>
+                    <td>$14,500,000</td>
+                    <td>$8,200,000</td>
+                    <td>$42,000,000</td>
+                    <td><strong>$64,700,000</strong></td>
+                  </tr>
+                  <tr>
+                    <td>2028</td>
+                    <td>$18,200,000</td>
+                    <td>$12,400,000</td>
+                    <td>$68,000,000</td>
+                    <td><strong>$98,600,000</strong></td>
+                  </tr>
+                  <tr>
+                    <td>2029</td>
+                    <td>$22,000,000</td>
+                    <td>$15,000,000</td>
+                    <td>$110,000,000</td>
+                    <td><strong>$147,000,000</strong></td>
+                  </tr>
+                  <tr>
+                    <td>2030+</td>
+                    <td>$295,300,000</td>
+                    <td>$89,400,000</td>
+                    <td>$232,000,000</td>
+                    <td><strong>$616,700,000</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 4: Subscription Confirmation Form -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Confirm Co-Investment Subscription Allocation
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Tranche Selection</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>
+                      TR-VALK-A (Senior 1st Lien - SOFR + 475 bps)
+                    </option>
+                    <option>TR-VALK-B (Subordinated Mezzanine - 12.8%)</option>
+                    <option>TR-NEBU-EQ (Direct Equity Co-Invest)</option>
+                    <option>
+                      TR-HELI-INF (Green Infrastructure Bond - 6.85%)
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Authorized Signatory</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="Chief Investment Officer (Sovereign Wealth)"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check-double"></i> Execute Digital Subscription
+                Agreement
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 3: DEAL DOSSIERS
+           ========================================================= -->
+        <div id="view-dossiers" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Confidential Deal Dossiers & Offering Memoranda
+              </h2>
+              <p class="view-subtitle">
+                Institutional private placement memoranda (PPM), legal terms,
+                and committee presentations.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-file-archive"></i> Download Bundle (ZIP)</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-signature"></i> Sign Subscription Pack</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-book"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Active PPMs</span>
+                <h3 class="stat-value">4 Mandates</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> LPAC Approved</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-file-pdf"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Diligence Reports</span>
+                <h3 class="stat-value">18 Documents</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-stamp"></i> Watermarked</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Security Tier</span>
+                <h3 class="stat-value">Tier-1 DRM</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-lock"></i> No Egress</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Co-Invest Capacity</span>
+                <h3 class="stat-value">$1.2B Open</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> Priority Queue</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Document Library Table with Live Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Institutional Investor Document Library
+                </h3>
+                <p class="dash-card-subtitle">
+                  Encrypted documents customized for your LP entity watermark.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-dossiers"
+                  placeholder="Search memoranda, legal briefs..."
+                />
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-dossiers">
+                <thead>
+                  <tr>
+                    <th>Deal Dossier Title</th>
+                    <th>Mandate</th>
+                    <th>Document Type</th>
                     <th>Classification</th>
-                    <th>Auditor</th>
+                    <th>Release Date</th>
+                    <th>File Size</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
-                      <strong
-                        >Vanguard_Fund_IV_Q2_Quarterly_Investor_Report.pdf</strong
+                      <i
+                        class="fas fa-file-pdf text-danger"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong
+                        >Project Valkyrie - Confidential Offering Memorandum
+                        (PPM)</strong
                       >
                     </td>
-                    <td>Q2 2026</td>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td>Private Placement Memo</td>
                     <td>
-                      <span class="status-badge status-active"
-                        >Quarterly Letter</span
-                      >
+                      <span class="badge badge-success">LPAC Authorized</span>
                     </td>
-                    <td>PwC LLP</td>
+                    <td>Sep 20, 2026</td>
+                    <td>14.8 MB</td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'Downloading Q2 Investor Report...',
-                            'info'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-secondary"
+                        >Download PDF</a
                       >
-                        Download
-                      </button>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <strong
-                        >Project_Titan_Carveout_Solvency_Opinion_Executed.pdf</strong
+                      <i
+                        class="fas fa-file-pdf text-danger"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong
+                        >Project Nebula - Technical & IP Due Diligence Audit
+                        (KPMG)</strong
                       >
                     </td>
-                    <td>Sep 2026</td>
+                    <td><code>PRJ-NEBULA</code></td>
+                    <td>Expert Diligence Report</td>
                     <td>
-                      <span class="status-badge status-active"
-                        >Solvency Opinion</span
-                      >
+                      <span class="badge badge-info">Confidential Tier-1</span>
                     </td>
-                    <td>Morgan Advisory</td>
+                    <td>Sep 15, 2026</td>
+                    <td>28.4 MB</td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'Downloading Solvency Opinion...',
-                            'info'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-secondary"
+                        >Download PDF</a
                       >
-                        Download
-                      </button>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <strong
-                        >Schedule_K1_Tax_Form_Tax_Year_2025_Final.pdf</strong
+                      <i
+                        class="fas fa-file-excel text-success"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong
+                        >BioGenix Carve-Out Pro-Forma Cash Flow Model & Cap
+                        Table</strong
                       >
                     </td>
-                    <td>Annual 2025</td>
+                    <td><code>PRJ-OLYMPUS</code></td>
+                    <td>Financial Model (.XLSM)</td>
                     <td>
-                      <span class="status-badge status-active"
-                        >Tax Document</span
+                      <span class="badge badge-warning"
+                        >Sponsor Clean Room</span
                       >
                     </td>
-                    <td>Internal Revenue</td>
+                    <td>Sep 12, 2026</td>
+                    <td>8.6 MB</td>
                     <td>
-                      <button
-                        type="button"
-                        class="btn btn-subtle btn-sm"
-                        onclick="
-                          window.showDashToast(
-                            'Downloading Schedule K-1 Form...',
-                            'info'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-secondary"
+                        >Download Model</a
                       >
-                        Download
-                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <i
+                        class="fas fa-file-pdf text-danger"
+                        style="margin-right: 8px"
+                      ></i
+                      ><strong
+                        >Project Helios - Wind Offshore Yield Forecast & PPA
+                        Contracts</strong
+                      >
+                    </td>
+                    <td><code>PRJ-HELIOS</code></td>
+                    <td>Engineering & PPA Audit</td>
+                    <td>
+                      <span class="badge badge-success">LPAC Authorized</span>
+                    </td>
+                    <td>Sep 08, 2026</td>
+                    <td>32.1 MB</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-secondary"
+                        >Download PDF</a
+                      >
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </section>
+          </div>
 
-          <!-- SECTION 4: CAPITAL CALLS & DISTRIBUTIONS CALENDAR -->
-          <section
-            class="dash-panel"
-            id="cust-distributions"
-            style="margin-bottom: 28px"
-          >
-            <div class="dash-panel-header">
-              <h3>Capital Call Schedule & Upcoming Distribution Forecast</h3>
-              <span class="user-greeting-pill">Wire Instructions Active</span>
+          <!-- Section 3: Target Company Executive Summaries -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Project Valkyrie - AeroDynamics Corp
+                </h3>
+              </div>
+              <p class="text-sm text-muted">
+                Global manufacturer of specialized composite aerodynamic
+                structures for defense avionics and next-gen commercial
+                aviation.
+              </p>
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.03);
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 15px;
+                  margin-bottom: 12px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 6px;
+                  "
+                >
+                  <span>LTM Revenue:</span> <strong>$1,840M</strong>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 6px;
+                  "
+                >
+                  <span>Adjusted EBITDA:</span>
+                  <strong>$356M (19.3% Margin)</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between">
+                  <span>Contracted Backlog:</span>
+                  <strong>$4.8B (3.2x Book-to-Bill)</strong>
+                </div>
+              </div>
+              <a
+                href="404.html"
+                class="btn btn-sm btn-outline w-100 text-center"
+                >Request Executive Diligence Session</a
+              >
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Project Nebula - Apex Cloud Systems
+                </h3>
+              </div>
+              <p class="text-sm text-muted">
+                Cloud infrastructure platform providing multi-tenant
+                orchestration, zero-trust security mesh, and compliance
+                automation.
+              </p>
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.03);
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 15px;
+                  margin-bottom: 12px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 6px;
+                  "
+                >
+                  <span>Annual Recurring Revenue:</span>
+                  <strong>$185M (+34% YoY)</strong>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 6px;
+                  "
+                >
+                  <span>Net Dollar Retention:</span> <strong>128% NDR</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between">
+                  <span>Gross Margin:</span>
+                  <strong>78.4% SaaS Benchmark</strong>
+                </div>
+              </div>
+              <a
+                href="404.html"
+                class="btn btn-sm btn-outline w-100 text-center"
+                >Request Executive Diligence Session</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 4: Diligence Request Inquiry Form -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Submit Confidential Investor Diligence Inquiry
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Inquiry Regarding Mandate</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>PRJ-VALKYRIE - AeroDynamics Corp</option>
+                    <option>PRJ-NEBULA - Apex Cloud Systems</option>
+                    <option>PRJ-OLYMPUS - BioGenix Therapeutics</option>
+                    <option>PRJ-HELIOS - Nordic CleanPower</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Subject Area</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Customer Retention & Cohort Churn</option>
+                    <option>Environmental ESA Phase I Contingency</option>
+                    <option>Senior Debt Credit Agreement Covenants</option>
+                    <option>Tax Structure & Swiss Treaty Exemptions</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Detailed Question for Investment Committee</label>
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Provide specific inquiry for partner written response..."
+                  style="
+                    background: rgba(255, 255, 255, 0.05);
+                    color: #fff;
+                    border: 1px solid var(--border-color);
+                    border-radius: 6px;
+                    padding: 10px;
+                  "
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Transmit Inquiry to
+                Investment Committee
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 4: DISTRIBUTIONS & WIRES
+           ========================================================= -->
+        <div id="view-payouts" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Distributions, Wire Confirmations & Tax Ledger
+              </h2>
+              <p class="view-subtitle">
+                Historical dividend returns, return of capital tranches, and
+                custodian SWIFT verification.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-receipt"></i> Export Tax Ledger (CSV)</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-university"></i> Update Bank Routing
+                Details</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-money-check-alt"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">YTD Cash Distributed</span>
+                <h3 class="stat-value">$68,450,000</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> +18.2% vs FY2025</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-percent"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Realized Capital Gain</span>
+                <h3 class="stat-value">$42,800,000</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> Long-term Qualified</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Return of Principal</span>
+                <h3 class="stat-value">$25,650,000</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-undo"></i> De-risked Exposure</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Next Expected Payout</span>
+                <h3 class="stat-value">Nov 15, 2026</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-calendar-alt"></i> Est. $14.2M
+                  Dividend</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Historical Cash Distribution Ledger -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Historical Cash Distribution Ledger
+                </h3>
+                <p class="dash-card-subtitle">
+                  All funds routed via Federal Reserve Fedwire and SWIFT to
+                  custodian UBS Zurich.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-download"></i> Custodian Reconcile</a
+              >
             </div>
             <div class="table-responsive">
-              <table class="custom-table">
+              <table class="dash-table">
                 <thead>
                   <tr>
-                    <th>Event Type</th>
-                    <th>Amount ($)</th>
-                    <th>Scheduled Date</th>
-                    <th>Associated Holding</th>
-                    <th>Payment Route</th>
-                    <th>Status</th>
+                    <th>Settlement Date</th>
+                    <th>Transaction Ref</th>
+                    <th>Fund Vehicle</th>
+                    <th>Payout Category</th>
+                    <th>Gross Distribution</th>
+                    <th>Withholding</th>
+                    <th>Net Remitted</th>
+                    <th>SWIFT Wire Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>Quarterly Preferred Dividend</strong></td>
-                    <td><strong style="color: #10b981">+$2,840,000</strong></td>
-                    <td>Oct 05, 2026</td>
-                    <td>Fund IV Income Basket</td>
-                    <td>FedWire Direct (Chase)</td>
+                    <td>Aug 15, 2026</td>
+                    <td><code>SWIFT-CH-992014</code></td>
+                    <td>Global Buyout Fund IV</td>
+                    <td>Dividend Realization (AeroSystems Exit)</td>
+                    <td>$32,000,000</td>
+                    <td>$0 (Treaty Exempt)</td>
+                    <td><strong>$32,000,000</strong></td>
                     <td>
-                      <span class="status-badge status-active">Confirmed</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>Capital Drawdown Notice</strong></td>
-                    <td>
-                      <strong style="color: var(--color-primary-900)"
-                        >-$4,500,000</strong
-                      >
-                    </td>
-                    <td>Oct 18, 2026</td>
-                    <td>Project Titan Escrow Closing</td>
-                    <td>Automated Standing Order</td>
-                    <td>
-                      <span class="status-badge status-pending"
-                        >Notice Dispatched</span
+                      <span class="badge badge-success"
+                        ><i class="fas fa-check"></i> Settled / Reconciled</span
                       >
                     </td>
                   </tr>
                   <tr>
-                    <td><strong>Special Liquidity Distribution</strong></td>
-                    <td><strong style="color: #10b981">+$6,120,000</strong></td>
-                    <td>Nov 15, 2026</td>
-                    <td>Apex Logistics Realization</td>
-                    <td>Escrow Wire</td>
+                    <td>May 15, 2026</td>
+                    <td><code>SWIFT-CH-883102</code></td>
+                    <td>Direct Lending Fund II</td>
+                    <td>Q1 Senior Debt Interest Coupon</td>
+                    <td>$3,450,000</td>
+                    <td>$0 (Treaty Exempt)</td>
+                    <td><strong>$3,450,000</strong></td>
                     <td>
-                      <span class="status-badge status-pending">Scheduled</span>
+                      <span class="badge badge-success"
+                        ><i class="fas fa-check"></i> Settled / Reconciled</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Feb 15, 2026</td>
+                    <td><code>SWIFT-CH-774029</code></td>
+                    <td>Global Buyout Fund IV</td>
+                    <td>Carve-Out Recapitalization Dividend</td>
+                    <td>$33,000,000</td>
+                    <td>$0 (Treaty Exempt)</td>
+                    <td><strong>$33,000,000</strong></td>
+                    <td>
+                      <span class="badge badge-success"
+                        ><i class="fas fa-check"></i> Settled / Reconciled</span
+                      >
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </section>
+          </div>
 
-          <!-- SECTION 5: DIRECT PARTNER CONCIERGE -->
-          <section class="dash-panel" id="cust-concierge">
-            <div class="dash-panel-header">
-              <h3>Dedicated Advisory Partner Concierge</h3>
-              <span class="user-greeting-pill">Direct Line</span>
+          <!-- Section 3: Tax Schedule K-1 & FATCA Archive -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Schedule K-1 & Tax Document Archive
+                </h3>
+              </div>
+              <div class="table-responsive">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Tax Year</th>
+                      <th>Document</th>
+                      <th>Entity</th>
+                      <th>Release Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>FY 2025</td>
+                      <td>Schedule K-1 (Form 1065)</td>
+                      <td>Fund IV GP</td>
+                      <td>Mar 15, 2026</td>
+                      <td>
+                        <a href="404.html" class="btn btn-xs btn-outline"
+                          >PDF</a
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>FY 2024</td>
+                      <td>Schedule K-1 (Form 1065)</td>
+                      <td>Fund IV GP</td>
+                      <td>Mar 14, 2025</td>
+                      <td>
+                        <a href="404.html" class="btn btn-xs btn-outline"
+                          >PDF</a
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>FY 2025</td>
+                      <td>FATCA Form 8966</td>
+                      <td>Swiss Entity</td>
+                      <td>Feb 28, 2026</td>
+                      <td>
+                        <a href="404.html" class="btn btn-xs btn-outline"
+                          >PDF</a
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
-            >
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Custodian Bank Routing Verification Form
+                </h3>
+              </div>
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
+                "
+                style="padding: 10px 0"
+              >
+                <div class="form-group">
+                  <label>Receiving Financial Institution</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="UBS Switzerland AG, Bahnhofstrasse 45, Zurich"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label>SWIFT / BIC Code</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="UBSWCHZH80A"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-lock"></i> Submit Wire Routing Update
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 5: PARTNER CONCIERGE
+           ========================================================= -->
+        <div id="view-concierge" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Dedicated Managing Partner Concierge Channel
+              </h2>
+              <p class="view-subtitle">
+                Direct, confidential access to senior investment committee
+                members and personal briefings.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-calendar-check"></i> Schedule 1-on-1 Strategy
+                Call</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: Advisory Access KPI Cards -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Dedicated Lead Partner</span>
+                <h3 class="stat-value">Marcus Vance</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-star"></i> Head of PE Practice</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Response Time SLA</span>
+                <h3 class="stat-value">< 2 Hours</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> Direct Mobile / Signal</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-comments"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Strategy Briefings YTD</span>
+                <h3 class="stat-value">6 Completed</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-calendar-check"></i> Next in Zurich</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Confidentiality Tier</span>
+                <h3 class="stat-value">Tier 1 Sovereign</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-lock"></i> End-to-End Encrypted</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Partner Profile & Inquiry Form -->
+          <div class="dash-grid-2">
+            <!-- Left: Dedicated Partner Card -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Assigned Lead Partner & Advisory Team
+                </h3>
+              </div>
               <div
                 style="
-                  background: #fbfaf8;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 18px;
+                  display: flex;
+                  gap: 20px;
+                  align-items: center;
+                  margin-bottom: 25px;
                 "
               >
                 <div
                   style="
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+                    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
                     display: flex;
                     align-items: center;
-                    gap: 14px;
-                    margin-bottom: 12px;
+                    justify-content: center;
+                    font-size: 1.6rem;
+                    font-weight: 800;
+                    color: #fff;
+                    border: 2px solid var(--accent-color);
                   "
                 >
-                  <div
-                    class="user-avatar-initials"
-                    style="width: 44px; height: 44px"
-                  >
-                    VA
-                  </div>
-                  <div>
-                    <strong
-                      style="color: var(--color-primary-900); font-size: 1rem"
-                      >Victoria Alexander</strong
-                    >
-                    <div
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--color-accent-gold-dark);
-                      "
-                    >
-                      Managing General Partner & CEO
-                    </div>
-                  </div>
+                  MV
                 </div>
-                <p
-                  style="
-                    font-size: 0.82rem;
-                    color: var(--text-secondary);
-                    line-height: 1.45;
-                    margin-bottom: 14px;
-                  "
-                >
-                  Available for confidential board advisory, co-investment
-                  syndication dockets, and quarterly performance briefings.
-                </p>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  onclick="
-                    window.showDashToast(
-                      'Encrypted consultation session requested with Victoria Alexander.',
-                      'success'
-                    )
-                  "
-                >
-                  Schedule Direct Call
-                </button>
+                <div>
+                  <h4 style="font-size: 1.15rem; margin-bottom: 4px">
+                    Marcus Vance
+                  </h4>
+                  <p
+                    class="text-accent"
+                    style="
+                      font-size: 0.85rem;
+                      font-weight: 600;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Managing Partner & Head of Private Equity
+                  </p>
+                  <p class="text-muted text-sm">
+                    <i class="fas fa-envelope"></i> m.vance@stacklycorp.com •
+                    <i class="fas fa-phone-alt"></i> +1 (212) 555-0198
+                  </p>
+                </div>
               </div>
+
+              <p
+                style="
+                  font-size: 0.9rem;
+                  line-height: 1.6;
+                  color: var(--text-muted);
+                  margin-bottom: 20px;
+                "
+              >
+                Mr. Vance oversees all direct co-investment opportunities for
+                sovereign and institutional partners, personally guiding asset
+                allocation across Aerospace, Enterprise SaaS, and Critical
+                Infrastructure.
+              </p>
 
               <div
                 style="
-                  background: #fbfaf8;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 18px;
+                  background: rgba(255, 255, 255, 0.03);
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 15px;
                 "
               >
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 14px;
-                    margin-bottom: 12px;
-                  "
-                >
-                  <div
-                    class="user-avatar-initials"
-                    style="width: 44px; height: 44px"
-                  >
-                    MS
-                  </div>
-                  <div>
-                    <strong
-                      style="color: var(--color-primary-900); font-size: 1rem"
-                      >Marcus Sterling</strong
-                    >
-                    <div
-                      style="
-                        font-size: 0.8rem;
-                        color: var(--color-accent-gold-dark);
-                      "
-                    >
-                      Director of Strategic Allocations
-                    </div>
-                  </div>
-                </div>
-                <p
-                  style="
-                    font-size: 0.82rem;
-                    color: var(--text-secondary);
-                    line-height: 1.45;
-                    margin-bottom: 14px;
-                  "
-                >
-                  Overseeing debt facility drawdowns, mezzanine tranche
-                  syndication, and mandate risk management.
+                <h5 style="font-size: 0.85rem; margin-bottom: 8px; color: #fff">
+                  <i class="fas fa-user-shield text-accent"></i> Secondary
+                  Relationship Director
+                </h5>
+                <p style="font-size: 0.85rem; margin-bottom: 0">
+                  <strong>Dr. Elena Rostova</strong> (Managing Director,
+                  Cross-Border M&A) • e.rostova@stacklycorp.com
                 </p>
-                <button
-                  type="button"
-                  class="btn btn-subtle btn-sm"
-                  onclick="
-                    window.showDashToast(
-                      'Capital allocation inquiry dispatched to Marcus Sterling.',
-                      'info'
-                    )
-                  "
-                >
-                  Send Allocation Inquiry
-                </button>
               </div>
             </div>
-          </section>
-        </main>
-      </div>
+
+            <!-- Right: Direct Message Form -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Confidential Partner Inquiry</h3>
+              </div>
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
+                "
+                style="padding: 10px 0"
+              >
+                <div class="form-group">
+                  <label>Inquiry Topic</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>
+                      Co-Investment Sizing & Allocation (Project Valkyrie)
+                    </option>
+                    <option>Secondary Portfolio Liquidity Request</option>
+                    <option>LPAC Voting Consultation</option>
+                    <option>Custom Tax Structuring (Swiss / EU Treaty)</option>
+                    <option>Direct Meeting at Zurich Executive Office</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Confidential Briefing Message</label>
+                  <textarea
+                    class="form-control"
+                    rows="4"
+                    placeholder="Type your confidential request directly to Marcus Vance..."
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-paper-plane"></i> Transmit Confidential
+                  Inquiry
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Section 3: Global Summit & Conference Schedule -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Exclusive Institutional Investor Global Summits
+                </h3>
+                <p class="dash-card-subtitle">
+                  Annual executive roundtables and private portfolio company CEO
+                  briefings.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-calendar-alt"></i> RSVP All</a
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Event Name</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>Focus Agenda</th>
+                    <th>Access Tier</th>
+                    <th>Registration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Stackly Zurich Investor Summit 2026</strong>
+                    </td>
+                    <td>The Dolder Grand, Zurich</td>
+                    <td>Nov 18-19, 2026</td>
+                    <td>
+                      Defense Aerospace, Clean Transition & AI Infrastructure
+                    </td>
+                    <td>
+                      <span class="badge badge-success">VIP Delegate</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-primary"
+                        >Confirm Pass</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Singapore Sovereign Wealth Roundtable</strong>
+                    </td>
+                    <td>Marina Bay Sands, Singapore</td>
+                    <td>Jan 22, 2027</td>
+                    <td>APAC Cross-Border Carve-Outs & Debt Syndication</td>
+                    <td>
+                      <span class="badge badge-success">VIP Delegate</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-primary"
+                        >Confirm Pass</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-    <div
-      id="dash-toast-container"
-      class="dash-toast-container"
-      aria-live="polite"
-    ></div>
-
-    <!-- Scripts -->
     <script src="../assets/js/storage.js"></script>
     <script src="../assets/js/dashboard.js"></script>
-    <script src="../assets/js/main.js"></script>
   </body>
 </html>

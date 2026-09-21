@@ -3,785 +3,1962 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manager Workspace | Stackly</title>
-    <meta
-      name="description"
-      content="Stackly Manager Workspace - Strategic Capital Allocations, M&A Pipeline Velocity, and Advisory Squad Allocation."
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <title>Manager Workspace - Stackly Corporate Business</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/dashboard.css" />
-    <script>
-      (function () {
-        try {
-          var raw = localStorage.getItem("cb_currentUser");
-          if (!raw) {
-            window.location.replace("sign-in.html");
-          }
-        } catch (e) {
-          window.location.replace("sign-in.html");
-        }
-      })();
-    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="dashboard-body">
-    <div class="dashboard-wrapper">
-      <!-- COLLAPSIBLE SIDEBAR -->
-      <aside
-        class="dash-sidebar"
-        role="navigation"
-        aria-label="Manager Navigation Sidebar"
-      >
-        <div class="dash-sidebar-header">
-          <a
-            href="../index.html"
-            aria-label="Stackly Home"
-            class="dash-brand-link"
-          >
-            <img
-              src="../assets/images/logoStackly.webp"
-              alt="Stackly Logo"
-              width="160"
-              height="36"
-              class="dash-brand-img"
-            />
-          </a>
-          <button
-            class="dash-mobile-close-btn"
-            id="dash-mobile-close"
-            aria-label="Close Mobile Navigation"
-          >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
+    <aside class="dash-sidebar" id="dashSidebar">
+      <div class="dash-sidebar-header">
+        <a
+          href="../index.html"
+          class="dash-brand-link"
+          aria-label="Stackly Home"
+        >
+          <img
+            src="../assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            width="160"
+            height="36"
+            class="dash-brand-img"
+            style="height: 36px; max-width: 160px; object-fit: contain"
+          />
+        </a>
+        <button
+          class="sidebar-close-btn"
+          id="sidebarCloseBtn"
+          aria-label="Close Sidebar"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
 
-        <ul class="dash-nav-menu">
-          <li class="dash-nav-heading">Manager Console</li>
-          <li class="dash-nav-item active" data-tooltip="Capital Allocation">
-            <a href="#manager-telemetry" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span>Allocations Pacing</span>
-            </a>
+      <div class="dash-user-card">
+        <div class="dash-avatar-wrapper">
+          <div class="dash-avatar" id="dashUserAvatar">MS</div>
+          <span class="dash-status-dot online"></span>
+        </div>
+        <div class="dash-user-info">
+          <h4 id="dashUserName">Marcus Sterling</h4>
+          <span class="dash-role-badge" id="dashRoleBadge"
+            >Transaction Director</span
+          >
+          <span class="dash-user-email" id="dashUserEmail"
+            >m.sterling@stacklycorp.com</span
+          >
+        </div>
+      </div>
+
+      <nav class="dash-nav">
+        <div class="dash-nav-section-title">Deal Portfolio</div>
+        <ul class="dash-nav-list">
+          <li
+            class="dash-nav-item active"
+            data-view="overview"
+            data-tooltip="Portfolio Overview"
+          >
+            <a href="#overview"
+              ><i class="fas fa-tachometer-alt"></i
+              ><span>Portfolio Overview</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Mandate Pipeline">
-            <a href="#manager-kanban" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                />
-              </svg>
-              <span>Mandates Kanban</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="kanban"
+            data-tooltip="Deal Pipeline Kanban"
+          >
+            <a href="#kanban"
+              ><i class="fas fa-columns"></i><span>Deal Pipeline Kanban</span
+              ><span class="nav-counter">4</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Squad Capacity">
-            <a href="#manager-squads" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-              <span>Advisory Squads</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="squads"
+            data-tooltip="Execution Squads"
+          >
+            <a href="#squads"
+              ><i class="fas fa-users"></i><span>Execution Squads</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Client Milestones">
-            <a href="#manager-milestones" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-                />
-              </svg>
-              <span>Deal Milestones</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="milestones"
+            data-tooltip="Milestone Critical Path"
+          >
+            <a href="#milestones"
+              ><i class="fas fa-flag-checkered"></i
+              ><span>Milestone Critical Path</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Treasury Facilities">
-            <a href="#manager-facilities" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
-                />
-              </svg>
-              <span>Treasury Facilities</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="facilities"
+            data-tooltip="Closing War Rooms"
+          >
+            <a href="#facilities"
+              ><i class="fas fa-building"></i><span>Closing War Rooms</span></a
+            >
           </li>
         </ul>
 
-        <!-- SIDEBAR COLLAPSE TRIGGER -->
-        <div class="dash-sidebar-bottom">
-          <button
-            class="sidebar-collapse-btn"
-            id="sidebar-collapse-trigger"
-            title="Collapse / Expand Sidebar"
-            aria-label="Toggle Desktop Sidebar"
-          >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-              />
-            </svg>
-            <span class="collapse-label">Collapse Menu</span>
-          </button>
-        </div>
-      </aside>
-
-      <!-- MOBILE SIDEBAR BACKDROP -->
-      <div class="dash-sidebar-backdrop" id="dash-sidebar-backdrop"></div>
-
-      <!-- MAIN CONTENT WRAPPER -->
-      <div class="dash-main">
-        <!-- PERMANENTLY FIXED TOPBAR -->
-        <header class="dash-topbar" role="banner">
-          <div class="dash-topbar-left">
-            <button class="sidebar-toggle-btn" aria-label="Open Sidebar Menu">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div class="dash-topbar-right">
-            <!-- User Profile Area -->
-            <div class="user-profile-badge">
-              <div id="dash-user-initials" class="user-avatar-initials">MS</div>
-              <div class="user-info-text">
-                <span id="dash-user-name" class="user-display-name"
-                  >Marcus Sterling</span
-                >
-                <span id="dash-user-role" class="user-role-label"
-                  >Manager Access</span
-                >
-              </div>
-            </div>
-
-            <!-- Primary CTA: Sign Out -->
-            <button
-              onclick="
-                window.CB_Storage
-                  ? window.CB_Storage.logout()
-                  : (window.location.href = 'sign-in.html')
-              "
-              class="btn btn-secondary-light btn-sm"
-              title="End Session"
+        <div class="dash-nav-section-title">Governance & Approvals</div>
+        <ul class="dash-nav-list">
+          <li class="dash-nav-item" data-tooltip="Partner Signoff Queue">
+            <a href="404.html"
+              ><i class="fas fa-signature"></i
+              ><span>Partner Signoff Queue</span></a
             >
-              <span>Sign Out</span>
-            </button>
-          </div>
-        </header>
+          </li>
+          <li class="dash-nav-item" data-tooltip="Fairness Opinion Board">
+            <a href="404.html"
+              ><i class="fas fa-balance-scale"></i
+              ><span>Fairness Opinion Board</span></a
+            >
+          </li>
+        </ul>
+      </nav>
 
-        <!-- DASHBOARD BODY CONTENT -->
-        <main class="dash-content">
-          <!-- HERO BANNER SECTION -->
-          <div class="dash-hero-banner" id="manager-telemetry">
-            <div class="dash-hero-eyebrow">
-              <span class="pulse-dot"></span>
-              <span>Strategic Capital Allocations & Pacing</span>
-            </div>
-            <h1 class="dash-hero-title">
-              <span id="greetingTime">Good afternoon</span>,
-              <span class="gradient-text" id="greetingName"
-                >Marcus Sterling.</span
-              >
-            </h1>
-            <p class="dash-hero-desc">
-              Advisory squad capacity, mandate closing velocities, and quarterly
-              fund drawdown schedules are tracking on target for Q3 2026.
-            </p>
-          </div>
+      <div class="dash-sidebar-footer">
+        <a href="../index.html" class="dash-sidebar-link"
+          ><i class="fas fa-globe"></i><span>Public Portal</span></a
+        >
+        <button class="dash-logout-btn" id="dashLogoutBtn">
+          <i class="fas fa-sign-out-alt"></i><span>Secure Logout</span>
+        </button>
+        <button
+          class="sidebar-collapse-btn"
+          id="sidebarCollapseBtn"
+          aria-label="Collapse Navigation Menu"
+          title="Collapse Sidebar"
+        >
+          <i class="fas fa-angle-double-left collapse-icon"></i>
+          <span class="collapse-label">Collapse Menu</span>
+        </button>
+      </div>
+    </aside>
 
-          <!-- SECTION 1: 4 KPI STATS CARDS -->
-          <section class="dash-stats-grid" aria-label="Manager KPIs">
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Pipeline Under Review</span>
-                <span class="stat-icon-wrap icon-blue">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">$840M</div>
-              <div class="stat-delta positive"><span>+18.5% QoQ</span></div>
-            </div>
+    <div
+      class="dash-sidebar-backdrop"
+      id="dash-sidebar-backdrop"
+      aria-hidden="true"
+    ></div>
 
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Active M&A Mandates</span>
-                <span class="stat-icon-wrap icon-emerald">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">14 Deals</div>
-              <div class="stat-delta positive">
-                <span>8 in Due Diligence</span>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Advisory Squad Utilization</span>
-                <span class="stat-icon-wrap icon-purple">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">91.4%</div>
-              <div class="stat-delta positive"><span>Optimal Pacing</span></div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <span class="stat-label">Quarterly Target Pacing</span>
-                <span class="stat-icon-wrap icon-amber">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width="20"
-                    height="20"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="stat-value">114%</div>
-              <div class="stat-delta positive"><span>+$120M Ahead</span></div>
-            </div>
-          </section>
-
-          <!-- SECTION 2: ACTIVE MANDATE KANBAN PIPELINE -->
-          <section
-            class="dash-panel"
-            id="manager-kanban"
-            style="margin-bottom: 28px"
+    <div class="dash-main-wrapper">
+      <header class="dash-topbar" role="banner">
+        <div class="dash-topbar-left">
+          <button
+            class="sidebar-toggle-btn"
+            id="sidebarToggleBtn"
+            aria-label="Toggle Sidebar"
           >
-            <div class="dash-panel-header">
-              <h3>Active M&A Mandate Kanban Pipeline ($3.45B Total EV)</h3>
-              <button
-                type="button"
-                class="btn btn-primary btn-sm"
-                onclick="
-                  window.showDashToast(
-                    'New mandate registration drawer opened.',
-                    'info'
-                  )
-                "
-              >
-                + New Mandate
-              </button>
-            </div>
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="dash-breadcrumb">
+            <span class="crumb-root">Workspace</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-role" id="crumbRole">Manager Console</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-view" id="crumbView">Portfolio Overview</span>
+          </div>
+        </div>
 
-            <div class="kanban-board-grid">
-              <!-- Sourcing -->
-              <div class="kanban-col">
-                <div class="kanban-col-header">
-                  <div class="kanban-col-title-wrap">
-                    <span class="kanban-col-dot dot-sourcing"></span>
-                    <span class="kanban-col-title">Sourcing (3)</span>
-                  </div>
-                </div>
-                <div class="kanban-col-cards">
-                  <div class="kanban-card">
-                    <span class="kanban-card-sector">Enterprise SaaS</span>
-                    <div class="kanban-card-title">
-                      Nordic Cloud Infrastructure
-                    </div>
-                    <div class="kanban-card-val-row">
-                      <span class="kanban-card-val">$650M EV</span>
-                    </div>
-                  </div>
-                  <div class="kanban-card">
-                    <span class="kanban-card-sector">Life Sciences</span>
-                    <div class="kanban-card-title">Quantum BioPharma Core</div>
-                    <div class="kanban-card-val-row">
-                      <span class="kanban-card-val">$280M EV</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Due Diligence -->
-              <div class="kanban-col">
-                <div class="kanban-col-header">
-                  <div class="kanban-col-title-wrap">
-                    <span class="kanban-col-dot dot-dd"></span>
-                    <span class="kanban-col-title">Due Diligence (4)</span>
-                  </div>
-                </div>
-                <div class="kanban-col-cards">
-                  <div class="kanban-card">
-                    <span class="kanban-card-sector">Clean Energy</span>
-                    <div class="kanban-card-title">
-                      Helios Solar Infrastructure
-                    </div>
-                    <div class="kanban-card-val-row">
-                      <span class="kanban-card-val">$850M EV</span>
-                    </div>
-                  </div>
-                  <div class="kanban-card">
-                    <span class="kanban-card-sector">FinTech</span>
-                    <div class="kanban-card-title">
-                      Sovereign Gateway Systems
-                    </div>
-                    <div class="kanban-card-val-row">
-                      <span class="kanban-card-val">$310M EV</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- LOI & Terms -->
-              <div class="kanban-col">
-                <div class="kanban-col-header">
-                  <div class="kanban-col-title-wrap">
-                    <span class="kanban-col-dot dot-loi"></span>
-                    <span class="kanban-col-title">LOI & Terms (4)</span>
-                  </div>
-                </div>
-                <div class="kanban-col-cards">
-                  <div class="kanban-card">
-                    <span class="kanban-card-sector">Aerospace</span>
-                    <div class="kanban-card-title">Horizon Aero Dynamics</div>
-                    <div class="kanban-card-val-row">
-                      <span class="kanban-card-val">$520M EV</span>
-                    </div>
-                  </div>
-                  <div class="kanban-card">
-                    <span class="kanban-card-sector">Clean Energy</span>
-                    <div class="kanban-card-title">Lumina Green Hydrogen</div>
-                    <div class="kanban-card-val-row">
-                      <span class="kanban-card-val">$330M EV</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Closing -->
-              <div class="kanban-col">
-                <div class="kanban-col-header">
-                  <div class="kanban-col-title-wrap">
-                    <span class="kanban-col-dot dot-closing"></span>
-                    <span class="kanban-col-title">Closing & Escrow (3)</span>
-                  </div>
-                </div>
-                <div class="kanban-col-cards">
-                  <div class="kanban-card">
-                    <span class="kanban-card-sector">Logistics</span>
-                    <div class="kanban-card-title">Project Titan Carveout</div>
-                    <div class="kanban-card-val-row">
-                      <span class="kanban-card-val">$1.20B EV</span>
-                    </div>
-                  </div>
-                  <div class="kanban-card">
-                    <span class="kanban-card-sector">Wealth Tech</span>
-                    <div class="kanban-card-title">Sterling Wealth Capital</div>
-                    <div class="kanban-card-val-row">
-                      <span class="kanban-card-val">$490M EV</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- SECTION 3: ADVISORY SQUAD WORKLOAD ALLOCATION -->
-          <section
-            class="dash-panel"
-            id="manager-squads"
-            style="margin-bottom: 28px"
+        <div class="dash-topbar-right">
+          <div class="topbar-chip">
+            <i class="fas fa-clock text-accent"></i
+            ><span id="dashLiveTime">UTC 00:00</span>
+          </div>
+          <div class="topbar-chip">
+            <i class="fas fa-briefcase text-success"></i
+            ><span>Advisory Active</span>
+          </div>
+          <a href="404.html" class="topbar-action-icon" title="Deal Alerts"
+            ><i class="fas fa-bell"></i><span class="badge-dot"></span
+          ></a>
+          <a href="404.html" class="topbar-action-icon" title="Partner Channel"
+            ><i class="fas fa-comments"></i
+          ></a>
+          <a href="404.html" class="btn btn-sm btn-primary action-404-btn"
+            ><i class="fas fa-plus"></i> New Mandate</a
           >
-            <div class="dash-panel-header">
-              <h3>Advisory Squad Capacity & Deal Team Utilization</h3>
-              <button
-                type="button"
-                class="btn btn-subtle btn-sm"
-                onclick="
-                  window.showDashToast(
-                    'Squad workload report dispatched to Investment Committee.',
-                    'success'
-                  )
-                "
+        </div>
+      </header>
+
+      <main class="dash-content">
+        <!-- =========================================================
+           VIEW 1: PORTFOLIO OVERVIEW
+           ========================================================= -->
+        <div id="view-overview" class="dash-view active-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Transaction Pipeline & Portfolio Command Center
+              </h2>
+              <p class="view-subtitle">
+                High-level visibility into active M&A mandates, execution squad
+                workload, and capital deployment velocity.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-file-pdf"></i> Committee Tear Sheet</a
               >
-                Rebalance Squads
-              </button>
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-sync-alt"></i> Refresh Valuations</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Active Deal Mandates</span>
+                <h3 class="stat-value">12 Live Deals</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> $8.4B Aggregate EV</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-trophy"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Mandate Win Rate</span>
+                <h3 class="stat-value">78.4%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> +6.2% vs Benchmark</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-hand-holding-usd"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Average Synergy Capture</span>
+                <h3 class="stat-value">24.2%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-chart-line"></i> Post-Merger Target</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-hourglass-half"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Closing in Q4</span>
+                <h3 class="stat-value">3 Transactions</h3>
+                <span class="stat-trend negative"
+                  ><i class="fas fa-exclamation-circle"></i> Valkyrie
+                  (14d)</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Active Transaction Workstreams Table with Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Live Advisory Mandates & Execution Workstreams
+                </h3>
+                <p class="dash-card-subtitle">
+                  Comprehensive tracking of deal values, lead directors, current
+                  stages, and definitive signing milestones.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-manager-workstreams"
+                  placeholder="Search mandates, leads, clients..."
+                />
+                <div class="filter-pill-group">
+                  <button class="status-filter-pill active" data-status="all">
+                    All (5)
+                  </button>
+                  <button class="status-filter-pill" data-status="Definitive">
+                    Definitive (1)
+                  </button>
+                  <button class="status-filter-pill" data-status="Diligence">
+                    Diligence (1)
+                  </button>
+                  <button class="status-filter-pill" data-status="Structuring">
+                    Structuring (1)
+                  </button>
+                </div>
+              </div>
             </div>
             <div class="table-responsive">
-              <table class="custom-table">
+              <table class="dash-table" id="table-manager-workstreams">
                 <thead>
                   <tr>
-                    <th>Advisory Squad</th>
-                    <th>Lead Partner</th>
-                    <th>Active Mandates</th>
-                    <th>Total EV Assigned</th>
-                    <th>Capacity Utilization</th>
-                    <th>Sprint Velocity</th>
+                    <th>Deal Code</th>
+                    <th>Client / Target</th>
+                    <th>Advisory Type</th>
+                    <th>Transaction EV</th>
+                    <th>Squad Lead</th>
+                    <th>Stage</th>
+                    <th>Est. Close</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>Squad Alpha (Tech & Clean Energy)</strong></td>
-                    <td>Victoria Alexander</td>
-                    <td>5 Mandates</td>
-                    <td>$2.05B</td>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td><strong>AeroDynamics Corp</strong></td>
+                    <td>Sell-Side M&A</td>
+                    <td>$2,800M</td>
+                    <td>M. Sterling (MD)</td>
                     <td>
-                      <div style="display: flex; align-items: center; gap: 8px">
-                        <div
-                          class="progress-bar-bg"
-                          style="width: 80px; height: 6px"
-                        >
-                          <div
-                            class="progress-bar-fill"
-                            style="width: 94%"
-                          ></div>
-                        </div>
-                        <span style="font-size: 0.78rem; font-weight: 700"
-                          >94%</span
-                        >
-                      </div>
+                      <span class="status-pill status-active"
+                        >Definitive Signing</span
+                      >
                     </td>
+                    <td>Oct 12, 2026</td>
                     <td>
-                      <span class="status-badge status-active">Optimal</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>Squad Beta (FinTech & Industrial)</strong></td>
-                    <td>Marcus Sterling</td>
-                    <td>6 Mandates</td>
-                    <td>$980M</td>
-                    <td>
-                      <div style="display: flex; align-items: center; gap: 8px">
-                        <div
-                          class="progress-bar-bg"
-                          style="width: 80px; height: 6px"
-                        >
-                          <div
-                            class="progress-bar-fill"
-                            style="width: 88%"
-                          ></div>
-                        </div>
-                        <span style="font-size: 0.78rem; font-weight: 700"
-                          >88%</span
-                        >
-                      </div>
-                    </td>
-                    <td>
-                      <span class="status-badge status-active"
-                        >High Velocity</span
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal</a
                       >
                     </td>
                   </tr>
                   <tr>
-                    <td><strong>Squad Gamma (Special Situations)</strong></td>
-                    <td>Elena Rostova</td>
-                    <td>3 Mandates</td>
-                    <td>$420M</td>
+                    <td><code>PRJ-NEBULA</code></td>
+                    <td><strong>Apex Cloud Systems</strong></td>
+                    <td>Strategic Acquisition</td>
+                    <td>$1,400M</td>
+                    <td>E. Watson (VP)</td>
                     <td>
-                      <div style="display: flex; align-items: center; gap: 8px">
-                        <div
-                          class="progress-bar-bg"
-                          style="width: 80px; height: 6px"
-                        >
-                          <div
-                            class="progress-bar-fill"
-                            style="width: 72%"
-                          ></div>
-                        </div>
-                        <span style="font-size: 0.78rem; font-weight: 700"
-                          >72%</span
-                        >
-                      </div>
+                      <span class="status-pill status-review"
+                        >Confirmatory Diligence</span
+                      >
                     </td>
+                    <td>Nov 04, 2026</td>
                     <td>
-                      <span class="status-badge status-pending"
-                        >Bench Available</span
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-OLYMPUS</code></td>
+                    <td><strong>BioGenix Therapeutics</strong></td>
+                    <td>Carve-Out & Spinoff</td>
+                    <td>$1,900M</td>
+                    <td>A. Zhang (Dir)</td>
+                    <td>
+                      <span class="status-pill status-active"
+                        >LBO Structuring</span
+                      >
+                    </td>
+                    <td>Nov 28, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-CYPHER</code></td>
+                    <td><strong>QuantumGrid Security</strong></td>
+                    <td>Series D Recap</td>
+                    <td>$700M</td>
+                    <td>J. Rodriguez (VP)</td>
+                    <td>
+                      <span class="status-pill status-closed"
+                        >Term Sheet Executed</span
+                      >
+                    </td>
+                    <td>Dec 15, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-HELIOS</code></td>
+                    <td><strong>Nordic CleanPower</strong></td>
+                    <td>Infrastructure Buyout</td>
+                    <td>$3,200M</td>
+                    <td>M. Vance (Partner)</td>
+                    <td>
+                      <span class="status-pill status-review"
+                        >Preliminary Teaser</span
+                      >
+                    </td>
+                    <td>Jan 20, 2027</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review Deal</a
                       >
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </section>
+          </div>
 
-          <!-- SECTION 4: CLIENT MANDATE MILESTONES -->
-          <section
-            class="dash-panel"
-            id="manager-milestones"
-            style="margin-bottom: 28px"
-          >
-            <div class="dash-panel-header">
-              <h3>Active Mandate Milestone Tracking & Closing Schedules</h3>
-              <span class="user-greeting-pill">Q3 Pacing</span>
+          <!-- Section 3: Transaction Pipeline Distribution & Capital Deployment -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">Deal Pipeline Stage Velocity</h3>
+                <p class="dash-card-subtitle">
+                  Aggregate enterprise values allocated across advisory funnel
+                  stages.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-sliders-h"></i> Adjust Thresholds</a
+              >
             </div>
-            <div class="milestones-grid">
-              <div class="milestone-card">
-                <div class="milestone-card-top">
-                  <div>
-                    <div class="milestone-card-title">
-                      Project Titan Carveout
-                    </div>
-                    <div class="milestone-entity">
-                      Energy Infrastructure • $1.20B
-                    </div>
-                  </div>
-                  <span class="milestone-stage-badge status-active"
-                    >Closing</span
-                  >
+            <div class="dash-grid-2">
+              <div
+                class="dash-card"
+                style="margin-bottom: 0; background: rgba(255, 255, 255, 0.02)"
+              >
+                <h4 style="font-size: 0.95rem; margin-bottom: 10px">
+                  Origination & Pitch ($3.2B)
+                </h4>
+                <p class="text-sm text-muted">
+                  Project Helios ($3.2B) in preliminary sponsor outreach with
+                  Nordic sovereign fund.
+                </p>
+                <div
+                  class="progress-bar-container"
+                  style="
+                    background: rgba(255, 255, 255, 0.08);
+                    height: 8px;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin: 12px 0 6px;
+                  "
+                >
+                  <div
+                    style="width: 38%; height: 100%; background: #3b82f6"
+                  ></div>
                 </div>
-                <div class="milestone-progress-box">
-                  <div class="progress-header">
-                    <span>Definitive Escrow Wiring</span>
-                    <span>88% Complete</span>
-                  </div>
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 88%"></div>
-                  </div>
-                </div>
-                <div class="milestone-meta-row">
-                  <span>Lead: V. Alexander</span>
-                  <span>Target Close: Sep 28, 2026</span>
-                </div>
+                <span class="text-sm text-muted"
+                  >Conversion probability: 65%</span
+                >
               </div>
 
-              <div class="milestone-card">
-                <div class="milestone-card-top">
-                  <div>
-                    <div class="milestone-card-title">
-                      Apex Logistics Acquisition
-                    </div>
-                    <div class="milestone-entity">
-                      Supply Chain Logistics • $420M
-                    </div>
-                  </div>
-                  <span class="milestone-stage-badge status-active"
-                    >QofE Final</span
-                  >
+              <div
+                class="dash-card"
+                style="margin-bottom: 0; background: rgba(255, 255, 255, 0.02)"
+              >
+                <h4 style="font-size: 0.95rem; margin-bottom: 10px">
+                  Confirmatory Diligence & Closing ($5.2B)
+                </h4>
+                <p class="text-sm text-muted">
+                  Projects Valkyrie ($2.8B), Nebula ($1.4B), and Olympus ($1.9B)
+                  in advanced negotiation.
+                </p>
+                <div
+                  class="progress-bar-container"
+                  style="
+                    background: rgba(255, 255, 255, 0.08);
+                    height: 8px;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    margin: 12px 0 6px;
+                  "
+                >
+                  <div
+                    style="width: 84%; height: 100%; background: #22c55e"
+                  ></div>
                 </div>
-                <div class="milestone-progress-box">
-                  <div class="progress-header">
-                    <span>Independent Audit Review</span>
-                    <span>74% Complete</span>
-                  </div>
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 74%"></div>
-                  </div>
-                </div>
-                <div class="milestone-meta-row">
-                  <span>Lead: M. Sterling</span>
-                  <span>Target Close: Oct 15, 2026</span>
-                </div>
+                <span class="text-sm text-muted"
+                  >Conversion probability: 92%</span
+                >
               </div>
             </div>
-          </section>
+          </div>
 
-          <!-- SECTION 5: SYNDICATED TREASURY FACILITIES -->
-          <section class="dash-panel" id="manager-facilities">
-            <div class="dash-panel-header">
-              <h3>
-                Syndicated Credit Facilities & Liquidity Reserves ($4.80B)
-              </h3>
-              <button
-                type="button"
-                class="btn btn-subtle btn-sm"
-                onclick="
-                  window.showDashToast(
-                    'Facility reconciliation generated.',
-                    'info'
-                  )
+          <!-- Section 4: Critical Decision Docket & Resource Alerts -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Managing Director Review Queue</h3>
+                <span class="badge badge-warning">2 Pending Approvals</span>
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-amber">
+                    <i class="fas fa-stamp"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Project Valkyrie Merger Agreement:</strong> Final
+                      draft disclosure schedules require MD signoff before board
+                      submission.
+                    </p>
+                    <span class="feed-time">SLA: Today at 17:00</span>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>White & Case Q3 Retainer Drawdown:</strong>
+                      Professional advisory fee invoice of $180,000 awaiting
+                      engagement lead approval.
+                    </p>
+                    <span class="feed-time">Submitted 3 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer"
+                style="
+                  padding-top: 15px;
+                  border-top: 1px solid var(--border-color);
                 "
               >
-                Facility Audit
+                <a
+                  href="404.html"
+                  class="btn btn-sm btn-primary w-100 text-center"
+                  ><i class="fas fa-check-circle"></i> Open Approvals Queue</a
+                >
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Squad Capacity & Utilization Alerts
+                </h3>
+                <a href="404.html" class="btn btn-xs btn-outline"
+                  >Staffing Grid</a
+                >
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-purple">
+                    <i class="fas fa-user-friends"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Squad Alpha (Aerospace):</strong> Billable
+                      utilization at 96% due to Project Valkyrie clean room
+                      deadlines. Reallocation recommended.
+                    </p>
+                    <span class="feed-time"
+                      >Action: Assign 1 Junior Associate</span
+                    >
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-user-check"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Squad Gamma (CleanTech):</strong> 2 associates
+                      freed up following initial Phase 1 teaser release for
+                      Helios.
+                    </p>
+                    <span class="feed-time">Available for LBO modeling</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer"
+                style="
+                  padding-top: 15px;
+                  border-top: 1px solid var(--border-color);
+                "
+              >
+                <a
+                  href="404.html"
+                  class="btn btn-sm btn-secondary w-100 text-center"
+                  ><i class="fas fa-user-plus"></i> Rebalance Squad Staffing</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Pipeline Staging Form -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Initiate New Transaction Advisory Mandate
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Target Company / Client</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Apex Orbital Technologies"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Estimated Enterprise Value ($USD)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. $1,500,000,000"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Advisory Mandate Type</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Sell-Side Strategic M&A</option>
+                    <option>Buy-Side Sponsor Take-Private</option>
+                    <option>Corporate Carve-Out & Spinoff</option>
+                    <option>Senior Secured Debt Placement</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Stage Mandate for Investment
+                Committee
               </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 2: DEAL PIPELINE KANBAN
+           ========================================================= -->
+        <div id="view-kanban" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Transaction Pipeline Kanban Board</h2>
+              <p class="view-subtitle">
+                Interactive workflow tracking advisory mandates across
+                Origination, Confirmatory Due Diligence, Structuring, and
+                Definitive Closing.
+              </p>
             </div>
-            <div class="facilities-grid">
-              <div class="facility-card">
-                <div class="facility-card-top">
-                  <div>
-                    <div class="facility-card-title">
-                      $1.20B Revolver Facility
-                    </div>
-                    <div style="font-size: 0.78rem; color: var(--text-muted)">
-                      JPMorgan Chase & Barclays Syndicate
-                    </div>
-                  </div>
-                  <span class="facility-card-rate">SOFR + 215 bps</span>
-                </div>
-                <div style="font-size: 0.82rem; color: var(--text-secondary)">
-                  Drawn: <strong>$816M</strong> (68%) • Available:
-                  <strong>$384M</strong>
-                </div>
-                <div class="progress-bar-bg" style="height: 8px">
-                  <div class="progress-bar-fill" style="width: 68%"></div>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-subtle btn-sm"
-                  onclick="
-                    window.showDashToast(
-                      'Simulated $50M drawdown for Revolver Facility.',
-                      'success'
-                    )
-                  "
-                >
-                  Drawdown $50M
-                </button>
-              </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-filter"></i> Filter by Sector</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-plus"></i> Add Kanban Card</a
+              >
+            </div>
+          </div>
 
-              <div class="facility-card">
-                <div class="facility-card-top">
-                  <div>
-                    <div class="facility-card-title">$2.00B Term Loan B</div>
-                    <div style="font-size: 0.78rem; color: var(--text-muted)">
-                      Goldman Sachs & Morgan Stanley
-                    </div>
-                  </div>
-                  <span class="facility-card-rate">SOFR + 350 bps</span>
-                </div>
-                <div style="font-size: 0.82rem; color: var(--text-secondary)">
-                  Drawn: <strong>$1.64B</strong> (82%) • Available:
-                  <strong>$360M</strong>
-                </div>
-                <div class="progress-bar-bg" style="height: 8px">
-                  <div class="progress-bar-fill" style="width: 82%"></div>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-subtle btn-sm"
-                  onclick="
-                    window.showDashToast(
-                      'Simulated $100M drawdown for Term Loan B.',
-                      'success'
-                    )
-                  "
-                >
-                  Drawdown $100M
-                </button>
+          <!-- Section 1: Pipeline Stage Metrics KPI Cards -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-compass"></i>
               </div>
-
-              <div class="facility-card">
-                <div class="facility-card-top">
-                  <div>
-                    <div class="facility-card-title">$600M ESG Green Bond</div>
-                    <div style="font-size: 0.78rem; color: var(--text-muted)">
-                      BNP Paribas & Credit Agricole
-                    </div>
-                  </div>
-                  <span class="facility-card-rate">5.125% Fixed</span>
-                </div>
-                <div style="font-size: 0.82rem; color: var(--text-secondary)">
-                  Drawn: <strong>$270M</strong> (45%) • Available:
-                  <strong>$330M</strong>
-                </div>
-                <div class="progress-bar-bg" style="height: 8px">
-                  <div class="progress-bar-fill" style="width: 45%"></div>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-subtle btn-sm"
-                  onclick="
-                    window.showDashToast(
-                      'Simulated $25M drawdown for Green Bond.',
-                      'success'
-                    )
-                  "
+              <div class="stat-content">
+                <span class="stat-label">1. Origination</span>
+                <h3 class="stat-value">$3.2B EV</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-file-alt"></i> 1 Live Pitch</span
                 >
-                  Drawdown $25M
-                </button>
               </div>
             </div>
-          </section>
-        </main>
-      </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">2. Confirmatory DD</span>
+                <h3 class="stat-value">$1.4B EV</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-microscope"></i> Apex Cloud</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-calculator"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">3. Structuring & LBO</span>
+                <h3 class="stat-value">$1.9B EV</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-chart-line"></i> BioGenix Carve-Out</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">4. Definitive Signing</span>
+                <h3 class="stat-value">$2.8B EV</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-signature"></i> Project Valkyrie</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: 4-Column Kanban Board -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">Live Pipeline Board</h3>
+                <p class="dash-card-subtitle">
+                  Drag-and-drop workflow status with deal values, squad
+                  assignments, and regulatory status.
+                </p>
+              </div>
+              <span class="badge badge-primary">4 Live Workstreams</span>
+            </div>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 15px;
+                margin-top: 15px;
+              "
+            >
+              <!-- Col 1: Origination -->
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.02);
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 15px;
+                "
+              >
+                <h4
+                  style="
+                    font-size: 0.9rem;
+                    color: var(--accent-color);
+                    margin-bottom: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <span>ORIGINATION</span>
+                  <span class="badge badge-secondary">1</span>
+                </h4>
+                <div
+                  class="dash-card"
+                  style="
+                    padding: 14px;
+                    margin-bottom: 12px;
+                    border-left: 3px solid #3b82f6;
+                  "
+                >
+                  <span class="badge badge-secondary" style="font-size: 0.7rem"
+                    >PRJ-HELIOS</span
+                  >
+                  <h5 style="margin: 8px 0 4px; font-size: 0.92rem">
+                    Nordic CleanPower Buyout
+                  </h5>
+                  <p class="text-muted text-sm" style="margin-bottom: 8px">
+                    Infrastructure buyout • $3.2B EV
+                  </p>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      font-size: 0.75rem;
+                    "
+                  >
+                    <span>Lead: M. Vance</span>
+                    <a href="404.html" class="btn btn-xs btn-outline"
+                      >Details</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 2: Diligence -->
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.02);
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 15px;
+                "
+              >
+                <h4
+                  style="
+                    font-size: 0.9rem;
+                    color: #a78bfa;
+                    margin-bottom: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <span>CONFIRMATORY DD</span>
+                  <span class="badge badge-secondary">1</span>
+                </h4>
+                <div
+                  class="dash-card"
+                  style="
+                    padding: 14px;
+                    margin-bottom: 12px;
+                    border-left: 3px solid #8b5cf6;
+                  "
+                >
+                  <span class="badge badge-info" style="font-size: 0.7rem"
+                    >PRJ-NEBULA</span
+                  >
+                  <h5 style="margin: 8px 0 4px; font-size: 0.92rem">
+                    Apex Cloud Acquisition
+                  </h5>
+                  <p class="text-muted text-sm" style="margin-bottom: 8px">
+                    Enterprise SaaS • $1.4B EV
+                  </p>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      font-size: 0.75rem;
+                    "
+                  >
+                    <span>Lead: E. Watson</span>
+                    <a href="404.html" class="btn btn-xs btn-outline"
+                      >Details</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 3: Structuring -->
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.02);
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 15px;
+                "
+              >
+                <h4
+                  style="
+                    font-size: 0.9rem;
+                    color: #fbbf24;
+                    margin-bottom: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <span>STRUCTURING</span>
+                  <span class="badge badge-secondary">1</span>
+                </h4>
+                <div
+                  class="dash-card"
+                  style="
+                    padding: 14px;
+                    margin-bottom: 12px;
+                    border-left: 3px solid #f59e0b;
+                  "
+                >
+                  <span class="badge badge-warning" style="font-size: 0.7rem"
+                    >PRJ-OLYMPUS</span
+                  >
+                  <h5 style="margin: 8px 0 4px; font-size: 0.92rem">
+                    BioGenix Therapeutics Carve-Out
+                  </h5>
+                  <p class="text-muted text-sm" style="margin-bottom: 8px">
+                    Biopharma • $1.9B EV
+                  </p>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      font-size: 0.75rem;
+                    "
+                  >
+                    <span>Lead: A. Zhang</span>
+                    <a href="404.html" class="btn btn-xs btn-outline"
+                      >Details</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Col 4: Closing -->
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.02);
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 15px;
+                "
+              >
+                <h4
+                  style="
+                    font-size: 0.9rem;
+                    color: #34d399;
+                    margin-bottom: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <span>DEFINITIVE CLOSING</span>
+                  <span class="badge badge-secondary">1</span>
+                </h4>
+                <div
+                  class="dash-card"
+                  style="
+                    padding: 14px;
+                    margin-bottom: 12px;
+                    border-left: 3px solid #10b981;
+                  "
+                >
+                  <span class="badge badge-success" style="font-size: 0.7rem"
+                    >PRJ-VALKYRIE</span
+                  >
+                  <h5 style="margin: 8px 0 4px; font-size: 0.92rem">
+                    AeroDynamics Corp Sell-Side
+                  </h5>
+                  <p class="text-muted text-sm" style="margin-bottom: 8px">
+                    Aerospace Defense • $2.8B EV
+                  </p>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      font-size: 0.75rem;
+                    "
+                  >
+                    <span>Lead: M. Sterling</span>
+                    <a href="404.html" class="btn btn-xs btn-primary"
+                      >Signoff</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Mandate Velocity & Time-in-Stage Analytics Table -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Mandate Velocity & Stage Dwell Time
+                </h3>
+                <p class="dash-card-subtitle">
+                  Tracking execution efficiency against industry quartile
+                  benchmarks.
+                </p>
+              </div>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-history"></i> Historical Benchmarks</a
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Deal Code</th>
+                    <th>Current Stage</th>
+                    <th>Days in Current Stage</th>
+                    <th>Stage Target SLA</th>
+                    <th>Variance</th>
+                    <th>Blockers / Dependencies</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td>Definitive Signing</td>
+                    <td>18 days</td>
+                    <td>21 days</td>
+                    <td><span class="text-success">-3 days (Ahead)</span></td>
+                    <td>Awaiting FTC HSR waiting period expiration</td>
+                    <td><span class="badge badge-success">On Track</span></td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-NEBULA</code></td>
+                    <td>Confirmatory DD</td>
+                    <td>32 days</td>
+                    <td>30 days</td>
+                    <td><span class="text-warning">+2 days (Delay)</span></td>
+                    <td>Customer cohort churn retention validation</td>
+                    <td><span class="badge badge-warning">Watchlist</span></td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-OLYMPUS</code></td>
+                    <td>LBO Structuring</td>
+                    <td>24 days</td>
+                    <td>28 days</td>
+                    <td><span class="text-success">-4 days (Ahead)</span></td>
+                    <td>Shared services agreement (TSA) cost schedule</td>
+                    <td><span class="badge badge-success">On Track</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 4: Stage Gate Approvals Form -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Advance Mandate Stage Gate Approval
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Select Mandate</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>PRJ-VALKYRIE - AeroDynamics Corp ($2.8B)</option>
+                    <option>PRJ-NEBULA - Apex Cloud Systems ($1.4B)</option>
+                    <option>PRJ-OLYMPUS - BioGenix Therapeutics ($1.9B)</option>
+                    <option>PRJ-HELIOS - Nordic CleanPower ($3.2B)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Target Advanced Stage</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Advance to Confirmatory Due Diligence</option>
+                    <option>Advance to LBO Structuring & Financing</option>
+                    <option>
+                      Advance to Definitive Merger Agreement Signing
+                    </option>
+                    <option>Approve Final Closing & Wire Release</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Partner Approval Passcode</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="••••••••"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-arrow-right"></i> Authorize Stage Transition
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 3: EXECUTION SQUADS
+           ========================================================= -->
+        <div id="view-squads" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Cross-Functional Deal Execution Squads</h2>
+              <p class="view-subtitle">
+                Human capital allocation, associate workload capacity, and
+                sector practice group staffing.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-user-clock"></i> Utilization Report</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-user-plus"></i> Reassign Associate</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Total Execution Staff</span>
+                <h3 class="stat-value">42 Specialists</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 4 Active Squads</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Average Utilization</span>
+                <h3 class="stat-value">88.4%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-up"></i> +3.4% Above Target</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-user-check"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Available Capacity</span>
+                <h3 class="stat-value">6.0 FTEs</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-calendar-check"></i> Ready for Q1
+                  Pitching</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Overtime Watchlist</span>
+                <h3 class="stat-value">2 Associates</h3>
+                <span class="stat-trend negative"
+                  ><i class="fas fa-clock"></i> >65 hrs/wk</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Squad Roster Table with Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Deal Execution Squad Roster & Allocation
+                </h3>
+                <p class="dash-card-subtitle">
+                  Active squad staffing and assigned advisory mandates.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-squad-roster"
+                  placeholder="Search squad, lead, mandate..."
+                />
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-squad-roster">
+                <thead>
+                  <tr>
+                    <th>Squad Name</th>
+                    <th>Focus Sector</th>
+                    <th>Assigned Mandate</th>
+                    <th>Squad Lead</th>
+                    <th>Associates</th>
+                    <th>Avg Utilization</th>
+                    <th>Capacity Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Squad Alpha</strong></td>
+                    <td>Aerospace & Defense</td>
+                    <td><code>PRJ-VALKYRIE</code> ($2.8B)</td>
+                    <td>M. Sterling (MD)</td>
+                    <td>8 Specialists</td>
+                    <td><strong>96.2%</strong></td>
+                    <td>
+                      <span class="badge badge-warning">At Capacity</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Manage</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Squad Beta</strong></td>
+                    <td>Enterprise SaaS & Cloud</td>
+                    <td><code>PRJ-NEBULA</code> ($1.4B)</td>
+                    <td>E. Watson (VP)</td>
+                    <td>6 Specialists</td>
+                    <td><strong>84.0%</strong></td>
+                    <td><span class="badge badge-success">Balanced</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Manage</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Squad Gamma</strong></td>
+                    <td>Biopharma & Healthcare</td>
+                    <td><code>PRJ-OLYMPUS</code> ($1.9B)</td>
+                    <td>A. Zhang (Dir)</td>
+                    <td>7 Specialists</td>
+                    <td><strong>88.5%</strong></td>
+                    <td><span class="badge badge-success">Balanced</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Manage</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Squad Delta</strong></td>
+                    <td>Energy & Infrastructure</td>
+                    <td><code>PRJ-HELIOS</code> ($3.2B)</td>
+                    <td>S. Kakarparthi (Partner)</td>
+                    <td>5 Specialists</td>
+                    <td><strong>72.0%</strong></td>
+                    <td><span class="badge badge-info">Open Capacity</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Manage</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Cross-Functional Specialist Pool Breakdown -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Subject Matter Specialist Deployment
+                </h3>
+              </div>
+              <p class="text-sm text-muted">
+                Dedicated corporate specialists shared across transaction teams.
+              </p>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-calculator"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>LBO & Valuation Modeling Pool:</strong> 6
+                      quantitative associates dedicated to dynamic financial
+                      projections and DCF models.
+                    </p>
+                    <span class="feed-time">Lead: S. Jenkins • 92% Billed</span>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-purple">
+                    <i class="fas fa-file-contract"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Legal & Contract Diligence Pool:</strong> 4
+                      corporate paralegals and junior counsel reviewing material
+                      contracts.
+                    </p>
+                    <span class="feed-time">Lead: D. Chen • 86% Billed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Weekly Staffing Reallocation Form
+                </h3>
+              </div>
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
+                "
+                style="padding: 10px 0"
+              >
+                <div class="form-group">
+                  <label>Associate to Reassign</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Robert Chen (Valuation Associate)</option>
+                    <option>Elena Rostova (Senior Diligence Associate)</option>
+                    <option>Tyler Smith (Tax Analyst)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Target Deal Squad</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>Squad Alpha - Project Valkyrie</option>
+                    <option>Squad Beta - Project Nebula</option>
+                    <option>Squad Gamma - Project Olympus</option>
+                    <option>Squad Delta - Project Helios</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-user-check"></i> Authorize Staffing
+                  Reallocation
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 4: MILESTONE CRITICAL PATH
+           ========================================================= -->
+        <div id="view-milestones" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Transaction Critical Path & Regulatory Milestone Tracker
+              </h2>
+              <p class="view-subtitle">
+                Antitrust waiting periods, board presentation schedules, and
+                definitive agreement signoffs.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-calendar-alt"></i> Sync Deal Calendar</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-plus"></i> Add Milestone</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-tasks"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Total Tracked Milestones</span>
+                <h3 class="stat-value">36 Milestones</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 22 Completed</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-hourglass-end"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">On Critical Path</span>
+                <h3 class="stat-value">11 Milestones</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check-circle"></i> Zero Hard Delays</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">HSR Antitrust Clock</span>
+                <h3 class="stat-value">18 Days</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-shield-alt"></i> Expiry: Oct 02</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-exclamation-circle"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Critical Path Risks</span>
+                <h3 class="stat-value">1 Flagged</h3>
+                <span class="stat-trend negative"
+                  ><i class="fas fa-flag"></i> Nebula IP Assignment</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Master Milestone Table with Live Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Master Transaction Milestone Docket
+                </h3>
+                <p class="dash-card-subtitle">
+                  Critical path dependencies for Q4 transaction closings.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-milestones-docket"
+                  placeholder="Search milestone, deal, owner..."
+                />
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-milestones-docket">
+                <thead>
+                  <tr>
+                    <th>Milestone ID</th>
+                    <th>Deal Mandate</th>
+                    <th>Deliverable / Phase</th>
+                    <th>Responsible Owner</th>
+                    <th>Target Deadline</th>
+                    <th>Dependency</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>MS-VALK-08</code></td>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td>
+                      <strong>FTC Hart-Scott-Rodino (HSR) Clearance</strong>
+                    </td>
+                    <td>White & Case (Antitrust)</td>
+                    <td>Oct 02, 2026</td>
+                    <td>DOJ Second Request Assessment</td>
+                    <td><span class="badge badge-success">On Track</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Dossier</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>MS-VALK-09</code></td>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td><strong>Board of Directors Definitive Vote</strong></td>
+                    <td>M. Sterling (MD)</td>
+                    <td>Oct 10, 2026</td>
+                    <td>Fairness Opinion Delivery</td>
+                    <td><span class="badge badge-success">On Track</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Dossier</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>MS-NEBU-04</code></td>
+                    <td><code>PRJ-NEBULA</code></td>
+                    <td>
+                      <strong
+                        >Cloud Architecture Security Penetration Audit</strong
+                      >
+                    </td>
+                    <td>Mandiant Cyber DD</td>
+                    <td>Oct 14, 2026</td>
+                    <td>SOC-2 Type II Report</td>
+                    <td><span class="badge badge-warning">Watchlist</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Dossier</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>MS-OLYM-03</code></td>
+                    <td><code>PRJ-OLYMPUS</code></td>
+                    <td>
+                      <strong
+                        >Carve-Out Transition Services Agreement (TSA)</strong
+                      >
+                    </td>
+                    <td>A. Zhang (Director)</td>
+                    <td>Oct 20, 2026</td>
+                    <td>Shared IT Infrastructure Separation</td>
+                    <td><span class="badge badge-success">On Track</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Dossier</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Critical Path Risk Scorecard -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Critical Path Dependency Map</h3>
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Project Valkyrie:</strong> Fairness Opinion from
+                      Houlihan Lokey finalized. Clears milestone MS-VALK-09 for
+                      board approval.
+                    </p>
+                    <span class="feed-time">Completed yesterday</span>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-amber">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Project Nebula:</strong> European IP patent
+                      assignment deed requires Swedish patent office stamp
+                      before closing.
+                    </p>
+                    <span class="feed-time"
+                      >Assigned to: White & Case Stockholm</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Milestone Escalation Request</h3>
+              </div>
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
+                "
+                style="padding: 10px 0"
+              >
+                <div class="form-group">
+                  <label>Milestone to Escalate</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>MS-NEBU-04 (Cloud Security Audit)</option>
+                    <option>MS-VALK-08 (HSR Antitrust Clearance)</option>
+                    <option>MS-OLYM-03 (TSA Shared Services)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Escalation Reason</label>
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    placeholder="Describe risk to critical closing timeline..."
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-bullhorn"></i> Transmit Escalation to
+                  Managing Partner
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 5: CLOSING WAR ROOMS
+           ========================================================= -->
+        <div id="view-facilities" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Physical Clean Rooms & Secure Closing War Rooms
+              </h2>
+              <p class="view-subtitle">
+                Physical and digital secure environments with biometric access
+                logs, clean team protocols, and executive signing desks.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-id-card"></i> Badge Access Log</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-calendar-plus"></i> Reserve War Room</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-door-closed"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Global War Rooms</span>
+                <h3 class="stat-value">12 Facilities</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 8 Active Sessions</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-fingerprint"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Biometric Perimeter</span>
+                <h3 class="stat-value">100% Strict</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-shield-alt"></i> Zero Tailgating</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-user-shield"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Clean Team Isolation</span>
+                <h3 class="stat-value">Active Protocol</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-lock"></i> Air-Gapped Network</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-video"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">CCTV & Audit Stream</span>
+                <h3 class="stat-value">Encrypted WORM</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-archive"></i> 90-Day Retention</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Facilities Table with Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Corporate Closing Rooms & Clean Room Facilities
+                </h3>
+                <p class="dash-card-subtitle">
+                  Real-time occupancy status across global executive offices.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-facilities-list"
+                  placeholder="Search city, room, deal..."
+                />
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-facilities-list">
+                <thead>
+                  <tr>
+                    <th>Facility Code</th>
+                    <th>Location / Office</th>
+                    <th>Dedicated Mandate</th>
+                    <th>Clean Team Isolation</th>
+                    <th>Current Occupancy</th>
+                    <th>Air-Gapped LAN</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>ROOM-NYC-01</code></td>
+                    <td><strong>New York (Park Avenue)</strong></td>
+                    <td><code>PRJ-VALKYRIE</code> (AeroDynamics)</td>
+                    <td><span class="badge badge-success">Enforced</span></td>
+                    <td>6 / 12 Persons</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                    <td>
+                      <span class="status-pill status-active">Occupied</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>ROOM-ZUR-03</code></td>
+                    <td><strong>Zurich (Bahnhofstrasse)</strong></td>
+                    <td><code>PRJ-OLYMPUS</code> (BioGenix)</td>
+                    <td><span class="badge badge-success">Enforced</span></td>
+                    <td>4 / 8 Persons</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                    <td>
+                      <span class="status-pill status-active">Occupied</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>ROOM-LON-02</code></td>
+                    <td><strong>London (Mayfair)</strong></td>
+                    <td><code>PRJ-NEBULA</code> (Apex Cloud)</td>
+                    <td><span class="badge badge-success">Enforced</span></td>
+                    <td>2 / 10 Persons</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                    <td>
+                      <span class="status-pill status-active">Occupied</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Inspect</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>ROOM-TKO-01</code></td>
+                    <td><strong>Tokyo (Marunouchi)</strong></td>
+                    <td>Standby (APAC Transactions)</td>
+                    <td><span class="badge badge-secondary">Ready</span></td>
+                    <td>0 / 8 Persons</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                    <td>
+                      <span class="status-pill status-closed">Available</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-primary">Book</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Clean Room Protocol Breakdown -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Clean Team Information Barrier Protocol
+                </h3>
+              </div>
+              <p class="text-sm text-muted">
+                Strict compliance regulations governing access to sensitive
+                target pricing and competitor data.
+              </p>
+              <ul class="task-list">
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" checked disabled />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Personal cellular devices and external storage prohibited
+                      inside physical room</span
+                    >
+                    <span class="task-meta text-success"
+                      ><i class="fas fa-check-circle"></i> Faraday Lockers
+                      Active</span
+                    >
+                  </div>
+                </li>
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" checked disabled />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >Clean team members bound by non-disclosure agreements
+                      barring contact with commercial sales</span
+                    >
+                    <span class="task-meta text-success"
+                      ><i class="fas fa-check-circle"></i> Legal Screen
+                      Enforced</span
+                    >
+                  </div>
+                </li>
+                <li class="task-item">
+                  <input type="checkbox" class="task-check" checked disabled />
+                  <div class="task-content">
+                    <span class="task-title"
+                      >All whiteboards, scratch pads, and draft printouts
+                      shredded immediately post-session</span
+                    >
+                    <span class="task-meta text-success"
+                      ><i class="fas fa-check-circle"></i> Cryptographic
+                      Shredding</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Book Closing War Room</h3>
+              </div>
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
+                "
+                style="padding: 10px 0"
+              >
+                <div class="form-group">
+                  <label>Facility Location</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>New York (Park Avenue - Room 02)</option>
+                    <option>Zurich (Bahnhofstrasse - Room 01)</option>
+                    <option>London (Mayfair - Room 03)</option>
+                    <option>Tokyo (Marunouchi - Room 01)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Associated Deal Mandate</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>PRJ-VALKYRIE - AeroDynamics</option>
+                    <option>PRJ-NEBULA - Apex Cloud</option>
+                    <option>PRJ-OLYMPUS - BioGenix</option>
+                    <option>PRJ-HELIOS - Nordic CleanPower</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-calendar-check"></i> Reserve Closing Suite
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-    <div
-      id="dash-toast-container"
-      class="dash-toast-container"
-      aria-live="polite"
-    ></div>
-
-    <!-- Scripts -->
     <script src="../assets/js/storage.js"></script>
     <script src="../assets/js/dashboard.js"></script>
-    <script src="../assets/js/main.js"></script>
   </body>
 </html>

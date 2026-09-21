@@ -3,1110 +3,1661 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Syndicate Counsel & Vendor Portal | Stackly</title>
-    <meta
-      name="description"
-      content="Stackly Legal Counsel & Advisory Vendor Portal - Retainer Mandates, Solvency Opinions, Regulatory Clearances, and Milestone Escrow."
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <title>Vendor & Advisor Portal - Stackly Corporate Business</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/dashboard.css" />
-    <script>
-      (function () {
-        try {
-          var raw = localStorage.getItem("cb_currentUser");
-          if (!raw) {
-            window.location.replace("sign-in.html");
-          }
-        } catch (e) {
-          window.location.replace("sign-in.html");
-        }
-      })();
-    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="dashboard-body">
-    <div class="dashboard-wrapper">
-      <!-- COLLAPSIBLE SIDEBAR -->
-      <aside
-        class="dash-sidebar"
-        role="navigation"
-        aria-label="Vendor Navigation Sidebar"
-      >
-        <div class="dash-sidebar-header">
-          <a
-            href="../index.html"
-            aria-label="Stackly Home"
-            class="dash-brand-link"
-          >
-            <img
-              src="../assets/images/logoStackly.webp"
-              alt="Stackly Logo"
-              width="160"
-              height="36"
-              class="dash-brand-img"
-            />
-          </a>
-          <button
-            class="dash-mobile-close-btn"
-            id="dash-mobile-close"
-            aria-label="Close Mobile Navigation"
-          >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
+    <aside class="dash-sidebar" id="dashSidebar">
+      <div class="dash-sidebar-header">
+        <a
+          href="../index.html"
+          class="dash-brand-link"
+          aria-label="Stackly Home"
+        >
+          <img
+            src="../assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            width="160"
+            height="36"
+            class="dash-brand-img"
+            style="height: 36px; max-width: 160px; object-fit: contain"
+          />
+        </a>
+        <button
+          class="sidebar-close-btn"
+          id="sidebarCloseBtn"
+          aria-label="Close Sidebar"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
 
-        <ul class="dash-nav-menu">
-          <li class="dash-nav-heading">Counsel & Syndicate</li>
-          <li class="dash-nav-item active" data-tooltip="Retainer Contracts">
-            <a href="#ven-contracts" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              <span>Retainer Contracts</span>
-            </a>
+      <div class="dash-user-card">
+        <div class="dash-avatar-wrapper">
+          <div class="dash-avatar" id="dashUserAvatar">VR</div>
+          <span class="dash-status-dot online"></span>
+        </div>
+        <div class="dash-user-info">
+          <h4 id="dashUserName">White & Case LLP</h4>
+          <span class="dash-role-badge" id="dashRoleBadge"
+            >Vendor / Counsel</span
+          >
+          <span class="dash-user-email" id="dashUserEmail"
+            >advisory@whitecase-counsel.com</span
+          >
+        </div>
+      </div>
+
+      <nav class="dash-nav">
+        <div class="dash-nav-section-title">Retainers & Advisory</div>
+        <ul class="dash-nav-list">
+          <li
+            class="dash-nav-item active"
+            data-view="overview"
+            data-tooltip="Advisory Hub"
+          >
+            <a href="#overview"
+              ><i class="fas fa-briefcase"></i><span>Advisory Hub</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Deliverables Docket">
-            <a href="#ven-deliverables" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-                />
-              </svg>
-              <span>Deliverables Docket</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="deliverables"
+            data-tooltip="Deliverables Docket"
+          >
+            <a href="#deliverables"
+              ><i class="fas fa-file-contract"></i
+              ><span>Deliverables Docket</span
+              ><span class="nav-counter">4</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Regulatory Filings">
-            <a href="#ven-regulatory" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-                />
-              </svg>
-              <span>Antitrust Clearances</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="regulatory"
+            data-tooltip="Anti-Trust Tracker"
+          >
+            <a href="#regulatory"
+              ><i class="fas fa-globe-americas"></i
+              ><span>Anti-Trust Tracker</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Milestone Escrow">
-            <a href="#ven-invoicing" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-              <span>Escrow & Billing</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="billing"
+            data-tooltip="Invoicing & Escrow"
+          >
+            <a href="#billing"
+              ><i class="fas fa-file-invoice-dollar"></i
+              ><span>Invoicing & Escrow</span></a
+            >
           </li>
-          <li class="dash-nav-item" data-tooltip="Compliance & NDAs">
-            <a href="#ven-compliance" draggable="false">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                />
-              </svg>
-              <span>Compliance & NDAs</span>
-            </a>
+          <li
+            class="dash-nav-item"
+            data-view="compliance"
+            data-tooltip="Conflicts & NDAs"
+          >
+            <a href="#compliance"
+              ><i class="fas fa-certificate"></i
+              ><span>Conflicts & NDAs</span></a
+            >
           </li>
         </ul>
+      </nav>
 
-        <!-- SIDEBAR COLLAPSE TRIGGER -->
-        <div class="dash-sidebar-bottom">
+      <div class="dash-sidebar-footer">
+        <a href="../index.html" class="dash-sidebar-link"
+          ><i class="fas fa-globe"></i><span>Public Portal</span></a
+        >
+        <button class="dash-logout-btn" id="dashLogoutBtn">
+          <i class="fas fa-sign-out-alt"></i><span>Secure Logout</span>
+        </button>
+        <button
+          class="sidebar-collapse-btn"
+          id="sidebarCollapseBtn"
+          aria-label="Collapse Navigation Menu"
+          title="Collapse Sidebar"
+        >
+          <i class="fas fa-angle-double-left collapse-icon"></i>
+          <span class="collapse-label">Collapse Menu</span>
+        </button>
+      </div>
+    </aside>
+
+    <div
+      class="dash-sidebar-backdrop"
+      id="dash-sidebar-backdrop"
+      aria-hidden="true"
+    ></div>
+
+    <div class="dash-main-wrapper">
+      <header class="dash-topbar" role="banner">
+        <div class="dash-topbar-left">
           <button
-            class="sidebar-collapse-btn"
-            id="sidebar-collapse-trigger"
-            title="Collapse / Expand Sidebar"
-            aria-label="Toggle Desktop Sidebar"
+            class="sidebar-toggle-btn"
+            id="sidebarToggleBtn"
+            aria-label="Toggle Sidebar"
           >
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-              />
-            </svg>
-            <span class="collapse-label">Collapse Menu</span>
+            <i class="fas fa-bars"></i>
           </button>
+          <div class="dash-breadcrumb">
+            <span class="crumb-root">Workspace</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-role" id="crumbRole">Vendor & Advisory</span>
+            <i class="fas fa-chevron-right crumb-sep"></i>
+            <span class="crumb-view" id="crumbView">Advisory Hub</span>
+          </div>
         </div>
-      </aside>
 
-      <!-- MOBILE SIDEBAR BACKDROP -->
-      <div class="dash-sidebar-backdrop" id="dash-sidebar-backdrop"></div>
+        <div class="dash-topbar-right">
+          <div class="topbar-chip">
+            <i class="fas fa-clock text-accent"></i
+            ><span id="dashLiveTime">UTC 00:00</span>
+          </div>
+          <div class="topbar-chip">
+            <i class="fas fa-gavel text-warning"></i
+            ><span>Retainer Active</span>
+          </div>
+          <a href="404.html" class="topbar-action-icon" title="Notifications"
+            ><i class="fas fa-bell"></i><span class="badge-dot"></span
+          ></a>
+          <a href="404.html" class="topbar-action-icon" title="Counsel Chat"
+            ><i class="fas fa-comments"></i
+          ></a>
+          <a href="404.html" class="btn btn-sm btn-primary action-404-btn"
+            ><i class="fas fa-file-upload"></i> Upload Deliverable</a
+          >
+        </div>
+      </header>
 
-      <!-- MAIN CONTENT WRAPPER -->
-      <div class="dash-main">
-        <!-- PERMANENTLY FIXED TOPBAR -->
-        <header class="dash-topbar" role="banner">
-          <div class="dash-topbar-left">
-            <button class="sidebar-toggle-btn" aria-label="Open Sidebar Menu">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
+      <main class="dash-content">
+        <!-- =========================================================
+           VIEW 1: ADVISORY HUB
+           ========================================================= -->
+        <div id="view-overview" class="dash-view active-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Special Counsel & External Advisory Command Hub
+              </h2>
+              <p class="view-subtitle">
+                Active legal mandates, regulatory filings, expert witness
+                opinions, and escrow release tracking.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-file-export"></i> Export Retainer Report</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-plus"></i> Submit Work Order</a
+              >
+            </div>
           </div>
 
-          <div class="dash-topbar-right">
-            <!-- User Profile Area -->
-            <div class="user-profile-badge">
-              <div id="dash-user-initials" class="user-avatar-initials">SJ</div>
-              <div class="user-info-text">
-                <span id="dash-user-name" class="user-display-name"
-                  >Sarah Jenkins</span
-                >
-                <span id="dash-user-role" class="user-role-label"
-                  >Vendor Access</span
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-balance-scale"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Active Mandates</span>
+                <h3 class="stat-value">6 Retainers</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> Clean Conflict Check</span
                 >
               </div>
             </div>
-
-            <!-- Primary CTA: Sign Out -->
-            <button
-              onclick="
-                window.CB_Storage
-                  ? window.CB_Storage.logout()
-                  : (window.location.href = 'sign-in.html')
-              "
-              class="btn btn-secondary-light btn-sm"
-              title="End Session"
-            >
-              <span>Sign Out</span>
-            </button>
-          </div>
-        </header>
-
-        <!-- DASHBOARD BODY CONTENT -->
-        <main class="dash-content">
-          <!-- HERO BANNER SECTION -->
-          <div class="dash-hero-banner" id="ven-contracts">
-            <div class="dash-hero-top">
-              <div>
-                <span class="dash-hero-eyebrow">Syndicate Partner Portal</span>
-                <h1 class="dash-hero-title">
-                  External Legal & Advisory Retainer Workspace
-                </h1>
-                <p class="dash-hero-desc">
-                  Overseeing transatlantic legal mandates, statutory solvency
-                  opinions, antitrust merger clearances, and milestone escrow
-                  disbursements for Stackly Capital partners.
-                </p>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-file-invoice-dollar"></i>
               </div>
-              <div style="display: flex; gap: 10px; flex-wrap: wrap">
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  onclick="
-                    window.showDashToast(
-                      'Opening Solvency Opinion submission wizard...',
-                      'info'
-                    )
-                  "
+              <div class="stat-content">
+                <span class="stat-label">Approved Fees (YTD)</span>
+                <h3 class="stat-value">$1,850,000</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-money-bill-wave"></i> 100% On-Time
+                  Settlement</span
                 >
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    style="width: 16px; height: 16px; margin-right: 6px"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 4v16m8-8H4"
-                    />
-                  </svg>
-                  Submit Solvency Opinion
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary-light btn-sm"
-                  onclick="
-                    window.showDashToast(
-                      'Downloading active engagement retainer schedule (PDF)...',
-                      'success'
-                    )
-                  "
-                >
-                  Download Engagement Letter
-                </button>
               </div>
             </div>
-
-            <!-- SECTION 1: KEY RETAINER METRICS -->
-            <div class="dash-stats-grid" style="margin-top: 24px">
-              <div class="dash-stat-card">
-                <div class="dash-stat-header">
-                  <span class="dash-stat-label">Committed Retainer Value</span>
-                  <span class="dash-stat-badge badge-success">+14.5% YoY</span>
-                </div>
-                <div class="dash-stat-value">$3.25M</div>
-                <div class="dash-stat-caption">
-                  Across 6 active transatlantic M&A engagements
-                </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-tasks"></i>
               </div>
-
-              <div class="dash-stat-card">
-                <div class="dash-stat-header">
-                  <span class="dash-stat-label">Active Mandates</span>
-                  <span class="dash-stat-badge badge-primary">Legal Lead</span>
-                </div>
-                <div class="dash-stat-value">6 Deals</div>
-                <div class="dash-stat-caption">
-                  2 Solvency Opinions, 4 Regulatory Filings
-                </div>
+              <div class="stat-content">
+                <span class="stat-label">Milestone Opinions</span>
+                <h3 class="stat-value">4 In Review</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-clock"></i> 2 Solvency Certificates</span
+                >
               </div>
-
-              <div class="dash-stat-card">
-                <div class="dash-stat-header">
-                  <span class="dash-stat-label">Deliverable Pacing</span>
-                  <span class="dash-stat-badge badge-success"
-                    >100% On-Track</span
-                  >
-                </div>
-                <div class="dash-stat-value">0 Overdue</div>
-                <div class="dash-stat-caption">
-                  All statutory closing deadlines satisfied
-                </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-hourglass-start"></i>
               </div>
-
-              <div class="dash-stat-card">
-                <div class="dash-stat-header">
-                  <span class="dash-stat-label">Escrow Released YTD</span>
-                  <span class="dash-stat-badge badge-info">Verified</span>
-                </div>
-                <div class="dash-stat-value">$850,000</div>
-                <div class="dash-stat-caption">
-                  Milestone wire transfers processed via JP Morgan
-                </div>
+              <div class="stat-content">
+                <span class="stat-label">HSR Waiting Period</span>
+                <h3 class="stat-value">18 Days Remaining</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-shield-alt"></i> FTC Submissions Clear</span
+                >
               </div>
             </div>
           </div>
 
-          <!-- SECTION 2: DELIVERABLES DOCKET & SOLVENCY OPINIONS -->
-          <section class="dash-card" id="ven-deliverables">
+          <!-- Section 2: Active Retainers & Purchase Orders Table with Search -->
+          <div class="dash-card">
             <div class="dash-card-header">
               <div>
                 <h3 class="dash-card-title">
-                  Statutory Deliverables & Solvency Docket
+                  Retainer Agreements & Scope Orders (PO Docket)
                 </h3>
                 <p class="dash-card-subtitle">
-                  Formal legal opinions, debt covenants reviews, and
-                  transactional closing certificates.
+                  Approved advisory contracts and engagement budgets across
+                  Stackly transaction teams.
                 </p>
               </div>
-              <span class="user-greeting-pill">4 Deliverables in Flight</span>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-vendor-pos"
+                  placeholder="Search POs, deals, scopes..."
+                />
+                <a href="404.html" class="btn btn-sm btn-secondary"
+                  ><i class="fas fa-file-signature"></i> Sign PO Addendum</a
+                >
+              </div>
             </div>
-
-            <div class="dash-table-wrap">
-              <table class="dash-table">
+            <div class="table-responsive">
+              <table class="dash-table" id="table-vendor-pos">
                 <thead>
                   <tr>
-                    <th>Deliverable Name</th>
-                    <th>Associated Mandate</th>
-                    <th>Governing Law</th>
-                    <th>Target Filing Date</th>
-                    <th>Review Status</th>
+                    <th>PO Reference</th>
+                    <th>Deal Mandate</th>
+                    <th>Advisory Scope</th>
+                    <th>Engagement Lead</th>
+                    <th>Budget Cap</th>
+                    <th>Billed to Date</th>
+                    <th>Remaining</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>PO-2026-081</code></td>
+                    <td><strong>Project Valkyrie</strong></td>
+                    <td>Merger Agreement Drafting & Antitrust Clearance</td>
+                    <td>R. Thorne, Esq.</td>
+                    <td>$750,000</td>
+                    <td>$520,000</td>
+                    <td>$230,000</td>
+                    <td>
+                      <span class="status-pill status-active">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review SOW</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PO-2026-084</code></td>
+                    <td><strong>Project Valkyrie</strong></td>
+                    <td>Independent Fairness & Solvency Opinion</td>
+                    <td>J. Callahan (Valuation)</td>
+                    <td>$350,000</td>
+                    <td>$280,000</td>
+                    <td>$70,000</td>
+                    <td>
+                      <span class="status-pill status-active">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review SOW</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PO-2026-092</code></td>
+                    <td><strong>Project Nebula</strong></td>
+                    <td>Cross-Border IP Transfer & Patent Portfolio Audit</td>
+                    <td>K. Lindqvist (Stockholm)</td>
+                    <td>$420,000</td>
+                    <td>$180,000</td>
+                    <td>$240,000</td>
+                    <td>
+                      <span class="status-pill status-active">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review SOW</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PO-2026-105</code></td>
+                    <td><strong>Project Olympus</strong></td>
+                    <td>Carve-Out Transition Services Agreement (TSA)</td>
+                    <td>S. Kulkarni (London)</td>
+                    <td>$600,000</td>
+                    <td>$450,000</td>
+                    <td>$150,000</td>
+                    <td>
+                      <span class="status-pill status-active">Active</span>
+                    </td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Review SOW</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Pending Milestone Signoffs & Escrows -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Pending Milestone Signoffs</h3>
+                <span class="badge badge-warning"
+                  >2 Awaiting Stackly MD Review</span
+                >
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-stamp"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Project Valkyrie Solvency Opinion:</strong>
+                      Delivered preliminary solvency memorandum to Transaction
+                      Committee. Formal letter drafted.
+                    </p>
+                    <span class="feed-time">Submitted Yesterday at 16:30</span>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-purple">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>HSR Form 4 Antitrust Whitepaper:</strong>
+                      Completed market concentration Herfindahl-Hirschman Index
+                      (HHI) analysis for DOJ submission.
+                    </p>
+                    <span class="feed-time">Submitted Sep 18, 2026</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer"
+                style="
+                  padding-top: 15px;
+                  border-top: 1px solid var(--border-color);
+                "
+              >
+                <a
+                  href="404.html"
+                  class="btn btn-sm btn-outline w-100 text-center"
+                  ><i class="fas fa-file-invoice"></i> Submit Deliverables
+                  Packet</a
+                >
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Secure Escrow Accounts</h3>
+                <a href="404.html" class="btn btn-xs btn-outline"
+                  >Escrow Terms</a
+                >
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-university"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Citibank Escrow Account #9921:</strong> Balance
+                      <strong>$450,000.00</strong> held against Project Valkyrie
+                      legal closing milestones.
+                    </p>
+                    <span class="feed-time"
+                      >Release condition: Definitive Agreement Execution</span
+                    >
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>JPMorgan Escrow #4102:</strong> Release of
+                      $250,000 successfully authorized following Olympus Phase 1
+                      Carve-Out audit signoff.
+                    </p>
+                    <span class="feed-time">Settled Sep 15, 2026</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-footer"
+                style="
+                  padding-top: 15px;
+                  border-top: 1px solid var(--border-color);
+                "
+              >
+                <a
+                  href="404.html"
+                  class="btn btn-sm btn-secondary w-100 text-center"
+                  ><i class="fas fa-receipt"></i> Request Drawdown from
+                  Escrow</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Work Order Submission Form -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Submit Advisory Statement of Work (SOW) Addendum
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Target Mandate</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>PRJ-VALKYRIE - AeroDynamics Corp</option>
+                    <option>PRJ-NEBULA - Apex Cloud Systems</option>
+                    <option>PRJ-OLYMPUS - BioGenix Therapeutics</option>
+                    <option>PRJ-HELIOS - Nordic CleanPower</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Additional Scope Budget ($USD)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. $75,000"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Scope Expansion Justification</label>
+                <textarea
+                  class="form-control"
+                  rows="2"
+                  placeholder="Detail reason for additional counsel hours..."
+                  style="
+                    background: rgba(255, 255, 255, 0.05);
+                    color: #fff;
+                    border: 1px solid var(--border-color);
+                    border-radius: 6px;
+                    padding: 10px;
+                  "
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-file-contract"></i> Submit SOW for Partner
+                Approval
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 2: DELIVERABLES DOCKET
+           ========================================================= -->
+        <div id="view-deliverables" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Milestone Deliverables & Formal Opinions Docket
+              </h2>
+              <p class="view-subtitle">
+                Submission repository for legal opinions, solvency certificates,
+                environmental reports, and fairness analyses.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-download"></i> Download All Approved</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-upload"></i> Upload Deliverable</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: KPI Stats Grid -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-file-signature"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Total Deliverables</span>
+                <h3 class="stat-value">12 Documents</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 8 Approved</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Under Partner Review</span>
+                <h3 class="stat-value">2 In Review</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-hourglass-half"></i> SLA: 24h</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-check-double"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Client Acceptance Rate</span>
+                <h3 class="stat-value">100.0%</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-award"></i> Zero Redlines</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-stamp"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Formal Opinions</span>
+                <h3 class="stat-value">4 Executed</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-balance-scale"></i> Board Certified</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Deliverables Table with Search & Status Filter -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Contractual Deliverables Tracker
+                </h3>
+                <p class="dash-card-subtitle">
+                  Formal deliverables mandated under active legal and advisory
+                  retaining orders.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-deliverables"
+                  placeholder="Search deliverables..."
+                />
+                <div class="filter-pill-group">
+                  <button class="status-filter-pill active" data-status="all">
+                    All (4)
+                  </button>
+                  <button class="status-filter-pill" data-status="In Review">
+                    In Review (2)
+                  </button>
+                  <button class="status-filter-pill" data-status="Approved">
+                    Approved (2)
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-deliverables">
+                <thead>
+                  <tr>
+                    <th>Doc ID</th>
+                    <th>Deliverable Title</th>
+                    <th>Mandate</th>
+                    <th>Advisory Firm</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Approval Lead</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>DEL-081-1</code></td>
+                    <td>
+                      <strong
+                        >Merger Agreement (Definitive Execution Draft)</strong
+                      >
+                    </td>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td>White & Case LLP</td>
+                    <td>Oct 05, 2026</td>
+                    <td>
+                      <span class="status-pill status-review">In Review</span>
+                    </td>
+                    <td>M. Vance (Managing Partner)</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-primary"
+                        >Review Draft</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>DEL-084-1</code></td>
+                    <td>
+                      <strong
+                        >Fairness Opinion Letter & Board Presentation</strong
+                      >
+                    </td>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td>Houlihan Lokey</td>
+                    <td>Oct 08, 2026</td>
+                    <td>
+                      <span class="status-pill status-review">In Review</span>
+                    </td>
+                    <td>Investment Committee</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-primary"
+                        >Review Draft</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>DEL-092-2</code></td>
+                    <td>
+                      <strong>IP Freedom-to-Operate (FTO) Legal Memo</strong>
+                    </td>
+                    <td><code>PRJ-NEBULA</code></td>
+                    <td>White & Case LLP</td>
+                    <td>Sep 15, 2026</td>
+                    <td>
+                      <span class="status-pill status-closed">Approved</span>
+                    </td>
+                    <td>E. Rostova (MD)</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Download PDF</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>DEL-105-1</code></td>
+                    <td>
+                      <strong
+                        >Carve-Out Shared Services Framework Agreement</strong
+                      >
+                    </td>
+                    <td><code>PRJ-OLYMPUS</code></td>
+                    <td>White & Case LLP</td>
+                    <td>Sep 12, 2026</td>
+                    <td>
+                      <span class="status-pill status-closed">Approved</span>
+                    </td>
+                    <td>A. Zhang (Director)</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Download PDF</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Legal Opinion Summaries -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Solvency Certificate Legal Memorandum
+                </h3>
+              </div>
+              <p class="text-sm text-muted">
+                Analysis of target entity balance sheet post-debt capitalization
+                under Delaware General Corporation Law (DGCL) Section 154.
+              </p>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Capital Adequacy:</strong> Fair value of assets
+                      exceeds aggregate liabilities by $1.24B. Entity able to
+                      pay debts as they mature.
+                    </p>
+                    <span class="feed-time"
+                      >Certified by: Houlihan Lokey Advisory</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Submit Formal Opinion Package</h3>
+              </div>
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
+                "
+                style="padding: 10px 0"
+              >
+                <div class="form-group">
+                  <label>Deliverable Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Formal Solvency Letter of Advice"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Signed Opinion File (.PDF)</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-upload"></i> Upload & Submit for MD Signoff
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 3: ANTI-TRUST TRACKER
+           ========================================================= -->
+        <div id="view-regulatory" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Global Anti-Trust & Merger Control Tracker
+              </h2>
+              <p class="view-subtitle">
+                Cross-border regulatory notifications, waiting periods, second
+                requests, and remedies.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-chart-line"></i> Market Concentration
+                Metrics</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-file-medical"></i> Log Regulator
+                Communication</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: Merger Control KPI Cards -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-globe-americas"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Jurisdictions Filed</span>
+                <h3 class="stat-value">4 Global Filings</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> US, EU, UK, China</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-hourglass-half"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">HSR Statutory Clock</span>
+                <h3 class="stat-value">18 Days</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-calendar-check"></i> FTC Deadline: Oct
+                  02</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Second Request Risk</span>
+                <h3 class="stat-value">Low Risk</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-arrow-down"></i> HHI < 1,500</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-file-contract"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Phase 1 Clearances</span>
+                <h3 class="stat-value">2 Cleared</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-award"></i> SAMR Simplified</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Merger Control Table with Search -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">
+                  Cross-Border Merger Control Jurisdictions
+                </h3>
+                <p class="dash-card-subtitle">
+                  Project Valkyrie ($2.8B Acquisition) international regulatory
+                  clearance matrix.
+                </p>
+              </div>
+              <div class="card-header-tools">
+                <input
+                  type="text"
+                  class="dash-search-input"
+                  data-table-search="table-regulatory"
+                  placeholder="Search jurisdiction, authority..."
+                />
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table" id="table-regulatory">
+                <thead>
+                  <tr>
+                    <th>Jurisdiction</th>
+                    <th>Regulatory Body</th>
+                    <th>Notification Date</th>
+                    <th>Statutory Period</th>
+                    <th>Current Status</th>
+                    <th>Risk Level</th>
+                    <th>Outside Counsel</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
-                      <div
-                        style="
-                          font-weight: 700;
-                          color: var(--color-primary-900);
-                        "
+                      <i
+                        class="fas fa-flag-usa text-blue"
+                        style="margin-right: 6px"
+                      ></i
+                      ><strong>United States</strong>
+                    </td>
+                    <td>Federal Trade Commission (FTC) & DOJ</td>
+                    <td>Sep 02, 2026</td>
+                    <td>30-Day HSR Waiting Period (Expires Oct 02)</td>
+                    <td>
+                      <span class="status-pill status-active"
+                        >Under Review</span
                       >
-                        Project Apex Solvency Opinion
-                      </div>
-                      <div
-                        style="font-size: 0.75rem; color: var(--text-secondary)"
-                      >
-                        Independent Balance Sheet & Cash Flow Solvency
-                        Certificate
-                      </div>
                     </td>
                     <td>
-                      <span class="badge badge-primary">Project Apex</span>
-                    </td>
-                    <td>Delaware / NY Law</td>
-                    <td>Oct 15, 2026</td>
-                    <td>
-                      <span class="badge badge-success">Partner Signed</span>
-                    </td>
-                    <td>
-                      <button
-                        class="btn btn-subtle btn-xs"
-                        onclick="
-                          window.showDashToast(
-                            'Downloading Apex Solvency Opinion packet...',
-                            'success'
-                          )
-                        "
+                      <span class="badge badge-success"
+                        >Low Risk (HHI < 1,500)</span
                       >
-                        Download PDF
-                      </button>
+                    </td>
+                    <td>White & Case (DC Office)</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Dossier</a
+                      >
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div
-                        style="
-                          font-weight: 700;
-                          color: var(--color-primary-900);
-                        "
-                      >
-                        Nordic Renewables Escrow Release
-                      </div>
-                      <div
-                        style="font-size: 0.75rem; color: var(--text-secondary)"
-                      >
-                        Closing Settlement & Seller Escrow Instruction Memo
-                      </div>
+                      <i
+                        class="fas fa-flag-eu text-amber"
+                        style="margin-right: 6px"
+                      ></i
+                      ><strong>European Union</strong>
                     </td>
-                    <td><span class="badge badge-info">Nordic Wind</span></td>
-                    <td>Swedish / English Law</td>
-                    <td>Nov 01, 2026</td>
+                    <td>European Commission (DG-COMP)</td>
+                    <td>Sep 10, 2026</td>
+                    <td>Phase I Review (Expires Oct 15)</td>
                     <td>
-                      <span class="badge badge-warning"
-                        >Awaiting Bank Signoff</span
+                      <span class="status-pill status-active"
+                        >Under Review</span
                       >
                     </td>
+                    <td><span class="badge badge-success">Low Risk</span></td>
+                    <td>White & Case (Brussels)</td>
                     <td>
-                      <button
-                        class="btn btn-subtle btn-xs"
-                        onclick="
-                          window.showDashToast(
-                            'Escrow reminder ping sent to custodian bank.',
-                            'info'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Dossier</a
                       >
-                        Ping Custodian
-                      </button>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div
-                        style="
-                          font-weight: 700;
-                          color: var(--color-primary-900);
-                        "
+                      <i
+                        class="fas fa-flag text-danger"
+                        style="margin-right: 6px"
+                      ></i
+                      ><strong>United Kingdom</strong>
+                    </td>
+                    <td>Competition and Markets Authority (CMA)</td>
+                    <td>Sep 12, 2026</td>
+                    <td>Phase 1 Initial Assessment (40 Days)</td>
+                    <td>
+                      <span class="status-pill status-review"
+                        >Formal Notice Lodged</span
                       >
-                        Project Titan Cross-Border Tax Structuring
-                      </div>
-                      <div
-                        style="font-size: 0.75rem; color: var(--text-secondary)"
-                      >
-                        Section 368 Reorganization Memorandum
-                      </div>
                     </td>
                     <td>
-                      <span class="badge badge-primary">Titan Acquisition</span>
+                      <span class="badge badge-info">Routine Market Test</span>
                     </td>
-                    <td>US Internal Revenue Code</td>
-                    <td>Nov 18, 2026</td>
+                    <td>White & Case (London)</td>
                     <td>
-                      <span class="badge badge-info">Internal Review</span>
-                    </td>
-                    <td>
-                      <button
-                        class="btn btn-subtle btn-xs"
-                        onclick="
-                          window.showDashToast(
-                            'Tax memo draft uploaded for general partner review.',
-                            'success'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Dossier</a
                       >
-                        Upload Draft
-                      </button>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div
-                        style="
-                          font-weight: 700;
-                          color: var(--color-primary-900);
-                        "
-                      >
-                        Helvetia Logistics Fairness Opinion
-                      </div>
-                      <div
-                        style="font-size: 0.75rem; color: var(--text-secondary)"
-                      >
-                        Special Committee Transaction Valuation Assessment
-                      </div>
+                      <i
+                        class="fas fa-globe-asia text-danger"
+                        style="margin-right: 6px"
+                      ></i
+                      ><strong>China</strong>
                     </td>
+                    <td>State Administration for Market Regulation (SAMR)</td>
+                    <td>Sep 14, 2026</td>
+                    <td>Simplified Procedure (30 Days)</td>
                     <td>
-                      <span class="badge badge-success">Helvetia Special</span>
-                    </td>
-                    <td>Swiss Commercial Code</td>
-                    <td>Dec 05, 2026</td>
-                    <td>
-                      <span class="badge badge-primary"
-                        >Drafting In-Progress</span
+                      <span class="status-pill status-active"
+                        >Under Review</span
                       >
                     </td>
                     <td>
-                      <button
-                        class="btn btn-subtle btn-xs"
-                        onclick="
-                          window.showDashToast(
-                            'Opening secure drafting notepad...',
-                            'info'
-                          )
-                        "
+                      <span class="badge badge-success"
+                        >Simplified Procedure</span
                       >
-                        Edit Working Paper
-                      </button>
+                    </td>
+                    <td>King & Wood Mallesons</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >Dossier</a
+                      >
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </section>
+          </div>
 
-          <!-- SECTION 3: REGULATORY & ANTITRUST CLEARANCES -->
-          <section class="dash-card" id="ven-regulatory">
+          <!-- Section 3: Market Concentration & HHI Scorecard -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Herfindahl-Hirschman Index (HHI) Analysis
+                </h3>
+              </div>
+              <p class="text-sm text-muted">
+                Post-merger market concentration analysis submitted under FTC
+                Item 4(c) guidelines.
+              </p>
+              <div
+                style="
+                  background: rgba(255, 255, 255, 0.03);
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 15px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 6px;
+                  "
+                >
+                  <span>Pre-Merger HHI:</span>
+                  <strong>1,240 (Unconcentrated)</strong>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 6px;
+                  "
+                >
+                  <span>Post-Merger HHI:</span>
+                  <strong>1,385 (+145 Delta)</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between">
+                  <span>DOJ Threshold Status:</span>
+                  <strong class="text-success">Safe Harbor Presumption</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">Log Regulatory Communication</h3>
+              </div>
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
+                "
+                style="padding: 10px 0"
+              >
+                <div class="form-group">
+                  <label>Regulatory Body</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>US Federal Trade Commission (FTC)</option>
+                    <option>US Department of Justice (DOJ)</option>
+                    <option>European Commission (DG-COMP)</option>
+                    <option>UK Competition and Markets Authority (CMA)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Communication Summary</label>
+                  <textarea
+                    class="form-control"
+                    rows="2"
+                    placeholder="Record staff attorney correspondence..."
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save"></i> Log Official Correspondence
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 4: INVOICING & ESCROW
+           ========================================================= -->
+        <div id="view-billing" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Invoicing, Fee Approvals & Escrow Ledger
+              </h2>
+              <p class="view-subtitle">
+                Milestone billing schedules, fee cap compliance, and electronic
+                fund transfers.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-download"></i> Tax Pack (W-9 / W-8BEN)</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-plus"></i> Create Invoice</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: Billing & Escrow KPI Cards -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-file-invoice-dollar"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Billed Fees (YTD)</span>
+                <h3 class="stat-value">$1,850,000</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> 100% In Budget</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-vault"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Escrow Protected</span>
+                <h3 class="stat-value">$700,000</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-lock"></i> Citibank & JPMorgan</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-stopwatch"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Settlement Turnaround</span>
+                <h3 class="stat-value">14 Days Avg</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-bolt"></i> Automated Fedwire</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-file-signature"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Pending Approval</span>
+                <h3 class="stat-value">$355,000</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-clock"></i> 2 Invoices in Queue</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Invoice Ledger Table with Live Search -->
+          <div class="dash-card">
             <div class="dash-card-header">
               <div>
-                <h3 class="dash-card-title">
-                  Antitrust & Cross-Border Regulatory Clearances
-                </h3>
+                <h3 class="dash-card-title">Professional Fee Invoice Ledger</h3>
                 <p class="dash-card-subtitle">
-                  Statutory merger control tracking across North American and
-                  European regulatory bodies.
+                  All invoices reviewed under Stackly Corporate outside counsel
+                  billing guidelines.
                 </p>
               </div>
-              <button
-                class="btn btn-secondary-light btn-sm"
-                onclick="
-                  window.showDashToast(
-                    'Statutory filing scheduler launched.',
-                    'info'
-                  )
-                "
+              <a href="404.html" class="btn btn-sm btn-primary"
+                ><i class="fas fa-file-invoice"></i> Submit New Invoice</a
               >
-                Log Regulatory Action
-              </button>
             </div>
-
-            <div
-              style="
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 16px;
-              "
-            >
-              <!-- FTC / DOJ -->
-              <div
-                style="
-                  background: #fbfaf8;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 16px;
-                "
-              >
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-start;
-                    margin-bottom: 10px;
-                  "
-                >
-                  <div>
-                    <strong
-                      style="
-                        color: var(--color-primary-900);
-                        font-size: 0.95rem;
-                      "
-                      >US FTC / DOJ Hart-Scott-Rodino</strong
-                    >
-                    <div
-                      style="font-size: 0.75rem; color: var(--text-secondary)"
-                    >
-                      Docket # HSR-2026-8941 • Project Apex
-                    </div>
-                  </div>
-                  <span class="badge badge-success">Cleared</span>
-                </div>
-                <div style="margin: 12px 0">
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: space-between;
-                      font-size: 0.75rem;
-                      color: var(--text-secondary);
-                      margin-bottom: 4px;
-                    "
-                  >
-                    <span>Waiting Period Pacing</span>
-                    <span>30 / 30 Days (Early Termination Granted)</span>
-                  </div>
-                  <div
-                    style="
-                      height: 6px;
-                      background: #e2e8f0;
-                      border-radius: 3px;
-                      overflow: hidden;
-                    "
-                  >
-                    <div
-                      style="width: 100%; height: 100%; background: #16a34a"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    font-size: 0.8rem;
-                    color: var(--text-muted);
-                    display: flex;
-                    justify-content: space-between;
-                  "
-                >
-                  <span>Expiry: Granted Sep 12, 2026</span>
-                  <a
-                    href="javascript:void(0)"
-                    onclick="
-                      window.showDashToast(
-                        'FTC Early Termination letter opened in secure viewer.',
-                        'info'
-                      )
-                    "
-                    style="color: var(--color-accent-gold); font-weight: 600"
-                    >View Letter</a
-                  >
-                </div>
-              </div>
-
-              <!-- EU DG COMP -->
-              <div
-                style="
-                  background: #fbfaf8;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 16px;
-                "
-              >
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-start;
-                    margin-bottom: 10px;
-                  "
-                >
-                  <div>
-                    <strong
-                      style="
-                        color: var(--color-primary-900);
-                        font-size: 0.95rem;
-                      "
-                      >European Commission DG COMP</strong
-                    >
-                    <div
-                      style="font-size: 0.75rem; color: var(--text-secondary)"
-                    >
-                      Case M.11942 • Nordic Renewables
-                    </div>
-                  </div>
-                  <span class="badge badge-info">Phase 1 Review</span>
-                </div>
-                <div style="margin: 12px 0">
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: space-between;
-                      font-size: 0.75rem;
-                      color: var(--text-secondary);
-                      margin-bottom: 4px;
-                    "
-                  >
-                    <span>Statutory Deadline</span>
-                    <span>18 / 25 Working Days</span>
-                  </div>
-                  <div
-                    style="
-                      height: 6px;
-                      background: #e2e8f0;
-                      border-radius: 3px;
-                      overflow: hidden;
-                    "
-                  >
-                    <div
-                      style="width: 72%; height: 100%; background: #2563eb"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    font-size: 0.8rem;
-                    color: var(--text-muted);
-                    display: flex;
-                    justify-content: space-between;
-                  "
-                >
-                  <span>Expected Decision: Oct 24, 2026</span>
-                  <a
-                    href="javascript:void(0)"
-                    onclick="
-                      window.showDashToast(
-                        'Form CO submission dossier downloaded.',
-                        'info'
-                      )
-                    "
-                    style="color: var(--color-accent-gold); font-weight: 600"
-                    >View Form CO</a
-                  >
-                </div>
-              </div>
-
-              <!-- UK CMA -->
-              <div
-                style="
-                  background: #fbfaf8;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 16px;
-                "
-              >
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-start;
-                    margin-bottom: 10px;
-                  "
-                >
-                  <div>
-                    <strong
-                      style="
-                        color: var(--color-primary-900);
-                        font-size: 0.95rem;
-                      "
-                      >UK Competition & Markets (CMA)</strong
-                    >
-                    <div
-                      style="font-size: 0.75rem; color: var(--text-secondary)"
-                    >
-                      Mandate Ref CMA/ME/7041 • Titan Acq
-                    </div>
-                  </div>
-                  <span class="badge badge-warning">Pre-Notification</span>
-                </div>
-                <div style="margin: 12px 0">
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: space-between;
-                      font-size: 0.75rem;
-                      color: var(--text-secondary);
-                      margin-bottom: 4px;
-                    "
-                  >
-                    <span>Briefing Paper Stage</span>
-                    <span>Pre-filing discussions in progress</span>
-                  </div>
-                  <div
-                    style="
-                      height: 6px;
-                      background: #e2e8f0;
-                      border-radius: 3px;
-                      overflow: hidden;
-                    "
-                  >
-                    <div
-                      style="width: 35%; height: 100%; background: #d97706"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    font-size: 0.8rem;
-                    color: var(--text-muted);
-                    display: flex;
-                    justify-content: space-between;
-                  "
-                >
-                  <span>Meeting Date: Oct 08, 2026</span>
-                  <a
-                    href="javascript:void(0)"
-                    onclick="
-                      window.showDashToast(
-                        'CMA Briefing Memorandum opened.',
-                        'info'
-                      )
-                    "
-                    style="color: var(--color-accent-gold); font-weight: 600"
-                    >Briefing Notes</a
-                  >
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- SECTION 4: INVOICING, RETAINER ESCROW & MILESTONE PAYMENTS -->
-          <section class="dash-card" id="ven-invoicing">
-            <div class="dash-card-header">
-              <div>
-                <h3 class="dash-card-title">
-                  Retainer Escrow & Milestone Payment Ledger
-                </h3>
-                <p class="dash-card-subtitle">
-                  Statutory legal retainer drawdowns, disbursement receipts, and
-                  wire confirmations.
-                </p>
-              </div>
-              <button
-                class="btn btn-primary btn-sm"
-                onclick="
-                  window.showDashToast(
-                    'New Fee Note Submission form initialized.',
-                    'info'
-                  )
-                "
-              >
-                Submit Fee Note
-              </button>
-            </div>
-
-            <div class="dash-table-wrap">
+            <div class="table-responsive">
               <table class="dash-table">
                 <thead>
                   <tr>
-                    <th>Invoice / Mandate</th>
-                    <th>Milestone Description</th>
-                    <th>Billed Hours / Fee</th>
-                    <th>Escrow Drawdown</th>
-                    <th>Disbursement Date</th>
-                    <th>Payment Status</th>
-                    <th>Receipt</th>
+                    <th>Invoice No</th>
+                    <th>PO Reference</th>
+                    <th>Billing Period</th>
+                    <th>Deal Mandate</th>
+                    <th>Amount ($USD)</th>
+                    <th>Tax Withholding</th>
+                    <th>Settlement Status</th>
+                    <th>Payment Method</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
-                      <strong style="color: var(--color-primary-900)"
-                        >INV-2026-0891</strong
-                      >
-                      <div
-                        style="font-size: 0.75rem; color: var(--text-secondary)"
-                      >
-                        Project Apex HSR Filing Fee & Counsel
-                      </div>
-                    </td>
-                    <td>Antitrust Clearance & Solvency Draft</td>
-                    <td>142.5 hrs • $285,000</td>
-                    <td>$285,000 released</td>
-                    <td>Sep 14, 2026</td>
+                    <td><code>INV-WC-2026-09</code></td>
+                    <td><code>PO-2026-081</code></td>
+                    <td>Aug 01 - Aug 31</td>
+                    <td>Project Valkyrie</td>
+                    <td><strong>$240,000.00</strong></td>
+                    <td>$0.00</td>
                     <td>
                       <span class="badge badge-success"
-                        >Disbursed via Wire</span
+                        >Settled (Wire #9921)</span
                       >
                     </td>
+                    <td>ACH Direct / Fedwire</td>
                     <td>
-                      <button
-                        class="btn btn-subtle btn-xs"
-                        onclick="
-                          window.showDashToast(
-                            'Downloading Wire Confirmation FedWire #89421...',
-                            'success'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >PDF Receipt</a
                       >
-                        FedWire Receipt
-                      </button>
                     </td>
                   </tr>
                   <tr>
+                    <td><code>INV-WC-2026-10</code></td>
+                    <td><code>PO-2026-081</code></td>
+                    <td>Sep 01 - Sep 15</td>
+                    <td>Project Valkyrie</td>
+                    <td><strong>$180,000.00</strong></td>
+                    <td>$0.00</td>
                     <td>
-                      <strong style="color: var(--color-primary-900)"
-                        >INV-2026-0904</strong
+                      <span class="badge badge-warning"
+                        >Partner Signoff Pending</span
                       >
-                      <div
-                        style="font-size: 0.75rem; color: var(--text-secondary)"
-                      >
-                        Nordic Wind SPA Drafting
-                      </div>
                     </td>
-                    <td>Share Purchase Agreement Finalization</td>
-                    <td>110.0 hrs • $220,000</td>
-                    <td>$220,000 in escrow</td>
-                    <td>Pending Closing</td>
+                    <td>Escrow Drawdown Pending</td>
                     <td>
-                      <span class="badge badge-info">Approved for Closing</span>
-                    </td>
-                    <td>
-                      <button
-                        class="btn btn-subtle btn-xs"
-                        onclick="
-                          window.showDashToast(
-                            'Downloading fee note preview INV-2026-0904...',
-                            'info'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-secondary"
+                        >Review Invoice</a
                       >
-                        Fee Note PDF
-                      </button>
                     </td>
                   </tr>
                   <tr>
+                    <td><code>INV-HL-2026-04</code></td>
+                    <td><code>PO-2026-084</code></td>
+                    <td>Sep 01 - Sep 15</td>
+                    <td>Project Valkyrie</td>
+                    <td><strong>$175,000.00</strong></td>
+                    <td>$0.00</td>
                     <td>
-                      <strong style="color: var(--color-primary-900)"
-                        >INV-2026-0922</strong
+                      <span class="badge badge-warning"
+                        >Partner Signoff Pending</span
                       >
-                      <div
-                        style="font-size: 0.75rem; color: var(--text-secondary)"
-                      >
-                        Titan Reorganization Memorandum
-                      </div>
                     </td>
-                    <td>Section 368 Tax structuring memorandum</td>
-                    <td>68.0 hrs • $136,000</td>
-                    <td>$136,000 escrow hold</td>
-                    <td>Oct 30, 2026</td>
+                    <td>ACH Direct / Fedwire</td>
                     <td>
-                      <span class="badge badge-warning">Partner Review</span>
-                    </td>
-                    <td>
-                      <button
-                        class="btn btn-subtle btn-xs"
-                        onclick="
-                          window.showDashToast(
-                            'Detailed time log exported (CSV).',
-                            'success'
-                          )
-                        "
+                      <a href="404.html" class="btn btn-xs btn-secondary"
+                        >Review Invoice</a
                       >
-                        Export Timesheet
-                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>INV-WC-2026-08</code></td>
+                    <td><code>PO-2026-105</code></td>
+                    <td>Aug 01 - Aug 31</td>
+                    <td>Project Olympus</td>
+                    <td><strong>$210,000.00</strong></td>
+                    <td>$0.00</td>
+                    <td>
+                      <span class="badge badge-success"
+                        >Settled (Wire #8841)</span
+                      >
+                    </td>
+                    <td>ACH Direct / Fedwire</td>
+                    <td>
+                      <a href="404.html" class="btn btn-xs btn-outline"
+                        >PDF Receipt</a
+                      >
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </section>
+          </div>
 
-          <!-- SECTION 5: SYNDICATE COMPLIANCE & CONFLICT ATTESTATION -->
-          <section class="dash-card" id="ven-compliance">
+          <!-- Section 3: Escrow Drawdown Request Form -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">
+                Request Professional Fee Escrow Drawdown
+              </h3>
+            </div>
+            <form
+              class="contact-form"
+              onsubmit="
+                event.preventDefault();
+                window.location.href = '404.html';
+              "
+              style="padding: 10px 0"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Escrow Account</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  >
+                    <option>
+                      Citibank Escrow #9921 ($450,000 Balance - Project
+                      Valkyrie)
+                    </option>
+                    <option>
+                      JPMorgan Escrow #4102 ($250,000 Balance - Project Olympus)
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Drawdown Amount ($USD)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. $180,000.00"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-hand-holding-usd"></i> Authorize Escrow Release
+                Request
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =========================================================
+           VIEW 5: CONFLICTS & NDAS
+           ========================================================= -->
+        <div id="view-compliance" class="dash-view">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">
+                Ethical Walls, Conflict Check & NDA Compliance
+              </h2>
+              <p class="view-subtitle">
+                Non-disclosure agreements, restricted trading lists, and annual
+                legal compliance certifications.
+              </p>
+            </div>
+            <div class="view-header-actions">
+              <a href="404.html" class="btn btn-secondary btn-sm"
+                ><i class="fas fa-file-contract"></i> Download NDA Template</a
+              >
+              <a href="404.html" class="btn btn-primary btn-sm"
+                ><i class="fas fa-file-signature"></i> Renew Conflict
+                Clearance</a
+              >
+            </div>
+          </div>
+
+          <!-- Section 1: Ethical Wall KPI Cards -->
+          <div class="dash-stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-box bg-green">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Active NDAs</span>
+                <h3 class="stat-value">4 Mandates</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> Enforced DRM</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-blue">
+                <i class="fas fa-balance-scale"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Conflicts Detected</span>
+                <h3 class="stat-value">0 Conflicts</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-check"></i> Global Screen Clear</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-purple">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">SOC-2 Compliance</span>
+                <h3 class="stat-value">ISO 27001</h3>
+                <span class="stat-trend positive"
+                  ><i class="fas fa-award"></i> Certified Vault</span
+                >
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-box bg-amber">
+                <i class="fas fa-history"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-label">Next Attestation</span>
+                <h3 class="stat-value">Jan 15, 2027</h3>
+                <span class="stat-trend neutral"
+                  ><i class="fas fa-calendar"></i> Annual Cycle</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Executed NDAs Table with Search -->
+          <div class="dash-card">
             <div class="dash-card-header">
               <div>
                 <h3 class="dash-card-title">
-                  Syndicate Compliance & Ethical Wall Attestations
+                  Executed Non-Disclosure Agreements (NDAs)
                 </h3>
                 <p class="dash-card-subtitle">
-                  Third-party SOC-2 certifications, conflict check waivers, and
-                  mutual NDA sealing records.
+                  Active legal non-disclosure covenants governing confidential
+                  deal information.
                 </p>
               </div>
-              <span class="user-greeting-pill">All Attestations Current</span>
+              <a href="404.html" class="btn btn-sm btn-outline"
+                ><i class="fas fa-file-contract"></i> NDA Staging</a
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Deal Mandate</th>
+                    <th>Target / Entity</th>
+                    <th>Executed</th>
+                    <th>Expiry Date</th>
+                    <th>Clean Room</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>PRJ-VALKYRIE</code></td>
+                    <td>AeroDynamics Corp</td>
+                    <td>Jun 01, 2026</td>
+                    <td>Jun 01, 2028</td>
+                    <td><span class="badge badge-success">Enforced</span></td>
+                    <td>
+                      <span class="status-pill status-closed">Active</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-NEBULA</code></td>
+                    <td>Apex Cloud Systems</td>
+                    <td>Jul 15, 2026</td>
+                    <td>Jul 15, 2028</td>
+                    <td><span class="badge badge-success">Enforced</span></td>
+                    <td>
+                      <span class="status-pill status-closed">Active</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-OLYMPUS</code></td>
+                    <td>BioGenix Corp</td>
+                    <td>May 10, 2026</td>
+                    <td>May 10, 2028</td>
+                    <td><span class="badge badge-success">Enforced</span></td>
+                    <td>
+                      <span class="status-pill status-closed">Active</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>PRJ-HELIOS</code></td>
+                    <td>Nordic CleanPower</td>
+                    <td>Aug 01, 2026</td>
+                    <td>Aug 01, 2028</td>
+                    <td><span class="badge badge-success">Enforced</span></td>
+                    <td>
+                      <span class="status-pill status-closed">Active</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Ethical Wall Screen Attestation & Protocols -->
+          <div class="dash-grid-2">
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  Ethical Wall Information Barrier Attestation
+                </h3>
+              </div>
+              <div class="audit-feed">
+                <div class="feed-item">
+                  <div class="feed-icon bg-green">
+                    <i class="fas fa-check-shield"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>Information Barrier Verification:</strong> White &
+                      Case aerospace advisory practice confirmed strict screen
+                      isolation between Project Valkyrie deal team and public
+                      equities trading clients.
+                    </p>
+                    <span class="feed-time">Re-certified Sep 01, 2026</span>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="feed-icon bg-blue">
+                    <i class="fas fa-key"></i>
+                  </div>
+                  <div class="feed-content">
+                    <p class="feed-text">
+                      <strong>SOC 2 Type II Vendor Audit:</strong> Counsel
+                      document management cloud encrypted with ISO
+                      27001-certified hardware security modules.
+                    </p>
+                    <span class="feed-time">Audit Score: 100% Compliant</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div
-              style="
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 16px;
-              "
-            >
-              <div
-                style="
-                  background: #fbfaf8;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 18px;
-                "
-              >
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    margin-bottom: 10px;
-                  "
-                >
-                  <strong
-                    style="color: var(--color-primary-900); font-size: 0.95rem"
-                    >Annual Ethical Wall Recertification</strong
-                  >
-                  <span class="badge badge-success">Valid through 2027</span>
-                </div>
-                <p
-                  style="
-                    font-size: 0.8rem;
-                    color: var(--text-secondary);
-                    line-height: 1.45;
-                    margin-bottom: 14px;
-                  "
-                >
-                  Conflict clearance certifying complete information barrier
-                  separation between Stackly portfolio companies and conflicting
-                  banking syndicate advisory desks.
-                </p>
-                <button
-                  type="button"
-                  class="btn btn-subtle btn-xs"
-                  onclick="
-                    window.showDashToast(
-                      'Downloading signed Ethical Wall Certificate...',
-                      'success'
-                    )
-                  "
-                >
-                  Download Certificate (PDF)
-                </button>
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">
+                  File Conflict Clearance Affidavit
+                </h3>
               </div>
-
-              <div
-                style="
-                  background: #fbfaf8;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 18px;
+              <form
+                class="contact-form"
+                onsubmit="
+                  event.preventDefault();
+                  window.location.href = '404.html';
                 "
+                style="padding: 10px 0"
               >
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    margin-bottom: 10px;
-                  "
-                >
-                  <strong
-                    style="color: var(--color-primary-900); font-size: 0.95rem"
-                    >Master Syndicate NDA Protocol</strong
+                <div class="form-group">
+                  <label>Target Advisory Mandate</label>
+                  <select
+                    class="form-control"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
                   >
-                  <span class="badge badge-success"
-                    >Cryptographically Sealed</span
-                  >
+                    <option>PRJ-VALKYRIE - AeroDynamics Corp</option>
+                    <option>PRJ-NEBULA - Apex Cloud Systems</option>
+                    <option>PRJ-OLYMPUS - BioGenix Therapeutics</option>
+                    <option>PRJ-HELIOS - Nordic CleanPower</option>
+                  </select>
                 </div>
-                <p
-                  style="
-                    font-size: 0.8rem;
-                    color: var(--text-secondary);
-                    line-height: 1.45;
-                    margin-bottom: 14px;
-                  "
-                >
-                  Multi-party bilateral non-disclosure agreement with 256-bit
-                  SHA-256 seal covering virtual data room disclosures and
-                  proprietary diligence financial models.
-                </p>
-                <button
-                  type="button"
-                  class="btn btn-subtle btn-xs"
-                  onclick="
-                    window.showDashToast(
-                      'SHA-256 NDA Fingerprint: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-                      'info'
-                    )
-                  "
-                >
-                  Verify Hash Digest
-                </button>
-              </div>
-
-              <div
-                style="
-                  background: #fbfaf8;
-                  border: 1px solid var(--border-subtle);
-                  border-radius: var(--radius-md);
-                  padding: 18px;
-                "
-              >
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    margin-bottom: 10px;
-                  "
-                >
-                  <strong
-                    style="color: var(--color-primary-900); font-size: 0.95rem"
-                    >SOC-2 Type II Compliance Audit</strong
-                  >
-                  <span class="badge badge-success">Clean Opinion</span>
+                <div class="form-group">
+                  <label>Lead Outside Counsel Signatory</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="Richard Thorne, Esq. (Partner, White & Case LLP)"
+                    style="
+                      background: rgba(255, 255, 255, 0.05);
+                      color: #fff;
+                      border: 1px solid var(--border-color);
+                      border-radius: 6px;
+                      padding: 10px;
+                    "
+                  />
                 </div>
-                <p
-                  style="
-                    font-size: 0.8rem;
-                    color: var(--text-secondary);
-                    line-height: 1.45;
-                    margin-bottom: 14px;
-                  "
-                >
-                  Verified by Deloitte & Touche LLP. Security, availability, and
-                  confidentiality trust services criteria satisfied for legal
-                  syndicate operations.
-                </p>
-                <button
-                  type="button"
-                  class="btn btn-subtle btn-xs"
-                  onclick="
-                    window.showDashToast(
-                      'Auditor SOC-2 Executive Summary rendered.',
-                      'success'
-                    )
-                  "
-                >
-                  View Executive Summary
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-signature"></i> Sign Annual Ethical Wall
+                  Affidavit
                 </button>
-              </div>
+              </form>
             </div>
-          </section>
-        </main>
-      </div>
+          </div>
+        </div>
+      </main>
     </div>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-    <div
-      id="dash-toast-container"
-      class="dash-toast-container"
-      aria-live="polite"
-    ></div>
-
-    <!-- Scripts -->
     <script src="../assets/js/storage.js"></script>
     <script src="../assets/js/dashboard.js"></script>
-    <script src="../assets/js/main.js"></script>
   </body>
 </html>

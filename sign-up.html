@@ -80,8 +80,8 @@
             "
           >
             <img
-              src="assets/images/auth-trust.webp"
-              alt="Institutional Security and Access Control"
+              src="assets/images/auth-signup.jpg"
+              alt="Institutional Security and Strategic Enterprise Access"
               width="480"
               height="240"
               style="
@@ -209,10 +209,12 @@
                 id="signup-firstname"
                 type="text"
                 required
+                minlength="1"
+                pattern="^[^\d]+$"
                 autocomplete="given-name"
                 placeholder="First name"
               />
-              <div class="field-error-msg">Please enter your first name.</div>
+              <div class="field-error-msg">Please enter your first name (letters only, min 1 character).</div>
             </div>
             <div class="form-group">
               <label for="signup-lastname">Last name <b>*</b></label>
@@ -220,10 +222,12 @@
                 id="signup-lastname"
                 type="text"
                 required
+                minlength="1"
+                pattern="^[^\d]+$"
                 autocomplete="family-name"
                 placeholder="Last name"
               />
-              <div class="field-error-msg">Please enter your last name.</div>
+              <div class="field-error-msg">Please enter your last name (letters only, min 1 character).</div>
             </div>
           </div>
 
@@ -265,13 +269,14 @@
                 id="signup-phone"
                 type="tel"
                 inputmode="numeric"
+                pattern="[0-9]*"
                 required
                 autocomplete="tel-national"
                 placeholder="10-digit phone number"
               />
             </div>
             <div class="field-error-msg">
-              Please enter a valid phone number.
+              Please enter a valid numeric phone number.
             </div>
           </div>
 
@@ -285,7 +290,7 @@
                 required
                 minlength="8"
                 autocomplete="new-password"
-                placeholder="At least 8 chars, 1 uppercase, 1 number"
+                placeholder="At least 8 chars, 1 uppercase, 1 number, 1 special char"
               />
               <button
                 type="button"
@@ -310,7 +315,7 @@
               </button>
             </div>
             <div class="field-error-msg">
-              Password must be at least 8 characters with letters and numbers.
+              Password must be at least 8 characters with 1 uppercase letter, 1 number, and 1 special character.
             </div>
           </div>
 
@@ -357,7 +362,7 @@
           <div class="form-group">
             <label for="signup-role">Role <b>*</b></label>
             <select id="signup-role" required>
-              <option value="">Choose a role</option>
+              <option value="" selected disabled>Choose a role</option>
               <option value="Admin">Admin</option>
               <option value="Manager">Manager</option>
               <option value="Employee">Employee</option>

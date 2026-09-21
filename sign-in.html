@@ -223,9 +223,8 @@
                 id="signin-password"
                 type="password"
                 required
-                minlength="8"
                 autocomplete="current-password"
-                placeholder="Enter your password"
+                placeholder="At least 8 chars, 1 uppercase, 1 number, 1 special char"
               />
               <button
                 type="button"
@@ -249,19 +248,21 @@
                 </svg>
               </button>
             </div>
-            <div class="field-error-msg">Please enter your password.</div>
+            <div class="field-error-msg">Password must be at least 8 characters with 1 uppercase letter, 1 number, and 1 special character.</div>
           </div>
 
           <!-- Login as Role -->
           <div class="form-group">
-            <label for="signin-role">Login as Role</label>
-            <select id="signin-role">
-              <option value="Manager" selected>Manager</option>
+            <label for="signin-role">Login as Role <b>*</b></label>
+            <select id="signin-role" required>
+              <option value="" selected disabled>Choose a role</option>
               <option value="Admin">Admin</option>
+              <option value="Manager">Manager</option>
               <option value="Employee">Employee</option>
               <option value="Customer">Customer</option>
               <option value="Vendor">Vendor</option>
             </select>
+            <div class="field-error-msg">Please select an account role.</div>
           </div>
 
           <div class="auth-options">

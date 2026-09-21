@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - Page Not Found | Stackly</title>
+    <title>Page Unavailable | Stackly</title>
     <meta
       name="description"
       content="The requested institutional page or resource could not be found. Navigate back to Stackly headquarters."
@@ -127,34 +127,35 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 64px;
-            height: 64px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
-            background: rgba(158, 133, 104, 0.15);
-            border: 1px solid rgba(158, 133, 104, 0.35);
-            color: var(--color-accent-gold-light);
-            margin-bottom: 16px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1.5px solid rgba(197, 168, 128, 0.35);
+            color: var(--color-accent-gold-light, #c2ad94);
+            margin-bottom: 20px;
           "
         >
+          <!-- Modern page unavailable / broken link icon -->
           <svg
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            width="32"
-            height="32"
+            width="34"
+            height="34"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              stroke-width="1.8"
+              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
         </div>
 
         <div class="error-code">404</div>
-        <h1 style="font-size: 1.8rem; margin-bottom: 10px; color: #ffffff">
-          Mandate Destination Not Found
+        <h1 style="font-size: 1.85rem; font-weight: 700; margin-bottom: 12px; color: #ffffff">
+          Page Unavailable
         </h1>
         <p
           style="
@@ -165,9 +166,7 @@
             line-height: 1.6;
           "
         >
-          The institutional resource, mandate room, or advisory channel you are
-          attempting to reach has either been relocated or is currently under
-          restricted access.
+          The page you are looking for is currently unavailable, has been moved, or does not exist. Please check the URL or use the buttons below to navigate back.
         </p>
 
         <!-- Quick Navigation Links -->

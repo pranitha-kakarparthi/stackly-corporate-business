@@ -137,7 +137,10 @@
   function logout() {
     localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
     localStorage.removeItem(STORAGE_KEYS.ROLE);
-    window.location.href = "sign-in.html";
+    const isInPages =
+      window.location.pathname.includes("/pages/") ||
+      window.location.pathname.includes("\\pages\\");
+    window.location.href = isInPages ? "sign-in.html" : "pages/sign-in.html";
   }
 
   /**

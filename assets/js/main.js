@@ -87,10 +87,11 @@
       window.location.pathname.split("/").pop() || "index.html";
     const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
     navLinks.forEach((link) => {
-      const href = link.getAttribute("href");
+      const href = link.getAttribute("href") || "";
+      const targetFile = href.split("/").pop();
       if (
-        href === currentPath ||
-        (currentPath === "" && href === "index.html")
+        targetFile === currentPath ||
+        (currentPath === "index.html" && (targetFile === "index.html" || href === "/"))
       ) {
         link.classList.add("active");
       } else {
@@ -103,14 +104,18 @@
       const currentUser = window.CB_Storage.getCurrentUser();
       const navActions = document.querySelector(".nav-actions");
       const mobileNavActions = document.querySelector(".mobile-nav-actions");
+      const isInPages =
+        window.location.pathname.includes("/pages/") ||
+        window.location.pathname.includes("\\pages\\");
+      const dashUrl = isInPages ? "dashboard.html" : "pages/dashboard.html";
 
       if (currentUser && navActions) {
         navActions.innerHTML = `
-          <a href="dashboard.html" class="user-greeting-pill" title="Access Dashboard">
+          <a href="${dashUrl}" class="user-greeting-pill" title="Access Dashboard">
             <span class="pulse-dot"></span>
             <span>${currentUser.firstName} (${currentUser.role})</span>
           </a>
-          <a href="dashboard.html" class="btn btn-primary btn-sm">
+          <a href="${dashUrl}" class="btn btn-primary btn-sm">
             <span>Dashboard</span>
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -120,7 +125,7 @@
       }
       if (currentUser && mobileNavActions) {
         mobileNavActions.innerHTML = `
-          <a href="dashboard.html" class="btn btn-primary btn-lg">
+          <a href="${dashUrl}" class="btn btn-primary btn-lg">
             <span>Executive Dashboard</span>
           </a>
           <button onclick="window.CB_Storage.logout()" class="btn btn-secondary btn-lg">

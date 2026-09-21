@@ -42,18 +42,19 @@
   }
 
   // 2. Password Strength Evaluation
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]).{8,}$/;
+
   function evaluatePasswordStrength(password) {
     let score = 0;
     const checks = {
       length: password.length >= 8,
       upper: /[A-Z]/.test(password),
-      lower: /[a-z]/.test(password),
       number: /[0-9]/.test(password),
-      special: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+      special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/.test(password),
     };
 
     if (checks.length) score++;
-    if (checks.upper && checks.lower) score++;
+    if (checks.upper) score++;
     if (checks.number) score++;
     if (checks.special) score++;
 
@@ -77,11 +78,9 @@
 
       // Update checklist
       if (reqLength) reqLength.className = checks.length ? "valid" : "invalid";
-      if (reqUpper)
-        reqUpper.className = checks.upper && checks.lower ? "valid" : "invalid";
+      if (reqUpper) reqUpper.className = checks.upper ? "valid" : "invalid";
       if (reqNumber) reqNumber.className = checks.number ? "valid" : "invalid";
-      if (reqSpecial)
-        reqSpecial.className = checks.special ? "valid" : "invalid";
+      if (reqSpecial) reqSpecial.className = checks.special ? "valid" : "invalid";
 
       // Update strength bar class
       strengthBars.className = "strength-bars";
@@ -109,13 +108,23 @@
     const form = document.getElementById("signin-form");
     if (!form) return;
 
+    const email = document.getElementById("signin-email");
+    const password = document.getElementById("signin-password");
+    const role = document.getElementById("signin-role");
+
+    [email, password].forEach((el) => {
+      if (el) {
+        el.addEventListener("input", () => el.classList.remove("is-invalid"));
+      }
+    });
+    if (role) {
+      role.addEventListener("change", () => role.classList.remove("is-invalid"));
+    }
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       let firstInvalid = null;
 
-      const email = document.getElementById("signin-email");
-      const password = document.getElementById("signin-password");
-      const role = document.getElementById("signin-role");
       const alert = document.getElementById("auth-alert");
 
       // Reset
@@ -125,20 +134,25 @@
       if (alert) alert.style.display = "none";
 
       // Validation
-      const emailVal = email.value.trim();
+      const emailVal = email ? email.value.trim() : "";
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailVal || !emailRegex.test(emailVal)) {
-        email.classList.add("is-invalid");
+        if (email) email.classList.add("is-invalid");
         firstInvalid = firstInvalid || email;
       }
 
-      const passVal = password.value;
-      if (!passVal) {
-        password.classList.add("is-invalid");
+      const passVal = password ? password.value : "";
+      if (!passVal || !passwordRegex.test(passVal)) {
+        if (password) password.classList.add("is-invalid");
         firstInvalid = firstInvalid || password;
       }
 
-      const selectedRole = role && role.value ? role.value : "Manager";
+      if (!role || !role.value || role.value === "") {
+        if (role) role.classList.add("is-invalid");
+        firstInvalid = firstInvalid || role;
+      }
+
+      const selectedRole = role && role.value ? role.value : "";
 
       if (firstInvalid) {
         firstInvalid.focus();
@@ -169,8 +183,10 @@
           alert.textContent = result.message;
           alert.style.display = "block";
         }
-        password.classList.add("is-invalid");
-        password.focus();
+        if (password) {
+          password.classList.add("is-invalid");
+          password.focus();
+        }
       }
     });
   }
@@ -180,21 +196,50 @@
     const form = document.getElementById("signup-form");
     if (!form) return;
 
+    const firstName = document.getElementById("signup-firstname");
+    const lastName = document.getElementById("signup-lastname");
+    const email = document.getElementById("signup-email");
+    const password = document.getElementById("signup-password");
+    const confirmPassword = document.getElementById("signup-confirm-password");
+    const role = document.getElementById("signup-role");
+    const phone = document.getElementById("signup-phone");
+    const terms = document.getElementById("signup-terms");
+    const alert = document.getElementById("signup-alert");
+
+    // Live sanitization and error clearing
+    [firstName, lastName].forEach((el) => {
+      if (el) {
+        el.addEventListener("input", (e) => {
+          e.target.value = e.target.value.replace(/[0-9]/g, "");
+          el.classList.remove("is-invalid");
+        });
+      }
+    });
+
+    if (phone) {
+      phone.addEventListener("input", (e) => {
+        e.target.value = e.target.value.replace(/\D/g, "");
+        phone.classList.remove("is-invalid");
+      });
+    }
+
+    [email, password, confirmPassword].forEach((el) => {
+      if (el) {
+        el.addEventListener("input", () => el.classList.remove("is-invalid"));
+      }
+    });
+
+    if (role) {
+      role.addEventListener("change", () => role.classList.remove("is-invalid"));
+    }
+
+    if (terms) {
+      terms.addEventListener("change", () => terms.classList.remove("is-invalid"));
+    }
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       let firstInvalid = null;
-
-      const firstName = document.getElementById("signup-firstname");
-      const lastName = document.getElementById("signup-lastname");
-      const email = document.getElementById("signup-email");
-      const password = document.getElementById("signup-password");
-      const confirmPassword = document.getElementById(
-        "signup-confirm-password"
-      );
-      const role = document.getElementById("signup-role");
-      const phone = document.getElementById("signup-phone");
-      const terms = document.getElementById("signup-terms");
-      const alert = document.getElementById("signup-alert");
 
       // Reset
       form
@@ -202,52 +247,56 @@
         .forEach((el) => el.classList.remove("is-invalid"));
       if (alert) alert.style.display = "none";
 
-      // Validate Names
-      if (!firstName.value.trim()) {
-        firstName.classList.add("is-invalid");
+      // Validate Names (no numbers allowed, min 1 char)
+      const fNameVal = firstName ? firstName.value.trim() : "";
+      if (!fNameVal || fNameVal.length < 1 || /[0-9]/.test(fNameVal)) {
+        if (firstName) firstName.classList.add("is-invalid");
         firstInvalid = firstInvalid || firstName;
       }
-      if (!lastName.value.trim()) {
-        lastName.classList.add("is-invalid");
+
+      const lNameVal = lastName ? lastName.value.trim() : "";
+      if (!lNameVal || lNameVal.length < 1 || /[0-9]/.test(lNameVal)) {
+        if (lastName) lastName.classList.add("is-invalid");
         firstInvalid = firstInvalid || lastName;
       }
 
       // Validate Email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
-        email.classList.add("is-invalid");
+      const emailVal = email ? email.value.trim() : "";
+      if (!emailVal || !emailRegex.test(emailVal)) {
+        if (email) email.classList.add("is-invalid");
         firstInvalid = firstInvalid || email;
       }
 
-      // Validate Password
-      const { score } = evaluatePasswordStrength(password.value);
-      if (score < 3 || password.value.length < 8) {
-        password.classList.add("is-invalid");
+      // Validate Password (min 8 chars, 1 uppercase, 1 number, 1 special character)
+      const passVal = password ? password.value : "";
+      if (!passVal || !passwordRegex.test(passVal)) {
+        if (password) password.classList.add("is-invalid");
         firstInvalid = firstInvalid || password;
       }
 
       // Confirm Password
-      if (confirmPassword.value !== password.value || !confirmPassword.value) {
-        confirmPassword.classList.add("is-invalid");
+      if (!confirmPassword || confirmPassword.value !== passVal || !confirmPassword.value) {
+        if (confirmPassword) confirmPassword.classList.add("is-invalid");
         firstInvalid = firstInvalid || confirmPassword;
       }
 
-      // Validate Role
-      if (!role.value) {
-        role.classList.add("is-invalid");
+      // Validate Role (Mandatory, non-empty)
+      if (!role || !role.value || role.value === "") {
+        if (role) role.classList.add("is-invalid");
         firstInvalid = firstInvalid || role;
       }
 
-      // Validate Phone (Digits only >= 7)
-      const cleanPhone = phone.value.replace(/\D/g, "");
-      if (phone.value.trim() && cleanPhone.length < 7) {
-        phone.classList.add("is-invalid");
+      // Validate Phone (Mandatory numeric-only mobile number >= 7 digits)
+      const cleanPhone = phone ? phone.value.replace(/\D/g, "") : "";
+      if (!cleanPhone || cleanPhone.length < 7) {
+        if (phone) phone.classList.add("is-invalid");
         firstInvalid = firstInvalid || phone;
       }
 
-      // Validate Terms Checkbox
-      if (!terms.checked) {
-        terms.classList.add("is-invalid");
+      // Validate Terms Checkbox (Mandatory)
+      if (!terms || !terms.checked) {
+        if (terms) terms.classList.add("is-invalid");
         firstInvalid = firstInvalid || terms;
       }
 

@@ -20,6 +20,7 @@
   --color-accent-cyan: #7c98b3; /* Subtle Muted Mist Blue */
   --color-accent-emerald: #234338; /* Subtle Heritage Deep Forest */
   --color-accent-sage: #3d5a4f; /* Subtle Muted Sage */
+  --color-accent-green: #34d399; /* Vibrant High-Contrast Accent Green */
 
   /* Aliases for inline styles and components */
   --color-gold: var(--color-accent-gold);
@@ -1940,8 +1941,45 @@ body.nav-open .mobile-nav-overlay {
 }
 
 .form-input.is-invalid + .field-error-msg,
-.form-textarea.is-invalid + .field-error-msg {
+.form-textarea.is-invalid + .field-error-msg,
+.phone-input-group:has(.is-invalid) + .field-error-msg,
+.form-group:has(.is-invalid) > .field-error-msg {
   display: block;
+}
+
+.phone-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.phone-input-group select {
+  width: 125px !important;
+  flex-shrink: 0;
+}
+
+.phone-input-group input {
+  flex: 1;
+}
+
+@media (max-width: 576px) {
+  .phone-input-group select {
+    width: 95px !important;
+    padding: 13px 8px;
+  }
+}
+
+/* 4-Stage Engagement Framework 2x2 Grid */
+.framework-grid-2x2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 768px) {
+  .framework-grid-2x2 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 .char-counter {

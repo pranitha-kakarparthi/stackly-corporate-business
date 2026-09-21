@@ -25,6 +25,9 @@
 @media (min-width: 1024px) {
   .auth-shell {
     grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
   }
 }
 
@@ -49,6 +52,14 @@
 @media (min-width: 1024px) {
   .auth-story {
     display: flex;
+    height: 100vh;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+  }
+  .auth-form-wrap {
+    height: 100vh;
+    overflow-y: auto;
   }
 }
 

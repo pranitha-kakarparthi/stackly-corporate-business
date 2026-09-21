@@ -91,7 +91,8 @@
       const targetFile = href.split("/").pop();
       if (
         targetFile === currentPath ||
-        (currentPath === "index.html" && (targetFile === "index.html" || href === "/"))
+        (currentPath === "index.html" &&
+          (targetFile === "index.html" || href === "/"))
       ) {
         link.classList.add("active");
       } else {

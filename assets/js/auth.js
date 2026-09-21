@@ -42,7 +42,8 @@
   }
 
   // 2. Password Strength Evaluation
-  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]).{8,}$/;
+  const passwordRegex =
+    /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]).{8,}$/;
 
   function evaluatePasswordStrength(password) {
     let score = 0;
@@ -80,7 +81,8 @@
       if (reqLength) reqLength.className = checks.length ? "valid" : "invalid";
       if (reqUpper) reqUpper.className = checks.upper ? "valid" : "invalid";
       if (reqNumber) reqNumber.className = checks.number ? "valid" : "invalid";
-      if (reqSpecial) reqSpecial.className = checks.special ? "valid" : "invalid";
+      if (reqSpecial)
+        reqSpecial.className = checks.special ? "valid" : "invalid";
 
       // Update strength bar class
       strengthBars.className = "strength-bars";
@@ -118,7 +120,9 @@
       }
     });
     if (role) {
-      role.addEventListener("change", () => role.classList.remove("is-invalid"));
+      role.addEventListener("change", () =>
+        role.classList.remove("is-invalid")
+      );
     }
 
     form.addEventListener("submit", (e) => {
@@ -230,11 +234,15 @@
     });
 
     if (role) {
-      role.addEventListener("change", () => role.classList.remove("is-invalid"));
+      role.addEventListener("change", () =>
+        role.classList.remove("is-invalid")
+      );
     }
 
     if (terms) {
-      terms.addEventListener("change", () => terms.classList.remove("is-invalid"));
+      terms.addEventListener("change", () =>
+        terms.classList.remove("is-invalid")
+      );
     }
 
     form.addEventListener("submit", (e) => {
@@ -276,7 +284,11 @@
       }
 
       // Confirm Password
-      if (!confirmPassword || confirmPassword.value !== passVal || !confirmPassword.value) {
+      if (
+        !confirmPassword ||
+        confirmPassword.value !== passVal ||
+        !confirmPassword.value
+      ) {
         if (confirmPassword) confirmPassword.classList.add("is-invalid");
         firstInvalid = firstInvalid || confirmPassword;
       }

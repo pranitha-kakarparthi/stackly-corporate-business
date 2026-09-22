@@ -893,21 +893,24 @@ body.nav-open .mobile-nav-overlay {
   color: var(--color-accent-gold-light);
 }
 
+.mobile-dropdown-btn-arrow,
 .mobile-dropdown-btn-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
   background: rgba(197, 168, 128, 0.12);
   border: 1px solid rgba(197, 168, 128, 0.3);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   color: var(--color-accent-gold-light);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
   transition: all var(--transition-fast);
+  flex-shrink: 0;
 }
 
+.mobile-dropdown-btn:hover .mobile-dropdown-btn-arrow,
+.mobile-dropdown-btn:focus-visible .mobile-dropdown-btn-arrow,
 .mobile-dropdown-btn:hover .mobile-dropdown-btn-pill,
 .mobile-dropdown-btn:focus-visible .mobile-dropdown-btn-pill {
   background: rgba(197, 168, 128, 0.22);
@@ -915,9 +918,14 @@ body.nav-open .mobile-nav-overlay {
 }
 
 .mobile-dropdown-btn-chevron {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   transition: transform var(--transition-fast);
+}
+
+.mobile-dropdown-btn:hover .mobile-dropdown-btn-chevron,
+.mobile-dropdown-btn.active .mobile-dropdown-btn-chevron {
+  transform: translateY(2px);
 }
 
 /* Full-Screen Mobile Dropdown Overlay for Advisory Services */

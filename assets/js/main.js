@@ -85,7 +85,17 @@
     // Highlight current active route
     const currentPath =
       window.location.pathname.split("/").pop() || "index.html";
-    const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
+    const navLinks = document.querySelectorAll(
+      ".nav-link, .mobile-nav-link, .mobile-submenu-card"
+    );
+    const advisoryPages = [
+      "services.html",
+      "mergers-acquisitions.html",
+      "strategic-capital.html",
+      "turnaround-optimization.html",
+      "esg-governance.html",
+    ];
+
     navLinks.forEach((link) => {
       const href = link.getAttribute("href") || "";
       const targetFile = href.split("/").pop();
@@ -99,6 +109,14 @@
         link.classList.remove("active");
       }
     });
+
+    // Highlight mobile dropdown button if currently on any advisory service page
+    if (advisoryPages.includes(currentPath)) {
+      const mobileDropdownBtn = document.querySelector(".mobile-dropdown-btn");
+      if (mobileDropdownBtn) {
+        mobileDropdownBtn.classList.add("active");
+      }
+    }
 
     // Check if user is logged in to adapt header CTA
     if (window.CB_Storage) {
@@ -137,11 +155,33 @@
     }
   }
 
-  // 4. Mobile Navigation Drawer & Dedicated Close Control
+  // 4. Mobile Navigation Drawer, Dedicated Close Control & Full-Screen Submenu
   function initMobileMenu() {
     const hamburger = document.querySelector(".hamburger-btn");
     const overlay = document.querySelector(".mobile-nav-overlay");
     if (!hamburger || !overlay) return;
+
+    const fullScreenDropdown = overlay.querySelector(
+      ".mobile-fullscreen-dropdown"
+    );
+    const dropdownBtn = overlay.querySelector(".mobile-dropdown-btn");
+    const submenuBackBtn = overlay.querySelector(".mobile-submenu-back");
+    const submenuCloseBtn = overlay.querySelector(".mobile-submenu-close");
+
+    function openSubmenu() {
+      if (fullScreenDropdown) {
+        fullScreenDropdown.classList.add("is-open");
+        if (dropdownBtn) dropdownBtn.setAttribute("aria-expanded", "true");
+        fullScreenDropdown.scrollTop = 0;
+      }
+    }
+
+    function closeSubmenu() {
+      if (fullScreenDropdown) {
+        fullScreenDropdown.classList.remove("is-open");
+        if (dropdownBtn) dropdownBtn.setAttribute("aria-expanded", "false");
+      }
+    }
 
     function openMenu() {
       document.body.classList.add("nav-open");
@@ -153,6 +193,7 @@
       document.body.classList.remove("nav-open");
       document.documentElement.classList.remove("nav-open");
       hamburger.setAttribute("aria-expanded", "false");
+      closeSubmenu();
     }
 
     function toggleMenu() {
@@ -165,8 +206,31 @@
 
     hamburger.addEventListener("click", toggleMenu);
 
+    if (dropdownBtn) {
+      dropdownBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openSubmenu();
+      });
+    }
+
+    if (submenuBackBtn) {
+      submenuBackBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeSubmenu();
+      });
+    }
+
+    if (submenuCloseBtn) {
+      submenuCloseBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeMenu();
+      });
+    }
+
     // Dedicated Close Button inside overlay
-    const closeBtn = overlay.querySelector(".mobile-nav-close");
+    const closeBtn = overlay.querySelector(
+      ".mobile-nav-close:not(.mobile-submenu-close)"
+    );
     if (closeBtn) {
       closeBtn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -174,7 +238,7 @@
       });
     }
 
-    // Close on any link click
+    // Close on any anchor link click
     const mobileLinks = overlay.querySelectorAll("a");
     mobileLinks.forEach((link) => {
       link.addEventListener("click", () => {
@@ -184,8 +248,15 @@
 
     // Close on Escape key
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && document.body.classList.contains("nav-open")) {
-        closeMenu();
+      if (e.key === "Escape") {
+        if (
+          fullScreenDropdown &&
+          fullScreenDropdown.classList.contains("is-open")
+        ) {
+          closeSubmenu();
+        } else if (document.body.classList.contains("nav-open")) {
+          closeMenu();
+        }
       }
     });
   }

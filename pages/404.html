@@ -18,105 +18,43 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
   <body class="error-page-body">
-    <a href="#main-content" class="skip-link">Skip to error content</a>
-
-    <!-- STICKY NAVBAR -->
-    <header class="site-header" role="banner">
-      <div class="container nav-container">
-        <a href="../index.html" class="brand-logo" aria-label="Stackly Home">
-          <img
-            src="../assets/images/logoStackly.webp"
-            alt="Stackly Logo"
-            width="170"
-            height="38"
-            style="height: 38px; max-width: 170px; object-fit: contain"
-          />
-        </a>
-
-        <nav
-          class="desktop-nav"
-          role="navigation"
-          aria-label="Primary Navigation"
-        >
-          <ul class="nav-links">
-            <li class="nav-item">
-              <a href="../index.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="about.html" class="nav-link">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a href="services.html" class="nav-link">Advisory Services</a>
-            </li>
-            <li class="nav-item">
-              <a href="pricing.html" class="nav-link">Engagement Models</a>
-            </li>
-            <li class="nav-item">
-              <a href="contact.html" class="nav-link">Contact</a>
-            </li>
-          </ul>
-        </nav>
-
-        <div class="nav-actions">
-          <a href="sign-in.html" class="btn btn-secondary btn-sm">Sign In</a>
-          <a href="sign-up.html" class="btn btn-primary btn-sm">Get Started</a>
+    <!-- MAIN 404 CONTENT (No Navbar) -->
+    <main
+      id="main-content"
+      class="error-page-wrapper"
+      style="
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      "
+    >
+      <div class="error-card">
+        <!-- Brand Logo Header -->
+        <div style="margin-bottom: 24px; text-align: center">
+          <a
+            href="../index.html"
+            aria-label="Stackly Home"
+            style="display: inline-block"
+          >
+            <img
+              src="../assets/images/logoStackly.webp"
+              alt="Stackly Logo"
+              width="180"
+              height="40"
+              style="
+                height: 40px;
+                max-width: 180px;
+                object-fit: contain;
+                display: block;
+                margin: 0 auto;
+              "
+            />
+          </a>
         </div>
 
-        <button
-          class="hamburger-btn"
-          aria-label="Toggle navigation menu"
-          aria-expanded="false"
-        >
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Mobile Drawer Overlay -->
-    <div class="mobile-nav-overlay" role="dialog" aria-modal="true">
-      <div class="mobile-nav-header">
-        <a href="../index.html" class="brand-logo" aria-label="Stackly Home">
-          <img
-            src="../assets/images/logoStackly.webp"
-            alt="Stackly Logo"
-            width="150"
-            height="34"
-            style="height: 34px; max-width: 150px; object-fit: contain"
-          />
-        </a>
-        <button class="mobile-nav-close" aria-label="Close navigation menu">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
-      <ul class="mobile-nav-links">
-        <li><a href="../index.html" class="mobile-nav-link">Home</a></li>
-        <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
-        <li>
-          <a href="services.html" class="mobile-nav-link">Advisory Services</a>
-        </li>
-        <li>
-          <a href="pricing.html" class="mobile-nav-link">Engagement Models</a>
-        </li>
-        <li><a href="contact.html" class="mobile-nav-link">Contact Us</a></li>
-      </ul>
-      <div class="mobile-nav-actions">
-        <a href="sign-in.html" class="btn btn-secondary btn-lg">Sign In</a>
-        <a href="sign-up.html" class="btn btn-primary btn-lg">Get Started</a>
-      </div>
-    </div>
-
-    <!-- MAIN 404 CONTENT -->
-    <main id="main-content" class="error-page-wrapper">
-      <div class="error-card">
         <div class="error-icon-circle">
           <!-- Modern page unavailable / broken link icon -->
           <svg
@@ -157,7 +95,7 @@
         >
           The page you are looking for is currently unavailable, has been moved,
           or does not exist. Please check the URL or use the buttons below to
-          navigate back.
+          navigate back to safety.
         </p>
 
         <!-- Quick Navigation Links -->

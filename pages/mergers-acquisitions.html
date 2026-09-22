@@ -542,14 +542,7 @@
                 <h3 style="color: #fff; margin-bottom: 14px; font-size: 1.1rem">
                   M&A Advisory Track Record
                 </h3>
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 12px;
-                    text-align: center;
-                  "
-                >
+                <div class="track-record-stats-grid">
                   <div class="hero-stat-box" style="margin-bottom: 0">
                     <span class="stat-label">Total Volume</span>
                     <div class="stat-value" style="font-size: 1.5rem">
@@ -868,30 +861,10 @@
             </p>
           </div>
 
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-              gap: 24px;
-            "
-          >
+          <div class="transactions-grid">
             <!-- Deal 1 -->
-            <div
-              style="
-                background: rgba(255, 255, 255, 0.04);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: var(--radius-md);
-                padding: 28px;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: baseline;
-                  margin-bottom: 14px;
-                "
-              >
+            <div class="transaction-card">
+              <div class="transaction-card-header">
                 <span
                   style="
                     background: rgba(197, 168, 128, 0.2);
@@ -903,10 +876,7 @@
                   "
                   >Sell-Side Carve-Out</span
                 >
-                <span
-                  style="color: #ffffff; font-weight: 800; font-size: 1.4rem"
-                  >$640,000,000</span
-                >
+                <span class="transaction-card-amount">$640,000,000</span>
               </div>
               <h4
                 style="color: #ffffff; margin-bottom: 10px; font-size: 1.15rem"
@@ -941,22 +911,8 @@
             </div>
 
             <!-- Deal 2 -->
-            <div
-              style="
-                background: rgba(255, 255, 255, 0.04);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: var(--radius-md);
-                padding: 28px;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: baseline;
-                  margin-bottom: 14px;
-                "
-              >
+            <div class="transaction-card">
+              <div class="transaction-card-header">
                 <span
                   style="
                     background: rgba(197, 168, 128, 0.2);
@@ -968,10 +924,7 @@
                   "
                   >Cross-Border Buyout</span
                 >
-                <span
-                  style="color: #ffffff; font-weight: 800; font-size: 1.4rem"
-                  >$890,000,000</span
-                >
+                <span class="transaction-card-amount">$890,000,000</span>
               </div>
               <h4
                 style="color: #ffffff; margin-bottom: 10px; font-size: 1.15rem"
@@ -1006,22 +959,8 @@
             </div>
 
             <!-- Deal 3 -->
-            <div
-              style="
-                background: rgba(255, 255, 255, 0.04);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: var(--radius-md);
-                padding: 28px;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: baseline;
-                  margin-bottom: 14px;
-                "
-              >
+            <div class="transaction-card">
+              <div class="transaction-card-header">
                 <span
                   style="
                     background: rgba(197, 168, 128, 0.2);
@@ -1033,10 +972,7 @@
                   "
                   >Strategic Acquisition</span
                 >
-                <span
-                  style="color: #ffffff; font-weight: 800; font-size: 1.4rem"
-                  >$320,000,000</span
-                >
+                <span class="transaction-card-amount">$320,000,000</span>
               </div>
               <h4
                 style="color: #ffffff; margin-bottom: 10px; font-size: 1.15rem"
@@ -1090,25 +1026,8 @@
             </p>
           </div>
 
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-              gap: 32px;
-              max-width: 900px;
-              margin: 0 auto;
-            "
-          >
-            <div
-              style="
-                background: var(--bg-card);
-                border: 1px solid var(--border-subtle);
-                border-radius: var(--radius-lg);
-                padding: 32px;
-                text-align: center;
-                box-shadow: var(--shadow-sm);
-              "
-            >
+          <div class="partners-grid">
+            <div class="partner-card">
               <img
                 src="../assets/images/exec-advisory.webp"
                 alt="Marcus Vance, Senior Partner M&A"
@@ -1147,16 +1066,7 @@
               </p>
             </div>
 
-            <div
-              style="
-                background: var(--bg-card);
-                border: 1px solid var(--border-subtle);
-                border-radius: var(--radius-lg);
-                padding: 32px;
-                text-align: center;
-                box-shadow: var(--shadow-sm);
-              "
-            >
+            <div class="partner-card">
               <img
                 src="../assets/images/exec-partner.webp"
                 alt="Elena Rostova, Partner Cross-Border Deals"
